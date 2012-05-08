@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:javaee="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" version="2.4">
   <context-param>
-    <javaee:param-name>log4jConfigLocation</javaee:param-name>
-    <javaee:param-value>/WEB-INF/classes/log4j.properties</javaee:param-value>
+    <param-name>log4jConfigLocation</param-name>
+    <param-value>/WEB-INF/classes/log4j.properties</param-value>
   </context-param>
   <listener>
-    <javaee:listener-class>org.springframework.web.util.Log4jConfigListener</javaee:listener-class>
+    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
   </listener>
   <context-param>
-    <javaee:param-name>contextConfigLocation</javaee:param-name>
-    <javaee:param-value>/WEB-INF/metomeui-servlet.xml</javaee:param-value>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/metomeui-servlet.xml</param-value>
   </context-param>
   <listener>
-    <javaee:listener-class>org.springframework.web.context.ContextLoaderListener</javaee:listener-class>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
   <servlet>
     <servlet-name>metomeui</servlet-name>

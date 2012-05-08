@@ -2,10 +2,11 @@ package anathatest.web;
 
 import static org.junit.Assert.*;
 
+import metomeui.web.HelloController;
+
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 
-import anathatest.web.HelloController;
 
 public class HelloControllerTest {
 

@@ -2,6 +2,8 @@ package anathatest.model;
 
 import static org.junit.Assert.*;
 
+import metomeui.model.Messages;
+
 import org.junit.Test;
 
 public class MessagesTests {

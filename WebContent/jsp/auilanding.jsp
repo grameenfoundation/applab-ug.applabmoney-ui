@@ -5,8 +5,6 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="generator"
-	content="CoffeeCup HTML Editor (www.coffeecup.com)">
 <meta name="created" content="Tue, 10 Apr 2012 09:14:23 GMT">
 <meta name="description" content="">
 <meta name="keywords" content="">
@@ -69,7 +67,7 @@ fieldset {
 	font: "Helvetica Neue", helvetica, arial, sans-serif;
 	color: #666;
 	background-color: #efefef;
-	padding: 2px;
+	padding: 3px;
 	border: solid 1px #d3d3d3;
 	alignment-adjust: central;
 	width: 100%;
@@ -125,13 +123,13 @@ input,textarea {
 }
 
 input.formRadio {
-	position: relative;
+	 display: inline;
+    position: absolute;
 	left: 36%;
-	top: -5px;
-	margin-top: 4px;
+	margin-top: 45x;
 	margin-bottom: 4px;
-	height: 25px;
-	width: 30px;
+	height: 15px;
+	width: 15px;
 }
 
 input.formCheckbox {
@@ -156,6 +154,16 @@ select {
 	width: 155px
 }
 
+select.otherselect {
+    display: inline;
+    position: absolute;
+    left: 60%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 27px;
+    width: 155px
+}
+
 label.fieldLabel {
 	display: inline;
 	float: none;
@@ -166,8 +174,8 @@ label.radioLabel {
 	position: absolute;
 	margin-left: 40%;
 	text-align: left;
-	margin-top: 4px;
-	margin-bottom: 4px;
+	margin-top: 5px;
+	margin-bottom: 10px;
 	margin-right: 10px;
 }
 
@@ -192,6 +200,7 @@ input.formInputButton {
 	margin-left: 15px;
 	cursor: pointer;
 	width: 80px;
+	top:15px;
 }
 
 input.formInputButton:hover {
@@ -368,21 +377,18 @@ table,td,tr {
 						</form:select>
 						<br>
 
-						<form:label path="accountUnlock">Account will unlocked:</form:label>
-						<font color="red"><form:errors path="accountUnlock" />
-						</font> <br>
-
+						<form:label path="accountUnlock">Account will unlocked:</form:label><br>
 						<form:label path="accountUnlock" class="radioLabel">For a Duration of(mins)</form:label>
 						<form:radiobutton class="formRadio" path="accountUnlock"
-							value="accountTimedUnlock"></form:radiobutton>
-						<form:select path="accountLockDuration" tabindex="15">
+							value="true"></form:radiobutton>
+						<form:select class="otherselect" path="accountLockDuration" tabindex="15">
 							<form:option value="0" label="--- Select ---" />
 							<form:options items="${accountLockDurationList}" />
 						</form:select>
 						<br>
 						<form:label path="accountUnlock" class="radioLabel">Until Administrator manually unlocks account</form:label>
 						<form:radiobutton class="formRadio" path="accountUnlock"
-							value="accountManualUnlock"></form:radiobutton>
+							value="false"></form:radiobutton>
 						<br>
 
 					</fieldset>

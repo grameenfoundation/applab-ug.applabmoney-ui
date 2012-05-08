@@ -17,7 +17,7 @@
 
 	<mvc:annotation-driven/>
 
-	<context:component-scan base-package="anathatest.web" />
+	<context:component-scan base-package="metomeui.web" />
 
 	<!--<bean name="/adminui.html" class="metomeui.web.UserLoginController" /> -->
 	
@@ -29,6 +29,8 @@
 	</bean>
 
 <bean id="passwordSettingsValidator" class="metomeui.validator.PasswordSettingsValidator" />
+<bean id="msisdnSettingsValidator" class="metomeui.validator.MsisdnSettingsValidator" />
+<bean id="transactionSettingsValidator" class="metomeui.validator.TransactionSettingsValidator" />
 
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource" p:basename="messages">
 	</bean>

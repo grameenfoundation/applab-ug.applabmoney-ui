@@ -1,5 +1,6 @@
 package anathatest.model;
 
+import metomeui.model.Product;
 import junit.framework.TestCase;
 
 public class ProductTests extends TestCase {
