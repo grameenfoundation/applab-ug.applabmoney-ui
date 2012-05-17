@@ -2,8 +2,9 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ include file="include.jsp"%>
 <%-- <%@ taglib prefix="f"  uri="http://java.sun.com/jsf/core"%>
-<%@ taglib prefix="h"  uri="http://java.sun.com/jsf/html"%> --%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="h"  uri="http://java.sun.com/jsf/html"%> 
+ <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%> --%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>

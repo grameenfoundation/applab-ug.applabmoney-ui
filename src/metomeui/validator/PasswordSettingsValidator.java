@@ -54,10 +54,10 @@ public class PasswordSettingsValidator implements Validator {
 				errors.rejectValue("maxFailedLoginCount", "maxFailedLoginCount.required");
 			} 
 		}
-		if (passwordSettings.getAccountUnlock() == true) {
-			if (passwordSettings.getAccountLockDuration().intValue() == 0){
-				errors.rejectValue("accountLockDuration", "accountLockDuration.required");
-			} 
-		}
+//		if (passwordSettings.getAccountUnlock() == true) {
+//			if (passwordSettings.getAccountLockDuration().intValue() == 0){
+//				errors.rejectValue("accountLockDuration", "accountLockDuration.required");
+//			} 
+//		}
 	}
 }
