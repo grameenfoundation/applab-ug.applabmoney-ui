@@ -142,7 +142,7 @@ public class UssdMenuController {
 
 		ussdPredefInputValidator.validate(ussdPredefInput, result);
 		if (result.hasErrors()) {
-			return "ussdpredefinputs";
+			return "addussdpredefinputs";
 		}
 
 		ussdMenuService.addUssdPredefInput(ussdPredefInput);

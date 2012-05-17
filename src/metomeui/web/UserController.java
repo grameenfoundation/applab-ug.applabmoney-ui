@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-//@RequestMapping("/users")
 public class UserController {
 
 	private static Logger logger = Logger.getLogger(HelloController.class);
@@ -25,7 +24,6 @@ public class UserController {
 	
 
 	@RequestMapping("/users")
-	//@RequestMapping(method = RequestMethod.GET)
 	public String listUser(Map<String, Object> map) {
 		map.put("user", new User());
 		map.put("userList", userService.listUsers());

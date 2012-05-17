@@ -16,7 +16,7 @@
     
     <a>Admin UI parked!! :-)</a><br><br>
     
-    <a href ="adminui.html"> Administrator Console Login</a></br>
+    <a href ="uilogin.html"> Administrator Console Login</a></br>
     <a href ="auilanding.html">Password Settings</a></br>
     <a href ="auimsisdnsettings.html">MSISDN Settings</a></br>
     <a href ="auitransactionsettings.html">Transaction Settings</a></br>

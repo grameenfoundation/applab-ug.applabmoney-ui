@@ -273,6 +273,13 @@ td.savebutton {
 									Items</a>
 							</li>
 						</ul>
+						<h3>
+                            <a href="ussdrequests.html">USSD Requests</a>
+                        </h3>
+                        <ul>
+                            <li><a href="ussdrequests.html">USSD Requests</a>
+                            </li>
+                        </ul>
 					</div></td>
 				<td class="content">
 					<table width="100%">
@@ -305,7 +312,7 @@ td.savebutton {
 								<th>Input Item Name</th>
 								<th>Input Item Code</th>
 								<th>Input Item Order</th>
-								<th>Action</th>
+<!-- 								<th>Action</th> -->
 							</tr>
 							<c:forEach items="${ussdPredefInputItemList}"
 								var="predefinputitem">
@@ -313,16 +320,16 @@ td.savebutton {
 									<td class="data">${predefinputitem.predefInputItemName}</td>
 									<td class="data">${predefinputitem.predefInputItemCode}</td>
 									<td class="data">${predefinputitem.predefInputItemOrder}</td>
-									<td class="data"><c:if
-											test="${predefinputitem.predefInputItemEnabledFlag == 0}">
-											<a href="#activate/${predefinputitem.inputItemId}">Activate/</a>
-										</c:if> <c:if
-											test="${predefinputitem.predefInputItemEnabledFlag == 1}">
-											<a href="#deactivate/${predefinputitem.inputItemId}">Deactivate/</a>
-										</c:if><a
-										href="removepredefinputitem/${predefinputitem.inputItemId}.html">Delete/</a><a
-										href="#edit/${predefinputitem.inputItemId}">Edit</a>
-									</td>
+<%-- 									<td class="data"><c:if --%>
+<%-- 											test="${predefinputitem.predefInputItemEnabledFlag == 0}"> --%>
+<%-- 											<a href="#activate/${predefinputitem.inputItemId}">Activate/</a> --%>
+<%-- 										</c:if> <c:if --%>
+<%-- 											test="${predefinputitem.predefInputItemEnabledFlag == 1}"> --%>
+<%-- 											<a href="#deactivate/${predefinputitem.inputItemId}">Deactivate/</a> --%>
+<%-- 										</c:if><a --%>
+<%-- 										href="removepredefinputitem/${predefinputitem.inputItemId}.html">Delete/</a><a --%>
+<%-- 										href="#edit/${predefinputitem.inputItemId}">Edit</a> --%>
+<!-- 									</td> -->
 								</tr>
 							</c:forEach>
 						</table>

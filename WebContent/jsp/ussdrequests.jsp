@@ -273,6 +273,13 @@ td.savebutton {
                                     Items</a>
                             </li>
                         </ul>
+                        <h3>
+                            <a href="ussdrequests.html">USSD Requests</a>
+                        </h3>
+                        <ul>
+                            <li><a href="ussdrequests.html">USSD Requests</a>
+                            </li>
+                        </ul>
                     </div></td>
                 <td class="content">
 	<c:if test="${empty ussdRequestsList}">

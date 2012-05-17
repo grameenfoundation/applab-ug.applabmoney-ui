@@ -289,6 +289,13 @@ text-align:right;
 							<li><a href="ussdpredefinputitems.html">Predefined Input
 									Items</a></li>
 						</ul>
+						<h3>
+                            <a href="ussdrequests.html">USSD Requests</a>
+                        </h3>
+                        <ul>
+                            <li><a href="ussdrequests.html">USSD Requests</a>
+                            </li>
+                        </ul>
 					</div>
 				</td>
 				<td class="content">
@@ -307,7 +314,7 @@ text-align:right;
 						<div>
 							<table>
 								<tr>
-									<td>There are no predef inputs configured on this system <br>
+									<td>There are no menu items configured on this system <br>
 										<br></td>
 								</tr>
 							</table>
@@ -320,7 +327,7 @@ text-align:right;
 								<th>Menu Item Order</th>
 								<th>Keyword ID</th>
 								<th>Parent Menu ID</th>
-								<th>Action</th>
+<!-- 								<th>Action</th> -->
 							</tr>
 							<c:forEach items="${ussdMenuItemsList}" var="menuitem">
 								<tr class=data>
@@ -328,12 +335,12 @@ text-align:right;
 									<td class=data>${menuitem.menuItemOrder}</td>
 									<td class=data>${menuitem.menuItemKeywordId}</td>
 									<td class=data>${menuitem.menuItemParentId}</td>
-									<td class=data><c:if test="${menuitem.menuItemEnabledFlag == 0}">
-											<a href="#activate/${menuitem.menuItemId}">Activate/</a>
-										</c:if> <c:if test="${menuitem.menuItemEnabledFlag == 1}">
-											<a href="#deactivate/${menuitem.menuItemId}">Deactivate/</a>
-										</c:if> <a href="removemenuitem/${menuitem.menuItemId}.html">Delete</a><a>
-											| </a><a href="#edit/${menuitem.menuItemId}">Edit</a></td>
+<%-- 									<td class=data><c:if test="${menuitem.menuItemEnabledFlag == 0}"> --%>
+<%-- 											<a href="#activate/${menuitem.menuItemId}">Activate/</a> --%>
+<%-- 										</c:if> <c:if test="${menuitem.menuItemEnabledFlag == 1}"> --%>
+<%-- 											<a href="#deactivate/${menuitem.menuItemId}">Deactivate/</a> --%>
+<%-- 										</c:if> <a href="removemenuitem/${menuitem.menuItemId}.html">Delete</a><a> --%>
+<%-- 											| </a><a href="#edit/${menuitem.menuItemId}">Edit</a></td> --%>
 								</tr>
 							</c:forEach>
 						</table>

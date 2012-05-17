@@ -273,6 +273,13 @@ td.savebutton {
 									Items</a>
 							</li>
 						</ul>
+						<h3>
+                            <a href="ussdrequests.html">USSD Requests</a>
+                        </h3>
+                        <ul>
+                            <li><a href="ussdrequests.html">USSD Requests</a>
+                            </li>
+                        </ul>
 					</div></td>
 				<td class="content">
 					<table>
@@ -310,7 +317,7 @@ td.savebutton {
 								<th>Predefined Input</th>
 								<th>Use Fixed Value</th>
 								<th>Fixed Value</th>
-								<th>Action</th>
+<!-- 								<th>Action</th> -->
 							</tr>
 							<c:forEach items="${ussdKeywordStepList}" var="keywordstep">
 								<tr class="data">
@@ -322,9 +329,9 @@ td.savebutton {
 									<td class="data">${keywordstep.predefInputId}</td>
 									<td class="data">${keywordstep.useFixedValueFlag}</td>
 									<td class="data">${keywordstep.fixedValue}</td>
-									<td align="center"><a
-										href="removekeywordstep/${keywordstep.keywordStepId}.html">Delete</a><a>
-											| </a><a href="#edit/${keywordstep.keywordStepId}">Edit</a></td>
+<!-- 									<td align="center"><a -->
+<%-- 										href="removekeywordstep/${keywordstep.keywordStepId}.html">Delete</a><a> --%>
+<%-- 											| </a><a href="#edit/${keywordstep.keywordStepId}">Edit</a></td> --%>
 								</tr>
 							</c:forEach>
 						</table>

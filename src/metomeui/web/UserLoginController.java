@@ -15,7 +15,7 @@ import javax.validation.Valid;
 
 
 @Controller
-@RequestMapping("/adminui")
+@RequestMapping("/uilogin")
 public class UserLoginController {
 
 	private static Logger logger = Logger.getLogger(UserLoginController.class);
@@ -24,7 +24,7 @@ public class UserLoginController {
 	public String showForm(Map<String, User> model) {
 		User userLoginForm = new User();
 		model.put("user", userLoginForm);
-		return "adminui";
+		return "uilogin";
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
@@ -33,7 +33,7 @@ public class UserLoginController {
 		String userName = "Admin";
 		String password = "adminpass";
 		if (result.hasErrors()) {
-			return "adminui";
+			return "uilogin";
 		}
 		user = (User) model.get("user");
 		if (!user.getUserName().equals(userName)
@@ -42,11 +42,11 @@ public class UserLoginController {
 			result.reject("notmatch.login", "invalid login!! Please try again");
 			//errors.reject("notmatch.login", "inavlid login");
 			user.clearFields();
-			return "adminui";
+			return "uilogin";
 		} else {
 			model.put("user", user);
 			logger.info("Successful Login!! Now onto landing Page!!");
-			return "auilanding";
+			return "redirect:/ussdmenuitems.html";
 		}
 
 	}

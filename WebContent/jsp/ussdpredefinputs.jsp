@@ -268,6 +268,13 @@ td.savebutton {
 							<li><a href="ussdpredefinputitems.html">Predefined Input
 									Items</a></li>
 						</ul>
+						<h3>
+                            <a href="ussdrequests.html">USSD Requests</a>
+                        </h3>
+                        <ul>
+                            <li><a href="ussdrequests.html">USSD Requests</a>
+                            </li>
+                        </ul>
 					</div>
 				</td>
 				<td class="content">
@@ -298,19 +305,19 @@ td.savebutton {
 							<tr>
 								<th>Input Item Name</th>
 								<th>Input Item Desc</th>
-								<th>Action</th>
+<!-- 								<th>Action</th> -->
 							</tr>
 							<c:forEach items="${ussdPredefInputList}" var="predefinput">
 								<tr class="data">
 									<td class="data">${predefinput.predefInputName}</td>
 									<td class="data">${predefinput.predefInputDescription}</td>
-									<td class="data"><a
-										href="#activate/${predefinput.predefInputId}">Activate</a><a>
-											&nbsp; | &nbsp;</a><a
-										href="removepredefinput/${predefinput.predefInputId}.html">Delete</a><a>
-											&nbsp; | &nbsp;</a><a
-										href="editpredefinput/?id=${predefinput.predefInputId}.html">Edit</a>
-									</td>
+<!-- 									<td class="data"><a -->
+<%-- 										href="#activate/${predefinput.predefInputId}">Activate</a><a> --%>
+<!-- 											&nbsp; | &nbsp;</a><a -->
+<%-- 										href="removepredefinput/${predefinput.predefInputId}.html">Delete</a><a> --%>
+<!-- 											&nbsp; | &nbsp;</a><a -->
+<%-- 										href="editpredefinput/?id=${predefinput.predefInputId}.html">Edit</a> --%>
+<!-- 									</td> -->
 								</tr>
 							</c:forEach>
 						</table>

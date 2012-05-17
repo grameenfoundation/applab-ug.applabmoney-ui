@@ -2,11 +2,8 @@ package metomeui.dao;
 
 import java.util.List;
 
-import javax.transaction.Transaction;
-
 import metomeui.model.User;
 
-import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -47,8 +44,8 @@ public class UserDaoImplementation implements UserDao {
 		}
 	}
 
-	private static void updateUser(User user) {
-		Transaction tx = null;
+//	private static void updateUser(User user) {
+//		Transaction tx = null;
 
 		// try {
 		// tx =
@@ -67,5 +64,5 @@ public class UserDaoImplementation implements UserDao {
 		// }
 		// }
 		// }
-	}
+	//}
 }

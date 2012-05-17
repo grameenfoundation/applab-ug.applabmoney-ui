@@ -273,6 +273,13 @@ td.savebutton {
                                     Items</a>
                             </li>
                         </ul>
+                        <h3>
+                            <a href="ussdrequests.html">USSD Requests</a>
+                        </h3>
+                        <ul>
+                            <li><a href="ussdrequests.html">USSD Requests</a>
+                            </li>
+                        </ul>
                     </div></td>
                 <td class="content">
                     <table width="100%">
@@ -307,8 +314,7 @@ td.savebutton {
                 <th>Keyword Code</th>
                 <th>Keyword Steps Count</th>
                 <th>Keyword Description</th>
-                <th>Action</th>
-                <th>&nbsp;</th>
+<!--                 <th>Action</th> -->
             </tr>
             <c:forEach items="${ussdTransactionKeywordList}" var="transactionkeyword">
                 <tr>
@@ -316,15 +322,15 @@ td.savebutton {
                     <td>${transactionkeyword.keywordCode}</td>
                     <td>${transactionkeyword.keywordStepsCount}</td>
                     <td>${transactionkeyword.keywordDescription}</td>
-                    <td><c:if
-                            test="${transactionkeyword.keywordEnabledFlag != 1}">
-                            <a href="#activate/${transactionkeyword.keywordId}">Activate/</a>
-                        </c:if> <c:if test="${transactionkeyword.keywordEnabledFlag == 1}">
-                            <a href="#deactivate/${transactionkeyword.keywordId}">Deactivate/</a>
-                        </c:if>
-                        <a href="removekeyword/${transactionkeyword.keywordId}.html">Delete/</a><a
-                        href="#edit/${transactionkeyword.keywordId}">Edit</a>
-                    </td>
+<%--                     <td><c:if --%>
+<%--                             test="${transactionkeyword.keywordEnabledFlag != 1}"> --%>
+<%--                             <a href="#activate/${transactionkeyword.keywordId}">Activate | </a> --%>
+<%--                         </c:if> <c:if test="${transactionkeyword.keywordEnabledFlag == 1}"> --%>
+<%--                             <a href="#deactivate/${transactionkeyword.keywordId}">Deactivate |</a> --%>
+<%--                         </c:if> --%>
+<%--                         <a href="removekeyword/${transactionkeyword.keywordId}.html"> Delete |</a><a --%>
+<%--                         href="#edit/${transactionkeyword.keywordId}"> Edit</a> --%>
+<!--                     </td> -->
                 </tr>
             </c:forEach>
         </table>
