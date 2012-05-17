@@ -36,7 +36,7 @@ public class UssdPredefInputItem {
 	@Column(name = "INPUT_ITEM_ORDER", nullable = false, length = 11)
 	private Integer predefInputItemOrder;
 	
-	@Column(name = "ENABLED_FLG", nullable = false)
+	@Column(name = "ENABLED_FLG", nullable = true)
 	private Integer predefInputItemEnabledFlag;
 
 	public UssdPredefInputItem() {

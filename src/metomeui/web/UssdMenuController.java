@@ -195,7 +195,8 @@ public class UssdMenuController {
 	@RequestMapping("/ussdkeywordsteps")
 	public String listUssdKeywordSteps(Map<String, Object> map) {
 		map.put("ussdKeywordStep", new UssdKeywordStep());
-		map.put("ussdKeywordStepList", ussdMenuService.listUssdKeywordSteps());
+		map.put("ussdKeywordStepList",
+				ussdMenuService.listUssdKeywordSteps());
 		return "ussdkeywordsteps";
 	}
 
@@ -214,8 +215,9 @@ public class UssdMenuController {
 		if (result.hasErrors()) {
 			return "addussdkeywordsteps";
 		}
-
+logger.debug("here");
 		ussdMenuService.addUssdKeywordStep(ussdKeywordStep);
+		logger.debug("there");
 		return "redirect:/ussdkeywordsteps.html";
 	}
 

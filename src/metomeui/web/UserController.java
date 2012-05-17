@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class UserController {
 
-	private static Logger logger = Logger.getLogger(HelloController.class);
+	private static Logger logger = Logger.getLogger(UserController.class);
 	
 	@Autowired
 	private UserService userService;

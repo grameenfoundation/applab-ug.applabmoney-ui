@@ -55,7 +55,7 @@ public class UssdMenuDaoImplementation implements UssdMenuDao {
 		sessionFactory.getCurrentSession().saveOrUpdate(ussdPredefInput);
 	}
 
-	// To get list of all predefined input items
+	// To get list of all predefined inputs
 	@SuppressWarnings("unchecked")
 	public List<UssdPredefInput> listUssdPredefInputs() {
 		return (List<UssdPredefInput>) sessionFactory.getCurrentSession()
@@ -131,7 +131,6 @@ public class UssdMenuDaoImplementation implements UssdMenuDao {
 
 	public void addUssdKeywordStep(UssdKeywordStep ussdKeywordStep) {
 		sessionFactory.getCurrentSession().saveOrUpdate(ussdKeywordStep);
-
 	}
 
 	@Override

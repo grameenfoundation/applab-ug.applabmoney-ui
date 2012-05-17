@@ -22,7 +22,6 @@ public class UssdMenuItem {
 	@Size(min = 6, max = 20)
 	@Column(name = "PARENT_MENU_ID", nullable = true, length = 11)
 	private Integer menuItemParentId;
-	
 
 	@NotEmpty
 	@Size(min = 1, max = 11)
@@ -41,6 +40,10 @@ public class UssdMenuItem {
 	
 	@Column(name = "ENABLED_FLG", nullable = true)
 	private Integer menuItemEnabledFlag;
+	
+	public UssdMenuItem(){
+		
+	}
 
 	public Integer getMenuItemId() {
 		return menuItemId;

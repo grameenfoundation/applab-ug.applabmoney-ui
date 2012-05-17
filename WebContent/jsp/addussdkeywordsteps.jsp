@@ -252,7 +252,7 @@ text-align:right;
 		<div>
 			<table style="width: 100%;">
 				<tr>
-					<td><h2>Transaction Keywords Manager</h2>
+					<td><h2>Transaction Keyword Steps</h2>
 						<hr>
 					</td>
 				</tr>
@@ -311,7 +311,7 @@ text-align:right;
 
 								<table>
 									<tr>
-										<td class="formlabels"><form:label path="keywordId">Keyword ID Associated with this Step:</form:label>
+										<td class="formlabels"><form:label path="keywordId">Keyword Associated with this Step:</form:label>
 										</td>
 										<td class="form"><form:select cssClass="dropdown"
 												path="keywordId">
@@ -340,23 +340,23 @@ text-align:right;
 										</td>
 									</tr>
 									<tr>
-										<td><form:checkbox cssClass="otherformfields"
-												path="isFirstStepFlag" value="1" checked="no" />
+										<td class="formlabels"><form:checkbox cssClass="otherformfields"
+												path="isFirstStepFlag" value="1" />
 										</td>
 										<td class="form"><form:label path="isFirstStepFlag">Is First Step</form:label>
 										</td>
 									</tr>
 									<tr>
-										<td><form:checkbox cssClass="otherformfields"
-												path="isLastStepFlag" value="1" checked="no" />
+										<td class="formlabels"><form:checkbox cssClass="otherformfields"
+												path="isLastStepFlag" value="1" />
 										</td>
 										<td class="form"><form:label path="isLastStepFlag">Is Last Step</form:label>
 										</td>
 									</tr>
 
 									<tr>
-										<td><form:checkbox cssClass="otherformfields"
-												path="hasPredefInputFlag" value="1" checked="no" />
+										<td class="formlabels"><form:checkbox cssClass="otherformfields"
+												path="hasPredefInputFlag" value="1" />
 										</td>
 										<td class="form"><form:label path="hasPredefInputFlag">Keyword Step has Predefined Input: </form:label>
 										</td>
@@ -375,8 +375,8 @@ text-align:right;
 											</form:select></td>
 									</tr>
 									<tr>
-										<td><form:checkbox cssClass="otherformfields"
-												path="useFixedValueFlag" value="1" checked="yes" />
+										<td class="formlabels"><form:checkbox cssClass="otherformfields"
+												path="useFixedValueFlag" value="1"/>
 										</td>
 										<td class="form"><form:label path="useFixedValueFlag">Use Fixed Value </form:label>
 										</td>

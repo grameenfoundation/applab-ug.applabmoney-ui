@@ -51,7 +51,6 @@ public class UssdKeywordStep {
 	@Column(name = "HAS_PREDEF_INPUT", nullable = true, length = 11)
 	private Integer hasPredefInputFlag;
 
-	@NotEmpty
 	@Size(min = 1, max = 50)
 	@Column(name = "PREDEF_INPUT_ID", nullable = true, length = 50)
 	private String predefInputId;
@@ -120,7 +119,7 @@ public class UssdKeywordStep {
 		return fixedValue;
 	}
 
-	public void setFixedValueFlag(String fixedValue) {
+	public void setFixedValue(String fixedValue) {
 		this.fixedValue = fixedValue;
 	}
 

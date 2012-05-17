@@ -2,7 +2,9 @@ package metomeui.validator;
 
 import metomeui.model.UssdKeywordStep;
 import metomeui.model.UssdMenuItem;
+import metomeui.web.HelloController;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Validator;
 import org.springframework.validation.Errors;
@@ -10,6 +12,9 @@ import org.springframework.validation.ValidationUtils;
 
 @Component("ussdKeywordStepValidator")
 public class UssdKeywordStepValidator implements Validator {
+
+	private static Logger logger = Logger
+			.getLogger(UssdKeywordStepValidator.class);
 
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -25,6 +30,36 @@ public class UssdKeywordStepValidator implements Validator {
 				"stepMenuName.required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "stepMenuNumber",
 				"stepMenuNumber.required");
+
+		if (!(ussdKeywordStep.getStepMenuNumber() == null)) {
+			if (UssdMenuValidator.check(ussdKeywordStep
+					.getStepMenuNumber().toString())) {
+				errors.rejectValue("stepMenuNumber",
+						"stepMenuNumber.wrongformat");
+			}
+		}
+
+		if (ussdKeywordStep.getKeywordId() == 0) {
+			errors.rejectValue("keywordId", "keywordId.required");
+		}
+
+		if (ussdKeywordStep.getUseFixedValueFlag() == null) {
+			ussdKeywordStep.setUseFixedValueFlag(0);
+		}
+
+		if (ussdKeywordStep.getIsFirstStepFlag() == null) {
+			ussdKeywordStep.setIsFirstStepFlag(0);
+		}
+
+		if (ussdKeywordStep.getIsLastStepFlag() == null) {
+			ussdKeywordStep.setIsLastStepFlag(0);
+		}
+
+		if (ussdKeywordStep.getHasPredefInputFlag() == null) {
+			ussdKeywordStep.setHasPredefInputFlag(0);
+			ussdKeywordStep.setPredefInputId(null);
+		}
+
 		if (ussdKeywordStep.getUseFixedValueFlag() == 1) {
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "fixedValue",
 					"fixedValue.required");
@@ -34,18 +69,10 @@ public class UssdKeywordStepValidator implements Validator {
 				errors.rejectValue("predefInputId", "predefInputId.required");
 			}
 		}
-		
-		if (ussdKeywordStep.getIsFirstStepFlag().equals(1)) {
-			if (ussdKeywordStep.getIsLastStepFlag().equals(1)) {
-				errors.reject("stepPosition.required");
-			}
-		}
 
-		// if (ussdMenuItem.getMenuItemName().equalsIgnoreCase(null)) {
-		// errors.rejectValue("menuItemName", "menuItemName.wrongformat");
-		// }
-		// if (ussdMenuItem.getMenuItemOrder().(null)) {
-		// errors.rejectValue("menuItemName", "menuItemName.wrongformat");
-		// }
+		if ((ussdKeywordStep.getIsFirstStepFlag() == 1)
+				&& (ussdKeywordStep.getIsLastStepFlag() == 1)) {
+			errors.reject("stepPosition.required");
+		}
 	}
 }

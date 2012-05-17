@@ -342,8 +342,8 @@ td.formlabels {
 										</td>
 									</tr>
 									<tr>
-										<td><form:checkbox cssClass="otherformfields"
-												path="keywordEnabledFlag" value="1" checked="checked" />
+										<td class="formlabels"><form:checkbox cssClass="otherformfields"
+												path="keywordEnabledFlag" value="1"/>
 										</td>
 										<td><form:label path="keywordEnabledFlag">Enable Transaction Keyword</form:label>
 										</td>

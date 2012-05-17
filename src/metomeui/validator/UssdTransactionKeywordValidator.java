@@ -26,6 +26,13 @@ public class UssdTransactionKeywordValidator implements Validator {
 				"keywordCode.required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "keywordStepsCount",
 				"keywordStepsCount.required");
-			
+		if (ussdTransactionKeyword.getKeywordEnabledFlag()==null) {
+			ussdTransactionKeyword.setKeywordEnabledFlag(0);
+		}
+		
+		if (ussdTransactionKeyword.getKeywordId() == 0) {
+			errors.rejectValue("keywordName",
+					"keywordName.required");
+		}
 	}
 }

@@ -1,6 +1,5 @@
 package metomeui.validator;
 
-import metomeui.model.UssdMenuItem;
 import metomeui.model.UssdPredefInputItem;
 
 import org.springframework.stereotype.Component;
@@ -29,6 +28,9 @@ public class UssdPredefInputItemValidator implements Validator {
 				"predefInputItemOrder", "predefInputItemOrder.required");
 		if (ussdPredefInputItem.getPredefInputId() == 0) {
 			errors.rejectValue("predefInputId", "predefInputId.required");
+		}
+		if (ussdPredefInputItem.getPredefInputItemEnabledFlag()==null) {
+			ussdPredefInputItem.setPredefInputItemEnabledFlag(0);
 		}	
 	}
 }

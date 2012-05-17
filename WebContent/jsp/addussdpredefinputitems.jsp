@@ -244,7 +244,8 @@ td.formlabels {
 				<div class="header" style="color: #000000;">
 					<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
 						> Administration</a>
-				</div></td>
+				</div>
+			</td>
 		</tr>
 	</table>
 	<div>
@@ -252,8 +253,7 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Predefined Input Items Manager</h2>
-						<hr>
-					</td>
+						<hr></td>
 				</tr>
 			</table>
 		</div>
@@ -269,7 +269,8 @@ td.formlabels {
 							<li><a href="ussdmenuitems.html">Ussd Menu Items Listing</a>
 							</li>
 							<li><a href="addussdmenuitems.html">Create Ussd Menu
-									Items</a></li>
+									Items</a>
+							</li>
 						</ul>
 						<h3>
 							<a href="ussdtransactionkeywords.html">Transaction Keywords
@@ -277,90 +278,94 @@ td.formlabels {
 						</h3>
 						<ul>
 							<li><a href="ussdtransactionkeywords.html">Transaction
-									Keywords</a></li>
-							<li><a href="ussdkeywordsteps.html">Keyword Steps</a></li>
+									Keywords</a>
+							</li>
+							<li><a href="ussdkeywordsteps.html">Keyword Steps</a>
+							</li>
 						</ul>
 						<h3>
 							<a href="ussdpredefinputs.html">Predefined Inputs Setup</a>
 						</h3>
 						<ul>
-							<li><a href="ussdpredefinputs.html">Predefined Inputs</a></li>
+							<li><a href="ussdpredefinputs.html">Predefined Inputs</a>
+							</li>
 							<li><a href="ussdpredefinputitems.html">Predefined Input
-									Items</a></li>
+									Items</a>
+							</li>
 						</ul>
 						<h3>
-                            <a href="ussdrequests.html">USSD Requests</a>
-                        </h3>
-                        <ul>
-                            <li><a href="ussdrequests.html">USSD Requests</a>
-                            </li>
-                        </ul>
-					</div>
-				</td>
+							<a href="ussdrequests.html">USSD Requests</a>
+						</h3>
+						<ul>
+							<li><a href="ussdrequests.html">USSD Requests</a></li>
+						</ul>
+					</div></td>
 				<td class="content">
-				<div>
-                        <fieldset>
-                            <legend>
-                                <h2>Create Predefined Input Items</h2>
-                            </legend>
-					<form:form method="post" action="addpredefinputitems.html"
-						commandName="ussdPredefInputItem">
-						<form:errors path="*" cssClass="errorblock" element="div" />
+					<div>
+						<fieldset>
+							<legend>
+								<h2>Create Predefined Input Items</h2>
+							</legend>
+							<form:form method="post" action="addpredefinputitems.html"
+								commandName="ussdPredefInputItem">
+								<form:errors path="*" cssClass="errorblock" element="div" />
 
-						<table>
-							<tr>
-								<td class="formlabels"><form:label path="predefInputId">Predefined Input Item Name</form:label>
-								</td>
-								<td class="form"><form:select cssClass="dropdown"
-										path="predefInputId">
-										<form:option value="0" label="--None--" />
-										<c:forEach items="${predefInputList}" var="predefinput">
-											<form:option value="${predefinput.predefInputId}"
-												label="${predefinput.predefInputName}" />
-										</c:forEach>
-									</form:select></td>
-							</tr>
-							<tr>
-								<td class="formlabels"><form:label 
-										path="predefInputItemName">Predefined Input Item Name</form:label>
-								</td>
-								<td class="form"><form:input cssClass="formfields" path="predefInputItemName" />
-								</td>
-							</tr>
-							<tr>
-								<td class="formlabels"><form:label 
-										path="predefInputItemCode">Predefined Input Item Code</form:label>
-								</td>
-								<td class="form"><form:input cssClass="formfields" path="predefInputItemCode" />
-								</td>
-							</tr>
+								<table>
+									<tr>
+										<td class="formlabels"><form:label path="predefInputId">Predefined Input Name</form:label>
+										</td>
+										<td class="form"><form:select cssClass="dropdown"
+												path="predefInputId">
+												<form:option value="0" label="--None--" />
+												<c:forEach items="${predefInputList}" var="predefinput">
+													<form:option value="${predefinput.predefInputId}"
+														label="${predefinput.predefInputName}" />
+												</c:forEach>
+											</form:select>
+										</td>
+									</tr>
+									<tr>
+										<td class="formlabels"><form:label
+												path="predefInputItemName">Predefined Input Item Name</form:label>
+										</td>
+										<td class="form"><form:input cssClass="formfields"
+												path="predefInputItemName" /></td>
+									</tr>
+									<tr>
+										<td class="formlabels"><form:label
+												path="predefInputItemCode">Predefined Input Item Code</form:label>
+										</td>
+										<td class="form"><form:input cssClass="formfields"
+												path="predefInputItemCode" /></td>
+									</tr>
 
-							<tr>
-								<td class="formlabels"><form:label 
-										path="predefInputItemOrder">Predefined Input Item Order</form:label>
-								</td>
-								<td class="form"><form:input cssClass="formfields" path="predefInputItemOrder" />
-								</td>
-							</tr>
+									<tr>
+										<td class="formlabels"><form:label
+												path="predefInputItemOrder">Predefined Input Item Order</form:label>
+										</td>
+										<td class="form"><form:input cssClass="formfields"
+												path="predefInputItemOrder" /></td>
+									</tr>
 
-							<tr>
-								<td class="formlabels"><form:checkbox cssClass="otherformfields"
-										path="predefInputItemEnabledFlag" value="1" checked="no" />
-								</td>
-								<td class="form"><form:label 
-										path="predefInputItemEnabledFlag">Enable Predefined Input</form:label>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2" class="savebutton"><br> <input
-									class="btn" type="submit" value="Save" /></td>
-							</tr>
-						</table>
-					</form:form>
-					</fieldset>
-					</div>
-				</td>
+									<tr>
+										<td class="formlabels"><form:checkbox
+												cssClass="otherformfields" path="predefInputItemEnabledFlag"
+												value="1" /></td>
+										<td class="form"><form:label
+												path="predefInputItemEnabledFlag">Enable Predefined Input Item</form:label>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2" class="savebutton"><br> <input
+											class="btn" type="submit" value="Save" />
+										</td>
+									</tr>
+								</table>
+							</form:form>
+						</fieldset>
+					</div></td>
 			</tr>
-		</table> </div>
+		</table>
+	</div>
 </body>
 </html>
