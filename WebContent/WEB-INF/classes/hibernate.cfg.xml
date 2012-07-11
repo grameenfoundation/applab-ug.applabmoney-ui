@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+	
+	<!-- SQL dialect -->
+        <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+
+        <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">true</property>
+
+        <!-- Enable Hibernate's automatic session context management -->
+         <!--<property name="current_session_context_class">thread</property>-->
+       <!-- <property name="hibernate.jdbc.batch_size">20</property> -->
+
+        <!-- MySQL connection -->
+        <property name="connection.url">jdbc:mysql://localhost:3306/applabmoney</property>
+        <property name="connection.username">root</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.password">root123</property>
+
+        <!-- JDBC connection pool (use the built-in) 
+        <property name="connection.pool_size">1</property>-->
+
+        <!-- Disable the second-level cache 
+        <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>-->
+        
+        
+		<mapping class="metomeui.model.AccountType"/>
+		<mapping class="metomeui.model.Contact"/>
+		<mapping class="metomeui.model.ContactForm"/>
+		<mapping class="metomeui.model.Message"/>
+		<mapping class="metomeui.model.Language"/>
+		<mapping class="metomeui.model.User"/>
+		<mapping class="metomeui.model.Login"/>
+		<mapping class="metomeui.model.MemoGroup"/>
+		<mapping class="metomeui.model.UssdPredefInputItem"/>
+		<mapping class="metomeui.model.UssdPredefInput"/>
+		<mapping class="metomeui.model.UssdKeywordStep"/>
+		<mapping class="metomeui.model.UssdMenuItem"/>
+		<mapping class="metomeui.model.UssdTransactionKeyword"/>
+		<mapping class="metomeui.model.UssdRequest"/>
+	</session-factory>
+
+</hibernate-configuration>

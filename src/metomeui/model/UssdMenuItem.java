@@ -1,11 +1,19 @@
 package metomeui.model;
 
-import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -14,51 +22,54 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class UssdMenuItem {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue()
 	@Column(name = "MENU_ITEM_ID")
-	private Integer menuItemId;
+	private Long menuItemId;
 
-	@NotEmpty
-	@Size(min = 6, max = 20)
-	@Column(name = "PARENT_MENU_ID", nullable = true, length = 11)
-	private Integer menuItemParentId;
+	@OneToMany(targetEntity = UssdMenuItem.class, mappedBy = "rootMenuItem", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+	@JoinColumn(name = "PARENT_MENU_ID", insertable = false, updatable = false, nullable = true)
+	private List<UssdMenuItem> menuItems;
 
-	@NotEmpty
-	@Size(min = 1, max = 11)
-	@Column(name = "KEYWORD_ID", nullable = true, length = 11)
-	private Integer menuItemKeywordId;
+	@ManyToOne
+	@JoinColumn(name = "PARENT_MENU_ID", nullable = true)
+	private UssdMenuItem rootMenuItem;
+
+	@ManyToOne
+	@JoinColumn(name = "KEYWORD_ID", nullable = true)
+	private UssdTransactionKeyword menuItemKeyword;
 
 	@NotEmpty
 	@Size(min = 1, max = 11)
 	@Column(name = "MENU_ITEM_ORDER", nullable = true, length = 11)
 	private Integer menuItemOrder;
-	
+
 	@NotEmpty
 	@Size(min = 8, max = 20)
 	@Column(name = "MENU_ITEM_NAME", nullable = true, length = 100)
 	private String menuItemName;
-	
+
 	@Column(name = "ENABLED_FLG", nullable = true)
 	private Integer menuItemEnabledFlag;
-	
-	public UssdMenuItem(){
-		
+
+	public UssdMenuItem() {
+
 	}
 
-	public Integer getMenuItemId() {
+	public UssdMenuItem(String menuItemName, Integer menuItemOrder,
+			Integer menuItemEnabledFlag) {
+		this.menuItemName = menuItemName;
+		this.menuItemOrder = menuItemOrder;
+		this.menuItemKeyword = new UssdTransactionKeyword();
+		this.rootMenuItem = new UssdMenuItem();
+		//this.menuItems = new ArrayList<UssdMenuItem>();
+	}
+
+	public Long getMenuItemId() {
 		return menuItemId;
 	}
 
-	public void setMenuItemId(Integer menuItemId) {
+	public void setMenuItemId(Long menuItemId) {
 		this.menuItemId = menuItemId;
-	}
-
-	public Integer getMenuItemKeywordId() {
-		return menuItemKeywordId;
-	}
-
-	public void setMenuItemKeywordId(Integer menuItemKeywordId) {
-		this.menuItemKeywordId = menuItemKeywordId;
 	}
 
 	public Integer getMenuItemOrder() {
@@ -77,14 +88,6 @@ public class UssdMenuItem {
 		this.menuItemName = menuItemName;
 	}
 
-	public Integer getMenuItemParentId() {
-		return menuItemParentId;
-	}
-
-	public void setMenuItemParentId(Integer menuItemParentId) {
-		this.menuItemParentId = menuItemParentId;
-	}
-
 	public Integer getMenuItemEnabledFlag() {
 		return menuItemEnabledFlag;
 	}
@@ -93,5 +96,28 @@ public class UssdMenuItem {
 		this.menuItemEnabledFlag = menuItemEnabledFlag;
 	}
 
-	
+	public UssdMenuItem getRootMenuItem() {
+		return rootMenuItem;
+	}
+
+	public void setRootMenuItem(UssdMenuItem rootMenuItem) {
+		this.rootMenuItem = rootMenuItem;
+	}
+
+	public UssdTransactionKeyword getMenuItemKeyword() {
+		return menuItemKeyword;
+	}
+
+	public void setMenuItemKeyword(UssdTransactionKeyword menuItemKeyword) {
+		this.menuItemKeyword = menuItemKeyword;
+	}
+
+	public List<UssdMenuItem> getMenuItems() {
+		return menuItems;
+	}
+
+	public void setMenuItems(List<UssdMenuItem> menuItems) {
+		this.menuItems = menuItems;
+	}
+
 }

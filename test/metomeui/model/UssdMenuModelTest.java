@@ -14,7 +14,7 @@ public class UssdMenuModelTest extends TestCase {
     public void testSetAndGetPredefInputId() {
         Integer testPredefInputId = 1;
         assertNull(ussdPredefInput.getPredefInputId());
-        ussdPredefInput.setPredefInputId(testPredefInputId);
+       // ussdPredefInput.setPredefInputId(testPredefInputId);
         assertEquals(testPredefInputId, ussdPredefInput.getPredefInputId());
     }
     

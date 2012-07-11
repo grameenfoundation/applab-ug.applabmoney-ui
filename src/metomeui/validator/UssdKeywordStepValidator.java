@@ -1,10 +1,11 @@
 package metomeui.validator;
 
+import metomeui.dao.UssdMenuDao;
+import metomeui.dao.UssdMenuDaoImplementation;
 import metomeui.model.UssdKeywordStep;
-import metomeui.model.UssdMenuItem;
-import metomeui.web.HelloController;
-
-import org.apache.log4j.Logger;
+import metomeui.service.UssdMenuService;
+import metomeui.service.UssdMenuServiceImplementation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Validator;
 import org.springframework.validation.Errors;
@@ -13,36 +14,48 @@ import org.springframework.validation.ValidationUtils;
 @Component("ussdKeywordStepValidator")
 public class UssdKeywordStepValidator implements Validator {
 
-	private static Logger logger = Logger
-			.getLogger(UssdKeywordStepValidator.class);
+	@Autowired
+	UssdMenuService ussdMenuService = new UssdMenuServiceImplementation();
+	@Autowired
+	UssdMenuDao ussdMenuDao = new UssdMenuDaoImplementation();
 
 	@Override
 	public boolean supports(Class<?> clazz) {
 		return UssdKeywordStep.class.isAssignableFrom(clazz);
 	}
 
-	@Override
-	public void validate(Object target, Errors errors) {
+	public void validate(Object target, Errors errors, Long keywordId) {
 
 		UssdKeywordStep ussdKeywordStep = (UssdKeywordStep) target;
 
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "stepMenuName",
 				"stepMenuName.required");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "stepMenuNumber",
-				"stepMenuNumber.required");
 
-		if (!(ussdKeywordStep.getStepMenuNumber() == null)) {
-			if (UssdMenuValidator.check(ussdKeywordStep
-					.getStepMenuNumber().toString())) {
-				errors.rejectValue("stepMenuNumber",
-						"stepMenuNumber.wrongformat");
+		if (keywordId != null) {
+			if ((ussdKeywordStep.getStepMenuName() != null)
+					|| (ussdKeywordStep.getStepMenuName() != "")) {
+				if ((ussdMenuService.checkIfDuplicateStepMenuName(
+						ussdKeywordStep.getStepMenuName(), keywordId)) == true) {
+					errors.rejectValue("stepMenuName", "stepMenuName.duplicate");
+				}
+			}
+
+			if (null == ussdKeywordStep.getStepMenuNumber()) {
+				ValidationUtils.rejectIfEmptyOrWhitespace(errors,
+						"stepMenuNumber", "stepMenuNumber.required");
+			} else if ((null != ussdKeywordStep.getStepMenuNumber())
+					|| (ussdKeywordStep.getStepMenuNumber().toString() != "")) {
+				if ((ussdMenuDao.checkIfDuplicateStepMenuNumber(
+						ussdKeywordStep.getStepMenuNumber(), keywordId)) == true) {
+					errors.rejectValue("stepMenuNumber",
+							"stepMenuNumber.duplicate");
+				}	
+				/**
+				 * TODO: Add code to check if the user input is a number
+				 *  
+				 */
 			}
 		}
-
-		if (ussdKeywordStep.getKeywordId() == 0) {
-			errors.rejectValue("keywordId", "keywordId.required");
-		}
-
 		if (ussdKeywordStep.getUseFixedValueFlag() == null) {
 			ussdKeywordStep.setUseFixedValueFlag(0);
 		}
@@ -57,22 +70,22 @@ public class UssdKeywordStepValidator implements Validator {
 
 		if (ussdKeywordStep.getHasPredefInputFlag() == null) {
 			ussdKeywordStep.setHasPredefInputFlag(0);
-			ussdKeywordStep.setPredefInputId(null);
 		}
 
 		if (ussdKeywordStep.getUseFixedValueFlag() == 1) {
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "fixedValue",
 					"fixedValue.required");
 		}
-		if (ussdKeywordStep.getHasPredefInputFlag() == 1) {
-			if (ussdKeywordStep.getPredefInputId().equalsIgnoreCase(null)) {
-				errors.rejectValue("predefInputId", "predefInputId.required");
-			}
-		}
 
 		if ((ussdKeywordStep.getIsFirstStepFlag() == 1)
 				&& (ussdKeywordStep.getIsLastStepFlag() == 1)) {
 			errors.reject("stepPosition.required");
 		}
+	}
+
+	@Override
+	public void validate(Object target, Errors errors) {
+		validate(target, errors, null);
+
 	}
 }

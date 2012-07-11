@@ -15,10 +15,15 @@ public class UssdPredefInputValidator implements Validator {
 		return UssdPredefInput.class.isAssignableFrom(clazz);
 	}
 
-	@Override
-	public void validate(Object target, Errors errors) {
+	public void validate(Object target, Errors errors, Long menuId) {
 
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "predefInputName",
 				"predefInputName.required");
+	}
+	
+	@Override
+	public void validate(Object target, Errors errors) {
+		validate(target, errors, null);
+
 	}
 }

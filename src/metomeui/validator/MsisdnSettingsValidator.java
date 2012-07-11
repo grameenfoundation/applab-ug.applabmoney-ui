@@ -5,7 +5,6 @@ import metomeui.model.MsisdnSettings;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Validator;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 
 @Component("msisdnSettingsValidator")
 public class MsisdnSettingsValidator implements Validator {

@@ -1,11 +1,19 @@
 package metomeui.model;
 
-import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -14,9 +22,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class UssdTransactionKeyword {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "KEYWORD_ID")
-	private Integer keywordId;
+	private Long keywordId;
 
 	@NotEmpty
 	@Size(min = 6, max = 100)
@@ -39,15 +47,34 @@ public class UssdTransactionKeyword {
 	@Column(name = "ENABLED_FLG", nullable = true)
 	private Integer keywordEnabledFlag;
 
+	@OneToMany(targetEntity = UssdKeywordStep.class, mappedBy = "transactionKeyword", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "KEYWORD_ID", insertable = false, updatable = false)
+	private List<UssdKeywordStep> keywordSteps;
+
+	//@OneToMany(targetEntity = UssdMenuItem.class, mappedBy = "menuItemKeyword", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	//@JoinColumn(name = "KEYWORD_ID", insertable = false, updatable = false)
+	//private List<UssdMenuItem> menuItems;
+
 	public UssdTransactionKeyword() {
 
 	}
 
-	public Integer getKeywordId() {
+	public UssdTransactionKeyword(String keywordName, String keywordCode,
+			String keywordDescription, Integer keywordStepsCount,
+			Integer keywordEnabledFlag) {
+		this.keywordName = keywordName;
+		this.keywordCode = keywordCode;
+		this.keywordDescription = keywordDescription;
+		this.keywordStepsCount = keywordStepsCount;
+		this.keywordEnabledFlag = keywordEnabledFlag;
+		this.keywordSteps = new ArrayList<UssdKeywordStep>();
+	}
+
+	public Long getKeywordId() {
 		return keywordId;
 	}
 
-	public void setKeywordId(Integer keywordId) {
+	public void setKeywordId(Long keywordId) {
 		this.keywordId = keywordId;
 	}
 
@@ -89,5 +116,13 @@ public class UssdTransactionKeyword {
 
 	public void setKeywordEnabledFlag(Integer keywordEnabledFlag) {
 		this.keywordEnabledFlag = keywordEnabledFlag;
+	}
+
+	public List<UssdKeywordStep> getKeywordSteps() {
+		return keywordSteps;
+	}
+
+	public void setKeywordSteps(List<UssdKeywordStep> keywordSteps) {
+		this.keywordSteps = keywordSteps;
 	}
 }

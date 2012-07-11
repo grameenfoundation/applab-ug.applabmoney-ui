@@ -261,7 +261,7 @@ text-align:right;
                             </legend>
 						
 					 <form:form method="post" action="uilogin.html"
-						commandName="user">
+						commandName="login">
 						<form:errors path="*" cssClass="errorblock" element="div" />
 							<table>
 								<tr>

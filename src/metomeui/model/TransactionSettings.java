@@ -1,9 +1,6 @@
 package metomeui.model;
 
-import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.Range;
 
 public class TransactionSettings {
 	

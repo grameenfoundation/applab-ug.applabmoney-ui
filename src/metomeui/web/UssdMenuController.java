@@ -1,16 +1,21 @@
 package metomeui.web;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import metomeui.dao.UssdMenuDao;
+import metomeui.dao.UssdMenuDaoImplementation;
 import metomeui.model.UssdKeywordStep;
 import metomeui.model.UssdMenuItem;
 import metomeui.model.UssdPredefInput;
 import metomeui.model.UssdPredefInputItem;
-import metomeui.model.UssdRequest;
 import metomeui.model.UssdTransactionKeyword;
 import metomeui.service.UssdMenuService;
+import metomeui.service.UssdMenuServiceImplementation;
 import metomeui.validator.UssdKeywordStepValidator;
 import metomeui.validator.UssdMenuItemValidator;
 import metomeui.validator.UssdPredefInputItemValidator;
@@ -20,22 +25,28 @@ import metomeui.validator.UssdTransactionKeywordValidator;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * @author Sarahk
+ * 
+ */
 @Controller
-// @RequestMapping("/users")
 public class UssdMenuController {
 
 	private static Logger logger = Logger.getLogger(UssdMenuController.class);
 
 	@Autowired
-	private UssdMenuService ussdMenuService;
+	UssdMenuService ussdMenuService = new UssdMenuServiceImplementation();
+	@Autowired
+	UssdMenuDao ussdMenuDao = new UssdMenuDaoImplementation();
+
 	@Autowired
 	private UssdMenuItemValidator ussdMenuItemValidator;
 	@Autowired
@@ -47,6 +58,12 @@ public class UssdMenuController {
 	@Autowired
 	private UssdKeywordStepValidator ussdKeywordStepValidator;
 
+	private static List<UssdPredefInputItem> predefInputItemsList = new ArrayList<UssdPredefInputItem>();
+	private static Set<UssdPredefInputItem> predefInputItemsSet = new HashSet<UssdPredefInputItem>();
+
+	private static List<UssdKeywordStep> keywordStepsList = new ArrayList<UssdKeywordStep>();
+	private static Set<UssdKeywordStep> keywordStepsSet = new HashSet<UssdKeywordStep>();
+
 	@RequestMapping("/hello")
 	public String printWelcome(ModelMap model) {
 
@@ -55,234 +72,863 @@ public class UssdMenuController {
 		logger.info("Returning hello view with " + now);
 		model.addAttribute("now", now);
 		return "hello";
-
 	}
 
-	@RequestMapping("/ussdpredefinputitems")
-	public String listUssdPredefInputItems(Map<String, Object> map) {
+	/**
+	 * Predefined inputs and input items mapping functions
+	 * 
+	 * Function lists configured Predefined Inputs"
+	 */
+	@RequestMapping(value = "/listussdpredefinputs", method = RequestMethod.GET)
+	public String getPredefInputList(Map<String, Object> map) {
+		predefInputItemsList.clear();
+		map.put("predefInput", new UssdPredefInput());
+		map.put("predefInputList", ussdMenuService.listPredefInputs());
+		return "listussdpredefinputs";
+	}
+
+	/**
+	 * Retrieves "Add New Predefined Input" page
+	 */
+	@RequestMapping(value = "/addussdpredefinput", method = RequestMethod.GET)
+	public ModelAndView getPredefInput(
+			@ModelAttribute("ussdPredefInput") UssdPredefInput predefInput) {
+		if (null != predefInputItemsList) {
+			logger.info("PredefItemsList is not Null");
+			predefInput.setPredefInputItems(predefInputItemsList);
+		} else {
+			logger.info("PredefItemsList is Null");
+		}
+		return new ModelAndView("addussdpredefinput", "ussdPredefInput",
+				predefInput);
+	}
+
+	/**
+	 * Retrieves "Add New Predefined Input Item" page
+	 */
+	@RequestMapping(value = "/addnewussdpredefinputitem", method = RequestMethod.GET)
+	public String addPredefInputItemLink(Map<String, Object> map) {
 		map.put("ussdPredefInputItem", new UssdPredefInputItem());
-		map.put("ussdPredefInputItemList",
-				ussdMenuService.listUssdPredefInputItems());
-		return "ussdpredefinputitems";
+		return "addnewussdpredefinputitem";
 	}
 
-	@RequestMapping(value = "/addussdpredefinputitems", method = RequestMethod.GET)
-	public String addUssdPredefInputItemsLink(Map<String, Object> map) {
-		map.put("ussdPredefInputItem", new UssdPredefInputItem());
-		return "addussdpredefinputitems";
-	}
-	
-	@RequestMapping(value = "/addpredefinputitems", method = RequestMethod.POST)
-	public String addUssdPredefInputItems(
-			@ModelAttribute("ussdPredefInputItem") UssdPredefInputItem ussdPredefInputItem,
-			BindingResult result) {
+	/**
+	 * Add New Predefined Input Item to Predefined Input
+	 */
+	@RequestMapping(value = "/addussdpredefinputitem", method = RequestMethod.POST)
+	public String addPredefInputItem(
+			@ModelAttribute("ussdPredefInputItem") UssdPredefInputItem predefInputItem,
+			BindingResult result, Map<String, Object> map) {
 
-		ussdPredefInputItemValidator.validate(ussdPredefInputItem, result);
+		ussdPredefInputItemValidator.validate(predefInputItem, result);
 		if (result.hasErrors()) {
-			return "addussdpredefinputitems";
+			return "addnewussdpredefinputitem";
+		} else {
+			UssdPredefInput predefInput = new UssdPredefInput();
+			if (predefInputItemsSet.add(predefInputItem) == true) {
+				if (predefInputItem != null) {
+					try {
+						logger.info("add item to predefInputItemsList");
+						predefInputItemsList.add(predefInputItem);
+						predefInput.setPredefInputItems(predefInputItemsList);
+					} catch (Exception e) {
+						e.printStackTrace();
+						return "redirect:/listussdpredefinputs.html";
+					}
+				}
+			}
+			map.put("ussdPredefInput", predefInput);
+			return "addussdpredefinput";
+		}
+	}
+
+	/**
+	 * Add New Predefined Input
+	 */
+	@SuppressWarnings({ "unused" })
+	@RequestMapping(value = "/addussdpredefinput", method = RequestMethod.POST)
+	public String addPredefinedInput(
+			@ModelAttribute("ussdPredefInput") UssdPredefInput predefInput,
+			BindingResult result, Map<String, Object> map) {
+
+		ussdPredefInputValidator.validate(predefInput, result);
+		if (result.hasErrors()) {
+			return "addussdpredefinput";
+		} else {
+			if (predefInput != null) {
+				List<UssdPredefInputItem> ussdPredefInputItems = predefInput
+						.getPredefInputItems();
+
+				/** for each of the predefinputitems, add the predefinput id */
+				if (null != predefInputItemsList
+						&& predefInputItemsList.size() > 0) {
+					predefInput.setPredefInputItems(predefInputItemsList);
+
+					for (UssdPredefInputItem predefInputItem : predefInputItemsList) {
+
+						predefInputItem.setPredefInput(predefInput);
+						if (predefInputItem.getPredefInputItemEnabledFlag() == null) {
+							predefInputItem.setPredefInputItemEnabledFlag(0);
+						}
+					}
+				}
+			}
+			ussdMenuService.addPredefInput(predefInput);
+			if (!predefInputItemsList.isEmpty()) {
+				predefInputItemsList.clear();
+			}
+			map.put("ussdPredefInput", new UssdPredefInput());
+			map.put("predefInputList", ussdMenuService.listPredefInputs());
+			return "listussdpredefinputs";
+		}
+	}
+
+	/**
+	 * Retrieves the "Edit Existing Predefined Input" page
+	 */
+	@RequestMapping(value = "/editussdpredefinput/{predefInputId}", method = RequestMethod.GET)
+	public String retrieveEditPredefInputPage(@PathVariable long predefInputId,
+			Map<String, Object> map) {
+		predefInputItemsList = ussdMenuService
+				.listPredefInputItemsByPredefInputId(predefInputId);
+		UssdPredefInput existingUssdPredefInput = ussdMenuService
+				.getExistingPredefInput(predefInputId);
+		if (predefInputItemsList != null) {
+			existingUssdPredefInput.setPredefInputItems(predefInputItemsList);
+		}
+		map.put("ussdPredefInput", existingUssdPredefInput);
+		return "editussdpredefinput";
+	}
+
+	/**
+	 * Retrieves the "Add Predefined Input Item to Existing Input" Page
+	 */
+	@RequestMapping(value = "/editaddnewussdpredefinputitem/{predefInputId}", method = RequestMethod.GET)
+	public String addPredefInputItemOnEditLink(
+			@PathVariable long predefInputId, Map<String, Object> map) {
+		map.put("ussdPredefInputItem", new UssdPredefInputItem());
+		map.put("predefInputId", predefInputId);
+		return "editaddnewussdpredefinputitem";
+	}
+
+	/**
+	 * Retrieves the "Edit Existing Predef Input" page after adding a new input
+	 * item
+	 */
+	@RequestMapping(value = "/editaddnewussdpredefinputitem/{predefInputId}", method = RequestMethod.POST)
+	public String addNewPredefInputItemOnEdit(
+			@PathVariable long predefInputId,
+			@ModelAttribute("ussdPredefInputItem") UssdPredefInputItem predefInputItem,
+			BindingResult result, Map<String, Object> map) {
+
+		ussdPredefInputItemValidator.validate(predefInputItem, result,
+				predefInputId);
+		if (result.hasErrors()) {
+			map.put("predefInputId", predefInputId);
+			return "editussdpredefinput";
+		} else {
+			predefInputItemsList = ussdMenuService
+					.listPredefInputItemsByPredefInputId(predefInputId);
+			UssdPredefInput existingPredefInput = ussdMenuService
+					.getExistingPredefInput(predefInputId);
+			predefInputItem.setPredefInput(existingPredefInput);
+
+			if (null == predefInputItemsList) {
+				predefInputItemsList = new ArrayList<UssdPredefInputItem>();
+			}
+			predefInputItemsList.add(predefInputItem);
+			if (predefInputItemsList != null) {
+				existingPredefInput.setPredefInputItems(predefInputItemsList);
+			}
+			map.put("ussdPredefInput", existingPredefInput);
+			return "editussdpredefinput";
+		}
+	}
+
+	/**
+	 * Commit changes to an existing predefined input
+	 */
+	@RequestMapping(value = "/editussdpredefinput/{predefInputId}", method = RequestMethod.POST)
+	public String postChangesToPredefinedInput(
+			@PathVariable Long predefInputId,
+			@ModelAttribute("ussdPredefInput") UssdPredefInput predefInput,
+			BindingResult result) {
+		ussdPredefInputValidator.validate(predefInput, result);
+		if (result.hasErrors()) {
+			return "editussdpredefinput";
 		}
 
-		ussdMenuService.addUssdPredefInputItem(ussdPredefInputItem);
-		return "redirect:/ussdpredefinputitems.html";
-	}
+		// Assign id
+		predefInput.setPredefInputId(predefInputId);
 
-	@RequestMapping("/removepredefinputitem/{inputItemId}")
-	public String deleteUssdPredefInputItem(
-			@PathVariable("inputItemId") Integer inputItemId) {
-		ussdMenuService.removeUssdPredefInputItem(inputItemId);
-		return "redirect:/ussdpredefinputitems.html";
-	}
-
-	@RequestMapping("/ussdpredefinputs")
-	public String listUssdPredefInputs(Map<String, Object> map) {
-		map.put("ussdPredefInput", new UssdPredefInput());
-		map.put("ussdPredefInputList", ussdMenuService.listUssdPredefInputs());
-		return "ussdpredefinputs";
-	}
-
-	@RequestMapping("/retreivepredefinputs/?id={predefInputId}")
-	public String retrieveSinglePredefInputEntry(
-			@PathVariable("predefInputId") Integer predefInputId) {
-		ussdMenuService.retrieveSinglePredefInputEntry(predefInputId);
-		return "singlepredefinput";
-	}
-
-	@RequestMapping("/editpredefinput/{predefInputId}")
-	public String getEditPredefInputEntry(
-			@PathVariable("predefInputId") Integer predefInputId, Model model) {
-		logger.debug("Received request to show edit page");
-
-		// Retrieve existing entry and add to model
-		model.addAttribute("ussdPredefInput", predefInputId);
-
-		// This will resolve to /WEB-INF/jsp/editpagepredefinputs.jsp
-		return "editussdpredefinputs";
-	}
-
-	@RequestMapping(value = "/editpredefinput/{predefInputId}", method = RequestMethod.POST)
-	public String saveEditPredefInputEntry(
-			@ModelAttribute("ussdPredefInput") UssdPredefInput ussdPredefInput,
-			@PathVariable("predefInputId") Integer predefInputId,
-			BindingResult result) {
-		logger.debug("Received request to update predefined input");
-		ussdMenuService.updatePredefInput(ussdPredefInput, predefInputId);
-		return "editedussdpredefinputs";
-	}
-
-	@RequestMapping(value = "/addussdpredefinputs", method = RequestMethod.GET)
-	public String addUssdPredefInputsLink(Map<String, Object> map) {
-		map.put("ussdPredefInput", new UssdPredefInput());
-		return "addussdpredefinputs";
-	}
-	
-	@RequestMapping(value = "/addpredefinputs", method = RequestMethod.POST)
-	public String addUssdPredefInput(
-			@ModelAttribute("ussdPredefInput") UssdPredefInput ussdPredefInput,
-			BindingResult result) {
-
-		ussdPredefInputValidator.validate(ussdPredefInput, result);
-		if (result.hasErrors()) {
-			return "addussdpredefinputs";
+		predefInputItemsList = predefInput.getPredefInputItems();
+		if (predefInputItemsList != null && predefInputItemsList.size() > 0) {
+			for (UssdPredefInputItem predefInputItem : predefInputItemsList) {
+				predefInputItem.setPredefInput(predefInput);
+				if (predefInputItem.getPredefInputItemEnabledFlag() != 1) {
+					predefInputItem.setPredefInputItemEnabledFlag(0);
+				} else {
+					predefInputItem.setPredefInputItemEnabledFlag(1);
+				}
+			}
+			predefInput.setPredefInputItems(predefInputItemsList);
 		}
 
-		ussdMenuService.addUssdPredefInput(ussdPredefInput);
-		return "redirect:/ussdpredefinputs.html";
+		// Delegate to service
+		ussdMenuService.editPredefInput(predefInput);
+		return "redirect:/listussdpredefinputs.html";
 	}
 
-	@RequestMapping("/removepredefinput/{predefInputId}")
-	public String deleteUssdPredefInput(
-			@PathVariable("predefInputId") Integer predefInputId) {
-		ussdMenuService.removeUssdPredefInput(predefInputId);
-		return "redirect:/ussdpredefinputs.html";
+	@RequestMapping(value = "/activatepredefinputitem/{predefInputItemId}")
+	public String activatePredefInputItem(@PathVariable Long predefInputItemId,
+			@ModelAttribute("ussdPredefInput") UssdPredefInput predefInput,
+			Map<String, Object> map) {
+
+		UssdPredefInputItem predefInputItem = ussdMenuDao
+				.getExistingPredefInputItem(predefInputItemId);
+		predefInputItem.setPredefInputItemEnabledFlag(1);
+		Long predefInputId = predefInputItem.getPredefInput()
+				.getPredefInputId();
+		predefInputItemsList = ussdMenuService
+				.listPredefInputItemsByPredefInputId(predefInputId);
+		predefInput = ussdMenuService.getExistingPredefInput(predefInputId);
+
+		// Assign id
+		predefInput.setPredefInputId(predefInputId);
+		predefInput.setPredefInputItems(predefInputItemsList);
+		ussdMenuService.editPredefInput(predefInput);
+
+		map.put("ussdPredefInput.predefInputItems", ussdMenuService
+				.listPredefInputItemsByPredefInputId(predefInputId));
+		map.put("ussdPredefInput",
+				ussdMenuService.getExistingPredefInput(predefInputId));
+
+		map.put("predefInputId", predefInputId);
+		return "/editussdpredefinput";
 	}
 
-	@RequestMapping("/ussdtransactionkeywords")
-	public String listUssdTransactionKeywords(Map<String, Object> map) {
+	@RequestMapping(value = "/deactivatepredefinputitem/{predefInputItemId}")
+	public String deactivatePredefInputItem(
+			@PathVariable Long predefInputItemId,
+			@ModelAttribute("ussdPredefInput") UssdPredefInput predefInput,
+			Map<String, Object> map) {
+
+		UssdPredefInputItem predefInputItem = ussdMenuDao
+				.getExistingPredefInputItem(predefInputItemId);
+		predefInputItem.setPredefInputItemEnabledFlag(0);
+		Long predefInputId = predefInputItem.getPredefInput()
+				.getPredefInputId();
+		predefInputItemsList = ussdMenuService
+				.listPredefInputItemsByPredefInputId(predefInputId);
+		predefInput = ussdMenuService.getExistingPredefInput(predefInputId);
+
+		// Assign id
+		predefInput.setPredefInputId(predefInputId);
+		predefInput.setPredefInputItems(predefInputItemsList);
+		ussdMenuService.editPredefInput(predefInput);
+
+		map.put("ussdPredefInput.predefInputItems", ussdMenuService
+				.listPredefInputItemsByPredefInputId(predefInputId));
+		map.put("ussdPredefInput",
+				ussdMenuService.getExistingPredefInput(predefInputId));
+
+		map.put("predefInputId", predefInputId);
+		return "/editussdpredefinput";
+	}
+
+	/**
+	 * Delete an existing predefined input
+	 */
+	@RequestMapping(value = "/removepredefinput/{predefInputId}", method = RequestMethod.GET)
+	public String deletePredefInput(@PathVariable Long predefInputId,
+			Map<String, Object> map) {
+
+		ussdMenuService.deleteExistingPredefInput(predefInputId);
+		map.put("ussdPredefInput", new UssdPredefInput());
+		map.put("ussdPredefInputList", ussdMenuService.listPredefInputs());
+		return "redirect:/listussdpredefinputs.html";
+	}
+
+	/**
+	 * Delete an existing predefined input item
+	 */
+	@RequestMapping(value = "/removepredefinputitem/{inputItemId}", method = RequestMethod.GET)
+	public String deletePredefInputItem(@PathVariable Long inputItemId,
+			Map<String, Object> map) {
+
+		UssdPredefInputItem predefInputItem = ussdMenuService
+				.getExistingPredefInputItem(inputItemId);
+		UssdPredefInput predefInput = predefInputItem.getPredefInput();
+
+		predefInput.getPredefInputItems().remove(predefInputItem);
+		Long predefInputId = predefInputItem.getPredefInput()
+				.getPredefInputId();
+
+		ussdMenuService.deleteExistingPredefInputItem(inputItemId);
+		map.put("ussdPredefInput", predefInput);
+		map.put("ussdPredefInputItemsList", predefInput.getPredefInputItems());
+		return "redirect:/editussdpredefinput/" + predefInputId + ".html";
+	}
+
+	/**
+	 * Ussd Transaction Keywords mapping functions
+	 * 
+	 * Function lists configured Ussd Transaction Keywords"
+	 */
+	@RequestMapping(value = "/listussdtransactionkeywords", method = RequestMethod.GET)
+	public String listTransactionKeywords(Map<String, Object> map) {
 		map.put("ussdTransactionKeyword", new UssdTransactionKeyword());
 		map.put("ussdTransactionKeywordList",
-				ussdMenuService.listUssdTransactionKeywords());
-		return "ussdtransactionkeywords";
+				ussdMenuService.listTransactionKeywords());
+		return "listussdtransactionkeywords";
 	}
 
-	@RequestMapping(value = "/addussdtransactionkeywords", method = RequestMethod.GET)
-	public String addUssdTransactionKeywordsLink(Map<String, Object> map) {
-		map.put("ussdTransactionKeyword", new UssdTransactionKeyword());
-		return "addussdtransactionkeywords";
+	/**
+	 * Retrieves "Add New Transaction Keyword" page
+	 */
+	@RequestMapping(value = "/addussdtransactionkeyword", method = RequestMethod.GET)
+	public ModelAndView getTransactionKeyword(
+			@ModelAttribute("ussdTransactionKeyword") UssdTransactionKeyword transactionKeyword) {
+		return new ModelAndView("addussdtransactionkeyword",
+				"ussdTransactionKeyword", new UssdTransactionKeyword());
 	}
-	
-	@RequestMapping(value = "/addtransactionkeywords", method = RequestMethod.POST)
-	public String addUssdTransactionKeyword(
-			@ModelAttribute("ussdTransactionKeyword") UssdTransactionKeyword ussdTransactionKeyword,
-			BindingResult result) {
 
-		ussdTransactionKeywordValidator
-				.validate(ussdTransactionKeyword, result);
+	/**
+	 * Retrieves "Add New Keyword Step" page
+	 */
+	@RequestMapping(value = "/addnewussdkeywordstep", method = RequestMethod.GET)
+	public String addKeywordStepLink(Map<String, Object> map) {
+		map.put("ussdKeywordStep", new UssdKeywordStep());
+		return "addnewussdkeywordstep";
+	}
+
+	/**
+	 * Add New Keyword Step to transaction Keyword
+	 */
+	@RequestMapping(value = "/addussdkeywordstep", method = RequestMethod.POST)
+	public String addKeywordStep(
+			@ModelAttribute("ussdKeywordStep") UssdKeywordStep keywordStep,
+			BindingResult result, Map<String, Object> map) {
+
+		ussdKeywordStepValidator.validate(keywordStep, result);
 		if (result.hasErrors()) {
-			return "addussdtransactionkeywords";
+			return "addnewussdkeywordstep";
+		} else {
+			UssdTransactionKeyword transactionKeyword = new UssdTransactionKeyword();
+			if (keywordStepsSet.add(keywordStep) == true) {
+				if (keywordStep != null) {
+					try {
+						keywordStepsList.add(keywordStep);
+						transactionKeyword.setKeywordSteps(keywordStepsList);
+					} catch (Exception e) {
+						e.printStackTrace();
+						return "redirect:/listussdtransactionkeywords.html";
+					}
+				}
+			}
+			map.put("ussdTransactionKeyword", transactionKeyword);
+			return "addussdtransactionkeyword";
 		}
 
-		ussdMenuService.addUssdTransactionKeyword(ussdTransactionKeyword);
-		return "redirect:/ussdtransactionkeywords.html";
+	}
+
+	@RequestMapping(value = "/addussdtransactionkeyword", method = RequestMethod.POST)
+	public String addUssdTransactionKeyword(
+			@ModelAttribute("ussdTransactionKeyword") UssdTransactionKeyword transactionKeyword,
+			BindingResult result, Map<String, Object> map) {
+
+		ussdTransactionKeywordValidator.validate(transactionKeyword, result);
+		if (result.hasErrors()) {
+			return "addussdtransactionkeyword";
+		}
+
+		if (transactionKeyword != null) {
+
+			if (null != keywordStepsList && keywordStepsList.size() > 0) {
+
+				for (UssdKeywordStep keywordStep : keywordStepsList) {
+					keywordStep.setTransactionKeyword(transactionKeyword);
+					if (keywordStep.getHasPredefInputFlag() != 1) {
+						keywordStep.setHasPredefInputFlag(0);
+						keywordStep.setPredefInput(null);
+					}
+					if (keywordStep.getIsFirstStepFlag() != 1) {
+						keywordStep.setIsFirstStepFlag(0);
+					}
+					if (keywordStep.getIsLastStepFlag() != 1) {
+						keywordStep.setIsLastStepFlag(0);
+					}
+					if (keywordStep.getUseFixedValueFlag() != 1) {
+						keywordStep.setUseFixedValueFlag(0);
+					}
+				}
+			}
+			transactionKeyword.setKeywordSteps(keywordStepsList);
+			ussdMenuService.addTransactionKeyword(transactionKeyword);
+		}
+		if (!keywordStepsList.isEmpty()) {
+			keywordStepsList.clear();
+		}
+		map.put("ussdTransactionKeyword", new UssdTransactionKeyword());
+		map.put("ussdTransactionKeywordList",
+				ussdMenuService.listTransactionKeywords());
+
+		return "listussdtransactionkeywords";
+	}
+
+	/**
+	 * Retrieves the "Edit Existing Transaction Keyword" page
+	 */
+	@RequestMapping(value = "/editussdtransactionkeyword/{keywordId}", method = RequestMethod.GET)
+	public String retrieveExistingTransactionKeyword(
+			@PathVariable long keywordId, Map<String, Object> map) {
+
+		UssdTransactionKeyword existingTransactionKeyword = ussdMenuService
+				.getExistingTransactionKeyword(keywordId);
+
+		map.put("ussdTransactionKeyword", existingTransactionKeyword);
+		return "editussdtransactionkeyword";
+	}
+
+	/**
+	 * Retrieves the "Add Keyword Step to Existing Transaction Keyword" Page
+	 */
+	@RequestMapping(value = "/editaddnewussdkeywordstep/{keywordId}", method = RequestMethod.GET)
+	public String addKeywordStepOnEditLink(@PathVariable long keywordId,
+			Map<String, Object> map) {
+		map.put("ussdKeywordStep", new UssdKeywordStep());
+		map.put("keywordId", keywordId);
+		return "editaddnewussdkeywordstep";
+	}
+
+	/**
+	 * Retrieves the "Edit Existing Transaction Keyword" page after adding a new
+	 * step
+	 * 
+	 */
+	@RequestMapping(value = "/editaddnewussdkeywordstep/{keywordId}", method = RequestMethod.POST)
+	public String addNewKeywordStepOnEdit(@PathVariable long keywordId,
+			@ModelAttribute("ussdKeywordStep") UssdKeywordStep keywordStep,
+			BindingResult result, Map<String, Object> map) {
+
+		ussdKeywordStepValidator.validate(keywordStep, result, keywordId);
+		if (result.hasErrors()) {
+			map.put("keywordId", keywordId);
+			return "editaddnewussdkeywordstep";
+		}
+
+		keywordStepsList = ussdMenuService
+				.listKeywordStepByKeywordId(keywordId);
+		List<UssdKeywordStep> keywordsLinkedToPredefInput = new ArrayList<UssdKeywordStep>();
+		UssdPredefInput linkedPredefInput = new UssdPredefInput();
+		if (keywordStep.getPredefInput().getPredefInputId() != 0) {
+			linkedPredefInput = ussdMenuService
+					.getExistingPredefInput(keywordStep.getPredefInput()
+							.getPredefInputId());
+			if (linkedPredefInput != null) {
+				keywordsLinkedToPredefInput = ussdMenuDao
+						.getKeywordsLinkedToThisPredefInput(keywordStep
+								.getPredefInput().getPredefInputId());
+				if (keywordsLinkedToPredefInput.isEmpty()) {
+					keywordsLinkedToPredefInput = new ArrayList<UssdKeywordStep>();
+				}
+				keywordStep.setPredefInput(linkedPredefInput);
+			}
+		}
+
+		UssdTransactionKeyword existingTransactionKeyword = ussdMenuService
+				.getExistingTransactionKeyword(keywordId);
+		keywordStep.setTransactionKeyword(existingTransactionKeyword);
+
+		if ((keywordStep.getHasPredefInputFlag() == null)
+				|| (keywordStep.getHasPredefInputFlag() != 1)) {
+			keywordStep.setHasPredefInputFlag(0);
+			keywordStep.setPredefInput(null);
+		} else if (keywordStep.getHasPredefInputFlag() == 1) {
+			keywordStep.setHasPredefInputFlag(1);
+		} else if ((keywordStep.getIsFirstStepFlag() == null)
+				|| (keywordStep.getIsFirstStepFlag() != 1)) {
+			keywordStep.setIsFirstStepFlag(0);
+		} else if (keywordStep.getIsFirstStepFlag() == 1) {
+			keywordStep.setIsFirstStepFlag(1);
+		} else if ((keywordStep.getIsLastStepFlag() == null)
+				|| (keywordStep.getIsLastStepFlag() != 1)) {
+			keywordStep.setIsLastStepFlag(0);
+		} else if (keywordStep.getIsLastStepFlag() == 1) {
+			keywordStep.setIsLastStepFlag(1);
+		} else if ((keywordStep.getUseFixedValueFlag() == null)
+				|| (keywordStep.getUseFixedValueFlag() != 1)) {
+			keywordStep.setUseFixedValueFlag(0);
+			keywordStep.setFixedValue(null);
+		} else if (keywordStep.getUseFixedValueFlag() == 1) {
+			keywordStep.setUseFixedValueFlag(1);
+		}
+
+		if (null == keywordStepsList) {
+			keywordStepsList = new ArrayList<UssdKeywordStep>();
+		}
+
+		if (keywordStepsList != null) {
+			keywordStepsList.add(keywordStep);
+
+			if (linkedPredefInput != null) {
+				for (UssdKeywordStep linkedKeywordStep : keywordStepsList) {
+					if (null != (linkedKeywordStep.getPredefInput())) {
+						keywordsLinkedToPredefInput.add(linkedKeywordStep);
+					}
+				}
+				if (null != keywordsLinkedToPredefInput) {
+					if (null != linkedPredefInput) {
+						linkedPredefInput
+								.setKeywordSteps(keywordsLinkedToPredefInput);
+					}
+				}
+			}
+			existingTransactionKeyword.setKeywordSteps(keywordStepsList);
+		}
+		map.put("ussdTransactionKeyword", existingTransactionKeyword);
+		map.put("keywordId", keywordId);
+		return "editussdtransactionkeyword";
+	}
+
+	/**
+	 * Commit changes to an existing transaction keyword
+	 */
+	@RequestMapping(value = "/editussdtransactionkeyword/{keywordId}", method = RequestMethod.POST)
+	public String postChangesToTransactionKeyword(
+			@PathVariable Long keywordId,
+			@ModelAttribute("ussdTransactionKeyword") UssdTransactionKeyword transactionKeyword,
+			BindingResult result, Map<String, Object> map) {
+
+		ussdTransactionKeywordValidator.validate(transactionKeyword, result);
+		if (result.hasErrors()) {
+			return "editussdtransactionkeyword";
+		}
+
+		logger.info("here Now!!!!!!!!!!!!!!!SET ID!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		// Assign id
+		transactionKeyword.setKeywordId(keywordId);
+
+		keywordStepsList = transactionKeyword.getKeywordSteps();
+		if (keywordStepsList != null && keywordStepsList.size() > 0) {
+			for (UssdKeywordStep keywordStep : keywordStepsList) {
+				keywordStep.setTransactionKeyword(transactionKeyword);
+				if ((keywordStep.getHasPredefInputFlag() != 1)
+						|| (keywordStep.getHasPredefInputFlag() == null)) {
+					keywordStep.setHasPredefInputFlag(0);
+					UssdPredefInput predefInput = new UssdPredefInput();
+					keywordStep.setPredefInput(predefInput);
+				} else if (keywordStep.getHasPredefInputFlag() == 1) {
+					keywordStep.setHasPredefInputFlag(1);
+				} else if ((keywordStep.getIsFirstStepFlag() == null)
+						|| (keywordStep.getIsFirstStepFlag() != 1)) {
+					keywordStep.setIsFirstStepFlag(0);
+				} else if (keywordStep.getIsFirstStepFlag() == 1) {
+					keywordStep.setIsFirstStepFlag(1);
+				} else if ((keywordStep.getIsLastStepFlag() == null)
+						|| (keywordStep.getIsLastStepFlag() != 1)) {
+					keywordStep.setIsLastStepFlag(0);
+				} else if (keywordStep.getIsLastStepFlag() == 1) {
+					keywordStep.setIsLastStepFlag(1);
+				} else if ((keywordStep.getUseFixedValueFlag() == null)
+						|| (keywordStep.getUseFixedValueFlag() != 1)) {
+					keywordStep.setUseFixedValueFlag(0);
+					keywordStep.setFixedValue(null);
+				} else if (keywordStep.getUseFixedValueFlag() == 1) {
+					keywordStep.setUseFixedValueFlag(1);
+				}
+				ussdMenuService.editExistingKeywordStep(keywordStep);
+			}
+			transactionKeyword.setKeywordSteps(keywordStepsList);
+		}
+		ussdMenuService.editExistingTransactionKeyword(transactionKeyword);
+		if (!(keywordStepsList.isEmpty())) {
+			keywordStepsList.clear();
+		}
+		map.put("ussdTransactionKeyword", new UssdTransactionKeyword());
+		return "redirect:/listussdtransactionkeywords.html";
+	}
+
+	@RequestMapping(value = "/activatekeyword/{keywordId}")
+	public String activateTransactionKeyword(
+			@PathVariable long keywordId,
+			@ModelAttribute("ussdTransactionKeyword") UssdTransactionKeyword transactionKeyword,
+			Map<String, Object> map) {
+
+		// Assign id
+		transactionKeyword.setKeywordId(keywordId);
+		ussdMenuService.activateExistingKeyword(keywordId);
+
+		map.put("ussdTransactionKeyword", new UssdTransactionKeyword());
+		map.put("ussdTransactionKeywordList",
+				ussdMenuService.listTransactionKeywords());
+		return "redirect:/listussdtransactionkeywords.html";
+	}
+
+	@RequestMapping(value = "/deactivatekeyword/{keywordId}")
+	public String deactivateTransactionKeyword(
+			@PathVariable long keywordId,
+			@ModelAttribute("ussdTransactionKeyword") UssdTransactionKeyword transactionKeyword,
+			Map<String, Object> map) {
+
+		// Assign id
+		transactionKeyword.setKeywordId(keywordId);
+		ussdMenuService.deactivateExistingKeyword(keywordId);
+		map.put("ussdTransactionKeyword", new UssdTransactionKeyword());
+		map.put("ussdTransactionKeywordList",
+				ussdMenuService.listTransactionKeywords());
+		return "redirect:/listussdtransactionkeywords.html";
 	}
 
 	@RequestMapping("/removekeyword/{keywordId}")
 	public String deleteUssdTransactionKeyword(
-			@PathVariable("keywordId") Integer keywordId) {
-		ussdMenuService.removeUssdTransactionKeyword(keywordId);
-		return "redirect:/ussdtransactionkeywords.html";
+			@PathVariable("keywordId") Long keywordId, Map<String, Object> map) {
+		ussdMenuService.deleteTransactionKeyword(keywordId);
+		map.put("ussdTransactionKeyword", new UssdTransactionKeyword());
+		map.put("ussdTransactionKeywordList",
+				ussdMenuService.listTransactionKeywords());
+		return "redirect:/listussdtransactionkeywords.html";
 	}
 
-	@RequestMapping("/ussdkeywordsteps")
-	public String listUssdKeywordSteps(Map<String, Object> map) {
-		map.put("ussdKeywordStep", new UssdKeywordStep());
-		map.put("ussdKeywordStepList",
-				ussdMenuService.listUssdKeywordSteps());
-		return "ussdkeywordsteps";
-	}
-
-	@RequestMapping(value = "/addussdkeywordsteps", method = RequestMethod.GET)
-	public String addUssdKeywordStepsLink(Map<String, Object> map) {
-		map.put("ussdKeywordStep", new UssdKeywordStep());
-		return "addussdkeywordsteps";
-	}
-	
-	@RequestMapping(value = "/addkeywordsteps", method = RequestMethod.POST)
-	public String addUssdKeywordStep(
-			@ModelAttribute("ussdKeywordStep") UssdKeywordStep ussdKeywordStep,
-			BindingResult result) {
-
-		ussdKeywordStepValidator.validate(ussdKeywordStep, result);
-		if (result.hasErrors()) {
-			return "addussdkeywordsteps";
-		}
-logger.debug("here");
-		ussdMenuService.addUssdKeywordStep(ussdKeywordStep);
-		logger.debug("there");
-		return "redirect:/ussdkeywordsteps.html";
-	}
-
-	@RequestMapping("/removekeywordstep/{keywordStepId}")
+	/**
+	 * Delete an existing keyword step
+	 */
+	@RequestMapping(value = "/removekeywordstep/{keywordStepId}", method = RequestMethod.GET)
 	public String deleteUssdKeywordStep(
-			@PathVariable("keywordStepId") Integer keywordStepId) {
-		ussdMenuService.removeUssdKeywordStep(keywordStepId);
-		return "redirect:/ussdkeywordsteps.html";
+			@PathVariable("keywordStepId") Long keywordStepId,
+			Map<String, Object> map) {
+
+		UssdKeywordStep keywordStep = ussdMenuService
+				.getExistingKeywordStep(keywordStepId);
+		UssdTransactionKeyword transactionKeyword = keywordStep
+				.getTransactionKeyword();
+
+		UssdPredefInput predefInput = keywordStep.getPredefInput();
+		if (predefInput != null) {
+			predefInput.getKeywordSteps().remove(keywordStep);
+		}
+		transactionKeyword.getKeywordSteps().remove(keywordStep);
+
+		Long transactionKeywordId = keywordStep.getTransactionKeyword()
+				.getKeywordId();
+		// Delegate to service
+		ussdMenuService.deleteExistingKeywordStep(keywordStepId);
+		map.put("ussdTransactionKeyword", transactionKeyword);
+		map.put("ussdKeywordStepsList", transactionKeyword.getKeywordSteps());
+		return "redirect:/editussdtransactionkeyword/" + transactionKeywordId
+				+ ".html";
 	}
 
-	@RequestMapping("/ussdmenuitems")
-	public String listUssdMenuItems(Map<String, Object> map) {
+	/**
+	 * Ussd Menu Items mapping functions Function lists configured Ussd Menu
+	 * Items"
+	 */
+	@RequestMapping("/listussdmenuitems")
+	public String listMenuItems(Map<String, Object> map) {
 		map.put("ussdMenuItem", new UssdMenuItem());
-		map.put("ussdMenuItemsList", ussdMenuService.listUssdMenuItems());
-		return "ussdmenuitems";
+		map.put("ussdMenuItemsList", ussdMenuService.listMenuItems());
+		map.put("ussdTransactionKeywordsList",
+				ussdMenuService.listTransactionKeywords());
+		return "listussdmenuitems";
 	}
 
-	@RequestMapping(value = "/addussdmenuitems", method = RequestMethod.GET)
+	@RequestMapping(value = "/addussdmenuitem", method = RequestMethod.GET)
 	public String addUssdMenuItemLink(Map<String, Object> map) {
 		map.put("ussdMenuItem", new UssdMenuItem());
-		return "addussdmenuitems";
+		return "addussdmenuitem";
 	}
 
-	@RequestMapping(value = "/addmenuitems", method = RequestMethod.POST)
+	@RequestMapping(value = "/addussdmenuitem", method = RequestMethod.POST)
 	public String addUssdMenuItem(
-			@ModelAttribute("ussdMenuItem") UssdMenuItem ussdMenuItem,
-			BindingResult result) {
+			@ModelAttribute("ussdMenuItem") UssdMenuItem menuItem,
+			BindingResult result, Map<String, Object> map) {
 
-		ussdMenuItemValidator.validate(ussdMenuItem, result);
+		ussdMenuItemValidator.validate(menuItem, result);
 		if (result.hasErrors()) {
-			return "addussdmenuitems";
+			return "addussdmenuitem";
 		}
 
-		ussdMenuService.addUssdMenuItem(ussdMenuItem);
-		return "redirect:/ussdmenuitems.html";
+		List<UssdMenuItem> childMenuItemsList = new ArrayList<UssdMenuItem>();
+		Set<UssdMenuItem> childMenuItemsSet = new HashSet<UssdMenuItem>();
+		UssdMenuItem rootMenuItem = null;
+		if ((null == menuItem.getMenuItemKeyword().getKeywordId())
+				|| (menuItem.getMenuItemKeyword().getKeywordId() == 0)) {
+			menuItem.setMenuItemKeyword(null);
+		} else {
+			UssdTransactionKeyword menuItemKeyword = ussdMenuService
+					.getExistingTransactionKeyword(menuItem
+							.getMenuItemKeyword().getKeywordId());
+			menuItem.setMenuItemKeyword(menuItemKeyword);
+		}
+		if ((null != menuItem.getRootMenuItem().getMenuItemId())
+				&& (menuItem.getRootMenuItem().getMenuItemId() != 0)) {
+
+			/** Get all this menu's child menu Items */
+			childMenuItemsList = ussdMenuService
+					.getChildMenuItemsForParentMenuItem(menuItem
+							.getRootMenuItem().getMenuItemId());
+			rootMenuItem = ussdMenuService.getExistingMenuItem(menuItem
+					.getRootMenuItem().getMenuItemId());
+
+			if (childMenuItemsSet.add(menuItem) == true) {
+				childMenuItemsList.add(menuItem);
+			}
+
+			// rootMenuItem.setMenuItems(childMenuItemsList);
+			menuItem.setRootMenuItem(rootMenuItem);
+
+		} else {
+			menuItem.setRootMenuItem(rootMenuItem);
+		}
+
+		if ((menuItem.getMenuItemEnabledFlag() == null)
+				|| (menuItem.getMenuItemEnabledFlag() != 1)) {
+			menuItem.setMenuItemEnabledFlag(0);
+		}
+
+		logger.info("Got to add menu Item");
+		ussdMenuService.addMenuItem(menuItem);
+		if (!childMenuItemsList.isEmpty()) {
+			childMenuItemsList.clear();
+		}
+		return "redirect:/listussdmenuitems.html";
+	}
+
+	/**
+	 * Retrieves the "Edit Existing Menu Item" page
+	 */
+	@RequestMapping(value = "/editussdmenuitem/{menuItemId}", method = RequestMethod.GET)
+	public String retrieveExistingMenuItem(@PathVariable long menuItemId,
+			Map<String, Object> map) {
+
+		UssdMenuItem existingMenuItem = ussdMenuService
+				.getExistingMenuItem(menuItemId);
+
+		map.put("ussdMenuItem", existingMenuItem);
+		return "editussdmenuitem";
+	}
+
+	/**
+	 * Commit changes to an existing Menu Item
+	 */
+	@RequestMapping(value = "/editussdmenuitem/{menuItemId}", method = RequestMethod.POST)
+	public String postChangesToMenuItem(@PathVariable Long menuItemId,
+			@ModelAttribute("ussdMenuItem") UssdMenuItem menuItem,
+			BindingResult result, Map<String, Object> map) {
+
+		/*
+		 * ussdMenuItemValidator.validate(menuItem, result, menuItemId); if
+		 * (result.hasErrors()) { map.put("menuItemId", menuItemId); return
+		 * "editussdmenuitem"; }
+		 */
+
+		// Assign id
+		menuItem.setMenuItemId(menuItemId);
+
+		List<UssdMenuItem> childMenuItemsList = new ArrayList<UssdMenuItem>();
+		Set<UssdMenuItem> childMenuItemsSet = new HashSet<UssdMenuItem>();
+		UssdMenuItem rootMenuItem = new UssdMenuItem();
+		if ((null == menuItem.getMenuItemKeyword().getKeywordId())
+				|| (menuItem.getMenuItemKeyword().getKeywordId() == 0)) {
+			menuItem.setMenuItemKeyword(null);
+		} else {
+			UssdTransactionKeyword menuItemKeyword = ussdMenuService
+					.getExistingTransactionKeyword(menuItem
+							.getMenuItemKeyword().getKeywordId());
+			menuItem.setMenuItemKeyword(menuItemKeyword);
+		}
+		if ((null == menuItem.getRootMenuItem().getMenuItemId())
+				|| (menuItem.getRootMenuItem().getMenuItemId() == 0)) {
+			menuItem.setRootMenuItem(rootMenuItem);
+		} else if (null != menuItem.getRootMenuItem().getMenuItemId()) {
+			// || (0 != menuItem.getRootMenuItem().getMenuItemId())) {
+
+			/** Get all this menu's child menu Items */
+			childMenuItemsList = ussdMenuService
+					.getChildMenuItemsForParentMenuItem(menuItem
+							.getRootMenuItem().getMenuItemId());
+			rootMenuItem = ussdMenuService.getExistingMenuItem(menuItem
+					.getRootMenuItem().getMenuItemId());
+
+			if (childMenuItemsSet.add(menuItem) == true) {
+				childMenuItemsList.add(menuItem);
+			}
+			rootMenuItem.setMenuItems(childMenuItemsList);
+			menuItem.setRootMenuItem(rootMenuItem);
+		}
+
+		if ((menuItem.getMenuItemEnabledFlag() == null)
+				|| (menuItem.getMenuItemEnabledFlag() != 1)) {
+			menuItem.setMenuItemEnabledFlag(0);
+		}
+		ussdMenuService.editExistingMenuItem(menuItem);
+		return "redirect:/listussdmenuitems.html";
+	}
+
+	@RequestMapping(value = "/activatemenuitem/{menuItemId}")
+	public String activateMenuItem(@PathVariable long menuItemId,
+			@ModelAttribute("ussdMenuItem") UssdMenuItem menuItem,
+			Map<String, Object> map) {
+
+		// Assign id
+		menuItem.setMenuItemId(menuItemId);
+		ussdMenuService.activateExistingMenuItem(menuItemId);
+
+		map.put("ussdMenuItem", new UssdMenuItem());
+		map.put("ussdMenuItemsList", ussdMenuService.listMenuItems());
+		map.put("ussdTransactionKeywordsList",
+				ussdMenuService.listTransactionKeywords());
+		return "redirect:/listussdmenuitems.html";
+	}
+
+	@RequestMapping(value = "/deactivatemenuitem/{menuItemId}")
+	public String deactivateMenuItem(@PathVariable long menuItemId,
+			@ModelAttribute("ussdMenuItem") UssdMenuItem menuItem,
+			Map<String, Object> map) {
+
+		// Assign id
+		menuItem.setMenuItemId(menuItemId);
+		ussdMenuService.deactivateExistingMenuItem(menuItemId);
+		map.put("ussdMenuItem", new UssdMenuItem());
+		map.put("ussdMenuItemsList", ussdMenuService.listMenuItems());
+		map.put("ussdTransactionKeywordsList",
+				ussdMenuService.listTransactionKeywords());
+		return "redirect:/listussdmenuitems.html";
 	}
 
 	@RequestMapping("/removemenuitem/{menuItemId}")
 	public String deleteUssdMenuItem(
-			@PathVariable("menuItemId") Integer menuItemId) {
-		ussdMenuService.removeUssdMenuItem(menuItemId);
-		return "redirect:/ussdmenuitems.html";
+			@PathVariable("menuItemId") Long menuItemId, Map<String, Object> map) {
+
+		ussdMenuService.deleteMenuItem(menuItemId);
+
+		map.put("ussdMenuItem", new UssdMenuItem());
+		map.put("ussdMenuItemsList", ussdMenuService.listMenuItems());
+		map.put("ussdTransactionKeywordsList",
+				ussdMenuService.listTransactionKeywords());
+		return "redirect:/listussdmenuitems.html";
 	}
 
-	@RequestMapping("/ussdrequests")
-	public String listUssdRequests(Map<String, Object> map) {
-		map.put("ussdRequest", new UssdRequest());
-		map.put("ussdRequestsList",
-				ussdMenuService.listUssdRequests());
-		return "ussdrequests";
-	}
-	
-	// Create model attributes for linking across models
+	/**
+	 * Create model attributes for linking across models
+	 */
 	@ModelAttribute("predefInputList")
-	public List<UssdPredefInput> populatePredefInputIdAndNameList() {
-		return ussdMenuService.listUssdPredefInputs();
+	public List<UssdPredefInput> populatePredefInputList() {
+		return ussdMenuService.listPredefInputs();
 	}
 
 	@ModelAttribute("transactionKeywordList")
-	public List<UssdTransactionKeyword> populateKeywordIdAndNameList() {
-		return ussdMenuService.listUssdTransactionKeywords();
+	public List<UssdTransactionKeyword> populateTransactionKeywordsList() {
+		return ussdMenuService.listTransactionKeywords();
+	}
+
+	@ModelAttribute("keywordStepList")
+	public List<UssdKeywordStep> populateKeywordStepsList() {
+		return ussdMenuService.listKeywordSteps();
 	}
 
 	@ModelAttribute("menuItemList")
-	public List<UssdMenuItem> populateMenuItemIdAndNameList() {
-		return ussdMenuService.listUssdMenuItems();
+	public List<UssdMenuItem> populateMenuItemList() {
+		return ussdMenuService.listMenuItems();
 	}
 }

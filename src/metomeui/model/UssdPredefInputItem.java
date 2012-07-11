@@ -3,7 +3,10 @@ package metomeui.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -14,50 +17,50 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class UssdPredefInputItem {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "INPUT_ITEM_ID")
-	private Integer inputItemId;
-	
-	@Column(name = "PREDEF_INPUT_ID")
-	private Integer predefInputId;
+	private Long inputItemId;
+
+	@ManyToOne
+	@JoinColumn(name = "PREDEF_INPUT_ID", nullable = false)
+	private UssdPredefInput predefInput;
 
 	@NotEmpty
 	@Size(min = 6, max = 100)
-	@Column(name = "INPUT_ITEM_NAME", nullable = false, length = 100)
+	@Column(name = "INPUT_ITEM_NAME", unique = true, nullable = false, length = 100)
 	private String predefInputItemName;
 
 	@NotEmpty
 	@Size(min = 6, max = 100)
-	@Column(name = "INPUT_ITEM_CODE", nullable = false, length = 100)
+	@Column(name = "INPUT_ITEM_CODE", unique = true, nullable = false, length = 100)
 	private String predefInputItemCode;
 
 	@NotEmpty
 	@Size(min = 1, max = 11)
 	@Column(name = "INPUT_ITEM_ORDER", nullable = false, length = 11)
 	private Integer predefInputItemOrder;
-	
+
 	@Column(name = "ENABLED_FLG", nullable = true)
-	private Integer predefInputItemEnabledFlag;
+	private Integer predefInputItemEnabledFlag = 0;
 
 	public UssdPredefInputItem() {
-
 	}
 
-	
-	public Integer getInputItemId() {
-		return inputItemId;
+	public UssdPredefInputItem(String predefInputItemCode,
+			String predefInputItemName, Integer predefInputItemOrder,
+			Integer predefInputItemEnabledFlag) {
+		this.predefInputItemCode = predefInputItemCode;
+		this.predefInputItemName = predefInputItemName;
+		this.predefInputItemOrder = predefInputItemOrder;
+		this.predefInputItemEnabledFlag = predefInputItemEnabledFlag;
 	}
 
-	public void setInputItemId(Integer inputItemId) {
-		this.inputItemId = inputItemId;
+	public String getPredefInputItemName() {
+		return predefInputItemName;
 	}
 
-	public Integer getPredefInputId() {
-		return predefInputId;
-	}
-
-	public void setPredefInputId(Integer predefInputId) {
-		this.predefInputId = predefInputId;
+	public void setPredefInputItemName(String predefInputItemName) {
+		this.predefInputItemName = predefInputItemName;
 	}
 
 	public String getPredefInputItemCode() {
@@ -84,13 +87,19 @@ public class UssdPredefInputItem {
 		this.predefInputItemEnabledFlag = predefInputItemEnabledFlag;
 	}
 
-	public String getPredefInputItemName() {
-		return predefInputItemName;
+	public Long getInputItemId() {
+		return inputItemId;
 	}
 
-	public void setPredefInputItemName(String predefInputItemName) {
-		this.predefInputItemName = predefInputItemName;
+	public void setInputItemId(Long inputItemId) {
+		this.inputItemId = inputItemId;
 	}
 
-	
+	public UssdPredefInput getPredefInput() {
+		return predefInput;
+	}
+
+	public void setPredefInput(UssdPredefInput predefInput) {
+		this.predefInput = predefInput;
+	}
 }

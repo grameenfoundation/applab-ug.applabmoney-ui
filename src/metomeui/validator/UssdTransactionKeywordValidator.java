@@ -30,9 +30,14 @@ public class UssdTransactionKeywordValidator implements Validator {
 			ussdTransactionKeyword.setKeywordEnabledFlag(0);
 		}
 		
-		if (ussdTransactionKeyword.getKeywordId() == 0) {
+		if (ussdTransactionKeyword.getKeywordCode().length()>10){
+			errors.rejectValue("keywordName",
+					"keywordCode.lengthLimit");
+			
+		}
+		/*if (ussdTransactionKeyword.getKeywordId() == 0) {
 			errors.rejectValue("keywordName",
 					"keywordName.required");
-		}
+		}*/
 	}
 }

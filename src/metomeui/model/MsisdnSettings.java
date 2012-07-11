@@ -3,9 +3,11 @@ package metomeui.model;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.Range;
+
 
 public class MsisdnSettings {
+	
+	
 	@NotNull(message="Country code is required")
 	private Integer countryCode;
 	@NotEmpty(message="Country Domain is required")

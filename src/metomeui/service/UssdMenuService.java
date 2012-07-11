@@ -8,53 +8,87 @@ import metomeui.model.UssdKeywordStep;
 import metomeui.model.UssdMenuItem;
 import metomeui.model.UssdPredefInput;
 import metomeui.model.UssdPredefInputItem;
-import metomeui.model.UssdRequest;
 import metomeui.model.UssdTransactionKeyword;
 
 public interface UssdMenuService {
-
-	public void addUssdPredefInputItem(UssdPredefInputItem ussdPredefInputItem);
-
-	public List<UssdPredefInputItem> listUssdPredefInputItems();
 	
-	public void removeUssdPredefInputItem(Integer inputItemId);
+	public List<UssdTransactionKeyword> listTransactionKeywords();
+
+	public void addTransactionKeyword(
+			UssdTransactionKeyword transactionKeyword);
+
+	public void deleteTransactionKeyword(Long keywordId);
+
+	public void editExistingTransactionKeyword(UssdTransactionKeyword transactionKeyword);
 	
-	public void addUssdPredefInput(UssdPredefInput ussdPredefInput);
+	public List<UssdKeywordStep> listKeywordSteps();
 
-	public List<UssdPredefInput> listUssdPredefInputs();
+	public void addKeywordStep(UssdKeywordStep ussdKeywordStep);
+
+	public void deleteExistingKeywordStep(Long keywordStepId);
 	
-	public UssdPredefInput retrieveSinglePredefInputEntry(Integer predefInputId);
-
-	public void updatePredefInput(UssdPredefInput ussdPredefInput, Integer predefInputId);
+	public void editExistingKeywordStep(UssdKeywordStep keywordStep);
 	
-	public void removeUssdPredefInput(Integer predefInputId);
+	public List<UssdMenuItem> listMenuItems();
 
-	public void addUssdTransactionKeyword(
-			UssdTransactionKeyword ussdTransactionKeyword);
+	public void addMenuItem(UssdMenuItem ussdMenuItem);
+
+	public void deleteMenuItem(Long menuItemId);
+	public void editExistingMenuItem(UssdMenuItem menuItem);
+
+	public void addPredefInput(UssdPredefInput predefInput);
+
+	public List<UssdPredefInput> listPredefInputs();
+	public List<UssdPredefInputItem> listPredefInputItemsByPredefInputId(long predefInputId);
+
+	public void editPredefInput(UssdPredefInput predefInput);
+
+	public UssdPredefInput getExistingPredefInput(Long predefInputId);
 	
-	public List<UssdTransactionKeyword> listUssdTransactionKeywords();
+	public void deleteExistingPredefInput(Long predefInputId);
 
-	public void removeUssdTransactionKeyword(Integer keywordId);
+	public UssdTransactionKeyword getExistingTransactionKeyword(Long keywordId);
 
-	public void addUssdKeywordStep(UssdKeywordStep ussdKeywordStep);
+	public UssdKeywordStep getExistingKeywordStep(Long keywordStepId);
+
+	public UssdMenuItem getExistingMenuItem(Long menuItemId);
+
+	public List<UssdKeywordStep> listKeywordStepByKeywordId(Long keywordId);
+
+	public void activateExistingMenuItem(Long menuItemId);
+
+	public void deactivateExistingMenuItem(Long menuItemId);
+
+	public void activateExistingKeyword(Long keywordId);
+
+	public void deactivateExistingKeyword(Long keywordId);
 	
-	public List<UssdKeywordStep> listUssdKeywordSteps();
+	public void activateExistingPredefInputItem(Long predefInputItemId);
 
-	public void removeUssdKeywordStep(Integer keywordStepId);
+	public void deactivateExistingPredefInputItem(Long predefInputItemId);
 
-	public List<UssdMenuItem> listUssdMenuItems();
+	public void deleteExistingPredefInputItem(Long inputItemId);
 
-	public void addUssdMenuItem(UssdMenuItem ussdMenuItem);
+	public UssdPredefInputItem getExistingPredefInputItem(Long predefInputItemId);
 
-	public void removeUssdMenuItem(Integer menuItemId);
+	public List<UssdMenuItem> getChildMenuItemsForParentMenuItem(Long menuItemId);
 
-	public List<UssdRequest> listUssdRequests();
+	public boolean checkIfDuplicateStepMenuName(String stepMenuName, Long keywordId);
+
+	public boolean checkIfDuplicateInputItemName(String predefInputItemName,
+			Long predefInputId);
 	
-	
+	boolean checkIfDuplicateMenuName(String menuItemName, Long menuItemId);
 
-	
+	boolean checkIfDuplicateKeywordName(String keywordName, Long keywordId);
 
-	
+	boolean checkIfDuplicateKeywordCode(String keywordCode, Long keywordId);
 
-	
+	public boolean checkIfDuplicateInputItemCode(String predefInputItemCode,
+			Long predefInputId);
+
+	public boolean checkIfDuplicateInputItemOrder(Integer predefInputItemOrder,
+			Long predefInputId);
+
+	boolean checkIfDuplicatePredefInputName(String predefInputName, Long predefInputId);
 }
