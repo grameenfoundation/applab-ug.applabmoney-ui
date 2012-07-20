@@ -8,33 +8,30 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "account_types")
+@Table(name = "ACCOUNT_TYPES")
 public class AccountType {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "account_type_id")
+	@Column(name = "ACCOUNT_TYPE_ID")
 	private long accountTypeId;
 
 	@NotEmpty
-	@Column(name = "account_type_code", nullable = false, length = 20)
+	@Column(name = "ACCOUNT_TYPE_CODE", nullable = false, length = 20)
 	private String accountTypeCode;
 
 	@NotEmpty
-	@Column(name = "account_type_name", nullable = false, length = 50)
+	@Column(name = "ACCOUNT_TYPE_NAME", nullable = false, length = 50)
 	private String accountTypeName;
 
 	@NotEmpty
-	@Column(name = "account_type_bitmap", nullable = false, length = 11)
+	@Column(name = "ACCOUNT_TYPE_BITMAP", nullable = false, length = 11)
 	private Integer accountTypeBitMap;
 
-	@Column(name = "sys_account_type_flg", nullable = true, length = 11)
-	private Integer sysAccountTypeFlag;
-
-	@Column(name = "max_book_balance", nullable = false)
+	@Column(name = "MAX_BOOK_BALANCE", nullable = false)
 	private Double accountMaximumBookBalance;
 
-	@Column(name = "enabled_flg", nullable = false, length = 11)
+	@Column(name = "ENABLED_FLG", nullable = false, length = 11)
 	private Integer enabledFlag;
 
 	public AccountType() {
@@ -71,14 +68,6 @@ public class AccountType {
 
 	public void setAccountTypeBitMap(Integer accountTypeBitMap) {
 		this.accountTypeBitMap = accountTypeBitMap;
-	}
-
-	public Integer getSysAccountTypeFlag() {
-		return sysAccountTypeFlag;
-	}
-
-	public void setSysAccountTypeFlag(Integer sysAccountTypeFlag) {
-		this.sysAccountTypeFlag = sysAccountTypeFlag;
 	}
 
 	public Double getAccountMaximumBookBalance() {

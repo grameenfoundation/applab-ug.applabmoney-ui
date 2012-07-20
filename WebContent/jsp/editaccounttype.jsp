@@ -5,7 +5,7 @@
 
 <html>
 <head>
-<title>Predefined Inputs Manager</title>
+<title>Account Type Manager</title>
 <link type="text/css"
 	href="resources/css/ui-lightness/jquery-ui-1.8.18.custom.css"
 	rel="stylesheet" />
@@ -279,8 +279,7 @@ td.formlabels {
 				<div class="header" style="color: #000000;">
 					<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
 						> Administration</a>
-				</div>
-			</td>
+				</div></td>
 		</tr>
 	</table>
 	<div>
@@ -288,55 +287,25 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Manage Predefined Inputs</h2>
-						<hr></td>
+						<hr>
+					</td>
 				</tr>
 			</table>
 		</div>
 
 		<table style="width: 100%;">
 			<tr>
-				<td class="navbar">
-					<div id="accordion">
-						<h3>
-							<a href="ussdmenuitems.html">Ussd Menu Setup</a>
-						</h3>
-						<ul>
-							<li><a href="/metomeui/listussdmenuitems.html">Ussd Menu
-									Items Setup</a></li>
-							<li><a href="/metomeui/listussdtransactionkeywords.html">Transaction
-									Keywords Setup</a>
-							</li>
-							<li><a href="/metomeui/listussdkeywordsteps.html">Keyword
-									Steps</a></li>
-							<li><a href="/metomeui/listussdpredefinputs.html">Predefined
-									Inputs Setup</a>
-							</li>
-						</ul>
-						<h3>
-							<a href="/metomeui/charge.html">Charge Setup</a>
-						</h3>
-						<ul>
-							<li><a href="/metomeui/charge.html">Configure Charges</a>
-							</li>
-							<li><a href="/metomeui/accounttypes.html">Manage Account
-									Types</a>
-							</li>
-						</ul>
-					</div></td>
 				<td class="content">
 					<div>
 						<fieldset>
 							<legend>
 								<h2>Edit Account Types</h2>
 							</legend>
-							<%--               action="/metomeui/editcontacts.html"                 --%>
 							<form:form method="post"
-								action="/metomeui/editaccounttype/${accountTypes.accountTypeId}.html"
+								action="/metomeui/editaccounttype/${accountType.accountTypeId}.html"
 								commandName="accountType">
 
 								<form:errors path="*" cssClass="errorblock" element="div" />
-								<form:errors path="*" cssClass="errorblock" element="div" />
-
 								<table>
 
 									<tr>
@@ -346,53 +315,54 @@ td.formlabels {
 										<td class="form"><form:input cssClass="formfields"
 												path="accountTypeId" value="${accountType.accountTypeId}"
 												disabled="true" /><input type="hidden" name="accountTypeId"
-											value="${accountType.accountTypeId}" /></td>
+											value="${accountType.accountTypeId}" />
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="accountTypeCode">Account Code: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
 												path="accountTypeCode"
-												value="${accountType.accountTypeCode}" /></td>
+												value="${accountType.accountTypeCode}" />
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="accountTypeName">Account Name: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
 												path="accountTypeName"
-												value="${accountType.accountTypeName}" /></td>
-									</tr>
-									<tr>
-										<td class="formlabels"><form:label
-												path="accountTypeBitMap">Account Bitmap:</form:label>
-										</td>
-										<td class="form"><form:checkbox
-												cssClass="alterformfields" path="accountTypeBitMap"
-												value="0" /><label class="alterlabel">Undefined</label><br>
-											<form:checkbox cssClass="alterformfields"
-												path="accountTypeBitMap" value="1" /><label
-											class="alterlabel">Dealer</label><br> <form:checkbox
-												cssClass="alterformfields" path="accountTypeBitMap"
-												value="2" /><label class="alterlabel">Agent</label>
+												value="${accountType.accountTypeName}" />
 										</td>
 									</tr>
-
 									<tr>
 										<td class="formlabels"><form:label
 												path="accountMaximumBookBalance">Maximum Book Balance:</form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
 												path="accountMaximumBookBalance"
-												value="${accountType.accountTypeId}" /></td>
+												value="${accountType.accountTypeId}" />
+										</td>
 									</tr>
 									<tr>
+                                        <td class="formlabels"><form:label path="accountTypeBitMap">Account Type BitMap: </form:label>
+                                        </td>
+                                        <td class="form"><form:input cssClass="formfields"
+                                                path="accountTypeBitMap"
+                                                value="${accountType.accountTypeBitMap}" disabled="true"/>
+                                        </td>
+                                    </tr>
+									<tr>
 										<td colspan="2" class="savebutton"><input class="btn"
-											type="submit" value="addaccounttypes" /></td>
+											type="submit" value="Update" /><input class="btn"
+											type="button" value="Cancel"
+											onClick="location.href='/metomeui/listaccounttypes.html'" />
+										</td>
 									</tr>
 								</table>
 							</form:form>
 						</fieldset>
-					</div></td>
+					</div>
+				</td>
 			</tr>
 		</table>
 	</div>

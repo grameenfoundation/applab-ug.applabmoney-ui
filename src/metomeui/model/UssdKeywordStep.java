@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "keyword_steps")
+@Table(name = "KEYWORD_STEPS")
 public class UssdKeywordStep {
 
 	@Id

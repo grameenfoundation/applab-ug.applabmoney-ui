@@ -241,32 +241,54 @@ td.savebutton {
 			<td class="navbar">
 				<div id="accordion">
 					<h3>
-						<a href="/metomeui/listussdmenuitems.html">Ussd Menu Items
-							Setup</a>
+						<a href="#systemsettings">System Settings</a>
+					</h3>
+					<ul>
+						<li><a href="/metomeui/viewsystemconfiguration.html">System
+								Configuration</a>
+						</li>
+						<li><a href="/metomeui/listcharges.html">Charge
+								Configuration</a>
+						</li>
+						<li><a href="/metomeui/listaccounttypes.html">Account
+								Type Configuration</a></li>
+						<li><a href="/metomeui/listmemogroups.html">Memo Groups
+								Configuration</a></li>
+						<li><a href="/metomeui/listlanguages.html">Languages
+								Configuration</a></li>
+						<li><a href="/metomeui/listmessages.html">Messages
+								Configuration</a></li>
+						<li><a href="listmobilendc.html">Mobile NDC Configuration</a>
+						</li>
+					</ul>
+					<h3>
+						<a href="#ussdmenusetup">Ussd Menu Setup</a>
 					</h3>
 					<ul>
 						<li><a href="/metomeui/listussdmenuitems.html">Ussd Menu
-								Items</a></li>
-					</ul>
-					<h3>
-						<a href="/metomeui/listussdtransactionkeywords.html">Transaction
-							Keywords Setup</a>
-					</h3>
-					<ul>
+								Items</a>
+						</li>
 						<li><a href="/metomeui/listussdtransactionkeywords.html">Transaction
-								Keywords</a>
+								Keywords</a></li>
+						<li><a href="/metomeui/listussdpredefinputs.html">Predefined
+								Inputs</a></li>
+					</ul>
+					<h3>
+						<a href="#amlsettings">AML Settings</a>
+					</h3>
+					<ul>
+						<li><a href="/metomeui/viewamlsettings.html">AML Settings</a>
 						</li>
 					</ul>
 					<h3>
-						<a href="/metomeui/listussdpredefinputs.html">Predefined
-							Inputs Setup</a>
+						<a href="#">Products Setup</a>
 					</h3>
 					<ul>
-						<li><a href="/metomeui/listussdpredefinputs.html">Predefined
-								Inputs</a>
-						</li>
+						<li><a href="#viewmetomesetup">Me2Me Setup</a></li>
+						<li><a href="#viewzimbasetup.html">Zimba Setup</a></li>
 					</ul>
-				</div></td>
+				</div>
+			</td>
 			<td class="content">
 				<table width="100%">
 					<tr>
@@ -304,6 +326,7 @@ td.savebutton {
 						<c:forEach items="${ussdTransactionKeywordList}"
 							var="transactionkeyword">
 							<tr class="data">
+							<c:if test="${transactionkeyword.keywordId != 0}">
 								<td class="data"><a
 									href="/metomeui/editussdtransactionkeyword/${transactionkeyword.keywordId}.html">${transactionkeyword.keywordName}</a>
 								</td>
@@ -325,6 +348,7 @@ td.savebutton {
 									href="/metomeui/removekeyword/${transactionkeyword.keywordId}.html">
 										Delete </a>
 								</td>
+								</c:if>
 							</tr>
 						</c:forEach>
 					</table>

@@ -4,48 +4,43 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "messages")
+@Table(name = "MESSAGES")
 public class Message {
 
 
 	@Id
 	@GeneratedValue
-	@Column(name = "message_id")
-	private long messageId;
+	@Column(name = "MESSAGE_ID")
+	private Long messageId;
 	
-	@Column(name = "language_id", nullable= true, length= 11)
-	private Integer languageId;
-	
-	@Column(name = "message_code", nullable=false, length= 11)
+	@Column(name = "MESSAGE_CODE", nullable=false, length= 11)
 	private Integer messageCode;
 	
-	@Column(name = "message_text", nullable=false, length= 500)
+	@Column(name = "MESSAGE_TEXT", nullable=false, length= 500)
 	private String messageText;
 	
-	@Column(name = "message_desc", nullable=false, length= 500)
+	@Column(name = "MESSAGE_DESC", nullable=false, length= 500)
 	private String messageDesc;
+	
+	@ManyToOne
+	@JoinColumn(name = "LANGUAGE_ID", nullable = true)
+	private Language language;
 	
 	public Message(){
 		
 	}
 
-	public long getMessageId() {
+	public Long getMessageId() {
 		return messageId;
 	}
 
-	public void setMessageId(long messageId) {
+	public void setMessageId(Long messageId) {
 		this.messageId = messageId;
-	}
-
-	public Integer getLanguageId() {
-		return languageId;
-	}
-
-	public void setLanguageId(Integer languageId) {
-		this.languageId = languageId;
 	}
 
 	public Integer getMessageCode() {
@@ -72,15 +67,11 @@ public class Message {
 		this.messageDesc = messageDesc;
 	}
 
-	
-	
-	/*public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append("Message Id: " + messageId + ";");
-		buffer.append("Language Id: " + languageId + ";");
-		buffer.append("Message Code: " + messageCode + ";");
-		buffer.append("Message Text: " + messageText + ";");
-		buffer.append("Message Description: " + messageDesc);
-		return buffer.toString();
-	}*/
+	public Language getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(Language language) {
+		this.language = language;
+	}
 }

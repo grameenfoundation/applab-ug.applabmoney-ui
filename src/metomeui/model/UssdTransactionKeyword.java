@@ -18,7 +18,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "transaction_keywords")
+@Table(name = "TRANSACTION_KEYWORDS")
 public class UssdTransactionKeyword {
 
 	@Id
@@ -48,12 +48,12 @@ public class UssdTransactionKeyword {
 	private Integer keywordEnabledFlag;
 
 	@OneToMany(targetEntity = UssdKeywordStep.class, mappedBy = "transactionKeyword", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "KEYWORD_ID", insertable = false, updatable = false)
+	@JoinColumn(name = "KEYWORD_ID", insertable = false, updatable = false, nullable = true)
 	private List<UssdKeywordStep> keywordSteps;
 
-	//@OneToMany(targetEntity = UssdMenuItem.class, mappedBy = "menuItemKeyword", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	//@JoinColumn(name = "KEYWORD_ID", insertable = false, updatable = false)
-	//private List<UssdMenuItem> menuItems;
+	@OneToMany(targetEntity = UssdMenuItem.class, mappedBy = "menuItemKeyword", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "KEYWORD_ID", insertable = false, updatable = false, nullable = true)
+	private List<UssdMenuItem> menuItems;
 
 	public UssdTransactionKeyword() {
 
@@ -68,6 +68,7 @@ public class UssdTransactionKeyword {
 		this.keywordStepsCount = keywordStepsCount;
 		this.keywordEnabledFlag = keywordEnabledFlag;
 		this.keywordSteps = new ArrayList<UssdKeywordStep>();
+		this.menuItems = new ArrayList<UssdMenuItem>();
 	}
 
 	public Long getKeywordId() {
@@ -124,5 +125,13 @@ public class UssdTransactionKeyword {
 
 	public void setKeywordSteps(List<UssdKeywordStep> keywordSteps) {
 		this.keywordSteps = keywordSteps;
+	}
+
+	public List<UssdMenuItem> getMenuItems() {
+		return menuItems;
+	}
+
+	public void setMenuItems(List<UssdMenuItem> menuItems) {
+		this.menuItems = menuItems;
 	}
 }

@@ -33,7 +33,7 @@
 
 	<target name="build" depends="compile">
 		<jar destfile="metomeui.war">
-			<fileset dir="." includes="WebContent/WEB-INF/**/*, WebContent/jsp/**/*" />
+			<fileset dir="." includes="WebContent/WEB-INF/**/*, WebContent/jsp/**/*,  WebContent/**/*" />
 		</jar>
 	</target>
 </project>

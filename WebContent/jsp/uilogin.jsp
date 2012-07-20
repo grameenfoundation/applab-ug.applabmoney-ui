@@ -27,206 +27,205 @@
 
 /*GENERAL*/
 body {
-    font-family: 'Arial', 'Helvetica', sans-serif;
-    font-size: 75%;
-    line-height: 1.6em;
-    background: #F3F3EC;
-    padding: 0;
+	font-family: 'Arial', 'Helvetica', sans-serif;
+	font-size: 75%;
+	line-height: 1.6em;
+	background: #F3F3EC;
+	padding: 0;
 }
 
 h1,h2 {
-    font-size: 14px;
-    font-weight: bold;
+	font-size: 14px;
+	font-weight: bold;
 }
 
 h3 {
-    font-size: 100%;
-    background: #DDB929;
-    display: block;
-    padding: 1px;
-    color: #fff;
+	font-size: 100%;
+	background: #DDB929;
+	display: block;
+	padding: 1px;
+	color: #fff;
 }
 
 h4 {
-    font-size: 80%;
-    background: #DDB929;
-    display: block;
-    padding: 1px;
-    color: #fff;
+	font-size: 80%;
+	background: #DDB929;
+	display: block;
+	padding: 1px;
+	color: #fff;
 }
 
 label {
-    font-weight: bold;
-    text-align: right;
+	font-weight: bold;
+	text-align: right;
 }
 
 /*END GENERAL*/
 
 /* ERROR BLOCK */
 .errorblock {
-    color: #000;
-    background-color: #ffEEEE;
-    border: 3px solid #ff0000;
-    padding: 8px;
-    margin: 16px;
+	color: #000;
+	background-color: #ffEEEE;
+	border: 3px solid #ff0000;
+	padding: 8px;
+	margin: 16px;
 }
 
 /*BUTTONS*/
 button,.btn {
-    background-image:
-        url('resources/css/ui-lightness/images/CuteCapLa7.gif');
-    background-position: left top;
-    background-repeat: repeat-x;
-    background-color: transparent;
-    border-color: -moz-use-text-color #5C5D61 rgb(92, 93, 97)
-        -moz-use-text-color;
-    border-style: none none none none;
-    border-width: medium 2px 2px medium;
-    cursor: pointer;
-    display: inline;
-    colour: #008000;
-    font-family: 'Arial', 'Helvetica', sans-serif;
-    font-size: 100%;
-    font-weight: bold;
-    padding: 1px 3px;
-    height: 33px;
-    width: 100px;
+	background-image:
+		url('resources/css/ui-lightness/images/CuteCapLa7.gif');
+	background-position: left top;
+	background-repeat: repeat-x;
+	background-color: transparent;
+	border-color: -moz-use-text-color #5C5D61 rgb(92, 93, 97)
+		-moz-use-text-color;
+	border-style: none none none none;
+	border-width: medium 2px 2px medium;
+	cursor: pointer;
+	display: inline;
+	colour: #008000;
+	font-family: 'Arial', 'Helvetica', sans-serif;
+	font-size: 100%;
+	font-weight: bold;
+	padding: 1px 3px;
+	height: 33px;
+	width: 100px;
 }
 
 hover.btn {
-    color: #0066CC;
+	color: #0066CC;
 }
 
 /*END BUTTONS*/
 
 /*SIDE BAR*/
 .navbar {
-    vertical-align: top;
-    top: 1px;
-    width: 20%;
+	vertical-align: top;
+	top: 1px;
+	width: 20%;
 }
 
 /*END SIDE BAR*/
 
 /*CONTENT SECTION*/
 .content {
-    vertical-align: top;
-    top: 1px;
-    width: 80%;
+	vertical-align: top;
+	top: 1px;
+	width: 80%;
 }
 
 div.header {
-    background: #008000;
-    border: 2px Solid #008000;
+	background: #008000;
+	border: 2px Solid #008000;
 }
 
 div {
-    background: #F3F3EC;
-    margin: 2px;
-    padding: 1px;
-    border: 2px;
+	background: #F3F3EC;
+	margin: 2px;
+	padding: 1px;
+	border: 2px;
 }
 
 fieldset {
-    border-color: #9AC482;
+	border-color: #9AC482;
 }
 
 hr {
-    border-color: #9AC482;
+	border-color: #9AC482;
 }
 
 li {
-    display: block;
-    margin: 2px 2px 2px -20px;
+	display: block;
+	margin: 2px 2px 2px -20px;
 }
 
 tr.header {
-    background: #ffffff;
+	background: #ffffff;
 }
 
 td {
-    height: 19px;
-    width: 30%;
-    margin: 0px 2px 0px 2px;
-    padding: 0px 5px 0px 5px;
-    test-align: center;
-    width: 40%;
+	height: 19px;
+	width: 30%;
+	margin: 0px 2px 0px 2px;
+	padding: 0px 5px 0px 5px;
+	test-align: center;
+	width: 40%;
 }
 
-
 th {
-    background: #7CB15C;
-    height: 19px;
-    width: 10%;
-    border-color: #ffffff;
-    text-align: left;
-    padding: 4px;
-    word-wrap: break-word;
+	background: #7CB15C;
+	height: 19px;
+	width: 10%;
+	border-color: #ffffff;
+	text-align: left;
+	padding: 4px;
+	word-wrap: break-word;
 }
 
 td.data {
-    border-color: #9AC482;
-    border-width: 1px 1px 0 0;
-    border-style: solid;
-    margin: 1;
-    padding: 1px;
-    background-color: #F3F3EC;
-    text-align: left;
-    word-wrap: break-word;
+	border-color: #9AC482;
+	border-width: 1px 1px 0 0;
+	border-style: solid;
+	margin: 1;
+	padding: 1px;
+	background-color: #F3F3EC;
+	text-align: left;
+	word-wrap: break-word;
 }
 
 tr.data {
-    border: 1px Solid #9AC482;
+	border: 1px Solid #9AC482;
 }
 
 table.form {
-    padding: 8px;
-    width: 100px;
+	padding: 8px;
+	width: 100px;
 }
 
 td.form {
-    padding: 5px;
-    width: 400px;
+	padding: 5px;
+	width: 400px;
 }
 
 table.data {
-    width: 100%;
-    font-size: 13px;
-    border: 1px Solid;
-    margin: 0px 0px 1px 1px;
-    padding: 0px;
-    border-color: #9AC482;
-    background-color: #F3F3EC;
-    border-collapse: collapse;
-    text-align: -webkit-auto;
+	width: 100%;
+	font-size: 13px;
+	border: 1px Solid;
+	margin: 0px 0px 1px 1px;
+	padding: 0px;
+	border-color: #9AC482;
+	background-color: #F3F3EC;
+	border-collapse: collapse;
+	text-align: -webkit-auto;
 }
 
 td.savebutton {
-    padding-right: 300px;
-    text-align: right;
-    height: 30px
+	padding-right: 300px;
+	text-align: right;
+	height: 30px
 }
 
-td.formlabels{
-text-align:right;
+td.formlabels {
+	text-align: right;
 }
 
-.dropdown{
-width: 157px;
-height: 29px;
+.dropdown {
+	width: 157px;
+	height: 29px;
 }
 
-.formfields{
-width: 150px;
-height: 25px;
+.formfields {
+	width: 150px;
+	height: 25px;
 }
 
-.labels{
-text-align:right;
+.labels {
+	text-align: right;
 }
 
 .otherformfields {
-    padding-left:250px;
+	padding-left: 250px;
 }
 
 /*END CONTENT SECTION*/
@@ -245,8 +244,7 @@ text-align:right;
 				<div class="header" style="color: #000000;">
 					<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
 						> Administration</a>
-				</div>
-			</td>
+				</div></td>
 		</tr>
 	</table>
 	<div>
@@ -255,36 +253,46 @@ text-align:right;
 			<tr>
 				<td class="content">
 					<div>
-                        <fieldset>
-                            <legend>
-                                <h2>Please Login</h2>
-                            </legend>
-						
-					 <form:form method="post" action="uilogin.html"
-						commandName="login">
-						<form:errors path="*" cssClass="errorblock" element="div" />
-							<table>
-								<tr>
-									<td class="formlabels"><form:label path="userName">User Name</form:label>
-									</td>
-									<td class="form"><form:input cssClass= "formfields" path="userName" /></td>
-								</tr>
-								<tr>
-									<td class="formlabels"><form:label path="password">Password</form:label>
-									</td>
-									<td class="form"><form:password cssClass= "formfields" path="password" /></td>
-								</tr>
-								<tr>
-                                        <td colspan="2" class="savebutton"><br>
-                                        <input class="btn" type="submit" value="Login" /> 
-                                        </td>
-                                    </tr>
-							</table>
-					</form:form>
-					</fieldset>
-					</div>
-					</td>
-					</tr>		
+						<fieldset>
+							<legend>
+								<h2>Please Login</h2>
+							</legend>
+
+							<form:form method="post" action="uilogin.html"
+								commandName="login">
+								<form:errors path="*" cssClass="errorblock" element="div" />
+								<table>
+									<tr>
+										<td class="formlabels"><form:label path="userName">User Name</form:label>
+										</td>
+										<td class="form"><form:input cssClass="formfields"
+												path="userName" />
+										</td>
+									</tr>
+									<tr>
+										<td class="formlabels"><form:label path="password">Password</form:label>
+										</td>
+										<td class="form"><form:password cssClass="formfields"
+												path="password" />
+										</td>
+									</tr>
+									<tr>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td class="savebutton"><br> <input class="btn"
+											type="submit" value="Login" /></td>
+										<td></td>
+									</tr>
+								</table>
+							</form:form>
+						</fieldset>
+					</div></td>
+			</tr>
 		</table>
 	</div>
 

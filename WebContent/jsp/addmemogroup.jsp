@@ -254,8 +254,7 @@ td.formlabels {
 				<div class="header" style="color: #000000;">
 					<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
 						> Administration</a>
-				</div>
-			</td>
+				</div></td>
 		</tr>
 	</table>
 	<div>
@@ -263,35 +262,14 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Manage Memo Group</h2>
-						<hr></td>
+						<hr>
+					</td>
 				</tr>
 			</table>
 		</div>
 
 		<table style="width: 100%;">
 			<tr>
-				<td class="navbar">
-					<div id="accordion">
-						<h3>
-							<a href="ussdmenuitems.html">Ussd Menu Setup</a>
-						</h3>
-						<ul>
-							<li><a href="ussdmenuitems.html">Ussd Menu Items Setup</a>
-							</li>
-							<li><a href="ussdtransactionkeywords.html">Transaction
-									Keywords Setup</a></li>
-							<li><a href="ussdpredefinputs.html">Predefined Inputs
-									Setup</a></li>
-						</ul>
-						<h3>
-							<a href="charge.html">Charge Setup</a>
-						</h3>
-						<ul>
-							<li><a href="charge.html">Configure Charge</a></li>
-							<li><a href="accounttypes.html">Manage Account Types</a></li>
-						</ul>
-					</div>
-				</td>
 				<td class="content">
 					<div>
 						<fieldset>
@@ -299,7 +277,7 @@ td.formlabels {
 								<h2>Create New Memo Group</h2>
 							</legend>
 
-							<form:form method="post" action="addmemogroups.html"
+							<form:form method="post" action="addmemogroup.html"
 								commandName="memoGroup">
 								<form:errors path="*" cssClass="errorblock" element="div" />
 
@@ -308,22 +286,20 @@ td.formlabels {
 										<td class="formlabels"><form:label path="memoGroupCode">Memo Group Code: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="memoGroupCode" />
-										</td>
+												path="memoGroupCode" /></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="memoGroupName">Memo Group Name: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="memoGroupName" />
-										</td>
+												path="memoGroupName" /></td>
 									</tr>
 									<tr>
-										<td class="formlabels"><form:label path="memoGroupDescription">Memo Group Description: </form:label>
+										<td class="formlabels"><form:label
+												path="memoGroupDescription">Memo Group Description: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="memoGroupDescription" />
-										</td>
+												path="memoGroupDescription" /></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:checkbox
@@ -333,20 +309,28 @@ td.formlabels {
 										</td>
 									</tr>
 									<tr>
-										<td colspan="2" class="savebutton"><input class="btn"
-											type="submit" value="addmemogroups" /></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td class="savebutton"><input class="btn"
+											type="submit" value="Add" /><input class="btn" type="button"
+											value="Cancel"
+											onClick="location.href='/metomeui/listmemogroups.html'" />
+										</td>
+										<td></td>
 									</tr>
 								</table>
 							</form:form>
 						</fieldset>
 						<table>
 							<tr>
-								<td><br>
-								</td>
+								<td><br></td>
 							</tr>
 						</table>
 
-					</div></td>
+					</div>
+				</td>
 			</tr>
 		</table>
 		<!--    <table border=1px; width=100%;> -->

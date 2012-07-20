@@ -48,7 +48,7 @@ public class Dao {
 	}
 
 	private static final Logger log = Logger.getAnonymousLogger();
-	private static final ThreadLocal session = new ThreadLocal();
+	private static final ThreadLocal<Session> session = new ThreadLocal<Session>();
 	private static final SessionFactory sessionFactory = new Configuration()
 			.configure().buildSessionFactory();
 }

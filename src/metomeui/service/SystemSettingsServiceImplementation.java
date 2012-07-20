@@ -5,13 +5,13 @@ import java.util.List;
 import metomeui.dao.SystemSettingsDao;
 import metomeui.dao.SystemSettingsDaoImplementation;
 import metomeui.model.AccountType;
-import metomeui.model.ContactForm;
 import metomeui.model.Language;
 import metomeui.model.MemoGroup;
 import metomeui.model.Message;
+import metomeui.model.NdcListOffnet;
+import metomeui.model.NdcListPToP;
 import metomeui.model.SystemConfiguration;
 import metomeui.model.User;
-import metomeui.model.UssdPredefInputItem;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,18 +20,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service("chargeSetupService")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-public class SystemSettingsServiceImplementation implements SystemSettingsService {
+public class SystemSettingsServiceImplementation implements
+		SystemSettingsService {
 
 	@Autowired
 	private SystemSettingsDao systemSettingsDao = new SystemSettingsDaoImplementation();
-	
+
 	public SystemSettingsServiceImplementation() {
-		
+
 	}
 
 	/**
 	 * AccountTypes Management functions
-	 *
+	 * 
 	 */
 	@Transactional
 	public List<AccountType> listAccountTypes() {
@@ -39,28 +40,36 @@ public class SystemSettingsServiceImplementation implements SystemSettingsServic
 	}
 
 	@Transactional
-	public void removeAccountType(long accountTypeId) {
-		systemSettingsDao.removeAccountType(accountTypeId);
+	public void deleteExistingAccountType(Long accountTypeId) {
+		systemSettingsDao.deleteExistingAccountType(accountTypeId);
 	}
-	
+
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void addAccountType(AccountType accountType) {
 		systemSettingsDao.addAccountType(accountType);
 	}
-	
+
 	@Transactional
-	public AccountType getExistingAccountType(long accountTypeId) {
+	public AccountType getExistingAccountType(Long accountTypeId) {
 		return systemSettingsDao.getExistingAccountType(accountTypeId);
 	}
-	
+
 	@Transactional
 	public void editExistingAccountType(AccountType accountType) {
 		systemSettingsDao.editExistingAccountType(accountType);
 	}
-	
+
+	@Transactional
+	public void activateOrDeactivateExistingAccountType(Long accountTypeId,
+			Integer offSwitch) {
+		systemSettingsDao.activateOrDeactivateExistingAccountType(
+				accountTypeId, offSwitch);
+
+	}
+
 	/**
 	 * User Management functions
-	 *
+	 * 
 	 */
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void addUser(User user) {
@@ -73,58 +82,63 @@ public class SystemSettingsServiceImplementation implements SystemSettingsServic
 	}
 
 	@Transactional
-	public void removeUser(long id) {
+	public void deleteExistingUser(Long id) {
 		systemSettingsDao.removeUser(id);
 	}
-	
+
 	@Transactional
-	public User getUserByName(String userName, String password) {
-		return systemSettingsDao.getUserByName(userName, password);
+	public User getUserByLogin(String userName, String password) {
+		return systemSettingsDao.getUserByLogin(userName, password);
 	}
-	
-	@Transactional
-	public User getExistingUser(long userId) {
-		return systemSettingsDao.getExistingUser(userId);
-	}
-	
+
 	@Transactional
 	public void editExistingUser(User user) {
 		systemSettingsDao.editExistingUser(user);
 	}
-	
+
+	@Transactional
+	public User getExistingUser(Long userId) {
+		return systemSettingsDao.getExistingUser(userId);
+	}
+
 	/**
 	 * Language Management functions
-	 *
+	 * 
 	 */
 	@Transactional
 	public List<Language> listLanguages() {
 		return systemSettingsDao.listLanguages();
 	}
-	
+
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void addLanguage(Language language) {
 		systemSettingsDao.addLanguage(language);
 	}
 
 	@Transactional
-	public void removeLanguage(Integer languageId) {
-		systemSettingsDao.removeLanguage(languageId);
+	public void deleteExistingLanguage(Long languageId) {
+		systemSettingsDao.deleteExistingLanguage(languageId);
 	}
-	
+
 	@Transactional
-	public Language getExistingLanguage(long languageId) {
+	public Language getExistingLanguage(Long languageId) {
 		return systemSettingsDao.getExistingLanguage(languageId);
 	}
-	
+
 	@Transactional
 	public void editExistingLanguage(Language language) {
 		systemSettingsDao.editExistingLanguage(language);
 	}
-	
-	
+
+	@Override
+	public void setDefaultLanguage(Long languageId, Integer offSwitch) {
+		systemSettingsDao.setDefaultLanguage(languageId, offSwitch);
+
+	}
+
 	/**
 	 * Message Management functions
-	 *
+	 * 
 	 */
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void addMessage(Message message) {
@@ -137,24 +151,23 @@ public class SystemSettingsServiceImplementation implements SystemSettingsServic
 	}
 
 	@Transactional
-	public void removeMessage(Integer messageId) {
+	public void deleteExistingMessage(Long messageId) {
 		systemSettingsDao.removeMessage(messageId);
 	}
-	
+
 	@Transactional
-	public Message getExistingMessage(long messageId) {
+	public Message getExistingMessage(Long messageId) {
 		return systemSettingsDao.getExistingMessage(messageId);
 	}
-	
+
 	@Transactional
 	public void editExistingMessage(Message message) {
 		systemSettingsDao.editExistingMessage(message);
 	}
-	
-	
+
 	/**
 	 * MemoGroup Management functions
-	 *
+	 * 
 	 */
 	@Transactional
 	public List<MemoGroup> listMemoGroups() {
@@ -162,28 +175,36 @@ public class SystemSettingsServiceImplementation implements SystemSettingsServic
 	}
 
 	@Transactional
-	public void removeMemoGroup(Integer memoGroupId) {
-		systemSettingsDao.removeMemoGroup(memoGroupId);
+	public void deleteExistingMemoGroup(Long memoGroupId) {
+		systemSettingsDao.deleteExistingMemoGroup(memoGroupId);
 	}
-	
+
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void addMemoGroup(MemoGroup memoGroup) {
 		systemSettingsDao.addMemoGroup(memoGroup);
 	}
-	
+
 	@Transactional
-	public MemoGroup getExistingMemoGroup(long memoGroupId) {
+	public MemoGroup getExistingMemoGroup(Long memoGroupId) {
 		return systemSettingsDao.getExistingMemoGroup(memoGroupId);
 	}
-	
+
 	@Transactional
 	public void editExistingMemoGroup(MemoGroup memoGroup) {
 		systemSettingsDao.editExistingMemoGroup(memoGroup);
 	}
-	
+
+	@Transactional
+	public void activateOrDeactivateExistingMemoGroup(Long memoGroupId,
+			Integer onOffSwitch) {
+		systemSettingsDao.activateOrDeactivateExistingMemoGroup(memoGroupId,
+				onOffSwitch);
+
+	}
+
 	/**
 	 * System Configuration functions
-	 *
+	 * 
 	 */
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void addSystemConfiguration(SystemConfiguration systemConfiguration) {
@@ -196,62 +217,78 @@ public class SystemSettingsServiceImplementation implements SystemSettingsServic
 	}
 
 	@Transactional
-	public void removeSystemConfiguration(Integer systemConfigurationId) {
+	public void deleteExistingSystemConfiguration(Long systemConfigurationId) {
 		systemSettingsDao.removeSystemConfiguration(systemConfigurationId);
-	}	
-	
+	}
+
 	/**
-	 * Object Management functions
-	 *
+	 * NDC List functions
+	 * 
 	 */
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-	public void addItem(Object object) {
-		systemSettingsDao.addObject(object);
+	@Transactional
+	public List<NdcListPToP> listNDCPToP() {
+		return systemSettingsDao.listNDCPToP();
 	}
 
 	@Transactional
-	public List<Object> listObject() {
-		return systemSettingsDao.listObject();
+	public List<NdcListOffnet> listNDCOffnet() {
+		return systemSettingsDao.listNDCOffnet();
 	}
 
 	@Transactional
-	public void removeObject(Integer id) {
-		systemSettingsDao.removeObject(id);
+	public void addNdcListPToP(NdcListPToP ndcListPToP) {
+		systemSettingsDao.addNdcListPToP(ndcListPToP);
 	}
 
-	@Override
-	public void removeAccountType(Integer accountTypeId) {
-		// TODO Auto-generated method stub
-		
+	@Transactional
+	public NdcListPToP getExistingNdcListPToP(Long ndcListId) {
+		return systemSettingsDao.getExistingNdcListPToP(ndcListId);
 	}
 
-	@Override
-	public void removeUser(Integer userId) {
-		// TODO Auto-generated method stub
-		
+	@Transactional
+	public void editExistingNdcListPToP(NdcListPToP ndcListPToP) {
+		systemSettingsDao.editExistingNdcListPToP(ndcListPToP);
 	}
 
-	@Override
-	public void addContact(UssdPredefInputItem contact) {
-		// TODO Auto-generated method stub
-		
+	@Transactional
+	public void deleteExistingNdcListPToP(Long ndcListId) {
+		systemSettingsDao.deleteExistingNdcListPToP(ndcListId);
 	}
 
-	@Override
-	public void addContact(ContactForm contactForm) {
-		// TODO Auto-generated method stub
-		
+	@Transactional
+	public void activateOrDeactivateExistingNdcListPToP(Long ndcListId,
+			Integer onSwitch) {
+		systemSettingsDao.activateOrDeactivateExistingNdcListPToP(ndcListId,
+				onSwitch);
+
 	}
 
-	@Override
-	public void updateContact(ContactForm contactForm) {
-		// TODO Auto-generated method stub
-		
+	@Transactional
+	public void addNdcListOffnet(NdcListOffnet ndcListOffnet) {
+		systemSettingsDao.addNdcListOffnet(ndcListOffnet);
+
 	}
 
-	@Override
-	public void updateContact(UssdPredefInputItem contact) {
-		// TODO Auto-generated method stub
-		
+	@Transactional
+	public NdcListOffnet getExistingNdcListOffnet(Long ndcListId) {
+		return systemSettingsDao.getExistingNdcListOffnet(ndcListId);
 	}
+
+	@Transactional
+	public void editExistingNdcListOffnet(NdcListOffnet ndcListOffnet) {
+		systemSettingsDao.editExistingNdcListOffnet(ndcListOffnet);
+	}
+
+	@Transactional
+	public void deleteExistingNdcListOffnet(Long ndcListId) {
+		systemSettingsDao.deleteExistingNdcListOffnet(ndcListId);
+	}
+
+	@Transactional
+	public void activateOrDeactivateExistingNdcListOffnet(Long ndcListId,
+			Integer onSwitch) {
+		systemSettingsDao.activateOrDeactivateExistingNdcListOffnet(ndcListId,
+				onSwitch);
+	}
+
 }

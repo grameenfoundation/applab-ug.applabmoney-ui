@@ -252,4 +252,16 @@ public class UssdMenuServiceImplementation implements UssdMenuService {
 			Long keywordId) {
 		return ussdMenuDao.checkIfDuplicateKeywordName(keywordCode, keywordId);
 	}
+
+	@Override
+	public List<UssdKeywordStep> getKeywordsLinkedToThisPredefInput(
+			Long predefInputId) {
+		return ussdMenuDao.getKeywordsLinkedToThisPredefInput(predefInputId);
+	}
+
+	@Override
+	public List<UssdMenuItem> getChildMenuItemsForParentMenuItem(
+			UssdMenuItem rootMenuItem) {
+		return ussdMenuDao.getChildMenuItemsForParentMenuItem(rootMenuItem);
+	}
 }

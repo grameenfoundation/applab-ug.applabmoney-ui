@@ -263,27 +263,55 @@ td.formlabels {
 				<td class="navbar">
 					<div id="accordion">
 						<h3>
-							<a href="ussdmenuitems.html">Ussd Menu Setup</a>
+							<a href="#systemsettings">System Settings</a>
 						</h3>
 						<ul>
-							<li><a href="ussdmenuitems.html">Ussd Menu Items Setup</a></li>
-							<li><a href="ussdtransactionkeywords.html">Transaction
-									Keywords Setup</a>
+							<li><a href="/metomeui/viewsystemconfiguration.html">System
+									Configuration</a>
 							</li>
-							<li><a href="ussdpredefinputs.html">Predefined Inputs
-									Setup</a>
+							<li><a href="/metomeui/listcharges.html">Charge
+									Configuration</a>
+							</li>
+							<li><a href="/metomeui/listaccounttypes.html">Account
+									Type Configuration</a></li>
+							<li><a href="/metomeui/listmemogroups.html">Memo Groups
+									Configuration</a></li>
+							<li><a href="/metomeui/listlanguages.html">Languages
+									Configuration</a></li>
+							<li><a href="/metomeui/listmessages.html">Messages
+									Configuration</a></li>
+							<li><a href="listmobilendc.html">Mobile NDC
+									Configuration</a></li>
+						</ul>
+						<h3>
+							<a href="#ussdmenusetup">Ussd Menu Setup</a>
+						</h3>
+						<ul>
+							<li><a href="/metomeui/listussdmenuitems.html">Ussd Menu
+									Items</a>
+							</li>
+							<li><a href="/metomeui/listussdtransactionkeywords.html">Transaction
+									Keywords</a></li>
+							<li><a href="/metomeui/listussdpredefinputs.html">Predefined
+									Inputs</a></li>
+						</ul>
+						<h3>
+							<a href="#amlsettings">AML Settings</a>
+						</h3>
+						<ul>
+							<li><a href="/metomeui/viewamlsettings.html">AML
+									Settings</a>
 							</li>
 						</ul>
 						<h3>
-							<a href="charge.html">Charge Setup</a>
+							<a href="#">Products Setup</a>
 						</h3>
 						<ul>
-							<li><a href="charge.html">Configure Charge</a>
-							</li>
-							<li><a href="accounttypes.html">Manage Account Types</a>
-							</li>
+							<li><a href="#viewmetomesetup">Me2Me Setup</a></li>
+							<li><a href="#viewzimbasetup.html">Zimba Setup</a></li>
 						</ul>
-					</div></td>
+					</div>
+				</td>
 				<td class="content">
 					<table>
 						<tr>
@@ -293,8 +321,7 @@ td.formlabels {
 							<td></td>
 							<td><div>
 									<input class="btn" type="submit" name="submit"
-										value="Create New"
-										onClick="location.href='addmessages.html'">
+										value="Create New" onClick="location.href='addmessage.html'">
 								</div>
 							</td>
 						</tr>
@@ -314,18 +341,28 @@ td.formlabels {
 							<tr>
 								<th>Message Code</th>
 								<th>Message Description</th>
-								<!-- <th>Action</th> -->
+								<th>Language</th>
+								<th>Action</th>
 							</tr>
 							<c:forEach items="${messagesList}" var="message">
 								<tr class=data>
-									<td class=data>${message.messageCode}</td>
+									<td class=data><a
+										href="/metomeui/editmessage/${message.messageId}.html">${message.messageCode}</a>
+									</td>
 									<td class=data>${message.messageDesc}</td>
-									<%-- 									<td class=data><c:if test="${menuitem.menuItemEnabledFlag == 0}"> --%>
-									<%-- 											<a href="#activate/${menuitem.menuItemId}">Activate/</a> --%>
-									<%-- 										</c:if> <c:if test="${menuitem.menuItemEnabledFlag == 1}"> --%>
-									<%-- 											<a href="#deactivate/${menuitem.menuItemId}">Deactivate/</a> --%>
-									<%-- 										</c:if> <a href="removemenuitem/${menuitem.menuItemId}.html">Delete</a><a> --%>
-									<%-- 											| </a><a href="#edit/${menuitem.menuItemId}">Edit</a></td> --%>
+									<td class=data><c:forEach items="${languagesList}"
+											var="language">
+											<c:if
+												test="${language.languageId == message.language.languageId}">
+												<c:if test="${language.languageId != 0}">
+													<c:out value="${language.languageName}" />
+												</c:if>
+											</c:if>
+										</c:forEach>
+									</td>
+									<td class=data><a
+										href="/metomeui/removemessage/${message.messageId}.html">Delete</a>
+									</td>
 								</tr>
 							</c:forEach>
 						</table>

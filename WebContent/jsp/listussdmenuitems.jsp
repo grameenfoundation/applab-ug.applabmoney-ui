@@ -262,29 +262,55 @@ td.formlabels {
 				<td class="navbar">
 					<div id="accordion">
 						<h3>
-							<a href="/metomeui/listussdmenuitems.html">Ussd Menu Items
-								Setup</a>
+							<a href="#systemsettings">System Settings</a>
+						</h3>
+						<ul>
+							<li><a href="/metomeui/viewsystemconfiguration.html">System
+									Configuration</a>
+							</li>
+							<li><a href="/metomeui/listcharges.html">Charge
+									Configuration</a>
+							</li>
+							<li><a href="/metomeui/listaccounttypes.html">Account
+									Type Configuration</a></li>
+							<li><a href="/metomeui/listmemogroups.html">Memo Groups
+									Configuration</a></li>
+							<li><a href="/metomeui/listlanguages.html">Languages
+									Configuration</a></li>
+									<li><a href="/metomeui/listmessages.html">Messages
+                                    Configuration</a>
+                            </li>
+							<li><a href="listmobilendc.html">Mobile NDC
+									Configuration</a>
+							</li>
+						</ul>
+						<h3>
+							<a href="#ussdmenusetup">Ussd Menu Setup</a>
 						</h3>
 						<ul>
 							<li><a href="/metomeui/listussdmenuitems.html">Ussd Menu
 									Items</a>
 							</li>
-						</ul>
-						<h3>
-							<a href="/metomeui/listussdtransactionkeywords.html">Transaction
-								Keywords Setup</a>
-						</h3>
-						<ul>
 							<li><a href="/metomeui/listussdtransactionkeywords.html">Transaction
 									Keywords</a></li>
-						</ul>
-						<h3>
-							<a href="/metomeui/listussdpredefinputs.html">Predefined
-								Inputs Setup</a>
-						</h3>
-						<ul>
 							<li><a href="/metomeui/listussdpredefinputs.html">Predefined
 									Inputs</a></li>
+						</ul>
+						<h3>
+							<a href="#amlsettings">AML Settings</a>
+						</h3>
+						<ul>
+							<li><a href="/metomeui/viewamlsettings.html">AML
+									Settings</a>
+							</li>
+						</ul>
+
+						<h3>
+							<a href="#">Products Setup</a>
+						</h3>
+						<ul>
+							<li><a href="#viewmetomesetup">Me2Me Setup</a></li>
+							<li><a href="#viewzimbasetup.html">Zimba Setup</a></li>
 						</ul>
 					</div>
 				</td>
@@ -321,7 +347,7 @@ td.formlabels {
 								<th>Action</th>
 							</tr>
 							<c:forEach items="${ussdMenuItemsList}" var="menuitem">
-								<tr class=data>
+								<tr class=data><c:if test="${menuitem.menuItemId != 0}">
 									<td class=data><a
 										href="/metomeui/editussdmenuitem/${menuitem.menuItemId}.html">${menuitem.menuItemName}</a>
 									</td>
@@ -330,10 +356,12 @@ td.formlabels {
 											items="${ussdTransactionKeywordsList}" var="transkeyword">
 											<c:if
 												test="${transkeyword.keywordId == menuitem.menuItemKeyword.keywordId}">
+												<c:if test="${transkeyword.keywordId != 0}">
 												<c:out value="${transkeyword.keywordName}" />
+												</c:if>
 											</c:if>
 										</c:forEach></td>
-									<td class=data>${menuitem.rootMenuItem.menuItemName}</td>
+									<td class=data><c:if test="${menuitem.rootMenuItem.menuItemId != 0}"><c:out value="${menuitem.rootMenuItem.menuItemName}"/></c:if></td>
 									<td class=data><c:if
 											test="${menuitem.menuItemEnabledFlag != 1}">
 											<a
@@ -343,8 +371,7 @@ td.formlabels {
 												href="/metomeui/deactivatemenuitem/${menuitem.menuItemId}.html">Deactivate</a>
 										</c:if> <a
 										href="/metomeui/removemenuitem/${menuitem.menuItemId}.html">Delete</a>
-									</td>
-									<%-- 											| </a><a href="#edit/${menuitem.menuItemId}">Edit</a></td> --%>
+									</td></c:if>
 								</tr>
 							</c:forEach>
 						</table>

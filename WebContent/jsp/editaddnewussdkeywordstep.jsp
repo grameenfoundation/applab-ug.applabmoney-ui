@@ -267,8 +267,7 @@ td.formlabels {
 				<div class="header" style="color: #000000;">
 					<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
 						> Administration</a>
-				</div>
-			</td>
+				</div></td>
 		</tr>
 	</table>
 	<div>
@@ -276,42 +275,14 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Manage Transaction Keywords</h2>
-						<hr></td>
+						<hr>
+					</td>
 				</tr>
 			</table>
 		</div>
 
 		<table style="width: 100%;">
 			<tr>
-				<td class="navbar">
-					<div id="accordion">
-						<h3>
-							<a href="/metomeui/listussdmenuitems.html">Ussd Menu Items
-								Setup</a>
-						</h3>
-						<ul>
-							<li><a href="/metomeui/listussdmenuitems.html">Ussd Menu
-									Items</a></li>
-						</ul>
-						<h3>
-							<a href="/metomeui/listussdtransactionkeywords.html">Transaction
-								Keywords Setup</a>
-						</h3>
-						<ul>
-							<li><a href="/metomeui/listussdtransactionkeywords.html">Transaction
-									Keywords</a>
-							</li>
-						</ul>
-						<h3>
-							<a href="/metomeui/listussdpredefinputs.html">Predefined
-								Inputs Setup</a>
-						</h3>
-						<ul>
-							<li><a href="/metomeui/listussdpredefinputs.html">Predefined
-									Inputs</a>
-							</li>
-						</ul>
-					</div></td>
 				<td class="content">
 					<div>
 						<fieldset>
@@ -325,22 +296,21 @@ td.formlabels {
 								<table>
 									<tr>
 										<td><input type="hidden" name="keywordId"
-											value="${keywordId}" /></td>
+											value="${keywordId}" />
+										</td>
 									</tr>
 									<tr>
 
 										<td class="formlabels"><form:label path="stepMenuName"> Step Menu Name:</form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="stepMenuName" />
-										</td>
+												path="stepMenuName" /></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="stepMenuNumber">Step Menu Number</form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="stepMenuNumber" />
-										</td>
+												path="stepMenuNumber" /></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:checkbox
@@ -359,8 +329,7 @@ td.formlabels {
 									<tr>
 										<td class="formlabels"><form:checkbox
 												cssClass="otherformfields" path="hasPredefInputFlag"
-												value="1" />
-										</td>
+												value="1" /></td>
 										<td class="form"><form:label path="hasPredefInputFlag">Keyword Step has Predefined Input: </form:label>
 										</td>
 									</tr>
@@ -372,17 +341,17 @@ td.formlabels {
 												path="predefInput.predefInputId">
 												<form:option value="0" label="--None--" />
 												<c:forEach items="${predefInputList}" var="predefinput">
-													<form:option value="${predefinput.predefInputId}"
-														label="${predefinput.predefInputName}" />
+													<c:if test="${predefinput.predefInputId != 0}">
+														<form:option value="${predefinput.predefInputId}"
+															label="${predefinput.predefInputName}" />
+													</c:if>
 												</c:forEach>
-											</form:select>
-										</td>
+											</form:select></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:checkbox
 												cssClass="otherformfields" path="useFixedValueFlag"
-												value="1" />
-										</td>
+												value="1" /></td>
 										<td class="form"><form:label path="useFixedValueFlag">Use Fixed Value </form:label>
 										</td>
 									</tr>
@@ -391,7 +360,8 @@ td.formlabels {
 										<td class="formlabels"><form:label path="fixedValue"> Fixed Value:</form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="fixedValue" /></td>
+												path="fixedValue" />
+										</td>
 									</tr>
 
 									<tr>
@@ -404,8 +374,7 @@ td.formlabels {
 								</table>
 							</form:form>
 						</fieldset>
-					</div>
-				</td>
+					</div></td>
 			</tr>
 		</table>
 	</div>

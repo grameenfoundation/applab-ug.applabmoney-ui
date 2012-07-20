@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,11 +19,11 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "ussd_menu_items")
+@Table(name = "USSD_MENU_ITEMS")
 public class UssdMenuItem {
 
 	@Id
-	@GeneratedValue()
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "MENU_ITEM_ID")
 	private Long menuItemId;
 
@@ -61,7 +62,7 @@ public class UssdMenuItem {
 		this.menuItemOrder = menuItemOrder;
 		this.menuItemKeyword = new UssdTransactionKeyword();
 		this.rootMenuItem = new UssdMenuItem();
-		//this.menuItems = new ArrayList<UssdMenuItem>();
+		this.menuItems = new ArrayList<UssdMenuItem>();
 	}
 
 	public Long getMenuItemId() {

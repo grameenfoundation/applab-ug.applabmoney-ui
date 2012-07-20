@@ -31,6 +31,16 @@ public class UssdMenuDaoImplementation implements UssdMenuDao {
 	private static Logger logger = Logger
 			.getLogger(SystemSettingsDaoImplementation.class);
 
+	public boolean success = false;
+
+	public boolean isSuccess() {
+		return success;
+	}
+
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
+
 	public Session currentSession() {
 		return HibernateUtil.getSessionFactory().getCurrentSession();
 	}
@@ -42,19 +52,19 @@ public class UssdMenuDaoImplementation implements UssdMenuDao {
 			currentSession().beginTransaction();
 			currentSession().save(predefInput);
 			currentSession().getTransaction().commit();
-
+			setSuccess(true);
 		} catch (Exception e) {
 			currentSession().getTransaction().rollback();
 			e.printStackTrace();
+			success = false;
 		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<UssdPredefInput> listPredefInputs() {
-		Transaction transaction = currentSession().beginTransaction();
+		currentSession().beginTransaction();
 		List<UssdPredefInput> listPredefInputs = (List<UssdPredefInput>) currentSession()
 				.createCriteria(UssdPredefInput.class).list();
-		transaction.commit();
 		return listPredefInputs;
 	}
 
@@ -82,14 +92,14 @@ public class UssdMenuDaoImplementation implements UssdMenuDao {
 			currentSession().update(existingPredefInput);
 			currentSession().getTransaction().commit();
 		} catch (Exception e) {
-			e.printStackTrace();
 			currentSession().getTransaction().rollback();
+			e.printStackTrace();
 		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<UssdPredefInputItem> listPredefInputItemsByPredefInputId(
-			long predefInputId) {
+			Long predefInputId) {
 		currentSession().beginTransaction();
 		return (List<UssdPredefInputItem>) currentSession()
 				.createQuery(
@@ -154,7 +164,7 @@ public class UssdMenuDaoImplementation implements UssdMenuDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<UssdKeywordStep> listKeywordStepByKeywordId(long keywordId) {
+	public List<UssdKeywordStep> listKeywordStepByKeywordId(Long keywordId) {
 		currentSession().beginTransaction();
 		return (List<UssdKeywordStep>) currentSession()
 				.createQuery(
@@ -288,7 +298,6 @@ public class UssdMenuDaoImplementation implements UssdMenuDao {
 				e.printStackTrace();
 			}
 		}
-
 	}
 
 	@SuppressWarnings("unchecked")
@@ -301,7 +310,7 @@ public class UssdMenuDaoImplementation implements UssdMenuDao {
 	public void addMenuItem(UssdMenuItem ussdMenuItem) {
 		try {
 			currentSession().beginTransaction();
-			currentSession().save(ussdMenuItem);
+			currentSession().saveOrUpdate(ussdMenuItem);
 			currentSession().getTransaction().commit();
 		} catch (Exception e) {
 			currentSession().getTransaction().rollback();
@@ -312,7 +321,6 @@ public class UssdMenuDaoImplementation implements UssdMenuDao {
 	public void deleteMenuItem(Long menuItemId) {
 		try {
 			currentSession().beginTransaction();
-
 			UssdMenuItem ussdMenuItem = (UssdMenuItem) currentSession().get(
 					UssdMenuItem.class, menuItemId);
 			if (null != ussdMenuItem) {
@@ -330,9 +338,8 @@ public class UssdMenuDaoImplementation implements UssdMenuDao {
 	 */
 	public void editMenuItem(UssdMenuItem menuItem) {
 
-		UssdMenuItem existingMenuItem = new UssdMenuItem();
 		currentSession().beginTransaction();
-		existingMenuItem = (UssdMenuItem) currentSession().load(
+		UssdMenuItem existingMenuItem = (UssdMenuItem) currentSession().load(
 				UssdMenuItem.class, menuItem.getMenuItemId());
 		if (existingMenuItem != null) {
 
@@ -356,24 +363,31 @@ public class UssdMenuDaoImplementation implements UssdMenuDao {
 		}
 	}
 
-	public UssdTransactionKeyword getExistingTransactionKeyword(long keywordId) {
+	public UssdTransactionKeyword getExistingTransactionKeyword(Long keywordId) {
 		currentSession().beginTransaction();
 		UssdTransactionKeyword existingTransactionKeyword = (UssdTransactionKeyword) currentSession()
 				.load(UssdTransactionKeyword.class, keywordId);
 		return existingTransactionKeyword;
 	}
 
-	public UssdKeywordStep getExistingKeywordStep(long keywordStepId) {
+	public UssdKeywordStep getExistingKeywordStep(Long keywordStepId) {
 		currentSession().beginTransaction();
 		UssdKeywordStep existingKeywordStep = (UssdKeywordStep) currentSession()
 				.load(UssdKeywordStep.class, keywordStepId);
 		return existingKeywordStep;
 	}
 
-	public UssdMenuItem getExistingMenuItem(long menuItemId) {
+	public UssdMenuItem getExistingMenuItem(Long menuItemId) {
 		currentSession().beginTransaction();
 		UssdMenuItem existingMenuItem = (UssdMenuItem) currentSession().load(
 				UssdMenuItem.class, menuItemId);
+		try {
+			currentSession().merge(existingMenuItem);
+			currentSession().getTransaction().commit();
+		} catch (Exception e) {
+			currentSession().getTransaction().rollback();
+			e.printStackTrace();
+		}
 		return existingMenuItem;
 	}
 
@@ -482,7 +496,6 @@ public class UssdMenuDaoImplementation implements UssdMenuDao {
 
 		try {
 			currentSession().beginTransaction();
-
 			@SuppressWarnings("unchecked")
 			List<UssdKeywordStep> keywordStepsList = (List<UssdKeywordStep>) currentSession()
 					.createQuery(
@@ -541,6 +554,7 @@ public class UssdMenuDaoImplementation implements UssdMenuDao {
 	@Override
 	public List<UssdKeywordStep> getKeywordsLinkedToThisPredefInput(
 			Long predefInputId) {
+		currentSession().beginTransaction();
 		@SuppressWarnings("unchecked")
 		List<UssdKeywordStep> keywordStepsList = (List<UssdKeywordStep>) currentSession()
 				.createQuery(
@@ -555,20 +569,40 @@ public class UssdMenuDaoImplementation implements UssdMenuDao {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<UssdMenuItem> getChildMenuItemsForParentMenuItem(Long menuItemId) {
-		@SuppressWarnings("unchecked")
-		List<UssdMenuItem> childMenuItemsList = (List<UssdMenuItem>) currentSession()
+		currentSession().beginTransaction();
+		//List<UssdMenuItem> childMenuItemsList = (List<UssdMenuItem>) currentSession()
+		return (List<UssdMenuItem>) currentSession()
 				.createQuery(
 						"from UssdMenuItem menuItem "
 								+ "where menuItem.rootMenuItem.menuItemId = :menuItemId")
 				.setParameter("menuItemId", menuItemId).list();
 
-		if (!(childMenuItemsList.isEmpty())) {
-			return childMenuItemsList;
-		} else {
-			return new ArrayList<UssdMenuItem>();
-		}
+		//if (!(childMenuItemsList.isEmpty())) {
+			//return childMenuItemsList;
+		//} else {
+			//return new ArrayList<UssdMenuItem>();
+		//}
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<UssdMenuItem> getChildMenuItemsForParentMenuItem(UssdMenuItem rootMenuItem) {
+		currentSession().beginTransaction();
+		//List<UssdMenuItem> childMenuItemsList = (List<UssdMenuItem>) currentSession()
+		return (List<UssdMenuItem>) currentSession()
+				.createQuery(
+						"from UssdMenuItem menuItem "
+								+ "where menuItem.rootMenuItem = :rootMenuItem")
+				.setParameter("rootMenuItem", rootMenuItem).list();
+
+		//if (!(childMenuItemsList.isEmpty())) {
+			//return childMenuItemsList;
+		//} else {
+			//return new ArrayList<UssdMenuItem>();
+		//}
 	}
 
 	/**

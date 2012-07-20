@@ -9,20 +9,20 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "users")
+@Table(name = "USERS")
 public class Login {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "user_id")
-	private Integer userId;
+	@Column(name = "USER_ID")
+	private Long userId;
 
 	@NotEmpty
-	@Column(name = "user_name", nullable = false, length = 20)
+	@Column(name = "USER_NAME", nullable = false, length = 20)
 	public String userName;
 
 	@NotEmpty
-	@Column(name = "password", nullable = false, length = 20)
+	@Column(name = "PASSWORD", nullable = false, length = 20)
 	public String password;
 
 	public Login() {
@@ -45,17 +45,16 @@ public class Login {
 		return password;
 	}
 
-	public void clearFields() {
-		this.userName = "";
-		this.password = "";
-
-	}
-
-	public Integer getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+
+	public void clearFields() {
+		this.userName = "";
+		this.password = "";
 	}
 }

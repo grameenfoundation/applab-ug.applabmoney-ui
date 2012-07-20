@@ -109,6 +109,34 @@ hover.btn {
 	color: #0066CC;
 }
 
+.longbtn {
+    background-image:
+        url('resources/css/ui-lightness/images/CuteCapLa7.gif');
+    /*background-position: left top;*/
+    background-position: absolute;
+    background-repeat: repeat-x;
+    background-color: transparent;
+    -moz-box-align: stretch;
+    background-size: 100% 100%;
+    border-color: -moz-use-text-color #5C5D61 rgb(92, 93, 97)
+        -moz-use-text-color;
+    border-style: none none none none;
+    border-width: medium 2px 2px medium;
+    cursor: pointer;
+    display: inline;
+    colour: #008000;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 100%;
+    font-weight: bold;
+    padding: 1px 3px;
+    height: 35px;
+    width: 210px;
+}
+
+hover.longbtn {
+    color: #0066CC;
+}
+
 /*END BUTTONS*/
 
 /*SIDE BAR*/
@@ -279,7 +307,8 @@ td.formlabels {
 				<div class="header" style="color: #000000;">
 					<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
 						> Administration</a>
-				</div></td>
+				</div>
+			</td>
 		</tr>
 	</table>
 	<div>
@@ -287,43 +316,13 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Manage Predefined Inputs</h2>
-						<hr>
-					</td>
+						<hr></td>
 				</tr>
 			</table>
 		</div>
 
 		<table style="width: 100%;">
 			<tr>
-				<td class="navbar">
-                    <div id="accordion">
-                        <h3>
-                            <a href="/metomeui/listussdmenuitems.html">Ussd Menu Items
-                                Setup</a>
-                        </h3>
-                        <ul>
-                            <li><a href="/metomeui/listussdmenuitems.html">Ussd Menu
-                                    Items</a>
-                            </li>
-                        </ul>
-                        <h3>
-                            <a href="/metomeui/listussdtransactionkeywords.html">Transaction
-                                Keywords Setup</a>
-                        </h3>
-                        <ul>
-                            <li><a href="/metomeui/listussdtransactionkeywords.html">Transaction
-                                    Keywords</a></li>
-                        </ul>
-                        <h3>
-                            <a href="/metomeui/listussdpredefinputs.html">Predefined
-                                Inputs Setup</a>
-                        </h3>
-                        <ul>
-                            <li><a href="/metomeui/listussdpredefinputs.html">Predefined
-                                    Inputs</a></li>
-                        </ul>
-                    </div>
-                </td>
 				<td class="content">
 					<div>
 						<fieldset>
@@ -337,15 +336,18 @@ td.formlabels {
 									<table>
 										<tr>
 											<td class="formlabels"><form:label
-													path="predefInputName">Predefined Input Name</form:label></td>
+													path="predefInputName">Predefined Input Name</form:label>
+											</td>
 											<td class="form"><form:input cssClass="formfields"
-													path="predefInputName" /></td>
+													path="predefInputName" />
+											</td>
 										<tr>
 											<td class="formlabels"><form:label
 													path="predefInputDescription">Predefined Input Description</form:label>
 											</td>
 											<td class="form"><form:input cssClass="formfields"
-													path="predefInputDescription" /></td>
+													path="predefInputDescription" />
+											</td>
 										</tr>
 									</table>
 								</fieldset>
@@ -353,11 +355,10 @@ td.formlabels {
 									<tr>
 										<td></td>
 										<td><div>
-												<br> <input type="button" name="submit"
+												<br> <input type="button" name="submit" class="longbtn"
 													value="Create New Predefined Input Item"
 													onClick="location.href='addnewussdpredefinputitem.html'">
-											</div>
-										</td>
+											</div></td>
 										<td></td>
 										<td></td>
 									</tr>
@@ -374,70 +375,41 @@ td.formlabels {
 										</tr>
 										<c:forEach items="${ussdPredefInput.predefInputItems}"
 											var="predefInputItem" varStatus="status">
-											<%-- <c:forEach items="${predefInputItemsList}" var="predefInputItem" varStatus="status"> --%>
-											<%-- <c:forEach items="${predefInputItemsList}" var="predefInputItem" varStatus="status"> --%>
 											<tr class=data>
-												<td class=otherdata>${status.count}</td>
-												<%-- <td class=otherdata><input id="enable" type="checkbox"
-													name="predefInputItems[${status.index}].predefInputItemEnabledFlag"
-													<c:if
-														test="${predefInputItem.predefInputItemEnabledFlag == null}"> $('(#enable)').attr('checked', false) </c:if>
-													<c:if test="${predefInputItem.predefInputItemEnabledFlag != null}"> $('(#enable)').attr('checked', true)</c:if> />
-													<c:if
-														test="${predefInputItem.predefInputItemEnabledFlag == null}"> $('(#enable)').attr('checked', false); </c:if>
-													<c:if test="${predefInputItem.predefInputItemEnabledFlag != null}"> $('(#enable)').attr('checked', true);</c:if>
-												</td> --%>
-												<td class=data><input
-													name="predefInputItems[${status.index}].predefInputItemName"
-													value="${predefInputItem.predefInputItemName}" /></td>
-												<td class=data><input
-													name="predefInputItems[${status.index}].predefInputItemCode"
-													value="${predefInputItem.predefInputItemCode}" /></td>
-												<td class=data><input
-													name="predefInputItems[${status.index}].predefInputItemOrder"
-													value="${predefInputItem.predefInputItemOrder}" /></td>
-
-												<%-- <td class=data><c:if
-														test="${predefinputitem.inputItemId != null}">
-														<c:if
-															test="${predefInputItem.predefInputItemEnabledFlag != 1}">
-															<input type="hidden"
-																name="predefInputItems[${status.index}].predefInputItemEnabledFlag"
-																value="0" />
-															<a
-																href="/metomeui/activatepredefinputitem/${predefInputItem.inputItemId}.html">Activate</a>
-														</c:if>
-														<c:if
-															test="${predefInputItem.predefInputItemEnabledFlag == 1}">
-															<input type="hidden"
-																name="predefInputItems[${status.index}].predefInputItemEnabledFlag"
-																value="1" />
-															<a
-																href="/metomeui/deactivatepredefinputitem/${predefInputItem.inputItemId}.html">Deactivate</a>
-														</c:if>
-														<a
-															href="/metomeui/removepredefinputitem/${predefInputItem.inputItemId}.html">Delete</a>
-														<td class=data><c:if
-														test="${predefInputItem.predefInputItemEnabledFlag == 0}">
-														<a href="#activate/${predefInputItem.inputItemId}">Enable/</a>
-													</c:if> <c:if
-														test="${predefInputItem.predefInputItemEnabledFlag == 1}">
-														<a href="#deactivate/${predefInputItem.inputItemId}">Disable/</a>
-													</c:if> <a
-													href="removemenuitem/${predefInputItem.inputItemId}.html">Delete</a><a>
-														| </a><a href="#edit/${predefInputItem.inputItemId}">Edit</a>
-												</td>
-													</c:if></td> --%>
+												<c:if test="${predefInputItem.predefInputItemId != 0}">
+													<td class=otherdata>${status.count}</td>
+													<td class=data><input
+														name="predefInputItems[${status.index}].predefInputItemName"
+														value="${predefInputItem.predefInputItemName}" />
+													</td>
+													<td class=data><input
+														name="predefInputItems[${status.index}].predefInputItemCode"
+														value="${predefInputItem.predefInputItemCode}" />
+													</td>
+													<td class=data><input
+														name="predefInputItems[${status.index}].predefInputItemOrder"
+														value="${predefInputItem.predefInputItemOrder}" />
+													</td>
+												</c:if>
 											</tr>
 										</c:forEach>
 									</table>
 								</c:if>
 								<br />
-								<input type="submit" value="Save" />
-
+								<table>
+									<tr>
+										<td></td>
+										<td></td>
+										<td><input type="submit" value="Save" class="btn" /> <input
+											class="btn" type="button" value="Cancel"
+											onClick="location.href='/metomeui/listussdpredefinputs.html'" />
+										<td></td>
+									</tr>
+								</table>
 							</form:form>
 						</fieldset>
-					</div></td>
+					</div>
+				</td>
 			</tr>
 		</table>
 	</div>

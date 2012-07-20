@@ -9,35 +9,38 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "memo_groups")
+@Table(name = "MEMO_GROUPS")
 public class MemoGroup {
-	
+
 	@Id
 	@GeneratedValue
-	@Column(name = "memo_group_id")
-	private long memoGroupId;
+	@Column(name = "MEMO_GROUP_ID")
+	private Long memoGroupId;
 
 	@NotEmpty
-	@Column(name = "memo_group_code", nullable = false, length = 20)
+	@Column(name = "MEMO_GROUP_CODE", nullable = false, length = 20)
 	private String memoGroupCode;
 
 	@NotEmpty
-	@Column(name = "memo_group_name", nullable = false, length = 50)
+	@Column(name = "MEMO_GROUP_NAME", nullable = false, length = 50)
 	private String memoGroupName;
 
 	@NotEmpty
-	@Column(name = "memo_group_desc", nullable = false, length = 11)
+	@Column(name = "MEMO_GROUP_DESC", nullable = false, length = 11)
 	private String memoGroupDescription;
-	
-	public MemoGroup(){
-		
+
+	@Column(name = "ENABLED_FLG", nullable = false, length = 11)
+	private Integer enabledFlag;
+
+	public MemoGroup() {
+
 	}
 
-	public long getMemoGroupId() {
+	public Long getMemoGroupId() {
 		return memoGroupId;
 	}
 
-	public void setMemoGroupId(long memoGroupId) {
+	public void setMemoGroupId(Long memoGroupId) {
 		this.memoGroupId = memoGroupId;
 	}
 
@@ -72,8 +75,4 @@ public class MemoGroup {
 	public void setEnabledFlag(Integer enabledFlag) {
 		this.enabledFlag = enabledFlag;
 	}
-
-	@Column(name = "enabled_flg", nullable = false, length = 11)
-	private Integer enabledFlag;
-
 }

@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "predef_input_items")
+@Table(name = "PREDEF_INPUT_ITEMS")
 public class UssdPredefInputItem {
 
 	@Id

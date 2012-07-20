@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import metomeui.dao.UssdMenuDao;
-import metomeui.dao.UssdMenuDaoImplementation;
 import metomeui.model.UssdKeywordStep;
 import metomeui.model.UssdMenuItem;
 import metomeui.model.UssdPredefInput;
@@ -16,11 +14,7 @@ import metomeui.model.UssdPredefInputItem;
 import metomeui.model.UssdTransactionKeyword;
 import metomeui.service.UssdMenuService;
 import metomeui.service.UssdMenuServiceImplementation;
-import metomeui.validator.UssdKeywordStepValidator;
-import metomeui.validator.UssdMenuItemValidator;
-import metomeui.validator.UssdPredefInputItemValidator;
-import metomeui.validator.UssdPredefInputValidator;
-import metomeui.validator.UssdTransactionKeywordValidator;
+import metomeui.validator.UssdMenuValidator;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,20 +38,10 @@ public class UssdMenuController {
 
 	@Autowired
 	UssdMenuService ussdMenuService = new UssdMenuServiceImplementation();
-	@Autowired
-	UssdMenuDao ussdMenuDao = new UssdMenuDaoImplementation();
 
 	@Autowired
-	private UssdMenuItemValidator ussdMenuItemValidator;
-	@Autowired
-	private UssdTransactionKeywordValidator ussdTransactionKeywordValidator;
-	@Autowired
-	private UssdPredefInputValidator ussdPredefInputValidator;
-	@Autowired
-	private UssdPredefInputItemValidator ussdPredefInputItemValidator;
-	@Autowired
-	private UssdKeywordStepValidator ussdKeywordStepValidator;
-
+	private UssdMenuValidator ussdMenuValidator;
+	
 	private static List<UssdPredefInputItem> predefInputItemsList = new ArrayList<UssdPredefInputItem>();
 	private static Set<UssdPredefInputItem> predefInputItemsSet = new HashSet<UssdPredefInputItem>();
 
@@ -120,7 +104,7 @@ public class UssdMenuController {
 			@ModelAttribute("ussdPredefInputItem") UssdPredefInputItem predefInputItem,
 			BindingResult result, Map<String, Object> map) {
 
-		ussdPredefInputItemValidator.validate(predefInputItem, result);
+		ussdMenuValidator.validate(predefInputItem, result);
 		if (result.hasErrors()) {
 			return "addnewussdpredefinputitem";
 		} else {
@@ -151,7 +135,7 @@ public class UssdMenuController {
 			@ModelAttribute("ussdPredefInput") UssdPredefInput predefInput,
 			BindingResult result, Map<String, Object> map) {
 
-		ussdPredefInputValidator.validate(predefInput, result);
+		ussdMenuValidator.validate(predefInput, result);
 		if (result.hasErrors()) {
 			return "addussdpredefinput";
 		} else {
@@ -187,7 +171,7 @@ public class UssdMenuController {
 	 * Retrieves the "Edit Existing Predefined Input" page
 	 */
 	@RequestMapping(value = "/editussdpredefinput/{predefInputId}", method = RequestMethod.GET)
-	public String retrieveEditPredefInputPage(@PathVariable long predefInputId,
+	public String retrieveEditPredefInputPage(@PathVariable Long predefInputId,
 			Map<String, Object> map) {
 		predefInputItemsList = ussdMenuService
 				.listPredefInputItemsByPredefInputId(predefInputId);
@@ -221,7 +205,7 @@ public class UssdMenuController {
 			@ModelAttribute("ussdPredefInputItem") UssdPredefInputItem predefInputItem,
 			BindingResult result, Map<String, Object> map) {
 
-		ussdPredefInputItemValidator.validate(predefInputItem, result,
+		ussdMenuValidator.validate(predefInputItem, result,
 				predefInputId);
 		if (result.hasErrors()) {
 			map.put("predefInputId", predefInputId);
@@ -253,7 +237,7 @@ public class UssdMenuController {
 			@PathVariable Long predefInputId,
 			@ModelAttribute("ussdPredefInput") UssdPredefInput predefInput,
 			BindingResult result) {
-		ussdPredefInputValidator.validate(predefInput, result);
+		ussdMenuValidator.validate(predefInput, result);
 		if (result.hasErrors()) {
 			return "editussdpredefinput";
 		}
@@ -284,27 +268,18 @@ public class UssdMenuController {
 			@ModelAttribute("ussdPredefInput") UssdPredefInput predefInput,
 			Map<String, Object> map) {
 
-		UssdPredefInputItem predefInputItem = ussdMenuDao
+		UssdPredefInputItem predefInputItem = ussdMenuService
 				.getExistingPredefInputItem(predefInputItemId);
-		predefInputItem.setPredefInputItemEnabledFlag(1);
 		Long predefInputId = predefInputItem.getPredefInput()
 				.getPredefInputId();
-		predefInputItemsList = ussdMenuService
-				.listPredefInputItemsByPredefInputId(predefInputId);
-		predefInput = ussdMenuService.getExistingPredefInput(predefInputId);
 
 		// Assign id
-		predefInput.setPredefInputId(predefInputId);
-		predefInput.setPredefInputItems(predefInputItemsList);
-		ussdMenuService.editPredefInput(predefInput);
-
-		map.put("ussdPredefInput.predefInputItems", ussdMenuService
-				.listPredefInputItemsByPredefInputId(predefInputId));
-		map.put("ussdPredefInput",
-				ussdMenuService.getExistingPredefInput(predefInputId));
+		predefInput.setPredefInputId(predefInputItemId);
+		ussdMenuService.activateExistingPredefInputItem(predefInputItemId);
 
 		map.put("predefInputId", predefInputId);
-		return "/editussdpredefinput";
+
+		return "redirect:/editussdpredefinput/" + predefInputId + ".html";
 	}
 
 	@RequestMapping(value = "/deactivatepredefinputitem/{predefInputItemId}")
@@ -313,27 +288,18 @@ public class UssdMenuController {
 			@ModelAttribute("ussdPredefInput") UssdPredefInput predefInput,
 			Map<String, Object> map) {
 
-		UssdPredefInputItem predefInputItem = ussdMenuDao
+		UssdPredefInputItem predefInputItem = ussdMenuService
 				.getExistingPredefInputItem(predefInputItemId);
-		predefInputItem.setPredefInputItemEnabledFlag(0);
+
 		Long predefInputId = predefInputItem.getPredefInput()
 				.getPredefInputId();
-		predefInputItemsList = ussdMenuService
-				.listPredefInputItemsByPredefInputId(predefInputId);
-		predefInput = ussdMenuService.getExistingPredefInput(predefInputId);
 
 		// Assign id
-		predefInput.setPredefInputId(predefInputId);
-		predefInput.setPredefInputItems(predefInputItemsList);
-		ussdMenuService.editPredefInput(predefInput);
-
-		map.put("ussdPredefInput.predefInputItems", ussdMenuService
-				.listPredefInputItemsByPredefInputId(predefInputId));
-		map.put("ussdPredefInput",
-				ussdMenuService.getExistingPredefInput(predefInputId));
+		predefInput.setPredefInputId(predefInputItemId);
+		ussdMenuService.deactivateExistingPredefInputItem(predefInputItemId);
 
 		map.put("predefInputId", predefInputId);
-		return "/editussdpredefinput";
+		return "redirect:/editussdpredefinput/" + predefInputId + ".html";
 	}
 
 	/**
@@ -410,7 +376,7 @@ public class UssdMenuController {
 			@ModelAttribute("ussdKeywordStep") UssdKeywordStep keywordStep,
 			BindingResult result, Map<String, Object> map) {
 
-		ussdKeywordStepValidator.validate(keywordStep, result);
+		ussdMenuValidator.validate(keywordStep, result);
 		if (result.hasErrors()) {
 			return "addnewussdkeywordstep";
 		} else {
@@ -437,7 +403,7 @@ public class UssdMenuController {
 			@ModelAttribute("ussdTransactionKeyword") UssdTransactionKeyword transactionKeyword,
 			BindingResult result, Map<String, Object> map) {
 
-		ussdTransactionKeywordValidator.validate(transactionKeyword, result);
+		ussdMenuValidator.validate(transactionKeyword, result);
 		if (result.hasErrors()) {
 			return "addussdtransactionkeyword";
 		}
@@ -511,7 +477,7 @@ public class UssdMenuController {
 			@ModelAttribute("ussdKeywordStep") UssdKeywordStep keywordStep,
 			BindingResult result, Map<String, Object> map) {
 
-		ussdKeywordStepValidator.validate(keywordStep, result, keywordId);
+		ussdMenuValidator.validate(keywordStep, result, keywordId);
 		if (result.hasErrors()) {
 			map.put("keywordId", keywordId);
 			return "editaddnewussdkeywordstep";
@@ -526,7 +492,7 @@ public class UssdMenuController {
 					.getExistingPredefInput(keywordStep.getPredefInput()
 							.getPredefInputId());
 			if (linkedPredefInput != null) {
-				keywordsLinkedToPredefInput = ussdMenuDao
+				keywordsLinkedToPredefInput = ussdMenuService
 						.getKeywordsLinkedToThisPredefInput(keywordStep
 								.getPredefInput().getPredefInputId());
 				if (keywordsLinkedToPredefInput.isEmpty()) {
@@ -600,12 +566,11 @@ public class UssdMenuController {
 			@ModelAttribute("ussdTransactionKeyword") UssdTransactionKeyword transactionKeyword,
 			BindingResult result, Map<String, Object> map) {
 
-		ussdTransactionKeywordValidator.validate(transactionKeyword, result);
+		ussdMenuValidator.validate(transactionKeyword, result);
 		if (result.hasErrors()) {
 			return "editussdtransactionkeyword";
 		}
 
-		logger.info("here Now!!!!!!!!!!!!!!!SET ID!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		// Assign id
 		transactionKeyword.setKeywordId(keywordId);
 
@@ -651,7 +616,7 @@ public class UssdMenuController {
 
 	@RequestMapping(value = "/activatekeyword/{keywordId}")
 	public String activateTransactionKeyword(
-			@PathVariable long keywordId,
+			@PathVariable Long keywordId,
 			@ModelAttribute("ussdTransactionKeyword") UssdTransactionKeyword transactionKeyword,
 			Map<String, Object> map) {
 
@@ -667,7 +632,7 @@ public class UssdMenuController {
 
 	@RequestMapping(value = "/deactivatekeyword/{keywordId}")
 	public String deactivateTransactionKeyword(
-			@PathVariable long keywordId,
+			@PathVariable Long keywordId,
 			@ModelAttribute("ussdTransactionKeyword") UssdTransactionKeyword transactionKeyword,
 			Map<String, Object> map) {
 
@@ -711,6 +676,7 @@ public class UssdMenuController {
 
 		Long transactionKeywordId = keywordStep.getTransactionKeyword()
 				.getKeywordId();
+
 		// Delegate to service
 		ussdMenuService.deleteExistingKeywordStep(keywordStepId);
 		map.put("ussdTransactionKeyword", transactionKeyword);
@@ -743,50 +709,46 @@ public class UssdMenuController {
 			@ModelAttribute("ussdMenuItem") UssdMenuItem menuItem,
 			BindingResult result, Map<String, Object> map) {
 
-		ussdMenuItemValidator.validate(menuItem, result);
+		ussdMenuValidator.validate(menuItem, result);
 		if (result.hasErrors()) {
 			return "addussdmenuitem";
 		}
 
 		List<UssdMenuItem> childMenuItemsList = new ArrayList<UssdMenuItem>();
 		Set<UssdMenuItem> childMenuItemsSet = new HashSet<UssdMenuItem>();
-		UssdMenuItem rootMenuItem = null;
-		if ((null == menuItem.getMenuItemKeyword().getKeywordId())
+		UssdTransactionKeyword menuItemKeyword = new UssdTransactionKeyword();
+		if ((menuItem.getMenuItemKeyword().getKeywordId() == null)
 				|| (menuItem.getMenuItemKeyword().getKeywordId() == 0)) {
-			menuItem.setMenuItemKeyword(null);
+			menuItemKeyword = ussdMenuService
+					.getExistingTransactionKeyword((long) 0);
 		} else {
-			UssdTransactionKeyword menuItemKeyword = ussdMenuService
+			menuItemKeyword = ussdMenuService
 					.getExistingTransactionKeyword(menuItem
 							.getMenuItemKeyword().getKeywordId());
+		}
+		if (menuItemKeyword != null) {
+			menuItemKeyword.getMenuItems().add(menuItem);
 			menuItem.setMenuItemKeyword(menuItemKeyword);
 		}
-		if ((null != menuItem.getRootMenuItem().getMenuItemId())
-				&& (menuItem.getRootMenuItem().getMenuItemId() != 0)) {
 
-			/** Get all this menu's child menu Items */
-			childMenuItemsList = ussdMenuService
-					.getChildMenuItemsForParentMenuItem(menuItem
-							.getRootMenuItem().getMenuItemId());
-			rootMenuItem = ussdMenuService.getExistingMenuItem(menuItem
-					.getRootMenuItem().getMenuItemId());
+		/** Get all this menu's child menu Items */
+		UssdMenuItem rootMenuItem = ussdMenuService
+				.getExistingMenuItem(menuItem.getRootMenuItem().getMenuItemId());
+		childMenuItemsList = ussdMenuService
+				.getChildMenuItemsForParentMenuItem(rootMenuItem);
 
-			if (childMenuItemsSet.add(menuItem) == true) {
-				childMenuItemsList.add(menuItem);
-			}
-
-			// rootMenuItem.setMenuItems(childMenuItemsList);
-			menuItem.setRootMenuItem(rootMenuItem);
-
-		} else {
-			menuItem.setRootMenuItem(rootMenuItem);
+		if (childMenuItemsSet.add(menuItem) == true) {
+			childMenuItemsList.add(menuItem);
 		}
+
+		rootMenuItem.setMenuItems(childMenuItemsList);
+		menuItem.setRootMenuItem(rootMenuItem);
 
 		if ((menuItem.getMenuItemEnabledFlag() == null)
 				|| (menuItem.getMenuItemEnabledFlag() != 1)) {
 			menuItem.setMenuItemEnabledFlag(0);
 		}
 
-		logger.info("Got to add menu Item");
 		ussdMenuService.addMenuItem(menuItem);
 		if (!childMenuItemsList.isEmpty()) {
 			childMenuItemsList.clear();
@@ -798,7 +760,7 @@ public class UssdMenuController {
 	 * Retrieves the "Edit Existing Menu Item" page
 	 */
 	@RequestMapping(value = "/editussdmenuitem/{menuItemId}", method = RequestMethod.GET)
-	public String retrieveExistingMenuItem(@PathVariable long menuItemId,
+	public String retrieveExistingMenuItem(@PathVariable Long menuItemId,
 			Map<String, Object> map) {
 
 		UssdMenuItem existingMenuItem = ussdMenuService
@@ -816,40 +778,40 @@ public class UssdMenuController {
 			@ModelAttribute("ussdMenuItem") UssdMenuItem menuItem,
 			BindingResult result, Map<String, Object> map) {
 
-		/*
-		 * ussdMenuItemValidator.validate(menuItem, result, menuItemId); if
-		 * (result.hasErrors()) { map.put("menuItemId", menuItemId); return
-		 * "editussdmenuitem"; }
-		 */
+		ussdMenuValidator.validate(menuItem, result, menuItemId);
+		if (result.hasErrors()) {
+			map.put("menuItemId", menuItemId);
+			return "editussdmenuitem";
+		}
 
 		// Assign id
 		menuItem.setMenuItemId(menuItemId);
 
 		List<UssdMenuItem> childMenuItemsList = new ArrayList<UssdMenuItem>();
 		Set<UssdMenuItem> childMenuItemsSet = new HashSet<UssdMenuItem>();
-		UssdMenuItem rootMenuItem = new UssdMenuItem();
-		if ((null == menuItem.getMenuItemKeyword().getKeywordId())
+
+		UssdTransactionKeyword menuItemKeyword = new UssdTransactionKeyword();
+
+		if ((menuItem.getMenuItemKeyword().getKeywordId() == null)
 				|| (menuItem.getMenuItemKeyword().getKeywordId() == 0)) {
-			menuItem.setMenuItemKeyword(null);
+			menuItemKeyword = ussdMenuService
+					.getExistingTransactionKeyword((long) 0);
 		} else {
-			UssdTransactionKeyword menuItemKeyword = ussdMenuService
+			menuItemKeyword = ussdMenuService
 					.getExistingTransactionKeyword(menuItem
 							.getMenuItemKeyword().getKeywordId());
-			menuItem.setMenuItemKeyword(menuItemKeyword);
 		}
-		if ((null == menuItem.getRootMenuItem().getMenuItemId())
-				|| (menuItem.getRootMenuItem().getMenuItemId() == 0)) {
-			menuItem.setRootMenuItem(rootMenuItem);
-		} else if (null != menuItem.getRootMenuItem().getMenuItemId()) {
-			// || (0 != menuItem.getRootMenuItem().getMenuItemId())) {
 
-			/** Get all this menu's child menu Items */
-			childMenuItemsList = ussdMenuService
-					.getChildMenuItemsForParentMenuItem(menuItem
-							.getRootMenuItem().getMenuItemId());
-			rootMenuItem = ussdMenuService.getExistingMenuItem(menuItem
-					.getRootMenuItem().getMenuItemId());
+		menuItemKeyword.getMenuItems().add(menuItem);
+		menuItem.setMenuItemKeyword(menuItemKeyword);
 
+		/** Get all this menu's child menu Items */
+		UssdMenuItem rootMenuItem = ussdMenuService
+				.getExistingMenuItem(menuItem.getRootMenuItem().getMenuItemId());
+		childMenuItemsList = ussdMenuService
+				.getChildMenuItemsForParentMenuItem(rootMenuItem);
+
+		if (rootMenuItem == menuItem) {
 			if (childMenuItemsSet.add(menuItem) == true) {
 				childMenuItemsList.add(menuItem);
 			}
@@ -866,7 +828,7 @@ public class UssdMenuController {
 	}
 
 	@RequestMapping(value = "/activatemenuitem/{menuItemId}")
-	public String activateMenuItem(@PathVariable long menuItemId,
+	public String activateMenuItem(@PathVariable Long menuItemId,
 			@ModelAttribute("ussdMenuItem") UssdMenuItem menuItem,
 			Map<String, Object> map) {
 
@@ -882,7 +844,7 @@ public class UssdMenuController {
 	}
 
 	@RequestMapping(value = "/deactivatemenuitem/{menuItemId}")
-	public String deactivateMenuItem(@PathVariable long menuItemId,
+	public String deactivateMenuItem(@PathVariable Long menuItemId,
 			@ModelAttribute("ussdMenuItem") UssdMenuItem menuItem,
 			Map<String, Object> map) {
 

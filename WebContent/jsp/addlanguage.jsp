@@ -244,44 +244,22 @@ td.formlabels {
 				<div class="header" style="color: #000000;">
 					<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
 						> Administration</a>
-				</div>
-			</td>
+				</div></td>
 		</tr>
 	</table>
 	<div>
 		<div>
 			<table style="width: 100%;">
 				<tr>
-					<td><h2>Manage Memo Groups</h2>
-						<hr></td>
+					<td><h2>Manage Languages</h2>
+						<hr>
+					</td>
 				</tr>
 			</table>
 		</div>
 
 		<table style="width: 100%;">
 			<tr>
-				<td class="navbar">
-					<div id="accordion">
-						<h3>
-							<a href="ussdmenuitems.html">Ussd Menu Setup</a>
-						</h3>
-						<ul>
-							<li><a href="ussdmenuitems.html">Ussd Menu Items Setup</a>
-							</li>
-							<li><a href="ussdtransactionkeywords.html">Transaction
-									Keywords Setup</a></li>
-							<li><a href="ussdpredefinputs.html">Predefined Inputs
-									Setup</a></li>
-						</ul>
-						<h3>
-							<a href="charge.html">Charge Setup</a>
-						</h3>
-						<ul>
-							<li><a href="charge.html">Configure Charge</a></li>
-							<li><a href="accounttypes.html">Manage Account Types</a></li>
-						</ul>
-					</div>
-				</td>
 				<td class="content">
 					<div>
 						<fieldset>
@@ -289,7 +267,7 @@ td.formlabels {
 								<h2>Create New Language</h2>
 							</legend>
 
-							<form:form method="post" action="addlanguages.html"
+							<form:form method="post" action="addlanguage.html"
 								commandName="language">
 								<form:errors path="*" cssClass="errorblock" element="div" />
 
@@ -298,33 +276,30 @@ td.formlabels {
 										<td class="formlabels"><form:label path="languageName">Language Name: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="languageName" />
-										</td>
+												path="languageName" /></td>
 									</tr>
 									<tr>
-										<td class="formlabels"><form:checkbox id="isDefault"
-												cssClass="otherformfields" path="isDefault" value="1" />
-										</td>
-
-										<td class="form"><form:label path="isDefault">Is Default Language</form:label>
-										</td>
+										<td></td>
 									</tr>
 									<tr>
-										<td colspan="2" class="savebutton"><input class="btn"
-											type="submit" value="Add Language" />
-										</td>
+										<td></td>
+										<td class="savebutton"><input class="btn" type="submit"
+											value="Save" /><input class="btn" type="button"
+											value="Cancel"
+											onClick="location.href='/metomeui/listlanguages.html'" /></td>
+										<td></td>
 									</tr>
 								</table>
 							</form:form>
 						</fieldset>
 						<table>
 							<tr>
-								<td><br></td>
+								<td><br>
+								</td>
 							</tr>
 						</table>
 
-					</div>
-				</td>
+					</div></td>
 			</tr>
 		</table>
 		<!--    <table border=1px; width=100%;> -->

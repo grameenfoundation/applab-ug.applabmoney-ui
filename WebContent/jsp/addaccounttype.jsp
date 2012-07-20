@@ -254,7 +254,8 @@ td.formlabels {
 				<div class="header" style="color: #000000;">
 					<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
 						> Administration</a>
-				</div></td>
+				</div>
+			</td>
 		</tr>
 	</table>
 	<div>
@@ -262,42 +263,13 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Manage Account Types</h2>
-						<hr>
-					</td>
+						<hr></td>
 				</tr>
 			</table>
 		</div>
 
 		<table style="width: 100%;">
 			<tr>
-				<td class="navbar">
-					<div id="accordion">
-						<h3>
-							<a href="ussdmenuitems.html">Ussd Menu Setup</a>
-						</h3>
-						<ul>
-							<li><a href="/metomeui/listussdmenuitems.html">Ussd Menu
-									Items Setup</a></li>
-							<li><a href="/metomeui/listussdtransactionkeywords.html">Transaction
-									Keywords Setup</a>
-							</li>
-							<li><a href="/metomeui/listussdkeywordsteps.html">Keyword
-									Steps</a></li>
-							<li><a href="/metomeui/listussdpredefinputs.html">Predefined
-									Inputs Setup</a>
-							</li>
-						</ul>
-						<h3>
-							<a href="/metomeui/charge.html">Charge Setup</a>
-						</h3>
-						<ul>
-							<li><a href="/metomeui/charge.html">Configure Charges</a>
-							</li>
-							<li><a href="/metomeui/accounttypes.html">Manage Account
-									Types</a>
-							</li>
-						</ul>
-					</div></td>
 				<td class="content">
 					<div>
 						<fieldset>
@@ -305,7 +277,7 @@ td.formlabels {
 								<h2>Create New Account Type</h2>
 							</legend>
 
-							<form:form method="post" action="addaccounttypes.html"
+							<form:form method="post" action="addaccounttype.html"
 								commandName="accountType">
 								<form:errors path="*" cssClass="errorblock" element="div" />
 
@@ -314,27 +286,27 @@ td.formlabels {
 										<td class="formlabels"><form:label path="accountTypeCode">Account Code: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="accountTypeCode" /></td>
+												path="accountTypeCode" />
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="accountTypeName">Account Name: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="accountTypeName" /></td>
+												path="accountTypeName" />
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
-												path="accountTypeBitMap">Account Bitmap:</form:label>
-										</td>
+												path="accountTypeBitMap">Account Bitmap:</form:label></td>
 										<td class="form"><form:checkbox
 												cssClass="alterformfields" path="accountTypeBitMap"
 												value="0" /><label class="alterlabel">Undefined</label><br>
-										<form:checkbox cssClass="alterformfields"
+											<form:checkbox cssClass="alterformfields"
 												path="accountTypeBitMap" value="1" /><label
 											class="alterlabel">Dealer</label><br> <form:checkbox
 												cssClass="alterformfields" path="accountTypeBitMap"
-												value="2" /><label class="alterlabel">Agent</label>
-										</td>
+												value="2" /><label class="alterlabel">Agent</label></td>
 									</tr>
 
 									<tr>
@@ -342,15 +314,9 @@ td.formlabels {
 												path="accountMaximumBookBalance">Maximum Book Balance:</form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="accountMaximumBookBalance" /></td>
+												path="accountMaximumBookBalance" />
+										</td>
 									</tr>
-									<tr>
-										<%-- <td class="formlabels"><form:checkbox cssClass="otherformfields"
-													path="sysAccountTypeFlag" /></td>
-											<td class="form"><form:label path="sysAccountTypeFlag">Set System Account Type</form:label>
-											</td>
-											
-										</tr> --%>
 									<tr>
 										<td class="formlabels"><form:checkbox
 												cssClass="otherformfields" path="enabledFlag" value="1" />
@@ -358,22 +324,27 @@ td.formlabels {
 										<td class="form"><form:label path="enabledFlag">Enable Account Type</form:label>
 										</td>
 									</tr>
+									<tr><td></td></tr>
 									<tr>
-										<td colspan="2" class="savebutton"><input class="btn"
-											type="submit" value="addaccounttypes" />
+										<td></td>
+										<td class="savebutton"><input class="btn" type="submit"
+											value="Save" /><input class="btn" type="button"
+											value="Cancel"
+											onClick="location.href='/metomeui/listaccounttypes.html'" />
 										</td>
+										<td></td>
 									</tr>
 								</table>
 							</form:form>
 						</fieldset>
 						<table>
 							<tr>
-								<td><br></td>
+								<td><br>
+								</td>
 							</tr>
 						</table>
 
-					</div>
-				</td>
+					</div></td>
 			</tr>
 		</table>
 		<!--    <table border=1px; width=100%;> -->

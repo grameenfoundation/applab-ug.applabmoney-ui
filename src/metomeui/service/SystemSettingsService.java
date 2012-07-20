@@ -3,109 +3,135 @@ package metomeui.service;
 import java.util.List;
 
 import metomeui.model.AccountType;
-import metomeui.model.ContactForm;
 import metomeui.model.Language;
 import metomeui.model.MemoGroup;
 import metomeui.model.Message;
+import metomeui.model.NdcListOffnet;
+import metomeui.model.NdcListPToP;
 import metomeui.model.SystemConfiguration;
 import metomeui.model.User;
-import metomeui.model.UssdPredefInputItem;
 
 public interface SystemSettingsService {
 
 	/**
 	 * AccountTypes Management functions
-	 *
+	 * 
 	 */
 	public List<AccountType> listAccountTypes();
 
 	public void addAccountType(AccountType accountType);
-	
-	public void removeAccountType(Integer accountTypeId);
-	
-	
+
+	public void deleteExistingAccountType(Long accountTypeId);
+
+	public AccountType getExistingAccountType(Long accountTypeId);
+
+	public void editExistingAccountType(AccountType accountType);
+
+	public void activateOrDeactivateExistingAccountType(Long accountTypeId,
+			Integer offSwitch);
+
 	/**
 	 * User Management functions
-	 *
+	 * 
 	 */
 	public List<User> listUsers();
-	
+
 	public void addUser(User user);
+
+	public void deleteExistingUser(Long userId);
+
+	public User getUserByLogin(String username, String password);
 	
-	public void removeUser(Integer userId);
+	public User getExistingUser(Long userId);
 	
-	public User getUserByName(String username, String password);
-	
-	
+	public void editExistingUser(User user);
+
 	/**
 	 * Message Management functions
-	 *
+	 * 
 	 */
 	public List<Message> listMessages();
 
 	public void addMessage(Message message);
-	
-	public void removeMessage(Integer messageId);
-	
+
+	public void editExistingMessage(Message message);
+
+	public void deleteExistingMessage(Long messageId);
+
+	public Message getExistingMessage(Long messageId);
+
 	/**
 	 * Language Management functions
-	 *
+	 * 
 	 */
 	public List<Language> listLanguages();
-	
+
 	public void addLanguage(Language language);
 
-	public void removeLanguage(Integer languageId);
-	
+	public void deleteExistingLanguage(Long languageId);
+
+	public Language getExistingLanguage(Long languageId);
+
+	public void editExistingLanguage(Language language);
+
+	public void setDefaultLanguage(Long languageId, Integer offSwitch);
+
 	/**
 	 * MemoGroup Management functions
-	 *
+	 * 
 	 */
 	public List<MemoGroup> listMemoGroups();
 
 	public void addMemoGroup(MemoGroup memoGroup);
-	
-	public void removeMemoGroup(Integer memoGroupId);
-	
+
+	public void deleteExistingMemoGroup(Long memoGroupId);
+
+	public MemoGroup getExistingMemoGroup(Long memoGroupId);
+
+	public void editExistingMemoGroup(MemoGroup memoGroup);
+
+	public void activateOrDeactivateExistingMemoGroup(Long memoGroupId,
+			Integer onOffSwitch);
+
 	/**
 	 * System Config functions
-	 *
+	 * 
 	 */
 	public List<SystemConfiguration> listSystemConfiguration();
 
 	public void addSystemConfiguration(SystemConfiguration sysConfiguration);
+
+	public void deleteExistingSystemConfiguration(Long SystemConfigurationId);
+
+	/**
+	 * NDC  functions
+	 * 
+	 */
+	public List<NdcListPToP> listNDCPToP();
+
+	public List<NdcListOffnet> listNDCOffnet();
+
+	public void editExistingNdcListPToP(NdcListPToP ndcListPToP);
+
+	public void addNdcListPToP(NdcListPToP ndcListPToP);
+
+	public NdcListPToP getExistingNdcListPToP(Long ndcListPToPId);
+
+	public void deleteExistingNdcListPToP(Long ndcListId);
+
+	public void activateOrDeactivateExistingNdcListPToP(Long ndcListId,
+			Integer onSwitch);
+
+	public void addNdcListOffnet(NdcListOffnet ndcListOffnet);
+
+	public NdcListOffnet getExistingNdcListOffnet(Long ndcListId);
+
+	public void editExistingNdcListOffnet(NdcListOffnet ndcListOffnet);
+
+	public void deleteExistingNdcListOffnet(Long ndcListId);
+
+	public void activateOrDeactivateExistingNdcListOffnet(Long ndcListId,
+			Integer onSwitch);
 	
-	public void removeSystemConfiguration(Integer SystemConfigurationId);
-	
-	public void addContact(UssdPredefInputItem contact);
-	
-	public void addContact(ContactForm contactForm);
 
-	public void updateContact(ContactForm contactForm);
-
-	public void updateContact(UssdPredefInputItem contact);
-
-	public User getExistingUser(long userId);
-
-	public void editExistingUser(User user);
-
-	public void editExistingMessage(Message message);
-	
-	public Message getExistingMessage(long messageId);
-
-	public Language getExistingLanguage(long languageId);
-
-	public void editExistingLanguage(Language language);
-
-	public AccountType getExistingAccountType(long messageId);
-
-	public void editExistingAccountType(AccountType accountType);
-
-	public MemoGroup getExistingMemoGroup(long memoGroupId);
-
-	public void editExistingMemoGroup(MemoGroup memoGroup);
-
-	
-
-	
 }

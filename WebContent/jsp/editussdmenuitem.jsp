@@ -287,35 +287,6 @@ td.formlabels {
 
 		<table style="width: 100%;">
 			<tr>
-				<td class="navbar">
-					<div id="accordion">
-						<h3>
-							<a href="/metomeui/listussdmenuitems.html">Ussd Menu Items
-								Setup</a>
-						</h3>
-						<ul>
-							<li><a href="/metomeui/listussdmenuitems.html">Ussd Menu
-									Items</a></li>
-						</ul>
-						<h3>
-							<a href="/metomeui/listussdtransactionkeywords.html">Transaction
-								Keywords Setup</a>
-						</h3>
-						<ul>
-							<li><a href="/metomeui/listussdtransactionkeywords.html">Transaction
-									Keywords</a>
-							</li>
-						</ul>
-						<h3>
-							<a href="/metomeui/listussdpredefinputs.html">Predefined
-								Inputs Setup</a>
-						</h3>
-						<ul>
-							<li><a href="/metomeui/listussdpredefinputs.html">Predefined
-									Inputs</a>
-							</li>
-						</ul>
-					</div></td>
 				<td class="content">
 					<div>
 						<fieldset>
@@ -341,8 +312,7 @@ td.formlabels {
 										</td>
 										<td class="form"><form:input cssClass="formfields"
 												path="menuItemName" value="${ussdMenuItem.menuItemName}" />
-											<input type="hidden" name="menuItemId"
-											value="${ussdMenuItem.menuItemId}" /></td>
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
@@ -355,8 +325,13 @@ td.formlabels {
 													label="${ussdMenuItem.rootMenuItem.menuItemName}" />
 												<form:option value="0" label="--None--" />
 												<c:forEach items="${menuItemList}" var="menuitem">
-													<form:option value="${menuitem.menuItemId}"
-														label="${menuitem.menuItemName}" />
+													<c:if test="${menuitem.menuItemId != 0}">
+														<c:if
+															test="${menuitem.menuItemId != ussdMenuItem.menuItemId}">
+															<form:option value="${menuitem.menuItemId}"
+																label="${menuitem.menuItemName}" />
+														</c:if>
+													</c:if>
 												</c:forEach>
 											</form:select>
 									</tr>
@@ -372,8 +347,10 @@ td.formlabels {
 												<form:option value="0" label="--None--" />
 												<c:forEach items="${transactionKeywordList}"
 													var="transactionkeyword">
-													<form:option value="${transactionkeyword.keywordId}"
-														label="${transactionkeyword.keywordName}" />
+													<c:if test="${transactionkeyword.keywordId != 0}">
+														<form:option value="${transactionkeyword.keywordId}"
+															label="${transactionkeyword.keywordName}" />
+													</c:if>
 												</c:forEach>
 											</form:select></td>
 									</tr>
@@ -386,8 +363,9 @@ td.formlabels {
 									</tr>
 									<tr>
 										<td colspan="2" class="savebutton"><br> <input
-											class="btn" type="submit" value="Save" />
-										</td>
+											class="btn" type="submit" value="Update" /><input class="btn"
+											type="button" value="Cancel"
+											onClick="location.href='/metomeui/listussdmenuitems.html'" /></td>
 									</tr>
 								</table>
 							</form:form>

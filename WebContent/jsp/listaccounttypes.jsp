@@ -244,8 +244,7 @@ td.formlabels {
 				<div class="header" style="color: #000000;">
 					<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
 						> Administration</a>
-				</div>
-			</td>
+				</div></td>
 		</tr>
 	</table>
 	<div>
@@ -253,7 +252,8 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Manage Account Types</h2>
-						<hr></td>
+						<hr>
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -263,27 +263,56 @@ td.formlabels {
 				<td class="navbar">
 					<div id="accordion">
 						<h3>
-							<a href="ussdmenuitems.html">Ussd Menu Setup</a>
+							<a href="#systemsettings">System Settings</a>
 						</h3>
 						<ul>
-							<li><a href="ussdmenuitems.html">Ussd Menu Items Setup</a></li>
-							<li><a href="ussdtransactionkeywords.html">Transaction
-									Keywords Setup</a>
+							<li><a href="/metomeui/viewsystemconfiguration.html">System
+									Configuration</a>
 							</li>
-							<li><a href="ussdpredefinputs.html">Predefined Inputs
-									Setup</a>
+							<li><a href="/metomeui/listcharges.html">Charge
+									Configuration</a>
 							</li>
+							<li><a href="/metomeui/listaccounttypes.html">Account
+									Type Configuration</a></li>
+							<li><a href="/metomeui/listmemogroups.html">Memo Groups
+									Configuration</a></li>
+							<li><a href="/metomeui/listlanguages.html">Languages
+									Configuration</a></li>
+							<li><a href="/metomeui/listmessages.html">Messages
+									Configuration</a></li>
+							<li><a href="listmobilendc.html">Mobile NDC
+									Configuration</a></li>
 						</ul>
 						<h3>
-							<a href="charge.html">Charge Setup</a>
+							<a href="#ussdmenusetup">Ussd Menu Setup</a>
 						</h3>
 						<ul>
-							<li><a href="charge.html">Configure Charge</a>
+							<li><a href="/metomeui/listussdmenuitems.html">Ussd Menu
+									Items</a>
 							</li>
-							<li><a href="accounttypes.html">Manage Account Types</a>
+							<li><a href="/metomeui/listussdtransactionkeywords.html">Transaction
+									Keywords</a></li>
+							<li><a href="/metomeui/listussdpredefinputs.html">Predefined
+									Inputs</a></li>
+						</ul>
+						<h3>
+							<a href="#amlsettings">AML Settings</a>
+						</h3>
+						<ul>
+							<li><a href="/metomeui/viewamlsettings.html">AML
+									Settings</a>
 							</li>
 						</ul>
-					</div></td>
+
+						<h3>
+							<a href="#">Products Setup</a>
+						</h3>
+						<ul>
+							<li><a href="#viewmetomesetup">Me2Me Setup</a></li>
+							<li><a href="#viewzimbasetup.html">Zimba Setup</a></li>
+						</ul>
+					</div>
+				</td>
 				<td class="content">
 					<table>
 						<tr>
@@ -294,17 +323,15 @@ td.formlabels {
 							<td><div>
 									<input class="btn" type="submit" name="submit"
 										value="Create New"
-										onClick="location.href='addaccounttypes.html'">
-								</div>
-							</td>
+										onClick="location.href='addaccounttype.html'">
+								</div></td>
 						</tr>
 					</table> <c:if test="${empty accountTypesList}">
 						<div>
 							<table>
 								<tr>
 									<td>There are no Account Types registered on this system <br>
-										<br>
-									</td>
+										<br></td>
 								</tr>
 							</table>
 						</div>
@@ -315,24 +342,27 @@ td.formlabels {
 								<th>Code</th>
 								<th>Name</th>
 								<th>BitMap</th>
-								<!-- 								<th>Action</th> -->
+								<th>Action</th>
 							</tr>
 							<c:forEach items="${accountTypesList}" var="accounttype">
 								<tr class=data>
-									<td class=data>${accounttype.accountTypeCode}</td>
+									<td class=data><a
+										href="/metomeui/editaccounttype/${accounttype.accountTypeId}.html">${accounttype.accountTypeCode}</a>
+									</td>
 									<td class=data>${accounttype.accountTypeName}</td>
 									<td class=data>${accounttype.accountTypeBitMap}</td>
-									<%-- 									<td class=data><c:if test="${menuitem.menuItemEnabledFlag == 0}"> --%>
-									<%-- 											<a href="#activate/${menuitem.menuItemId}">Activate/</a> --%>
-									<%-- 										</c:if> <c:if test="${menuitem.menuItemEnabledFlag == 1}"> --%>
-									<%-- 											<a href="#deactivate/${menuitem.menuItemId}">Deactivate/</a> --%>
-									<%-- 										</c:if> <a href="removemenuitem/${menuitem.menuItemId}.html">Delete</a><a> --%>
-									<%-- 											| </a><a href="#edit/${menuitem.menuItemId}">Edit</a></td> --%>
+									<td class=data><c:if
+											test="${accounttype.enabledFlag == 0}">
+											<a
+												href="/metomeui/activateaccounttype/${accounttype.accountTypeId}.html">Activate/</a>
+										</c:if> <c:if test="${accounttype.enabledFlag == 1}">
+											<a
+												href="/metomeui/deactivateaccounttype/${accounttype.accountTypeId}.html">Deactivate/</a>
+										</c:if> <a href="removeaccounttype/${accounttype.accountTypeId}.html">Delete</a>
 								</tr>
 							</c:forEach>
 						</table>
-					</c:if>
-				</td>
+					</c:if></td>
 			</tr>
 		</table>
 		<!-- 	<table border=1px; width=100%;> -->

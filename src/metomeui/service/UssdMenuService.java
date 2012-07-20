@@ -91,4 +91,10 @@ public interface UssdMenuService {
 			Long predefInputId);
 
 	boolean checkIfDuplicatePredefInputName(String predefInputName, Long predefInputId);
+
+	public List<UssdKeywordStep> getKeywordsLinkedToThisPredefInput(
+			Long predefInputId);
+
+	public List<UssdMenuItem> getChildMenuItemsForParentMenuItem(
+			UssdMenuItem rootMenuItem);
 }

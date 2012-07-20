@@ -218,6 +218,8 @@ td.formlabels {
 .formfields {
 	width: 150px;
 	height: 25px;
+	font-family: 'Arial', 'Helvetica', sans-serif;
+	
 }
 
 .labels {
@@ -260,30 +262,6 @@ td.formlabels {
 
 		<table style="width: 100%;">
 			<tr>
-				<td class="navbar">
-					<div id="accordion">
-						<h3>
-							<a href="ussdmenuitems.html">Ussd Menu Setup</a>
-						</h3>
-						<ul>
-							<li><a href="ussdmenuitems.html">Ussd Menu Items Setup</a></li>
-							<li><a href="ussdtransactionkeywords.html">Transaction
-									Keywords Setup</a>
-							</li>
-							<li><a href="ussdpredefinputs.html">Predefined Inputs
-									Setup</a>
-							</li>
-						</ul>
-						<h3>
-							<a href="charge.html">Charge Setup</a>
-						</h3>
-						<ul>
-							<li><a href="charge.html">Configure Charge</a>
-							</li>
-							<li><a href="accounttypes.html">Manage Account Types</a>
-							</li>
-						</ul>
-					</div></td>
 				<td class="content">
 					<div>
 						<fieldset>
@@ -291,7 +269,7 @@ td.formlabels {
 								<h2>Create Message</h2>
 							</legend>
 
-							<form:form method="post" action="addmessages.html"
+							<form:form method="post" action="addmessage.html"
 								commandName="message">
 								<form:errors path="*" cssClass="errorblock" element="div" />
 
@@ -303,14 +281,17 @@ td.formlabels {
 												path="messageCode" /></td>
 									</tr>
 									<tr>
-										<td class="formlabels"><form:label path="languageId">Message Language:</form:label>
+										<td class="formlabels"><form:label
+												path="language.languageId">Message Language:</form:label>
 										</td>
 										<td class="form"><form:select cssClass="dropdown"
-												path="languageId">
+												path="language.languageId">
 												<form:option value="0" label="--None--" />
 												<c:forEach items="${languagesList}" var="language">
-													<form:option value="${language.languageId}"
-														label="${language.languageName}" />
+													<c:if test="${language.languageId != 0}">
+														<form:option value="${language.languageId}"
+															label="${language.languageName}" />
+													</c:if>
 												</c:forEach>
 												<form:options items="${languagesList}" />
 											</form:select>
@@ -329,9 +310,15 @@ td.formlabels {
 												path="messageDesc" /></td>
 									</tr>
 									<tr>
-										<td colspan="2" class="savebutton"><input class="btn"
-											type="submit" value="addmessages" />
-										</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td class="savebutton"><br> <input class="btn"
+											type="submit" value="Save" /> <input class="btn"
+											type="button" value="Cancel"
+											onClick="location.href='/metomeui/listmessages.html'" /></td>
+										<td></td>
 									</tr>
 								</table>
 							</form:form>

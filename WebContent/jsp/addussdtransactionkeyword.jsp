@@ -71,8 +71,8 @@ label {
 	margin: 16px;
 }
 
-/*BUTTONS*/
-button,.btn {
+/*BUTTONSbutton,*/
+.btn {
 	background-image:
 		url('resources/css/ui-lightness/images/CuteCapLa7.gif');
 	background-position: left top;
@@ -91,9 +91,38 @@ button,.btn {
 	padding: 1px 3px;
 	height: 33px;
 	width: 100px;
+	align: right;
 }
 
 hover.btn {
+	color: #0066CC;
+}
+
+.longbtn {
+	background-image:
+		url('resources/css/ui-lightness/images/CuteCapLa7.gif');
+	/*background-position: left top;*/
+	background-position: absolute;
+	background-repeat: repeat-x;
+	background-color: transparent;
+	-moz-box-align: stretch;
+	background-size: 100% 100%;
+	border-color: -moz-use-text-color #5C5D61 rgb(92, 93, 97)
+		-moz-use-text-color;
+	border-style: none none none none;
+	border-width: medium 2px 2px medium;
+	cursor: pointer;
+	display: inline;
+	colour: #008000;
+	font-family: 'Arial', 'Helvetica', sans-serif;
+	font-size: 100%;
+	font-weight: bold;
+	padding: 1px 3px;
+	height: 33px;
+	width: 140px;
+}
+
+hover.longbtn {
 	color: #0066CC;
 }
 
@@ -259,35 +288,6 @@ td.formlabels {
 		</div>
 		<table style="width: 100%;">
 			<tr>
-				<td class="navbar">
-                    <div id="accordion">
-                        <h3>
-                            <a href="/metomeui/listussdmenuitems.html">Ussd Menu Items
-                                Setup</a>
-                        </h3>
-                        <ul>
-                            <li><a href="/metomeui/listussdmenuitems.html">Ussd Menu
-                                    Items</a>
-                            </li>
-                        </ul>
-                        <h3>
-                            <a href="/metomeui/listussdtransactionkeywords.html">Transaction
-                                Keywords Setup</a>
-                        </h3>
-                        <ul>
-                            <li><a href="/metomeui/listussdtransactionkeywords.html">Transaction
-                                    Keywords</a></li>
-                        </ul>
-                        <h3>
-                            <a href="/metomeui/listussdpredefinputs.html">Predefined
-                                Inputs Setup</a>
-                        </h3>
-                        <ul>
-                            <li><a href="/metomeui/listussdpredefinputs.html">Predefined
-                                    Inputs</a></li>
-                        </ul>
-                    </div>
-                </td>
 				<td class="content">
 					<div>
 						<fieldset>
@@ -338,7 +338,7 @@ td.formlabels {
 									<tr>
 										<td></td>
 										<td><div>
-												<br> <input type="button" name="submit"
+												<br> <input type="button" name="submit" class="longbtn"
 													value="Add Keyword Step"
 													onClick="location.href='addnewussdkeywordstep.html'">
 											</div></td>
@@ -363,81 +363,85 @@ td.formlabels {
 										<c:forEach items="${ussdTransactionKeyword.keywordSteps}"
 											var="keywordSteps" varStatus="status">
 											<tr class="data">
-												<td>${status.count}</td>
-												<%-- <td><input
-													name="keywordSteps[${status.index}].keywordStepId"
-													value="${keywordSteps.keywordStepId}" />
-												</td> --%>
-												<td class="data"><input
-													name="keywordSteps[${status.index}].stepMenuName"
-													value="${keywordSteps.stepMenuName}" /></td>
-												<td class="data"><input size="2"
-													name="keywordSteps[${status.index}].stepMenuNumber"
-													value="${keywordSteps.stepMenuNumber}" />
-												</td>
-												<td class="data"><c:if
-														test="${keywordSteps.isFirstStepFlag == 0}">No <input
-															type="hidden"
-															name="keywordSteps[${status.index}].isFirstStepFlag"
-															value="${keywordSteps.isFirstStepFlag}" />
-													</c:if> <c:if test="${keywordSteps.isFirstStepFlag == 1}">Yes<input
-															type="hidden"
-															name="keywordSteps[${status.index}].isFirstStepFlag"
-															value="${keywordSteps.isFirstStepFlag}" />
-													</c:if></td>
-												<td class="data"><c:if
-														test="${keywordSteps.isLastStepFlag == 0}">No <input
-															type="hidden"
-															name="keywordSteps[${status.index}].isLastStepFlag"
-															value="${keywordSteps.isLastStepFlag}" />
-													</c:if> <c:if test="${keywordSteps.isLastStepFlag == 1}">Yes<input
-															type="hidden"
-															name="keywordSteps[${status.index}].isLastStepFlag"
-															value="${keywordSteps.isFirstStepFlag}" />
-													</c:if></td>
-												<td class="data"><c:if
-														test="${keywordSteps.hasPredefInputFlag == 0}">No <input
-															type="hidden"
-															name="keywordSteps[${status.index}].hasPredefInputFlag"
-															value="${keywordSteps.hasPredefInputFlag}" />
-													</c:if> <c:if test="${keywordSteps.hasPredefInputFlag == 1}">Yes <input
-															type="hidden"
-															name="keywordSteps[${status.index}].hasPredefInputFlag"
-															value="${keywordSteps.hasPredefInputFlag}" />
-													</c:if></td>
-												<td class="data"><c:forEach items="${predefInputList}"
-														var="predefinput">
-														<c:if
-															test="${predefinput.predefInputId == keywordSteps.predefInput.predefInputId}">
-															<c:out value= "${predefinput.predefInputName}" />
+												<c:if test="${keywordSteps.keywordStepId != 0}">
+													<td>${status.count}</td>
+													<td class="data"><input
+														name="keywordSteps[${status.index}].stepMenuName"
+														value="${keywordSteps.stepMenuName}" /></td>
+													<td class="data"><input size="2"
+														name="keywordSteps[${status.index}].stepMenuNumber"
+														value="${keywordSteps.stepMenuNumber}" />
+													</td>
+													<td class="data"><c:if
+															test="${keywordSteps.isFirstStepFlag == 0}">No <input
+																type="hidden"
+																name="keywordSteps[${status.index}].isFirstStepFlag"
+																value="${keywordSteps.isFirstStepFlag}" />
+														</c:if> <c:if test="${keywordSteps.isFirstStepFlag == 1}">Yes<input
+																type="hidden"
+																name="keywordSteps[${status.index}].isFirstStepFlag"
+																value="${keywordSteps.isFirstStepFlag}" />
+														</c:if></td>
+													<td class="data"><c:if
+															test="${keywordSteps.isLastStepFlag == 0}">No <input
+																type="hidden"
+																name="keywordSteps[${status.index}].isLastStepFlag"
+																value="${keywordSteps.isLastStepFlag}" />
+														</c:if> <c:if test="${keywordSteps.isLastStepFlag == 1}">Yes<input
+																type="hidden"
+																name="keywordSteps[${status.index}].isLastStepFlag"
+																value="${keywordSteps.isFirstStepFlag}" />
+														</c:if></td>
+													<td class="data"><c:if
+															test="${keywordSteps.hasPredefInputFlag == 0}">No <input
+																type="hidden"
+																name="keywordSteps[${status.index}].hasPredefInputFlag"
+																value="${keywordSteps.hasPredefInputFlag}" />
+														</c:if> <c:if test="${keywordSteps.hasPredefInputFlag == 1}">Yes <input
+																type="hidden"
+																name="keywordSteps[${status.index}].hasPredefInputFlag"
+																value="${keywordSteps.hasPredefInputFlag}" />
+														</c:if></td>
+													<td class="data"><c:forEach items="${predefInputList}"
+															var="predefinput">
+															<c:if
+																test="${predefinput.predefInputId == keywordSteps.predefInput.predefInputId}">
+																<c:out value="${predefinput.predefInputName}" />
+															</c:if>
+														</c:forEach><input type="hidden"
+														name="keywordSteps[${status.index}].predefInput.predefInputId"
+														value="${keywordSteps.predefInput.predefInputId}" />
+													</td>
+													<td class="data"><c:if
+															test="${keywordSteps.useFixedValueFlag == 0}">No <input
+																type="hidden"
+																name="keywordSteps[${status.index}].useFixedValueFlag"
+																value="${keywordSteps.useFixedValueFlag}" />
+														</c:if> <c:if test="${keywordSteps.useFixedValueFlag == 1}">Yes <input
+																type="hidden"
+																name="keywordSteps[${status.index}].useFixedValueFlag"
+																value="${keywordSteps.useFixedValueFlag}" />
 														</c:if>
-													</c:forEach><input type="hidden" name="keywordSteps[${status.index}].predefInput.predefInputId"
-													value="${keywordSteps.predefInput.predefInputId}" />
-												</td>
-												<td class="data"><c:if
-														test="${keywordSteps.useFixedValueFlag == 0}">No <input
-															type="hidden"
-															name="keywordSteps[${status.index}].useFixedValueFlag"
-															value="${keywordSteps.useFixedValueFlag}" />
-													</c:if> <c:if test="${keywordSteps.useFixedValueFlag == 1}">Yes <input
-															type="hidden"
-															name="keywordSteps[${status.index}].useFixedValueFlag"
-															value="${keywordSteps.useFixedValueFlag}" />
-													</c:if>
-												</td>
-												<td class="data"><input
-													name="keywordSteps[${status.index}].fixedValue"
-													value="${keywordSteps.fixedValue}"/></td>
-												<!--                                    <td align="center"><a -->
-												<%--                                        href="removekeywordstep/${keywordstep.keywordStepId}.html">Delete</a><a> --%>
-												<%--                                            | </a><a href="#edit/${keywordstep.keywordStepId}">Edit</a></td> --%>
+													</td>
+													<td class="data"><input
+														name="keywordSteps[${status.index}].fixedValue"
+														value="${keywordSteps.fixedValue}" /></td>
+												</c:if>
 											</tr>
 										</c:forEach>
 									</table>
 								</c:if>
 								<br />
-								<input type="submit" value="Save" class="btn" />
-
+								<table>
+									<tr>
+										<td></td>
+										<td></td>
+										<td><input type="submit" value="Save" class="btn" /> <input
+											class="btn" type="button" value="Cancel"
+											onClick="location.href='/metomeui/listussdtransactionkeywords.html'" />
+										<td></td>
+									</tr>
+								</table>
 							</form:form>
 						</fieldset>
 					</div>
