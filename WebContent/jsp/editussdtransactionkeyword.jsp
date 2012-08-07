@@ -175,17 +175,16 @@ tr.header {
 
 td {
 	height: 19px;
-	width: 30%;
+	width: 40%;
 	margin: 0px 2px 0px 2px;
 	padding: 0px 5px 0px 5px;
 	test-align: center;
-	width: 40%;
 }
 
 th {
 	background: #7CB15C;
 	height: 19px;
-	width: 10%;
+	width: 20%;
 	border-color: #ffffff;
 	text-align: left;
 	padding: 4px;
@@ -197,14 +196,42 @@ td.data {
 	border-width: 1px 1px 0 0;
 	border-style: solid;
 	margin: 1;
+	width: 20%;
 	padding: 1px;
 	background-color: #F3F3EC;
 	text-align: left;
 	word-wrap: break-word;
 }
 
+th.otherdata {
+	background: #7CB15C;
+	height: 19px;
+	width: 5%;
+	border-color: #ffffff;
+	text-align: left;
+	padding: 4px;
+	word-wrap: break-word;
+}
+
 tr.data {
 	border: 1px Solid #9AC482;
+}
+
+td.otherdata {
+	border-color: #9AC482;
+	border-width: 1px 1px 0 0;
+	border-style: solid;
+	margin: 1;
+	width: 5%;
+	padding: 1px;
+	background-color: #F3F3EC;
+	text-align: left;
+	word-wrap: break-word;
+}
+
+tr.otherdata {
+	border: 1px Solid #9AC482;
+	width: 5px;
 }
 
 table.form {
@@ -271,8 +298,10 @@ td.formlabels {
 					style="font-family: sans-serif; font-stretch: wider; font-size: x-large; color: #000000; text-indent: 6%;">
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
-					<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
-						> Administration</a>
+					<h2>
+						<a style="color: #000000;" href="/metomeui/auilanding.html"
+							title="Home">Go Back Home</a>
+					</h2>
 				</div></td>
 		</tr>
 	</table>
@@ -349,7 +378,7 @@ td.formlabels {
 									<tr>
 										<td></td>
 										<td><div>
-												<br> <input type="button" class="longbtn"
+												<br> <input type="button"
 													value="Create New Keyword Step"
 													onClick="location.href='/metomeui/editaddnewussdkeywordstep/${ussdTransactionKeyword.keywordId}.html'">
 											</div>
@@ -362,34 +391,35 @@ td.formlabels {
 									<h2>Keyword Steps Added</h2>
 									<table class="data">
 										<tr>
-											<th>No.</th>
+											<th class="otherdata">No.</th>
 											<th>Step Menu Name</th>
-											<th>Step Menu Number</th>
-											<th>Is First Step Flag</th>
-											<th>Is Last Step Flag</th>
-											<th>Has Predefined Input</th>
+											<th class="otherdata">Step Menu Number</th>
+											<th class="otherdata">Is First Step Flag</th>
+											<th class="otherdata">Is Last Step Flag</th>
+											<th class="otherdata">Has Predefined Input</th>
 											<th>Predefined Input</th>
-											<th>Use Fixed Value</th>
+											<th class="otherdata">Use Fixed Value</th>
 											<th>Fixed Value</th>
-											<th>Action</th>
+											<th class="otherdata">Action</th>
 										</tr>
 										<c:forEach items="${ussdTransactionKeyword.keywordSteps}"
 											var="keywordstep" varStatus="status">
 											<tr class="data">
 												<c:if test="${keywordstep.keywordStepId != 0}">
-													<td class=otherdata>${status.count} <input
+													<td class="otherdata">${status.count} <input size="2"
 														type="hidden"
 														name="keywordSteps[${status.index}].keywordStepId"
 														value="${keywordstep.keywordStepId}" /></td>
-													<td class=data><input
+													<td class="data"><input type="hidden"
 														name="keywordSteps[${status.index}].stepMenuName"
 														value="${keywordstep.stepMenuName}" /> <a
-														href="/metomeui/editussdkeywordstep/${keywordstep.keywordStepId}.html"></a>
+														href="/metomeui/editussdkeywordstep/${keywordstep.keywordStepId}.html">${keywordstep.stepMenuName}</a>
 													</td>
-													<td class=data><input
+													<td class="otherdata"><input type="hidden"
 														name="keywordSteps[${status.index}].stepMenuNumber"
-														value="${keywordstep.stepMenuNumber}" /></td>
-													<td class="data"><c:if
+														value="${keywordstep.stepMenuNumber}" />
+														${keywordstep.stepMenuNumber}</td>
+													<td class="otherdata"><c:if
 															test="${keywordstep.isFirstStepFlag == 0}"> No
 														<input size="3" type="hidden"
 																name="keywordSteps[${status.index}].isFirstStepFlag"
@@ -400,7 +430,7 @@ td.formlabels {
 																value="1" />
 														</c:if>
 													</td>
-													<td class="data"><c:if
+													<td class="otherdata"><c:if
 															test="${keywordstep.isLastStepFlag == 0}"> No
 														<input size="3" type="hidden"
 																name="keywordSteps[${status.index}].isLastStepFlag"
@@ -411,7 +441,7 @@ td.formlabels {
 																value="1" />
 														</c:if>
 													</td>
-													<td class="data"><c:if
+													<td class="otherdata"><c:if
 															test="${keywordstep.hasPredefInputFlag == 0}"> No
 														<input size="3" type="hidden"
 																name="keywordSteps[${status.index}].hasPredefInputFlag"
@@ -432,7 +462,7 @@ td.formlabels {
 														name="keywordSteps[${status.index}].predefInputId"
 														value="${keywordstep.predefInput.predefInputId}" />
 													</td>
-													<td class="data"><c:if
+													<td class="otherdata"><c:if
 															test="${keywordstep.useFixedValueFlag == 0}"> No
 														<input size="3" type="hidden"
 																name="keywordSteps[${status.index}].useFixedValueFlag"
@@ -442,9 +472,10 @@ td.formlabels {
 																name="keywordSteps[${status.index}].useFixedValueFlag"
 																value="1" />
 														</c:if></td>
-													<td class="data"><input
+													<td class="data"><input type="hidden"
 														name="keywordSteps[${status.index}].fixedValue"
-														value="${keywordstep.fixedValue}" /></td>
+														value="${keywordstep.fixedValue}" />
+														${keywordstep.fixedValue}</td>
 													<td class=data><c:if
 															test="${keywordstep.keywordStepId != null}">
 															<a
@@ -461,8 +492,9 @@ td.formlabels {
 								<table>
 									<tr>
 										<td></td>
-										<td><input class="btn" type="submit" value="Update" /><input
-											class="btn" type="button" value="Cancel"
+										<td></td>
+										<td><input type="submit" value="Update" />
+											&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="Cancel"
 											onClick="location.href='/metomeui/listussdtransactionkeywords.html'" />
 										</td>
 									</tr>

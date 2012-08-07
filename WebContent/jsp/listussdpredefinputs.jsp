@@ -222,10 +222,11 @@ td.savebutton {
 					style="font-family: sans-serif; font-stretch: wider; font-size: x-large; color: #000000; text-indent: 6%;">
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
-					<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
-						> Administration</a>
-				</div>
-			</td>
+					<h2>
+						<a style="color: #000000;" href="/metomeui/auilanding.html"
+							title="Home">Go Back Home</a>
+					</h2>
+				</div></td>
 		</tr>
 	</table>
 	<div>
@@ -233,7 +234,8 @@ td.savebutton {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Predefined Inputs Manager</h2>
-						<hr></td>
+						<hr>
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -249,18 +251,13 @@ td.savebutton {
 							<li><a href="/metomeui/viewsystemconfiguration.html">System
 									Configuration</a>
 							</li>
-							<li><a href="/metomeui/listcharges.html">Charge
-									Configuration</a>
-							</li>
-							<li><a href="/metomeui/listaccounttypes.html">Account
-									Type Configuration</a></li>
 							<li><a href="/metomeui/listmemogroups.html">Memo Groups
 									Configuration</a></li>
 							<li><a href="/metomeui/listlanguages.html">Languages
 									Configuration</a></li>
 							<li><a href="/metomeui/listmessages.html">Messages
 									Configuration</a></li>
-							<li><a href="listmobilendc.html">Mobile NDC
+							<li><a href="/metomeui/listmobilendc.html">Mobile NDC
 									Configuration</a></li>
 						</ul>
 						<h3>
@@ -276,18 +273,25 @@ td.savebutton {
 									Inputs</a></li>
 						</ul>
 						<h3>
-							<a href="#amlsettings">AML Settings</a>
+							<a href="#transsettings">Transaction Settings</a>
 						</h3>
 						<ul>
-							<li><a href="/metomeui/viewamlsettings.html">AML
+							<li><a href="/metomeui/viewamlbarringsettings.html">AML
 									Settings</a>
 							</li>
+							<li><a href="/metomeui/listcharges.html">Charge
+									Configuration</a>
+							</li>
+							<li><a href="/metomeui/listaccounttypes.html">Account
+									Type Configuration</a></li>
 						</ul>
+
 						<h3>
 							<a href="#">Products Setup</a>
 						</h3>
 						<ul>
-							<li><a href="#viewmetomesetup">Me2Me Setup</a></li>
+							<li><a href="/metomeui/viewmetomesetup.html">Me2Me Setup</a>
+							</li>
 							<li><a href="#viewzimbasetup.html">Zimba Setup</a></li>
 						</ul>
 					</div>
@@ -303,16 +307,14 @@ td.savebutton {
 									<input class="btn" type="submit" name="submit"
 										value="Create New"
 										onClick="location.href='addussdpredefinput.html'">
-								</div>
-							</td>
+								</div></td>
 						</tr>
 					</table> <c:if test="${empty predefInputList}">
 						<div>
 							<table>
 								<tr>
 									<td>There are no predef inputs configured on this system <br>
-										<br>
-									</td>
+										<br></td>
 								</tr>
 							</table>
 						</div>
@@ -327,20 +329,19 @@ td.savebutton {
 							<%-- editcontacts?id=${predefinput.predefInputId}.html --%>
 							<c:forEach items="${predefInputList}" var="predefinput">
 								<tr class="data">
-								<c:if test="${predefinput.predefInputId != 0}">
-									<td class="data"><a
-										href="/metomeui/editussdpredefinput/${predefinput.predefInputId}.html">${predefinput.predefInputName}</a>
-									</td>
-									<td class="data">${predefinput.predefInputDescription}</td>
-									<td class="data"><a
-										href="/metomeui/removepredefinput/${predefinput.predefInputId}.html">Delete</a>
-									</td>
+									<c:if test="${predefinput.predefInputId != 0}">
+										<td class="data"><a
+											href="/metomeui/editussdpredefinput/${predefinput.predefInputId}.html">${predefinput.predefInputName}</a>
+										</td>
+										<td class="data">${predefinput.predefInputDescription}</td>
+										<td class="data"><a
+											href="/metomeui/removepredefinput/${predefinput.predefInputId}.html">Delete</a>
+										</td>
 									</c:if>
 								</tr>
 							</c:forEach>
 						</table>
-					</c:if>
-				</td>
+					</c:if></td>
 			</tr>
 		</table>
 	</div>

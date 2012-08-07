@@ -240,11 +240,7 @@ td.formlabels {
 					Money</h1>
 				<div class="header"
 					style="font-family: sans-serif; font-stretch: wider; font-size: x-large; color: #000000; text-indent: 6%;">
-					Administrator Console</div> <br>
-				<div class="header" style="color: #000000;">
-					<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
-						> Administration</a>
-				</div></td>
+					Administrator Console</div> <br></td>
 		</tr>
 	</table>
 	<div>
@@ -266,15 +262,13 @@ td.formlabels {
 										<td class="formlabels"><form:label path="userName">User Name</form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="userName" />
-										</td>
+												path="userName" /></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="password">Password</form:label>
 										</td>
 										<td class="form"><form:password cssClass="formfields"
-												path="password" />
-										</td>
+												path="password" /></td>
 									</tr>
 									<tr>
 										<td></td>
@@ -285,13 +279,15 @@ td.formlabels {
 									<tr>
 										<td></td>
 										<td class="savebutton"><br> <input class="btn"
-											type="submit" value="Login" /></td>
+											type="submit" value="Login" />
+										</td>
 										<td></td>
 									</tr>
 								</table>
 							</form:form>
 						</fieldset>
-					</div></td>
+					</div>
+				</td>
 			</tr>
 		</table>
 	</div>

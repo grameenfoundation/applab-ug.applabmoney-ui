@@ -262,10 +262,11 @@ td.formlabels {
 					style="font-family: sans-serif; font-stretch: wider; font-size: x-large; color: #000000; text-indent: 6%;">
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
-					<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
-						> Administration</a>
-				</div>
-			</td>
+					<h2>
+						<a style="color: #000000;" href="/metomeui/auilanding.html"
+							title="Home">Go Back Home</a>
+					</h2>
+				</div></td>
 		</tr>
 	</table>
 	<table>
@@ -283,33 +284,38 @@ td.formlabels {
 							<table>
 								<tr>
 									<td><input type="hidden" name="predefInputId"
-										value="${predefInputId}" /></td>
+										value="${predefInputId}" />
+									</td>
 								</tr>
 								<tr>
 									<td class="formlabels"><form:label
 											path="predefInputItemName">Predefined Input Item Name</form:label>
 									</td>
 									<td class="form"><form:input cssClass="formfields"
-											path="predefInputItemName" /></td>
+											path="predefInputItemName" />
+									</td>
 								</tr>
 								<tr>
 									<td class="formlabels"><form:label
 											path="predefInputItemCode">Predefined Input Item Code</form:label>
 									</td>
 									<td class="form"><form:input cssClass="formfields"
-											path="predefInputItemCode" /></td>
+											path="predefInputItemCode" />
+									</td>
 								</tr>
 								<tr>
 									<td class="formlabels"><form:label
 											path="predefInputItemOrder">Predefined Input Item Order</form:label>
 									</td>
 									<td class="form"><form:input cssClass="formfields"
-											path="predefInputItemOrder" /></td>
+											path="predefInputItemOrder" />
+									</td>
 								</tr>
 								<tr>
 									<td class="formlabels"><form:checkbox id="enable"
 											cssClass="otherformfields" path="predefInputItemEnabledFlag"
-											value="1" /></td>
+											value="1" />
+									</td>
 									<td class="form"><form:label
 											path="predefInputItemEnabledFlag">Enable Predefined Input Item</form:label>
 									</td>
@@ -325,7 +331,8 @@ td.formlabels {
 							</table>
 						</form:form>
 					</fieldset>
-				</div></td>
+				</div>
+			</td>
 		</tr>
 	</table>
 </body>

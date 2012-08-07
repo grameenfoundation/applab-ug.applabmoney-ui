@@ -265,9 +265,12 @@ td.formlabels {
 					style="font-family: sans-serif; font-stretch: wider; font-size: x-large; color: #000000; text-indent: 6%;">
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
-					<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
-						> Administration</a>
-				</div></td>
+					<h2>
+						<a style="color: #000000;" href="/metomeui/auilanding.html"
+							title="Home">Go Back Home</a>
+					</h2>
+				</div>
+			</td>
 		</tr>
 	</table>
 	<div>
@@ -275,8 +278,7 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Manage Transaction Keywords</h2>
-						<hr>
-					</td>
+						<hr></td>
 				</tr>
 			</table>
 		</div>
@@ -296,21 +298,22 @@ td.formlabels {
 								<table>
 									<tr>
 										<td><input type="hidden" name="keywordId"
-											value="${keywordId}" />
-										</td>
+											value="${keywordId}" /></td>
 									</tr>
 									<tr>
 
 										<td class="formlabels"><form:label path="stepMenuName"> Step Menu Name:</form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="stepMenuName" /></td>
+												path="stepMenuName" />
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="stepMenuNumber">Step Menu Number</form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="stepMenuNumber" /></td>
+												path="stepMenuNumber" />
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:checkbox
@@ -329,7 +332,8 @@ td.formlabels {
 									<tr>
 										<td class="formlabels"><form:checkbox
 												cssClass="otherformfields" path="hasPredefInputFlag"
-												value="1" /></td>
+												value="1" />
+										</td>
 										<td class="form"><form:label path="hasPredefInputFlag">Keyword Step has Predefined Input: </form:label>
 										</td>
 									</tr>
@@ -346,12 +350,14 @@ td.formlabels {
 															label="${predefinput.predefInputName}" />
 													</c:if>
 												</c:forEach>
-											</form:select></td>
+											</form:select>
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:checkbox
 												cssClass="otherformfields" path="useFixedValueFlag"
-												value="1" /></td>
+												value="1" />
+										</td>
 										<td class="form"><form:label path="useFixedValueFlag">Use Fixed Value </form:label>
 										</td>
 									</tr>
@@ -360,8 +366,7 @@ td.formlabels {
 										<td class="formlabels"><form:label path="fixedValue"> Fixed Value:</form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="fixedValue" />
-										</td>
+												path="fixedValue" /></td>
 									</tr>
 
 									<tr>
@@ -374,7 +379,8 @@ td.formlabels {
 								</table>
 							</form:form>
 						</fieldset>
-					</div></td>
+					</div>
+				</td>
 			</tr>
 		</table>
 	</div>

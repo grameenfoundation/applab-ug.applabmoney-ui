@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -55,6 +56,10 @@ public class UssdTransactionKeyword {
 	@JoinColumn(name = "KEYWORD_ID", insertable = false, updatable = false, nullable = true)
 	private List<UssdMenuItem> menuItems;
 
+	@OneToMany(targetEntity = AmlBarring.class, mappedBy = "transactionKeyword", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "KEYWORD_ID", insertable = false, updatable = false, nullable = true)
+	private List<AmlBarring> keywordAmlBarring;
+
 	public UssdTransactionKeyword() {
 
 	}
@@ -69,6 +74,7 @@ public class UssdTransactionKeyword {
 		this.keywordEnabledFlag = keywordEnabledFlag;
 		this.keywordSteps = new ArrayList<UssdKeywordStep>();
 		this.menuItems = new ArrayList<UssdMenuItem>();
+		this.setAmlBarringKeywords(new ArrayList<AmlBarring>());
 	}
 
 	public Long getKeywordId() {
@@ -133,5 +139,13 @@ public class UssdTransactionKeyword {
 
 	public void setMenuItems(List<UssdMenuItem> menuItems) {
 		this.menuItems = menuItems;
+	}
+
+	public List<AmlBarring> getAmlBarringKeywords() {
+		return keywordAmlBarring;
+	}
+
+	public void setAmlBarringKeywords(List<AmlBarring> keywordAmlBarring) {
+		this.keywordAmlBarring = keywordAmlBarring;
 	}
 }

@@ -1,268 +1,284 @@
 package metomeui.model;
 
-import javax.validation.constraints.NotNull;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
+@Entity
+@Table(name = "SYSTEM_CONFIG")
 public class SystemConfiguration {
-	
-	//@NotEmpty
-    //@Size(min = 1, max = 50)
-	private String name;
-	//@NotNull
-   	private Integer precedence;
-	//@NotNull
+
+	@Id
+	@GeneratedValue
+	@Column(name = "ID")
+	private Long configId;
+
+	@Column(name = "MIN_PASSWORD", nullable = true, length = 11)
 	private Integer minPasswordLength;
-	@NotNull
+
+	@Column(name = "MAX_PASSWORD", nullable = true, length = 11)
 	private Integer maxPasswordLength;
-	/*private Boolean enforceMaxPasswordLength;
-	private Boolean enforceMinPasswordLength;*/
-	@NotNull
-	private Integer maxPasswordAge;
-	@NotNull
-	private Integer minPasswordAge;
-	/*private Boolean enforceMaxPasswordAge;
-	private Boolean enforceMinPasswordAge;*/
-	@NotNull
+
+	@Column(name = "INVALID_PASSWORD_LOCK", nullable = true, length = 11)
+	private Integer invalidPasswordLock;
+
+	@Transient
 	private Integer maxFailedLoginCount;
-	@NotNull
-	private Integer failedLoginResetCount;
-	private Boolean enforceLockoutPolicy;
-	private Boolean enforcePasswordComplexityRequirements;
-	private Boolean accountManualUnlock;
-	private Boolean accountUnlock;
-	private Boolean accountTimedUnlock;
-	@NotNull
-	private Integer accountLockDuration;
-	
-	
-	private Boolean failedTransferLock;
-	private Boolean autoCreateTempSub;
-	private String tempRestrictionSettings; 
+
+	@Column(name = "FAILED_TRANSFER_LOCK", nullable = true, length = 11)
+	private Integer failedTransferLock;
+
+	@Column(name = "AUTO_CREATE_TEMP_SUB", nullable = true, length = 11)
+	private Integer autoCreateTempSub;
+
+	@Column(name = "TEMP_RESTRICTION", nullable = true, length = 11)
+	private String tempRestrictionSettings;
+
+	@Column(name = "OPERATION", nullable = true, length = 50)
 	private Integer allowedOperations;
-	@NotEmpty(message="SMS Sender Name/Number is required")
-	private String smsSenderID;
-	private String smsSubscriptionFormat;
+
+	@Column(name = "SMS_SENDER_NUMBER", nullable = true, length = 50)
+	private String smsSenderNumber;
+
+	@Column(name = "SMS_MSG_SUB_DISPLAY_FMT", nullable = true, length = 11)
+	private Integer smsMessageSubscriptionFormat;
+
+	@Column(name = "SUB_DISPLAY_MAX_CHARS", nullable = true, length = 11)
 	private String subscriptionMaxDisplayCharacters;
-	private Boolean chargeCollectSetting;
-	private Boolean notifyOnDelayTrans;
+
+	@Column(name = "CHARGE_COLLECT_IMMEDIATE", nullable = true, length = 11)
+	private Integer chargeCollectSetting;
+
+	@Column(name = "NOTIFY_ON_DELAYED_TRANS", nullable = true, length = 11)
+	private Integer notifyOnDelayTransaction;
+
+	@Column(name = "NOTIFY_DELAY_MSG_ID", nullable = true, length = 11)
 	private String notifyOnDelayMessageID;
+
+	@Column(name = "NOTIFY_DELAY_SECONDS", nullable = true, length = 11)
 	private Integer notifyOnDelaySeconds;
-	private Boolean maintenanceMode;
-	private String maintenanceModeMessageID;	
-	
-	
-	@NotNull(message="Country code is required")
-	private Integer countryCode;
-	@NotEmpty(message="Country Domain is required")
+
+	@Column(name = "MAINTENANCE_MODE_FLG", nullable = true, length = 11)
+	private Integer maintenanceModeFlag;
+
+	@Column(name = "MAINTENANCE_MODE_MSG_ID", nullable = true, length = 11)
+	private String maintenanceModeMessageID;
+
+	@Column(name = "COUNTRY_CODE", nullable = true, length = 5)
+	private String countryCode;
+
+	@Column(name = "COUNTRY_DOMAIN", nullable = true, length = 10)
 	private String countryDomain;
-	@NotEmpty(message="Currency code is required")
-	private String currencyCode; 
-	@NotEmpty(message="Currency ISO Number is required")
+
+	@Column(name = "CURRENCY_CODE", nullable = true, length = 10)
+	private String currencyCode;
+
+	@Column(name = "CURRENCY_ISO_NUMBER", nullable = true, length = 11)
 	private String currencyISONumber;
-	@NotNull(message="MSISDN Length is required")
+
+	@Column(name = "MOBILE_LENGTH", nullable = true, length = 11)
 	private Integer msisdnLength;
-	private Boolean msisdnLeadZero;
-	public String getName() {
-		return name;
+
+	@Column(name = "MSISDN_LEAD_ZERO_REQUIRED", nullable = true, length = 11)
+	private Integer msisdnLeadZeroRequired;
+
+	public SystemConfiguration() {
+
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public Integer getPrecedence() {
-		return precedence;
-	}
-	public void setPrecedence(Integer precedence) {
-		this.precedence = precedence;
-	}
+
 	public Integer getMinPasswordLength() {
 		return minPasswordLength;
 	}
+
 	public void setMinPasswordLength(Integer minPasswordLength) {
 		this.minPasswordLength = minPasswordLength;
 	}
+
 	public Integer getMaxPasswordLength() {
 		return maxPasswordLength;
 	}
+
 	public void setMaxPasswordLength(Integer maxPasswordLength) {
 		this.maxPasswordLength = maxPasswordLength;
 	}
-	public Integer getMaxPasswordAge() {
-		return maxPasswordAge;
+
+	public Integer getInvalidPasswordLock() {
+		return invalidPasswordLock;
 	}
-	public void setMaxPasswordAge(Integer maxPasswordAge) {
-		this.maxPasswordAge = maxPasswordAge;
+
+	public void setInvalidPasswordLock(Integer invalidPasswordLock) {
+		this.invalidPasswordLock = invalidPasswordLock;
 	}
-	public Integer getMinPasswordAge() {
-		return minPasswordAge;
-	}
-	public void setMinPasswordAge(Integer minPasswordAge) {
-		this.minPasswordAge = minPasswordAge;
-	}
+
 	public Integer getMaxFailedLoginCount() {
 		return maxFailedLoginCount;
 	}
+
 	public void setMaxFailedLoginCount(Integer maxFailedLoginCount) {
 		this.maxFailedLoginCount = maxFailedLoginCount;
 	}
-	public Integer getFailedLoginResetCount() {
-		return failedLoginResetCount;
-	}
-	public void setFailedLoginResetCount(Integer failedLoginResetCount) {
-		this.failedLoginResetCount = failedLoginResetCount;
-	}
-	public Boolean getEnforceLockoutPolicy() {
-		return enforceLockoutPolicy;
-	}
-	public void setEnforceLockoutPolicy(Boolean enforceLockoutPolicy) {
-		this.enforceLockoutPolicy = enforceLockoutPolicy;
-	}
-	public Boolean getEnforcePasswordComplexityRequirements() {
-		return enforcePasswordComplexityRequirements;
-	}
-	public void setEnforcePasswordComplexityRequirements(
-			Boolean enforcePasswordComplexityRequirements) {
-		this.enforcePasswordComplexityRequirements = enforcePasswordComplexityRequirements;
-	}
-	public Boolean getAccountManualUnlock() {
-		return accountManualUnlock;
-	}
-	public void setAccountManualUnlock(Boolean accountManualUnlock) {
-		this.accountManualUnlock = accountManualUnlock;
-	}
-	public Boolean getAccountUnlock() {
-		return accountUnlock;
-	}
-	public void setAccountUnlock(Boolean accountUnlock) {
-		this.accountUnlock = accountUnlock;
-	}
-	public Boolean getAccountTimedUnlock() {
-		return accountTimedUnlock;
-	}
-	public void setAccountTimedUnlock(Boolean accountTimedUnlock) {
-		this.accountTimedUnlock = accountTimedUnlock;
-	}
-	public Integer getAccountLockDuration() {
-		return accountLockDuration;
-	}
-	public void setAccountLockDuration(Integer accountLockDuration) {
-		this.accountLockDuration = accountLockDuration;
-	}
-	public Boolean getFailedTransferLock() {
+
+	public Integer getFailedTransferLock() {
 		return failedTransferLock;
 	}
-	public void setFailedTransferLock(Boolean failedTransferLock) {
+
+	public void setFailedTransferLock(Integer failedTransferLock) {
 		this.failedTransferLock = failedTransferLock;
 	}
-	public Boolean getAutoCreateTempSub() {
+
+	public Integer getAutoCreateTempSub() {
 		return autoCreateTempSub;
 	}
-	public void setAutoCreateTempSub(Boolean autoCreateTempSub) {
+
+	public void setAutoCreateTempSub(Integer autoCreateTempSub) {
 		this.autoCreateTempSub = autoCreateTempSub;
 	}
+
 	public String getTempRestrictionSettings() {
 		return tempRestrictionSettings;
 	}
+
 	public void setTempRestrictionSettings(String tempRestrictionSettings) {
 		this.tempRestrictionSettings = tempRestrictionSettings;
 	}
+
 	public Integer getAllowedOperations() {
 		return allowedOperations;
 	}
+
 	public void setAllowedOperations(Integer allowedOperations) {
 		this.allowedOperations = allowedOperations;
 	}
-	public String getSmsSenderID() {
-		return smsSenderID;
+
+	public String getSmsSenderNumber() {
+		return smsSenderNumber;
 	}
-	public void setSmsSenderID(String smsSenderID) {
-		this.smsSenderID = smsSenderID;
+
+	public void setSmsSenderNumber(String smsSenderNumber) {
+		this.smsSenderNumber = smsSenderNumber;
 	}
-	public String getSmsSubscriptionFormat() {
-		return smsSubscriptionFormat;
+
+	public Integer getSmsMessageSubscriptionFormat() {
+		return smsMessageSubscriptionFormat;
 	}
-	public void setSmsSubscriptionFormat(String smsSubscriptionFormat) {
-		this.smsSubscriptionFormat = smsSubscriptionFormat;
+
+	public void setSmsMessageSubscriptionFormat(Integer smsMessageSubscriptionFormat) {
+		this.smsMessageSubscriptionFormat = smsMessageSubscriptionFormat;
 	}
+
 	public String getSubscriptionMaxDisplayCharacters() {
 		return subscriptionMaxDisplayCharacters;
 	}
+
 	public void setSubscriptionMaxDisplayCharacters(
 			String subscriptionMaxDisplayCharacters) {
 		this.subscriptionMaxDisplayCharacters = subscriptionMaxDisplayCharacters;
 	}
-	public Boolean getChargeCollectSetting() {
+
+	public Integer getChargeCollectSetting() {
 		return chargeCollectSetting;
 	}
-	public void setChargeCollectSetting(Boolean chargeCollectSetting) {
+
+	public void setChargeCollectSetting(Integer chargeCollectSetting) {
 		this.chargeCollectSetting = chargeCollectSetting;
 	}
-	public Boolean getNotifyOnDelayTrans() {
-		return notifyOnDelayTrans;
+
+	public Integer getNotifyOnDelayTransaction() {
+		return notifyOnDelayTransaction;
 	}
-	public void setNotifyOnDelayTrans(Boolean notifyOnDelayTrans) {
-		this.notifyOnDelayTrans = notifyOnDelayTrans;
+
+	public void setNotifyOnDelayTransaction(Integer notifyOnDelayTransaction) {
+		this.notifyOnDelayTransaction = notifyOnDelayTransaction;
 	}
+
 	public String getNotifyOnDelayMessageID() {
 		return notifyOnDelayMessageID;
 	}
+
 	public void setNotifyOnDelayMessageID(String notifyOnDelayMessageID) {
 		this.notifyOnDelayMessageID = notifyOnDelayMessageID;
 	}
+
 	public Integer getNotifyOnDelaySeconds() {
 		return notifyOnDelaySeconds;
 	}
+
 	public void setNotifyOnDelaySeconds(Integer notifyOnDelaySeconds) {
 		this.notifyOnDelaySeconds = notifyOnDelaySeconds;
 	}
-	public Boolean getMaintenanceMode() {
-		return maintenanceMode;
+
+	public Integer getMaintenanceModeFlag() {
+		return maintenanceModeFlag;
 	}
-	public void setMaintenanceMode(Boolean maintenanceMode) {
-		this.maintenanceMode = maintenanceMode;
+
+	public void setMaintenanceModeFlag(Integer maintenanceModeFlag) {
+		this.maintenanceModeFlag = maintenanceModeFlag;
 	}
+
 	public String getMaintenanceModeMessageID() {
 		return maintenanceModeMessageID;
 	}
+
 	public void setMaintenanceModeMessageID(String maintenanceModeMessageID) {
 		this.maintenanceModeMessageID = maintenanceModeMessageID;
 	}
-	public Integer getCountryCode() {
+
+	public String getCountryCode() {
 		return countryCode;
 	}
-	public void setCountryCode(Integer countryCode) {
+
+	public void setCountryCode(String countryCode) {
 		this.countryCode = countryCode;
 	}
+
 	public String getCountryDomain() {
 		return countryDomain;
 	}
+
 	public void setCountryDomain(String countryDomain) {
 		this.countryDomain = countryDomain;
 	}
+
 	public String getCurrencyCode() {
 		return currencyCode;
 	}
+
 	public void setCurrencyCode(String currencyCode) {
 		this.currencyCode = currencyCode;
 	}
+
 	public String getCurrencyISONumber() {
 		return currencyISONumber;
 	}
+
 	public void setCurrencyISONumber(String currencyISONumber) {
 		this.currencyISONumber = currencyISONumber;
 	}
+
 	public Integer getMsisdnLength() {
 		return msisdnLength;
 	}
+
 	public void setMsisdnLength(Integer msisdnLength) {
 		this.msisdnLength = msisdnLength;
 	}
-	public Boolean getMsisdnLeadZero() {
-		return msisdnLeadZero;
-	}
-	public void setMsisdnLeadZero(Boolean msisdnLeadZero) {
-		this.msisdnLeadZero = msisdnLeadZero;
+
+	public Integer getMsisdnLeadZeroRequired() {
+		return msisdnLeadZeroRequired;
 	}
 
+	public void setMsisdnLeadZeroRequired(Integer msisdnLeadZeroRequired) {
+		this.msisdnLeadZeroRequired = msisdnLeadZeroRequired;
+	}
 
+	public Long getConfigId() {
+		return configId;
+	}
+
+	public void setConfigId(Long configId) {
+		this.configId = configId;
+	}
 }

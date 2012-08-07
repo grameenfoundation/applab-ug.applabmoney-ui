@@ -2,7 +2,11 @@ package metomeui.dao;
 
 import java.util.List;
 
+import javax.persistence.Column;
+
 import metomeui.model.AccountType;
+import metomeui.model.AmlBarring;
+import metomeui.model.GlobalKeywordCharge;
 import metomeui.model.Language;
 import metomeui.model.MemoGroup;
 import metomeui.model.Message;
@@ -30,8 +34,10 @@ public class SystemSettingsDaoImplementation implements SystemSettingsDao {
 	private static Logger logger = Logger
 			.getLogger(SystemSettingsDaoImplementation.class);
 
+	private HibernateUtil hibernateUtil = new HibernateUtil();
+
 	private Session currentSession() {
-		return HibernateUtil.getSessionFactory().getCurrentSession();
+		return hibernateUtil.getSessionFactory().getCurrentSession();
 	}
 
 	/**
@@ -99,11 +105,17 @@ public class SystemSettingsDaoImplementation implements SystemSettingsDao {
 
 	}
 
-	public void removeUser(Long userId) {
-		currentSession().beginTransaction();
-		User user = (User) currentSession().load(User.class, userId);
-		if (null != user) {
-			currentSession().delete(user);
+	public void removeExistingUser(Long userId) {
+		try {
+			currentSession().beginTransaction();
+			User user = (User) currentSession().load(User.class, userId);
+			if (null != user) {
+				currentSession().delete(user);
+				currentSession().getTransaction().commit();
+			}
+		} catch (Exception e) {
+			currentSession().getTransaction().rollback();
+			e.printStackTrace();
 		}
 	}
 
@@ -286,8 +298,10 @@ public class SystemSettingsDaoImplementation implements SystemSettingsDao {
 					.getAccountMaximumBookBalance());
 			existingAccountType.setAccountTypeBitMap(accountType
 					.getAccountTypeBitMap());
+			existingAccountType.setSysAccountTypeFlag(accountType
+					.getSysAccountTypeFlag());
 			try {
-				currentSession().update(existingAccountType);
+				currentSession().merge(existingAccountType);
 				currentSession().getTransaction().commit();
 			} catch (Exception e) {
 				currentSession().getTransaction().rollback();
@@ -431,13 +445,23 @@ public class SystemSettingsDaoImplementation implements SystemSettingsDao {
 	 * 
 	 */
 	@SuppressWarnings("unchecked")
-	public List<SystemConfiguration> listSystemConfiguration() {
-		return (List<SystemConfiguration>) currentSession().createCriteria(
-				SystemConfiguration.class).list();
+	public SystemConfiguration getSystemConfiguration() {
+		currentSession().beginTransaction();
+		return (SystemConfiguration) currentSession()
+				.createCriteria(SystemConfiguration.class).setMaxResults(1)
+				.uniqueResult();
 	}
 
 	public void addSystemConfiguration(SystemConfiguration systemConfiguration) {
-		currentSession().saveOrUpdate(systemConfiguration);
+		try {
+			currentSession().beginTransaction();
+			currentSession().saveOrUpdate(systemConfiguration);
+			currentSession().getTransaction().commit();
+		} catch (Exception e) {
+			currentSession().getTransaction().rollback();
+			e.printStackTrace();
+		}
+
 	}
 
 	public void removeSystemConfiguration(Long systemConfigurationId) {
@@ -446,6 +470,79 @@ public class SystemSettingsDaoImplementation implements SystemSettingsDao {
 		if (null != systemConfiguration) {
 			currentSession().delete(systemConfiguration);
 		}
+	}
+
+	public void editSystemConfiguration(SystemConfiguration systemConfiguration) {
+		currentSession().beginTransaction();
+		SystemConfiguration existingSystemConfiguration = (SystemConfiguration) currentSession()
+				.createCriteria(SystemConfiguration.class).setMaxResults(1)
+				.uniqueResult();
+		if (null != existingSystemConfiguration) {
+			existingSystemConfiguration
+					.setAutoCreateTempSub(systemConfiguration
+							.getAutoCreateTempSub());
+			existingSystemConfiguration
+					.setAllowedOperations(systemConfiguration
+							.getAllowedOperations());
+			existingSystemConfiguration.setCountryDomain(systemConfiguration
+					.getCountryDomain());
+			existingSystemConfiguration
+					.setChargeCollectSetting(systemConfiguration
+							.getChargeCollectSetting());
+			existingSystemConfiguration.setCountryCode(systemConfiguration
+					.getCountryCode());
+			existingSystemConfiguration.setCountryDomain(systemConfiguration
+					.getCountryDomain());
+			existingSystemConfiguration.setCurrencyCode(systemConfiguration
+					.getCurrencyCode());
+			existingSystemConfiguration
+					.setCurrencyISONumber(systemConfiguration
+							.getCurrencyISONumber());
+			existingSystemConfiguration
+					.setFailedTransferLock(systemConfiguration
+							.getFailedTransferLock());
+			existingSystemConfiguration
+					.setInvalidPasswordLock(systemConfiguration
+							.getInvalidPasswordLock());
+			existingSystemConfiguration
+					.setMaintenanceModeMessageID(systemConfiguration
+							.getMaintenanceModeMessageID());
+			existingSystemConfiguration
+					.setMaintenanceModeFlag(systemConfiguration
+							.getMaintenanceModeFlag());
+			existingSystemConfiguration
+					.setMaxFailedLoginCount(systemConfiguration
+							.getMaxFailedLoginCount());
+			existingSystemConfiguration
+					.setMaxPasswordLength(systemConfiguration
+							.getMaxPasswordLength());
+			existingSystemConfiguration
+					.setMinPasswordLength(systemConfiguration
+							.getMinPasswordLength());
+			existingSystemConfiguration
+					.setMsisdnLeadZeroRequired(systemConfiguration
+							.getMsisdnLeadZeroRequired());
+			existingSystemConfiguration.setMsisdnLength(systemConfiguration
+					.getMsisdnLength());
+			existingSystemConfiguration
+					.setNotifyOnDelayMessageID(systemConfiguration
+							.getNotifyOnDelayMessageID());
+			existingSystemConfiguration
+					.setNotifyOnDelaySeconds(systemConfiguration
+							.getNotifyOnDelaySeconds());
+			existingSystemConfiguration
+					.setNotifyOnDelayTransaction(systemConfiguration
+							.getNotifyOnDelayTransaction());
+		}
+
+		try {
+			currentSession().merge(systemConfiguration);
+			currentSession().getTransaction().commit();
+		} catch (Exception e) {
+			currentSession().getTransaction().rollback();
+			e.printStackTrace();
+		}
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -515,7 +612,6 @@ public class SystemSettingsDaoImplementation implements SystemSettingsDao {
 				e.printStackTrace();
 			}
 		}
-
 	}
 
 	@Override
@@ -578,7 +674,13 @@ public class SystemSettingsDaoImplementation implements SystemSettingsDao {
 		NdcListOffnet ndcListOffnet = (NdcListOffnet) currentSession().load(
 				NdcListOffnet.class, ndcListId);
 		if (null != ndcListOffnet) {
-			currentSession().delete(ndcListOffnet);
+			try {
+				currentSession().delete(ndcListOffnet);
+				currentSession().getTransaction().commit();
+			} catch (Exception e) {
+				currentSession().getTransaction().rollback();
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -595,6 +697,218 @@ public class SystemSettingsDaoImplementation implements SystemSettingsDao {
 		} catch (Exception e) {
 			currentSession().getTransaction().rollback();
 			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void deleteExistingAmlBarring(Long barringId) {
+		currentSession().beginTransaction();
+		AmlBarring amlBarring = (AmlBarring) currentSession().load(
+				AmlBarring.class, barringId);
+
+		if (null != amlBarring) {
+			try {
+				currentSession().delete(amlBarring);
+				currentSession().getTransaction().commit();
+			} catch (Exception e) {
+				currentSession().getTransaction().rollback();
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public AmlBarring getExistingAmlBarring(Long barringId) {
+		currentSession().beginTransaction();
+		AmlBarring amlBarring = (AmlBarring) currentSession().load(
+				AmlBarring.class, barringId);
+		return amlBarring;
+	}
+
+	@Override
+	public void editExistingAmlBarring(AmlBarring amlBarring) {
+		currentSession().beginTransaction();
+		AmlBarring existingAmlBarring = (AmlBarring) currentSession().load(
+				AmlBarring.class, amlBarring.getBarringId());
+		if (null != existingAmlBarring) {
+			existingAmlBarring.setTransactionKeyword(amlBarring
+					.getTransactionKeyword());
+			existingAmlBarring.setAccountType(amlBarring.getAccountType());
+			existingAmlBarring.setAllowReceive(amlBarring.getAllowReceive());
+			existingAmlBarring.setAllowSend(amlBarring.getAllowSend());
+		}
+		try {
+			currentSession().update(existingAmlBarring);
+			currentSession().getTransaction().commit();
+		} catch (Exception e) {
+			currentSession().getTransaction().rollback();
+			e.printStackTrace();
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<AmlBarring> listAmlBarringSettings() {
+		currentSession().beginTransaction();
+		return (List<AmlBarring>) currentSession().createCriteria(
+				AmlBarring.class).list();
+	}
+
+	@Override
+	public void addAmlBarringSetting(AmlBarring amlBarring) {
+		try {
+			currentSession().beginTransaction();
+			currentSession().save(amlBarring);
+			currentSession().getTransaction().commit();
+		} catch (Exception e) {
+			currentSession().getTransaction().rollback();
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public GlobalKeywordCharge getExistingGlobalKeywordCharge(Long chargeId) {
+		currentSession().beginTransaction();
+		GlobalKeywordCharge globalKeywordCharge = (GlobalKeywordCharge) currentSession()
+				.load(GlobalKeywordCharge.class, chargeId);
+		return globalKeywordCharge;
+	}
+
+	@Override
+	public void editExistingGlobalKeywordCharge(
+			GlobalKeywordCharge globalKeywordCharge) {
+		currentSession().beginTransaction();
+		GlobalKeywordCharge existingGlobalKeywordCharge = (GlobalKeywordCharge) currentSession()
+				.load(GlobalKeywordCharge.class,
+						globalKeywordCharge.getChargeId());
+		if (null != existingGlobalKeywordCharge) {
+			existingGlobalKeywordCharge
+					.setTransactionKeyword(globalKeywordCharge
+							.getTransactionKeyword());
+			existingGlobalKeywordCharge.setChargeFixed(globalKeywordCharge
+					.getChargeFixed());
+			existingGlobalKeywordCharge.setChargePercent(globalKeywordCharge
+					.getChargePercent());
+			existingGlobalKeywordCharge.setHighRange(globalKeywordCharge
+					.getHighRange());
+			existingGlobalKeywordCharge.setLowRange(globalKeywordCharge
+					.getLowRange());
+		}
+		try {
+			currentSession().update(existingGlobalKeywordCharge);
+			currentSession().getTransaction().commit();
+		} catch (Exception e) {
+			currentSession().getTransaction().rollback();
+			e.printStackTrace();
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<GlobalKeywordCharge> listGlobalKeywordCharges() {
+		currentSession().beginTransaction();
+		return (List<GlobalKeywordCharge>) currentSession().createCriteria(
+				GlobalKeywordCharge.class).list();
+	}
+
+	@Override
+	public void addGlobalKeywordCharge(GlobalKeywordCharge globalKeywordCharge) {
+		try {
+			currentSession().beginTransaction();
+			currentSession().save(globalKeywordCharge);
+			currentSession().getTransaction().commit();
+		} catch (Exception e) {
+			currentSession().getTransaction().rollback();
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void deleteExistingGlobalKeywordCharge(Long chargeId) {
+		currentSession().beginTransaction();
+		GlobalKeywordCharge globalKeywordCharge = (GlobalKeywordCharge) currentSession()
+				.load(GlobalKeywordCharge.class, chargeId);
+
+		if (null != globalKeywordCharge) {
+			try {
+				currentSession().delete(globalKeywordCharge);
+				currentSession().getTransaction().commit();
+			} catch (Exception e) {
+				currentSession().getTransaction().rollback();
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean checkIfDuplicateMemoGroupName(Long memoGroupId,
+			String memoGroupName) {
+		currentSession().beginTransaction();
+		List<MemoGroup> memoGroup = (List<MemoGroup>) currentSession()
+				.createQuery(
+						"from MemoGroup memoGroup"
+								+ "where memoGroup.memoGroupId = :memoGroupId and memoGroup.memoGroupName = :memoGroupName")
+				.setParameter("memoGroupId", memoGroupId)
+				.setParameter("memoGroupName", memoGroupName).list();
+		if (memoGroup.isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean checkIfDuplicateMemoGroupCode(Long memoGroupId,
+			String memoGroupCode) {
+		currentSession().beginTransaction();
+		List<MemoGroup> memoGroup = (List<MemoGroup>) currentSession()
+				.createQuery(
+						"from MemoGroup memoGroup "
+								+ "where memoGroup.memoGroupId= :memoGroupId and memoGroup.goalGroupCode = :goalGroupCode")
+				.setParameter("memoGroupId", memoGroupId)
+				.setParameter("memoGroupCode", memoGroupCode).list();
+		if (memoGroup.isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean checkIfDuplicateLanguageName(Long languageId,
+			String languageName) {
+		currentSession().beginTransaction();
+		List<Language> language = (List<Language>) currentSession()
+				.createQuery(
+						"from Language language "
+								+ "where language.languageId = :languageId and language.languageName = :languageName")
+				.setParameter("languageId", languageId)
+				.setParameter("languageName", languageName).list();
+		if (language.isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean checkIfDuplicateMessageCode(Long messageId,
+			String messageCode) {
+		currentSession().beginTransaction();
+		List<Message> message = (List<Message>) currentSession()
+				.createQuery(
+						"from Message message "
+								+ "where message.messageId = :messageId and message.messageCode = :messageCode")
+				.setParameter("messageId", messageId)
+				.setParameter("messageCode", messageCode).list();
+		if (message.isEmpty()) {
+			return false;
+		} else {
+			return true;
 		}
 	}
 

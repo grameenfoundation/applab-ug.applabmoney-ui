@@ -5,7 +5,7 @@
 
 <html>
 <head>
-<title>Menu Items Manager</title>
+<title>Charges Manager</title>
 <link type="text/css"
 	href="resources/css/ui-lightness/jquery-ui-1.8.18.custom.css"
 	rel="stylesheet" />
@@ -24,6 +24,7 @@
 	});
 </script>
 <style>
+
 /*GENERAL*/
 body {
 	font-family: 'Arial', 'Helvetica', sans-serif;
@@ -60,6 +61,7 @@ label {
 }
 
 /*END GENERAL*/
+
 /* ERROR BLOCK */
 .errorblock {
 	color: #000;
@@ -68,11 +70,8 @@ label {
 	padding: 8px;
 	margin: 16px;
 }
-/*BUTTONS*/
-input.createbtn {
-	
-}
 
+/*BUTTONS*/
 button,.btn {
 	background-image:
 		url('resources/css/ui-lightness/images/CuteCapLa7.gif');
@@ -145,6 +144,15 @@ tr.header {
 	background: #ffffff;
 }
 
+td {
+	height: 19px;
+	width: 30%;
+	margin: 0px 2px 0px 2px;
+	padding: 0px 5px 0px 5px;
+	test-align: center;
+	width: 40%;
+}
+
 th {
 	background: #7CB15C;
 	height: 19px;
@@ -155,23 +163,15 @@ th {
 	word-wrap: break-word;
 }
 
-td {
-	height: 19px;
-	width: 30%;
-	margin: 0px 2px 0px 2px;
-	padding: 0px 5px 0px 5px;
-	test-align: center;
-	width: 20%;
-}
-
 td.data {
 	border-color: #9AC482;
 	border-width: 1px 1px 0 0;
 	border-style: solid;
 	margin: 1;
-	padding: 4px;
+	padding: 1px;
 	background-color: #F3F3EC;
 	text-align: left;
+	word-wrap: break-word;
 }
 
 tr.data {
@@ -225,7 +225,7 @@ td.formlabels {
 }
 
 .otherformfields {
-	padding-left: 200px;
+	padding-left: 250px;
 }
 
 /*END CONTENT SECTION*/
@@ -242,8 +242,10 @@ td.formlabels {
 					style="font-family: sans-serif; font-stretch: wider; font-size: x-large; color: #000000; text-indent: 6%;">
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
-					<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
-						> Administration</a>
+					<h2>
+						<a style="color: #000000;" href="/metomeui/auilanding.html"
+							title="Home">Go Back Home</a>
+					</h2>
 				</div>
 			</td>
 		</tr>
@@ -260,90 +262,101 @@ td.formlabels {
 
 		<table style="width: 100%;">
 			<tr>
-				<td class="navbar">
-					<div id="accordion">
-						<h3>
-							<a href="ussdmenuitems.html">Ussd Menu Setup</a>
-						</h3>
-						<ul>
-							<li><a href="ussdmenuitems.html">Ussd Menu Items Setup</a></li>
-							<li><a href="ussdtransactionkeywords.html">Transaction
-									Keywords Setup</a>
-							</li>
-							<li><a href="ussdpredefinputs.html">Predefined Inputs
-									Setup</a>
-							</li>
-						</ul>
-						<h3>
-							<a href="charge.html">Charge Setup</a>
-						</h3>
-						<ul>
-							<li><a href="charges.html">Configure Charge</a>
-							</li>
-							<li><a href="customers.html">Manage Customer Accounts </a>
-							</li>
-							<li><a href="accounts.html">Manage Account Types</a>
-							</li>
-						</ul>
-					</div></td>
 				<td class="content">
-					<table>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td><div>
-									<input class="btn" type="submit" name="submit"
-										value="Create New" onClick="location.href='addcharge.html'">
-								</div>
-							</td>
-						</tr>
-					</table> <c:if test="${empty chargeList}">
-						<div>
-							<table>
-								<tr>
-									<td>There are no customers registered on this system <br>
-										<br>
-									</td>
-								</tr>
-							</table>
-						</div>
-					</c:if> <c:if test="${!empty chargeList}">
-						<h2>System Charge Configuration</h2>
-						<table class="data">
+					<div>
+						<fieldset>
+							<legend>
+								<h2>Create New Keyword Charge Type</h2>
+							</legend>
+
+							<form:form method="post" action="addglobalkeywordcharge.html"
+								commandName="globalKeywordCharge">
+								<form:errors path="*" cssClass="errorblock" element="div" />
+
+								<table>
+									<tr>
+										<td class="formlabels"><form:label
+												path="transactionKeyword.keywordId">Linked Keyword: </form:label>
+										</td>
+										<td class="form"><form:select cssClass="dropdown"
+												path="transactionKeyword.keywordId">
+												<form:option value="0" label="--None--" />
+												<c:forEach items="${transactionKeywordsList}" var="keyword">
+													<form:option value="${keyword.keywordId}"
+														label="${keyword.keywordName}" />
+												</c:forEach>
+												<form:options items="${transactionKeywordsList}" />
+											</form:select></td>
+									</tr>
+									<tr>
+										<td class="formlabels"><label name="chargeRange">Charge
+												Range: </label>
+										</td>
+										<td class="form">From:&nbsp;&nbsp;&nbsp;&nbsp;<form:select
+												cssClass="dropdown" path="lowRange" style="width:60px;">
+												<form:option value="0 " label="0" />
+												<form:option value="1" label="500" />
+												<form:option value="2" label="2000" />
+											</form:select>&nbsp;&nbsp;&nbsp;&nbsp;To:&nbsp;&nbsp;&nbsp;&nbsp;<form:select
+												cssClass="dropdown" path="highRange" style="width:60px;">
+												<form:option value="0" label="0" />
+												<form:option value="1" label="500" />
+												<form:option value="2" label="2000" />
+											</form:select>
+										</td>
+									</tr>
+									<tr>
+										<td class="formlabels"><label name="chargeModeType">Charge
+												Mode:</label></td>
+										<td class="form"><form:radiobutton path="chargeMode"
+												value="1" /> Charge Fixed</td>
+									</tr>
+									<tr>
+										<td></td>
+										<td class="form"><form:radiobutton path="chargeMode"
+												value="0" /> Charge Percent</td>
+									</tr>
+									<tr>
+										<td class="formlabels"><form:label path="chargeFixed">Fixed Charge Amount: </form:label>
+										</td>
+										<td class="form"><form:input cssClass="formfields"
+												path="chargeFixed" />
+										</td>
+									</tr>
+									<tr>
+										<td class="formlabels"><form:label path="chargePercent">Charge Percent: </form:label>
+										</td>
+										<td class="form"><form:input cssClass="formfields"
+												path="chargePercent" />
+										</td>
+									</tr>
+									<tr>
+										<td></td>
+
+										<td class="savebutton"><input class="btn" type="submit"
+											value="addcharge" /><input class="btn" type="button"
+											value="Cancel"
+											onClick="location.href='/metomeui/listglobalkeywordcharges.html'" />
+										</td>
+									</tr>
+								</table>
+							</form:form>
+						</fieldset>
+						<table>
 							<tr>
-								<th>Charge Type</th>
-								<th>Charge Range</th>
-								<th>Charge Calculation Type</th>
-								<th>Charge Duration</th>
-								
-								<!-- 								<th>Action</th> -->
+								<td><br>
+								</td>
 							</tr>
-							<c:forEach items="${chargeList}" var="charge">
-								<tr class=data>
-									<td class=data>${charge.chargeType}</td>
-									<td class=data>${charge.range}</td>
-									<td class=data>${charge.calculationType}</td>
-									<td class=data>${charge.chargeDuration}</td>
-									<%-- 									<td class=data><c:if test="${menuitem.menuItemEnabledFlag == 0}"> --%>
-									<%-- 											<a href="#activate/${menuitem.menuItemId}">Activate/</a> --%>
-									<%-- 										</c:if> <c:if test="${menuitem.menuItemEnabledFlag == 1}"> --%>
-									<%-- 											<a href="#deactivate/${menuitem.menuItemId}">Deactivate/</a> --%>
-									<%-- 										</c:if> <a href="removemenuitem/${menuitem.menuItemId}.html">Delete</a><a> --%>
-									<%-- 											| </a><a href="#edit/${menuitem.menuItemId}">Edit</a></td> --%>
-								</tr>
-							</c:forEach>
 						</table>
-					</c:if>
-				</td>
+
+					</div></td>
 			</tr>
 		</table>
-		<!-- 	<table border=1px; width=100%;> -->
-		<!-- 		<tr> -->
-		<!-- 			<td>Footer</td> -->
-		<!-- 		</tr> -->
-		<!-- 	</table> -->
+		<!--    <table border=1px; width=100%;> -->
+		<!--        <tr> -->
+		<!--            <td>Footer</td> -->
+		<!--        </tr> -->
+		<!--    </table> -->
 	</div>
 </body>
 </html>

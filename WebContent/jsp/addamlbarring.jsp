@@ -5,7 +5,7 @@
 
 <html>
 <head>
-<title>Transaction Keywords Manager</title>
+<title>AML Barring Manager</title>
 <link type="text/css"
 	href="resources/css/ui-lightness/jquery-ui-1.8.18.custom.css"
 	rel="stylesheet" />
@@ -218,6 +218,7 @@ td.formlabels {
 .formfields {
 	width: 150px;
 	height: 25px;
+	font-family: 'Arial', 'Helvetica', sans-serif;
 }
 
 .labels {
@@ -242,141 +243,113 @@ td.formlabels {
 					style="font-family: sans-serif; font-stretch: wider; font-size: x-large; color: #000000; text-indent: 6%;">
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
-					<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
-						> Administration</a>
-				</div>
-			</td>
+					<h2>
+						<a style="color: #000000;" href="/metomeui/auilanding.html"
+							title="Home">Go Back Home</a>
+					</h2>
+				</div></td>
 		</tr>
 	</table>
 	<div>
 		<div>
 			<table style="width: 100%;">
 				<tr>
-					<td><h2>Manage Account Types</h2>
-						<hr></td>
+					<td><h2>Global AML Barring Manager</h2>
+						<hr>
+					</td>
 				</tr>
 			</table>
 		</div>
 
 		<table style="width: 100%;">
 			<tr>
-				<td class="navbar">
-					<div id="accordion">
-						<h3>
-							<a href="ussdmenuitems.html">Ussd Menu Setup</a>
-						</h3>
-						<ul>
-							<li><a href="ussdmenuitems.html">Ussd Menu Items Setup</a>
-							</li>
-							<li><a href="ussdtransactionkeywords.html">Transaction
-									Keywords Setup</a></li>
-							<li><a href="ussdpredefinputs.html">Predefined Inputs
-									Setup</a></li>
-						</ul>
-						<h3>
-							<a href="charge.html">Charge Setup</a>
-						</h3>
-						<ul>
-							<li><a href="charge.html">Configure Charge</a></li>
-							<li><a href="customer.html">Manage Customer Accounts </a></li>
-							<li><a href="account.html">Manage Account Types</a></li>
-						</ul>
-					</div>
-				</td>
 				<td class="content">
 					<div>
 						<fieldset>
 							<legend>
-								<h2>Create New Account Type</h2>
+								<h2>Create Global AML Barring Configuration</h2>
 							</legend>
 
-							<form:form method="post" action="addcharge.html"
-								commandName="charge">
+							<form:form method="post" action="addamlbarring.html"
+								commandName="amlBarring">
 								<form:errors path="*" cssClass="errorblock" element="div" />
 
 								<table>
 									<tr>
-										<td class="formlabels"><form:label path="accountCode">Charge Name: </form:label>
-										</td>
-										<td class="form"><form:input cssClass="formfields"
-												path="accountCode" " />
-										</td>
-									</tr>
-									<tr>
-										<td class="formlabels"><form:label path="country">Charge Type:</form:label>
+										<td class="formlabels"><form:label
+												path="transactionKeyword.keywordId">Associated Keyword Name:</form:label>
 										</td>
 										<td class="form"><form:select cssClass="dropdown"
-												path="country">
-												<form:option value="0" label="Global" />
-												<form:option value="1" label="Customer Type" />
-												<form:option value="2" label="Account Type" />
-											</form:select>
-										</td>
-									</tr>
-									<tr>
-										<td class="formlabels"><form:label path="chargeKeyword">Linked Keyword: </form:label>
-										</td>
-										<td class="form"><form:select cssClass="dropdown"
-													path="chargeKeyword">
-													<form:option value="0" label="--None--" />
-													<c:forEach items="${keywordList}" var="keyword">
-														<form:option value="${keyword.keywordId}"
-															label="${account.keywordName}" />
-													</c:forEach>
-													<form:options items="${keywordList}" />
-												</form:select></td>
-									</tr>
-									<tr>
-										<td class="formlabels"><label name="chargeRange">Charge Range: </label>
-										</td>  From  
-										<td class="form"><form:select cssClass="dropdown"
-												path="lowRange">
-												<form:option value="0" label="0" />
-												<form:option value="1" label="500" />
-												<form:option value="2" label="2000" />
-											</form:select>
-										</td>  To  
-										<td class="form"><form:select cssClass="dropdown"
-												path="highRange">
-												<form:option value="0" label="0" />
-												<form:option value="1" label="500" />
-												<form:option value="2" label="2000" />
-											</form:select>
-										</td>
+												path="transactionKeyword.keywordId">
+												<form:option value="0" label="--None--" />
+												<c:forEach items="${transactionKeywordsList}"
+													var="transactionkeyword">
+													<c:if test="${transactionkeyword.keywordId != 0}">
+														<form:option value="${transactionkeyword.keywordId}"
+															label="${transactionkeyword.keywordName}" />
+													</c:if>
+												</c:forEach>
+											</form:select></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
-												path="chargeCalculation">Charge Calculation:</form:label>
+												path="accountType.accountTypeId">Associated Account Type:</form:label>
 										</td>
 										<td class="form"><form:select cssClass="dropdown"
-												path="chargeCalculation">
-												<form:option value="0" label="fixed" />
-												<form:option value="1" label="percentage" />
+												path="accountType.accountTypeId">
+												<form:option value="0" label="--None--" />
+												<c:forEach items="${accountTypesList}" var="acctype">
+													<c:if test="${acctype.accountTypeId != 0}">
+														<form:option value="${acctype.accountTypeId}"
+															label="${acctype.accountTypeName}" />
+													</c:if>
+												</c:forEach>
+												<form:options items="${accountTypesList}" />
 											</form:select>
 										</td>
 									</tr>
 									<tr>
-										<td class="formlabels"><form:label path="chargeEndDate">Duration for Charge: </form:label>
+										<td class="formlabels"><form:label path="allowSend">Allow Send:</form:label>
 										</td>
-										<td class="form"><form:input cssClass="formfields"
-												path="chargeEndDate"/>
+										<td class="form"><form:select cssClass="dropdown"
+												path="allowSend">
+												<form:option value="0" label="No" />
+												<form:option value="1" label="Yes" />
+											</form:select>
 										</td>
 									</tr>
 									<tr>
-										<td colspan="2" class="savebutton"><input class="btn"
-											type="submit" value="addcharge" /></td>
+										<td class="formlabels"><form:label path="allowReceive">Allow Receive:</form:label>
+										</td>
+										<td class="form"><form:select cssClass="dropdown"
+												path="allowReceive">
+												<form:option value="0" label="No" />
+												<form:option value="1" label="Yes" />
+											</form:select>
+										</td>
+									</tr>
+									<tr>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td colspan="2" class="savebutton"><br> <input
+											class="btn" type="submit" value="Save" /> <input class="btn"
+											type="button" value="Cancel"
+											onClick="location.href='/metomeui/listamlbarring.html'" /></td>
+
 									</tr>
 								</table>
 							</form:form>
 						</fieldset>
 						<table>
 							<tr>
-								<td><br>
-								</td>
+								<td><br></td>
 							</tr>
 						</table>
 
-					</div></td>
+					</div>
+				</td>
 			</tr>
 		</table>
 		<!--    <table border=1px; width=100%;> -->

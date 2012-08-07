@@ -31,32 +31,26 @@ public class UssdMenuDaoImplementation implements UssdMenuDao {
 	private static Logger logger = Logger
 			.getLogger(SystemSettingsDaoImplementation.class);
 
-	public boolean success = false;
-
-	public boolean isSuccess() {
-		return success;
-	}
-
-	public void setSuccess(boolean success) {
-		this.success = success;
-	}
+	private HibernateUtil hibernateUtil = new HibernateUtil();
 
 	public Session currentSession() {
-		return HibernateUtil.getSessionFactory().getCurrentSession();
+		return hibernateUtil.getSessionFactory().getCurrentSession();
 	}
 
 	public void addPredefInput(UssdPredefInput predefInput) {
 		try {
 
 			// Retrieve session from Hibernate
+			if (!currentSession().isOpen()) {
+				currentSession();
+			}
 			currentSession().beginTransaction();
 			currentSession().save(predefInput);
 			currentSession().getTransaction().commit();
-			setSuccess(true);
 		} catch (Exception e) {
-			currentSession().getTransaction().rollback();
 			e.printStackTrace();
-			success = false;
+			currentSession().getTransaction().rollback();
+			HibernateUtil.discardSession((Session) currentSession());
 		}
 	}
 
@@ -74,7 +68,6 @@ public class UssdMenuDaoImplementation implements UssdMenuDao {
 	public void editPredefInput(UssdPredefInput predefInput) {
 
 		UssdPredefInput existingPredefInput = new UssdPredefInput();
-		deleteExistingPredefInputItems(predefInput.getPredefInputId());
 		currentSession().beginTransaction();
 		existingPredefInput = (UssdPredefInput) currentSession().load(
 				UssdPredefInput.class, predefInput.getPredefInputId());
@@ -84,8 +77,6 @@ public class UssdMenuDaoImplementation implements UssdMenuDao {
 				.setPredefInputName(predefInput.getPredefInputName());
 		existingPredefInput.setPredefInputDescription(predefInput
 				.getPredefInputDescription());
-		existingPredefInput.setPredefInputItems(predefInput
-				.getPredefInputItems());
 		try {
 
 			// Save updates
@@ -115,16 +106,68 @@ public class UssdMenuDaoImplementation implements UssdMenuDao {
 		// Retrieve existing UssdPredefInput
 		UssdPredefInput existingUssdPredefInput = (UssdPredefInput) currentSession()
 				.load(UssdPredefInput.class, predefInputId);
+		currentSession().flush();
 		return existingUssdPredefInput;
+	}
+
+	public void addPredefInputItem(UssdPredefInputItem predefInputItem) {
+		try {
+
+			// Retrieve session from Hibernate
+			if (!currentSession().isOpen()) {
+				currentSession();
+			}
+			currentSession().beginTransaction();
+			currentSession().save(predefInputItem);
+			currentSession().getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			currentSession().getTransaction().rollback();
+			HibernateUtil.discardSession((Session) currentSession());
+		}
+	}
+
+	@Override
+	public void editPredefInputItem(UssdPredefInputItem predefInputItem) {
+		UssdPredefInputItem existingPredefInputItem = new UssdPredefInputItem();
+		currentSession().beginTransaction();
+		existingPredefInputItem = (UssdPredefInputItem) currentSession().load(
+				UssdPredefInputItem.class, predefInputItem.getInputItemId());
+
+		// Assign updated values to this existing PredefInput
+		existingPredefInputItem.setPredefInputItemName(predefInputItem
+				.getPredefInputItemName());
+		existingPredefInputItem.setPredefInputItemCode(predefInputItem
+				.getPredefInputItemCode());
+		existingPredefInputItem.setPredefInputItemOrder(predefInputItem
+				.getPredefInputItemOrder());
+		existingPredefInputItem.setPredefInputItemEnabledFlag(predefInputItem
+				.getPredefInputItemEnabledFlag());
+		try {
+
+			// Save updates
+			currentSession().merge(predefInputItem);
+			currentSession().getTransaction().commit();
+		} catch (Exception e) {
+			currentSession().getTransaction().rollback();
+			e.printStackTrace();
+		}
 	}
 
 	public void deleteExistingPredefInputItems(Long predefInputId) {
 		currentSession().beginTransaction();
 		String hql = "delete from UssdPredefInputItem predefInputItem "
 				+ "where predefInputItem.predefInput.predefInputId = :predefInputId";
+
 		Query query = currentSession().createQuery(hql).setParameter(
 				"predefInputId", predefInputId);
-		query.executeUpdate();
+		try {
+			query.executeUpdate();
+			currentSession().getTransaction().commit();
+		} catch (Exception e) {
+			currentSession().getTransaction().rollback();
+			e.printStackTrace();
+		}
 
 	}
 
@@ -177,7 +220,6 @@ public class UssdMenuDaoImplementation implements UssdMenuDao {
 	 * Edits existing Ussd Transaction Keyword
 	 */
 	public void editTransactionKeyword(UssdTransactionKeyword transactionKeyword) {
-		logger.debug("Editing existing Ussd Transaction Keyword");
 		currentSession().beginTransaction();
 		UssdTransactionKeyword existingTransactionKeyword = (UssdTransactionKeyword) currentSession()
 				.load(UssdTransactionKeyword.class,
@@ -275,6 +317,7 @@ public class UssdMenuDaoImplementation implements UssdMenuDao {
 			existingKeywordStep.setFixedValue(keywordStep.getFixedValue());
 			existingKeywordStep.setHasPredefInputFlag(keywordStep
 					.getHasPredefInputFlag());
+			existingKeywordStep.setPredefInput(keywordStep.getPredefInput());
 			existingKeywordStep.setIsFirstStepFlag(keywordStep
 					.getIsFirstStepFlag());
 			existingKeywordStep.setIsLastStepFlag(keywordStep
@@ -436,6 +479,7 @@ public class UssdMenuDaoImplementation implements UssdMenuDao {
 			currentSession().getTransaction().commit();
 		} catch (Exception e) {
 			currentSession().getTransaction().rollback();
+			HibernateUtil.discardSession((Session) currentSession());
 			e.printStackTrace();
 		}
 	}
@@ -443,6 +487,9 @@ public class UssdMenuDaoImplementation implements UssdMenuDao {
 	@Override
 	public void deactivateExistingPredefInputItem(Long predefInputItemId) {
 		Integer offSwitch = 0;
+		if (!currentSession().isOpen()) {
+
+		}
 		currentSession().beginTransaction();
 		UssdPredefInputItem existingPredefInputItem = (UssdPredefInputItem) currentSession()
 				.load(UssdPredefInputItem.class, predefInputItemId);
@@ -452,6 +499,7 @@ public class UssdMenuDaoImplementation implements UssdMenuDao {
 			currentSession().getTransaction().commit();
 		} catch (Exception e) {
 			currentSession().getTransaction().rollback();
+			HibernateUtil.discardSession((Session) currentSession());
 			e.printStackTrace();
 		}
 	}
@@ -573,36 +621,23 @@ public class UssdMenuDaoImplementation implements UssdMenuDao {
 	@Override
 	public List<UssdMenuItem> getChildMenuItemsForParentMenuItem(Long menuItemId) {
 		currentSession().beginTransaction();
-		//List<UssdMenuItem> childMenuItemsList = (List<UssdMenuItem>) currentSession()
 		return (List<UssdMenuItem>) currentSession()
 				.createQuery(
 						"from UssdMenuItem menuItem "
 								+ "where menuItem.rootMenuItem.menuItemId = :menuItemId")
 				.setParameter("menuItemId", menuItemId).list();
-
-		//if (!(childMenuItemsList.isEmpty())) {
-			//return childMenuItemsList;
-		//} else {
-			//return new ArrayList<UssdMenuItem>();
-		//}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<UssdMenuItem> getChildMenuItemsForParentMenuItem(UssdMenuItem rootMenuItem) {
+	public List<UssdMenuItem> getChildMenuItemsForParentMenuItem(
+			UssdMenuItem rootMenuItem) {
 		currentSession().beginTransaction();
-		//List<UssdMenuItem> childMenuItemsList = (List<UssdMenuItem>) currentSession()
 		return (List<UssdMenuItem>) currentSession()
 				.createQuery(
 						"from UssdMenuItem menuItem "
 								+ "where menuItem.rootMenuItem = :rootMenuItem")
 				.setParameter("rootMenuItem", rootMenuItem).list();
-
-		//if (!(childMenuItemsList.isEmpty())) {
-			//return childMenuItemsList;
-		//} else {
-			//return new ArrayList<UssdMenuItem>();
-		//}
 	}
 
 	/**

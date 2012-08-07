@@ -144,6 +144,16 @@ public class UssdMenuServiceImplementation implements UssdMenuService {
 
 	}
 
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+	public void addPredefInputItem(UssdPredefInputItem predefInputItem) {
+		ussdMenuDao.addPredefInputItem(predefInputItem);
+	}
+
+	@Transactional
+	public void editPredefInputItem(UssdPredefInputItem predefInputItem) {
+		ussdMenuDao.editPredefInputItem(predefInputItem);
+	}
+
 	@Transactional
 	public List<UssdKeywordStep> listKeywordStepByKeywordId(Long keywordId) {
 		return ussdMenuDao.listKeywordStepByKeywordId(keywordId);
@@ -206,6 +216,13 @@ public class UssdMenuServiceImplementation implements UssdMenuService {
 			Long keywordId) {
 		return ussdMenuDao
 				.checkIfDuplicateStepMenuName(stepMenuName, keywordId);
+	}
+
+	@Override
+	public boolean checkIfDuplicateStepMenuNumber(Integer stepMenuNumber,
+			Long keywordId) {
+		return ussdMenuDao.checkIfDuplicateStepMenuNumber(stepMenuNumber,
+				keywordId);
 	}
 
 	@Override

@@ -3,6 +3,8 @@ package metomeui.dao;
 import java.util.List;
 
 import metomeui.model.AccountType;
+import metomeui.model.AmlBarring;
+import metomeui.model.GlobalKeywordCharge;
 import metomeui.model.MemoGroup;
 import metomeui.model.Message;
 import metomeui.model.NdcListOffnet;
@@ -20,7 +22,7 @@ public interface SystemSettingsDao {
 
 	public void addUser(User user);
 
-	public void removeUser(Long id);
+	public void removeExistingUser(Long userId);
 
 	public User getUserByLogin(String userName, String password);
 
@@ -57,6 +59,12 @@ public interface SystemSettingsDao {
 
 	public void editExistingMessage(Message message);
 
+	public boolean checkIfDuplicateMessageCode(Long messageId,
+			String messageCode);
+
+	public boolean checkIfDuplicateLanguageName(Long languageId,
+			String LanguageName);
+
 	/**
 	 * Language Management functions
 	 * 
@@ -92,11 +100,13 @@ public interface SystemSettingsDao {
 	/**
 	 * System Config functions
 	 */
-	public List<SystemConfiguration> listSystemConfiguration();
+	public SystemConfiguration getSystemConfiguration();
 
 	public void removeSystemConfiguration(Long SystemConfigurationId);
 
 	public void addSystemConfiguration(SystemConfiguration sysConfiguration);
+
+	public void editSystemConfiguration(SystemConfiguration systemConfiguration);
 
 	/**
 	 * NDC List functions
@@ -126,4 +136,38 @@ public interface SystemSettingsDao {
 
 	public void activateOrDeactivateExistingNdcListOffnet(Long ndcListId,
 			Integer onSwitch);
+
+	/**
+	 * AmlBarring functions
+	 */
+	public AmlBarring getExistingAmlBarring(Long barringId);
+
+	public void editExistingAmlBarring(AmlBarring amlBarring);
+
+	public List<AmlBarring> listAmlBarringSettings();
+
+	public void addAmlBarringSetting(AmlBarring amlBarring);
+
+	public void deleteExistingAmlBarring(Long barringId);
+
+	/**
+	 * GlobalKeywordCharge functions
+	 */
+	public GlobalKeywordCharge getExistingGlobalKeywordCharge(Long chargeId);
+
+	public void editExistingGlobalKeywordCharge(
+			GlobalKeywordCharge globalKeywordCharge);
+
+	public List<GlobalKeywordCharge> listGlobalKeywordCharges();
+
+	public void addGlobalKeywordCharge(GlobalKeywordCharge globalKeywordCharge);
+
+	public void deleteExistingGlobalKeywordCharge(Long chargeId);
+
+	public boolean checkIfDuplicateMemoGroupCode(Long memoGroupId,
+			String memoGroupCode);
+
+	public boolean checkIfDuplicateMemoGroupName(Long memoGroupId,
+			String memoGroupName);
+
 }

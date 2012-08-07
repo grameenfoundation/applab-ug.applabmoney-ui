@@ -161,13 +161,13 @@ td {
 	margin: 0px 2px 0px 2px;
 	padding: 0px 5px 0px 5px;
 	test-align: center;
-	width: 20%;
 }
 
 td.data {
 	border-color: #9AC482;
 	border-width: 1px 1px 0 0;
 	border-style: solid;
+	width: 20%;
 	margin: 1;
 	padding: 4px;
 	background-color: #F3F3EC;
@@ -176,6 +176,23 @@ td.data {
 
 tr.data {
 	border: 1px Solid #9AC482;
+}
+
+td.otherdata {
+	border-color: #9AC482;
+	border-width: 1px 1px 0 0;
+	border-style: solid;
+	margin: 1;
+	width: 5%;
+	padding: 1px;
+	background-color: #F3F3EC;
+	text-align: left;
+	word-wrap: break-word;
+}
+
+tr.otherdata {
+	border: 1px Solid #9AC482;
+	width: 5px;
 }
 
 table.form {
@@ -242,9 +259,12 @@ td.formlabels {
 					style="font-family: sans-serif; font-stretch: wider; font-size: x-large; color: #000000; text-indent: 6%;">
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
-					<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
-						> Administration</a>
-				</div></td>
+					<h2>
+						<a style="color: #000000;" href="/metomeui/auilanding.html"
+							title="Home">Go Back Home</a>
+					</h2>
+				</div>
+			</td>
 		</tr>
 	</table>
 	<div>
@@ -252,8 +272,7 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Manage Account Types</h2>
-						<hr>
-					</td>
+						<hr></td>
 				</tr>
 			</table>
 		</div>
@@ -267,40 +286,43 @@ td.formlabels {
 						</h3>
 						<ul>
 							<li><a href="/metomeui/viewsystemconfiguration.html">System
-									Configuration</a>
-							</li>
-							<li><a href="/metomeui/listcharges.html">Charge
-									Configuration</a>
-							</li>
-							<li><a href="/metomeui/listaccounttypes.html">Account
-									Type Configuration</a></li>
+									Configuration</a></li>
 							<li><a href="/metomeui/listmemogroups.html">Memo Groups
-									Configuration</a></li>
+									Configuration</a>
+							</li>
 							<li><a href="/metomeui/listlanguages.html">Languages
-									Configuration</a></li>
+									Configuration</a>
+							</li>
 							<li><a href="/metomeui/listmessages.html">Messages
-									Configuration</a></li>
+									Configuration</a>
+							</li>
 							<li><a href="listmobilendc.html">Mobile NDC
-									Configuration</a></li>
+									Configuration</a>
+							</li>
 						</ul>
 						<h3>
 							<a href="#ussdmenusetup">Ussd Menu Setup</a>
 						</h3>
 						<ul>
 							<li><a href="/metomeui/listussdmenuitems.html">Ussd Menu
-									Items</a>
-							</li>
+									Items</a></li>
 							<li><a href="/metomeui/listussdtransactionkeywords.html">Transaction
-									Keywords</a></li>
+									Keywords</a>
+							</li>
 							<li><a href="/metomeui/listussdpredefinputs.html">Predefined
-									Inputs</a></li>
+									Inputs</a>
+							</li>
 						</ul>
 						<h3>
-							<a href="#amlsettings">AML Settings</a>
+							<a href="#transsettings">Transaction Settings</a>
 						</h3>
 						<ul>
-							<li><a href="/metomeui/viewamlsettings.html">AML
-									Settings</a>
+							<li><a href="/metomeui/viewamlbarringsettings.html">AML
+									Settings</a></li>
+							<li><a href="/metomeui/listcharges.html">Charge
+									Configuration</a></li>
+							<li><a href="/metomeui/listaccounttypes.html">Account
+									Type Configuration</a>
 							</li>
 						</ul>
 
@@ -308,30 +330,34 @@ td.formlabels {
 							<a href="#">Products Setup</a>
 						</h3>
 						<ul>
-							<li><a href="#viewmetomesetup">Me2Me Setup</a></li>
-							<li><a href="#viewzimbasetup.html">Zimba Setup</a></li>
+							<li><a href="/metomeui/viewmetomesetup.html">Me2Me Setup</a>
+							</li>
+							<li><a href="#viewzimbasetup.html">Zimba Setup</a>
+							</li>
 						</ul>
-					</div>
-				</td>
+					</div></td>
 				<td class="content">
 					<table>
 						<tr>
 							<td></td>
 							<td></td>
-							<td></td>
-							<td></td>
+
 							<td><div>
 									<input class="btn" type="submit" name="submit"
 										value="Create New"
 										onClick="location.href='addaccounttype.html'">
-								</div></td>
+								</div>
+							</td>
+							<td></td>
+							<td></td>
 						</tr>
 					</table> <c:if test="${empty accountTypesList}">
 						<div>
 							<table>
 								<tr>
 									<td>There are no Account Types registered on this system <br>
-										<br></td>
+										<br>
+									</td>
 								</tr>
 							</table>
 						</div>
@@ -339,19 +365,23 @@ td.formlabels {
 						<h2>Configured Account Types Listing</h2>
 						<table class="data">
 							<tr>
-								<th>Code</th>
-								<th>Name</th>
-								<th>BitMap</th>
-								<th>Action</th>
+								<th class="otherdata">Code</th>
+								<th class="data">Name</th>
+								<th class="otherdata">BitMap</th>
+								<th class="otherdata">Mapped to</th>
+								<th class="data">Maximum Book Balance</th>
+								<th class="data">Action</th>
 							</tr>
 							<c:forEach items="${accountTypesList}" var="accounttype">
 								<tr class=data>
-									<td class=data><a
+									<td class="otherdata"><a
 										href="/metomeui/editaccounttype/${accounttype.accountTypeId}.html">${accounttype.accountTypeCode}</a>
 									</td>
-									<td class=data>${accounttype.accountTypeName}</td>
-									<td class=data>${accounttype.accountTypeBitMap}</td>
-									<td class=data><c:if
+									<td class="data">${accounttype.accountTypeName}</td>
+									<td class="otherdata">${accounttype.accountTypeBitMap}</td>
+									<td class="otherdata">${accounttype.sysAccountTypeFlag}</td>
+									<td class="data">${accounttype.accountMaximumBookBalance}</td>
+									<td class="data"><c:if
 											test="${accounttype.enabledFlag == 0}">
 											<a
 												href="/metomeui/activateaccounttype/${accounttype.accountTypeId}.html">Activate/</a>
@@ -362,7 +392,8 @@ td.formlabels {
 								</tr>
 							</c:forEach>
 						</table>
-					</c:if></td>
+					</c:if>
+				</td>
 			</tr>
 		</table>
 		<!-- 	<table border=1px; width=100%;> -->

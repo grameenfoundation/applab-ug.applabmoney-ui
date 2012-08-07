@@ -252,10 +252,11 @@ td.formlabels {
 					style="font-family: sans-serif; font-stretch: wider; font-size: x-large; color: #000000; text-indent: 6%;">
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
-					<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
-						> Administration</a>
-				</div>
-			</td>
+					<h2>
+						<a style="color: #000000;" href="/metomeui/auilanding.html"
+							title="Home">Go Back Home</a>
+					</h2>
+				</div></td>
 		</tr>
 	</table>
 	<div>
@@ -263,35 +264,14 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Manage Users</h2>
-						<hr></td>
+						<hr>
+					</td>
 				</tr>
 			</table>
 		</div>
 
 		<table style="width: 100%;">
 			<tr>
-				<td class="navbar">
-					<div id="accordion">
-						<h3>
-							<a href="ussdmenuitems.html">Ussd Menu Setup</a>
-						</h3>
-						<ul>
-							<li><a href="ussdmenuitems.html">Ussd Menu Items Setup</a>
-							</li>
-							<li><a href="ussdtransactionkeywords.html">Transaction
-									Keywords Setup</a></li>
-							<li><a href="ussdpredefinputs.html">Predefined Inputs
-									Setup</a></li>
-						</ul>
-						<h3>
-							<a href="charge.html">Charge Setup</a>
-						</h3>
-						<ul>
-							<li><a href="charge.html">Configure Charge</a></li>
-							<li><a href="accounttypes.html">Manage Account Types</a></li>
-						</ul>
-					</div>
-				</td>
 				<td class="content">
 					<div>
 						<fieldset>
@@ -300,57 +280,74 @@ td.formlabels {
 							</legend>
 
 
-	<form:form method="post" action="adduser.html" commandName="user">
+							<form:form method="post" action="adduser.html" commandName="user">
 
-		<table>
-			<tr>
-				<td><form:label path="userName">UserName</form:label></td>
-				<td><form:input path="userName" /></td>
-			</tr>
-			<tr>
-				<td><form:label path="password">Password</form:label></td>
-				<td><form:password path="password" /></td>
-			</tr>
-			<!-- 			<tr> -->
-			<%-- 				<td><form:label path="confirmPassword">Confirm Password</form:label> --%>
-			<!-- 				</td> -->
-			<%-- 				<td><form:input path="confirmPassword" /> --%>
-			<!-- 				</td> -->
-			<!-- 			</tr> -->
-			<tr>
-				<td><form:label path="firstName">FirstName</form:label></td>
-				<td><form:input path="firstName" /></td>
-			</tr>
-			<tr>
-				<td><form:label path="lastName">LastName</form:label></td>
-				<td><form:input path="lastName" /></td>
-			</tr>
-			<tr>
-				<td><form:label path="middleName">MiddleName</form:label></td>
-				<td><form:input path="middleName" /></td>
-			</tr>
-			<tr>
-				<td><form:label path="email">Email Address</form:label></td>
-				<td><form:input path="email" /></td>
-			</tr>
-			<tr>
-				<td><form:label path="telephone">Phone Contact</form:label></td>
-				<td><form:input path="telephone" /></td>
-			</tr>
-
-			<tr>
-				<td><form:label path="role">Role</form:label></td>
-				<td><form:select path="role">
-						<form:option value="Guest" label="Guest" />
-						<form:option value="Admin" label="Admin" />
-					</form:select></td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="submit" value="adduser" />
-				</td>
-			</tr>
-		</table>
-	</form:form>
-
+								<table>
+									<tr>
+										<td><form:label path="userName">UserName</form:label>
+										</td>
+										<td><form:input path="userName" />
+										</td>
+									</tr>
+									<tr>
+										<td><form:label path="password">Password</form:label>
+										</td>
+										<td><form:password path="password" />
+										</td>
+									</tr>
+									<!-- 			<tr> -->
+									<%-- 				<td><form:label path="confirmPassword">Confirm Password</form:label> --%>
+									<!-- 				</td> -->
+									<%-- 				<td><form:input path="confirmPassword" /> --%>
+									<!-- 				</td> -->
+									<!-- 			</tr> -->
+									<tr>
+										<td><form:label path="firstName">FirstName</form:label>
+										</td>
+										<td><form:input path="firstName" />
+										</td>
+									</tr>
+									<tr>
+										<td><form:label path="lastName">LastName</form:label>
+										</td>
+										<td><form:input path="lastName" />
+										</td>
+									</tr>
+									<tr>
+										<td><form:label path="middleName">MiddleName</form:label>
+										</td>
+										<td><form:input path="middleName" />
+										</td>
+									</tr>
+									<tr>
+										<td><form:label path="email">Email Address</form:label>
+										</td>
+										<td><form:input path="email" />
+										</td>
+									</tr>
+									<tr>
+										<td><form:label path="telephone">Phone Contact</form:label>
+										</td>
+										<td><form:input path="telephone" />
+										</td>
+									</tr>
+									<tr>
+										<td><form:label path="role">Role</form:label>
+										</td>
+										<td><form:select path="role">
+												<form:option value="Guest" label="Guest" />
+												<form:option value="Admin" label="Admin" />
+											</form:select>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2" class="savebutton"><br> <input
+											class="btn" type="submit" value="adduser" /> <input
+											class="btn" type="button" value="Cancel"
+											onClick="location.href='/metomeui/listusers.html'" />
+										</td>
+									</tr>
+								</table>
+							</form:form>
 </body>
 </html>

@@ -242,9 +242,12 @@ td.formlabels {
 					style="font-family: sans-serif; font-stretch: wider; font-size: x-large; color: #000000; text-indent: 6%;">
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
-					<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
-						> Administration</a>
-				</div></td>
+					<h2>
+						<a style="color: #000000;" href="/metomeui/auilanding.html"
+							title="Home">Go Back Home</a>
+					</h2>
+				</div>
+			</td>
 		</tr>
 	</table>
 	<div>
@@ -252,8 +255,7 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Manage Messages</h2>
-						<hr>
-					</td>
+						<hr></td>
 				</tr>
 			</table>
 		</div>
@@ -280,22 +282,20 @@ td.formlabels {
 										<td class="form"><form:input cssClass="formfields"
 												path="messageId" value="${message.messageId}"
 												disabled="true" /> <input type="hidden" name="messageId"
-											value="${message.messageId}" /></td>
+											value="${message.messageId}" />
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="messageCode">Message Code: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="messageCode" value="${message.messageCode}" />
-										</td>
+												path="messageCode" value="${message.messageCode}" /></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
-												path="language.languageId">Message Language:</form:label>
-										</td>
+												path="language.languageId">Message Language:</form:label></td>
 										<td class="form"><form:select cssClass="dropdown"
 												path="language.languageId">
-												<form:option value="0" label="--None--" />
 												<c:forEach items="${languagesList}" var="language">
 													<c:if test="${language.languageId != 0}">
 														<form:option value="${language.languageId}"
@@ -303,35 +303,29 @@ td.formlabels {
 													</c:if>
 												</c:forEach>
 												<form:options items="${languagesList}" />
-											</form:select>
-										</td>
+											</form:select></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="messageText">Message Text: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="messageText" value="${message.messageText}" />
-										</td>
+												path="messageText" value="${message.messageText}" /></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="messageDesc">Message Description: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="messageDesc" value="${message.messageDesc}" />
-										</td>
+												path="messageDesc" value="${message.messageDesc}" /></td>
 									</tr>
 									<tr>
-										<td colspan="2" class="savebutton"><input class="btn"
-											type="submit" value="Update" /><input class="btn" type="button"
-											value="Cancel"
-											onClick="location.href='/metomeui/listmessages.html'" />
-										</td>
+										<td colspan="2" class="savebutton"><input type="submit"
+											value="Update" /><input type="button" value="Cancel"
+											onClick="location.href='/metomeui/listmessages.html'" /></td>
 									</tr>
 								</table>
 							</form:form>
 						</fieldset>
-					</div>
-				</td>
+					</div></td>
 			</tr>
 		</table>
 		<!--    <table border=1px; width=100%;> -->

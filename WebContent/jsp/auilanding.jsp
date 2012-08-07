@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ include file="include.jsp"%>
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
 <head>
-<meta charset="utf-8">
-<meta name="created" content="Tue, 10 Apr 2012 09:14:23 GMT">
-<meta name="description" content="">
-<meta name="keywords" content="">
-<title></title>
+<title>Applab Money Administrative Console Landing</title>
 <link type="text/css"
 	href="resources/css/ui-lightness/jquery-ui-1.8.18.custom.css"
 	rel="stylesheet" />
@@ -23,171 +20,48 @@
 		});
 		// Tabs
 		$('#tabs').tabs();
+		$('#button').button();
 	});
 </script>
+<style>
 
-<style type="text/css">
+/*GENERAL*/
 body {
-	font: 90% "Trebuchet MS", sans-serif;
-	margin: 5px;
+	font-family: 'Arial', 'Helvetica', sans-serif;
+	font-size: 75%;
+	line-height: 1.6em;
+	background: #F3F3EC;
+	padding: 0;
 }
 
-#navbar {
-	float: left;
-	top: 1px;
-	width: 20%;
-}
-
-#content {
-	float: left;
-	top: 1px;
-	width: 79.5%;
-	margin-left: 5px;
-}
-
-logo {
-	width: 222px;
-	height: 59px;
-	font-size: 1.2em;
-	position: relative;
-	overflow: hidden;
-	overflow-x: hidden;
-	overflow-y: hidden;
-	display: inline;
-	text-indent: -5000px;
-	float: left;
-	margin: 0 0 0 20px;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
-	margin-left: 20px;
-}
-
-fieldset {
-	font: "Helvetica Neue", helvetica, arial, sans-serif;
-	color: #666;
-	background-color: #efefef;
-	padding: 3px;
-	border: solid 1px #d3d3d3;
-	alignment-adjust: central;
-	float:left;
-	width: 100%;
-	display:block;
-	position:relative;
-}
-
-fieldset.subfieldset {
-	font: "Helvetica Neue", helvetica, arial, sans-serif;
-	color: #666;
-	padding: 2px;
-	margin: 2.5%;
-	background-color: #efefef;
-	border: solid 1px #d3d3d3;
-	position: relative;
-	alignment-adjust: middle;
-	width: 95%;
-}
-
-legend {
-	color: #666;
+h1,h2 {
+	font-size: 14px;
 	font-weight: bold;
-	background-color: #d3d3d3;
-	padding: 2px 6px;
-	margin-bottom: 8px;
+}
+
+h3 {
+	font-size: 100%;
+	background: #DDB929;
+	display: block;
+	padding: 1px;
+	color: #fff;
+}
+
+h4 {
+	font-size: 80%;
+	background: #DDB929;
+	display: block;
+	padding: 1px;
+	color: #fff;
 }
 
 label {
-	margin-left: 50px;
-	margin-right: 10px;
-	margin-top: 4px;
-	margin-bottom: 4px;
-	position: absolute;
-	display: inline;
+	font-weight: bold;
 	text-align: right;
-	padding-top: 2px;
-	padding-right: 10px;
-	padding-bottom: 2px;
-	padding-left: 10px;
-	text-indent: -15px;
-	font-size: 14px;
-	font-weight: 500;
-	color: #333;
-	width: 30%;
-	display: block;
 }
 
-input,textarea {
-	position: absolute;
-	display: inline;
-	left: 40%;
-	margin-top: 1%;
-	margin-bottom: 4px;
-	height: 25px;
-	width: 150px;
-	*overflow: hidden;
-}
-
-input.formRadio {
-	display: inline;
-	position: absolute;
-	left: 36%;
-	margin-top: 45x;
-	margin-bottom: 4px;
-	height: 15px;
-	width: 15px;
-}
-
-input.formCheckbox {
-	position: relative;
-	left: 45%;
-	top: -5px;
-	width: auto;
-	display: inline-block;
-}
-
-li.tabs {
-	padding: 5px;
-	width: 24.4%;
-}
-
-select {
-	position: relative;
-	left: 45%;
-	margin-top: 4px;
-	margin-bottom: 4px;
-	height: 27px;
-	width: 155px
-}
-
-select.otherselect {
-	display: inline;
-	position: absolute;
-	left: 60%;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	height: 27px;
-	width: 155px
-}
-
-label.fieldLabel {
-	display: inline;
-	float: none;
-	position:
-	margin-top: 1%;
-	margin:bottom
-	
-}
-
-label.radioLabel {
-	display: inline;
-	position: absolute;
-	margin-left: 40%;
-	text-align: left;
-	margin-top: 5px;
-	margin-bottom: 10px;
-	margin-right: 10px;
-}
-
+/*END GENERAL*/
+/* ERROR BLOCK */
 .errorblock {
 	color: #000;
 	background-color: #ffEEEE;
@@ -195,208 +69,247 @@ label.radioLabel {
 	padding: 8px;
 	margin: 16px;
 }
+/*BUTTONS*/
+input.createbtn {
+	
+}
 
-input.formInputButton {
-	position: relative;
-	right: 60px;
-	font-size: 1.2em;
-	font-weight: bolder;
-	text-align: center;
-	color: #ffffff;
-	background: #004040 repeat-x;
-	padding: 1px;
-	border: solid 1px #C0C0C0;
-	margin-left: 15px;
+button,.btn {
+	background-image:
+		url('resources/css/ui-lightness/images/CuteCapLa7.gif');
+	background-position: left top;
+	background-repeat: repeat-x;
+	background-color: transparent;
+	border-color: -moz-use-text-color #5C5D61 rgb(92, 93, 97)
+		-moz-use-text-color;
+	border-style: none none none none;
+	border-width: medium 2px 2px medium;
 	cursor: pointer;
-	width: 80px;
-	top: 15px;
+	display: inline;
+	colour: #008000;
+	font-family: 'Arial', 'Helvetica', sans-serif;
+	font-size: 100%;
+	font-weight: bold;
+	padding: 1px 3px;
+	height: 33px;
+	width: 100px;
 }
 
-input.formInputButton:hover {
-	background-image: url(bg_button_hover.png);
+hover.btn {
+	color: #0066CC;
 }
 
-input.formInputButton:active {
-	background-image: url(bg_button.png);
+/*END BUTTONS*/
+
+/*SIDE BAR*/
+.navbar {
+	vertical-align: top;
+	top: 1px;
+	width: 20%;
 }
 
-table,td,tr {
-	border: 1px, solid, black;
+/*END SIDE BAR*/
+
+/*CONTENT SECTION*/
+.content {
+	vertical-align: top;
+	top: 1px;
+	width: 80%;
 }
+
+div.header {
+	background: #008000;
+	border: 2px Solid #008000;
+}
+
+div {
+	background: #F3F3EC;
+	margin: 2px;
+	padding: 1px;
+	border: 2px;
+}
+
+fieldset {
+	border-color: #9AC482;
+}
+
+hr {
+	border-color: #9AC482;
+}
+
+li {
+	display: block;
+	margin: 2px 2px 2px -20px;
+}
+
+tr.header {
+	background: #ffffff;
+}
+
+th {
+	background: #7CB15C;
+	height: 19px;
+	width: 10%;
+	border-color: #ffffff;
+	text-align: left;
+	padding: 4px;
+	word-wrap: break-word;
+}
+
+td.data {
+	border-color: #9AC482;
+	border-width: 1px 1px 0 0;
+	border-style: solid;
+	margin: 1;
+	padding: 2px;
+	background-color: #F3F3EC;
+	text-align: left;
+}
+
+tr.data {
+	border: 1px Solid #9AC482;
+}
+
+table.form {
+	padding: 8px;
+	width: 100px;
+}
+
+td.form {
+	padding: 5px;
+	width: 400px;
+}
+
+table.data {
+	width: 100%;
+	font-size: 13px;
+	border: 1px Solid;
+	margin: 0px 0px 1px 1px;
+	padding: 0px;
+	border-color: #9AC482;
+	background-color: #F3F3EC;
+	border-collapse: collapse;
+	text-align: -webkit-auto;
+}
+
+td.savebutton {
+	padding-right: 300px;
+	text-align: right;
+	height: 30px
+}
+
+.dropdown {
+	width: 157px;
+	height: 29px;
+}
+
+.formfields {
+	width: 150px;
+	height: 25px;
+}
+
+/*END CONTENT SECTION*/
 </style>
 </head>
 <body>
-	<div align="justify">
+
+	<table style="width: 100%;">
+		<tr style="background-color: #008000;">
+			<td
+				style="font-family: sans-serif; font-stretch: wider; color: #F9FFF9;"><h1>AppLab
+					Money</h1>
+				<div class="header"
+					style="font-family: sans-serif; font-stretch: wider; font-size: x-large; color: #000000; text-indent: 6%;">
+					Administrator Console</div> <br>
+				<div class="header" style="color: #000000;">
+					<h2>
+						<a style="color: #000000;" href="/metomeui/auilanding.html"
+							title="Home">Go Back Home</a>
+					</h2>
+				</div>
+			</td>
+		</tr>
+	</table>
+	<div>
 		<table style="width: 100%;">
-			<tr style="background-color: #008000;">
-				<td
-					style="font-family: sans-serif; font-stretch: wider; color: #F9FFF9;"><h1>AppLab
-						Money</h1>
-					<div
-						style="font-family: sans-serif; font-stretch: wider; font-size: x-large; color: #000000; text-indent: 6%;">
-						Administrator Console</div> <br>
-					<div style="color: #000000;">
-						<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
-							> Administration</a>
-					</div>
-				</td>
+			<tr>
+				<td><h2></h2>
+					<hr></td>
 			</tr>
 		</table>
 	</div>
-	<div>
-		<hr style="alignment-adjust: central; size: 1; color: #C0C0C0" />
-		<br> <br>
-	</div>
-	<div id="navbar" style="">
-		<div id="accordion">
-			<div>
-				<h3>
-					<a href="#">System Configuration</a>
-				</h3>
-				<ul>
-					<li><a href="#tabs-1">View current Settings</a></li>
-					<li><a href="auilanding.html">Password Settings</a></li>
-					<li><a href="auimsisdnsettings.html">Mobile/MSISDN
-							Settings</a></li>
-					<li><a href="auitransactionsettings.html">Transaction
-							Settings</a></li>
-				</ul>
-			</div>
-			<div>
-				<h3>
-					<a href="#">Message Settings</a>
-				</h3>
-			</div>
-			<div>
-				<h3>
-					<a href="#">Language Settings</a>
-				</h3>
-			</div>
-			<div>
-				<h3>
-					<a href="#">Accounts Configuration</a>
-				</h3>
-			</div>
-			<div>
-				<h3>
-					<a href="#">Memo Groups Configuration</a>
-				</h3>
-			</div>
-			<div>
-				<h3>
-					<a href="#">Mobile NDC Configuration</a>
-				</h3>
-			</div>
-		</div>
-	</div>
-	<div id="content" style="">
-		<form:form action="auilanding.html" commandName="passwordSettings"
-			method="POST">
-			<form:errors path="*" cssClass="errorblock" element="div" />
-			<fieldset>
-				<form:label path="name">Name: </form:label>
-				<form:input path="name" tabindex="1"></form:input>
-				<br>
-				<form:label path="precedence">Precedence:</form:label>
-				<form:select path="precedence" tabindex="2">
-					<form:option value="0" label="--- Select ---" />
-					<form:options items="${precedenceList}" />
-				</form:select>
-				<br>
+	<table style="width: 100%;">
+		<tr>
+			<td class="navbar">
+				<div id="accordion">
+					<h3>
+						<a href="#systemsettings">System Settings</a>
+					</h3>
+					<ul>
+						<li><a href="/metomeui/viewsystemconfiguration.html">System
+								Configuration</a></li>
+						<li><a href="/metomeui/listmemogroups.html">Memo Groups
+								Configuration</a>
+						</li>
+						<li><a href="/metomeui/listlanguages.html">Languages
+								Configuration</a>
+						</li>
+						<li><a href="/metomeui/listmessages.html">Messages
+								Configuration</a>
+						</li>
+						<li><a href="listmobilendc.html">Mobile NDC Configuration</a>
+						</li>
+					</ul>
+					<h3>
+						<a href="#ussdmenusetup">Ussd Menu Setup</a>
+					</h3>
+					<ul>
+						<li><a href="/metomeui/listussdmenuitems.html">Ussd Menu
+								Items</a></li>
+						<li><a href="/metomeui/listussdtransactionkeywords.html">Transaction
+								Keywords</a>
+						</li>
+						<li><a href="/metomeui/listussdpredefinputs.html">Predefined
+								Inputs</a>
+						</li>
+					</ul>
+					<h3>
+						<a href="#transsettings">Transaction Settings</a>
+					</h3>
+					<ul>
+						<li><a href="/metomeui/viewamlbarringsettings.html">AML
+								Settings</a></li>
+						<li><a href="/metomeui/listcharges.html">Charge
+								Configuration</a></li>
+						<li><a href="/metomeui/listaccounttypes.html">Account
+								Type Configuration</a>
+						</li>
+					</ul>
 
-				<form:label path="enforcePasswordComplexityRequirements">Password must meet complexity requirements</form:label>
-				<form:checkbox path="enforcePasswordComplexityRequirements"
-					class="formCheckbox" tabindex="3"></form:checkbox>
-				<br>
-
-				<form:label path="enforceMinPasswordLength">Enforce Minimum Password Length</form:label>
-				<form:checkbox path="enforceMinPasswordLength" class="formCheckbox"
-					tabindex="4"></form:checkbox>
-				<br>
-				<form:label path="minPasswordLength">Minimum Password Length(characters)</form:label>
-				<form:select path="minPasswordLength" tabindex="5">
-					<form:option value="0" label="--- Select ---" />
-					<form:options items="${minPasswordLengthList}" />
-				</form:select>
-				<br>
-
-				<form:label path="enforceMaxPasswordLength">Enforce Maximum Password Length</form:label>
-				<form:checkbox path="enforceMaxPasswordLength" class="formCheckbox"
-					tabindex="6"></form:checkbox>
-				<br>
-
-				<form:label path="maxPasswordLength">Maximum Password Length(characters)</form:label>
-				<form:select path="maxPasswordLength" tabindex="7">
-					<form:option value="0" label="--- Select ---" />
-					<form:options items="${maxPasswordLengthList}" />
-				</form:select>
-				<br>
-
-				<form:label path="enforceMinPasswordAge">Enforce Minimum Password Age</form:label>
-				<form:checkbox path="enforceMinPasswordAge" class="formCheckbox"
-					tabindex="8"></form:checkbox>
-				<br>
-
-				<form:label path="minPasswordAge">User cannot change password within (days)</form:label>
-				<form:select path="minPasswordAge" tabindex="9">
-					<form:option value="0" label="--- Select ---" />
-					<form:options items="${minPasswordAgeList}" />
-				</form:select>
-				<br>
-
-				<form:label path="enforceMaxPasswordAge">Enforce Maximum Password Age</form:label>
-				<form:checkbox path="enforceMaxPasswordAge" class="formCheckbox"
-					tabindex="10"></form:checkbox>
-				<br>
-
-				<form:label path="maxPasswordAge">User must change password within (days)</form:label>
-				<form:select path="maxPasswordAge" tabindex="11">
-					<form:option value="0" label="--- Select ---" />
-					<form:options items="${maxPasswordAgeList}" />
-				</form:select>
-				<br>
-
-				<form:label path="enforceLockoutPolicy">Enforce lockout
-                            policy</form:label>
-
-				<form:checkbox path="enforceLockoutPolicy" class="formCheckbox"
-					tabindex="12"></form:checkbox>
-				<br>
-				<form:label path="maxFailedLoginCount">Number of failed logon attempts: </form:label>
-				<form:select path="maxFailedLoginCount" tabindex="11">
-					<form:option value="0" label="--- Select ---" />
-					<form:options items="${loginAttemptCountList}" />
-				</form:select>
-				<br>
-				<form:label path="failedLoginResetCount">Reset failed logon attempts count after(mins) </form:label>
-				<form:select path="failedLoginResetCount" tabindex="11">
-					<form:option value="0" label="--- Select ---" />
-					<form:options items="${resetFailedLogonTimerList}" />
-				</form:select>
-				<br>
-
-				<form:label path="accountUnlock">Account will unlocked:</form:label>
-				<br>
-				<form:label path="accountUnlock" class="radioLabel">For a Duration of(mins)</form:label>
-				<form:radiobutton class="formRadio" path="accountUnlock"
-					value="true"></form:radiobutton>
-				<form:select class="otherselect" path="accountLockDuration"
-					tabindex="15">
-					<form:option value="0" label="--- Select ---" />
-					<form:options items="${accountLockDurationList}" />
-				</form:select>
-				<br>
-				<form:label path="accountUnlock" class="radioLabel">Until Administrator manually unlocks account</form:label>
-				<form:radiobutton class="formRadio" path="accountUnlock"
-					value="false"></form:radiobutton>
-				<br>
-
-			</fieldset>
-			<input class="formInputButton" type="submit" name="submit"
-				value="Save">
-			<input class="formInputButton" type="button" name="cancel"
-				value="Cancel">
-		</form:form>
-	</div>
+					<h3>
+						<a href="#">Products Setup</a>
+					</h3>
+					<ul>
+						<li><a href="/metomeui/viewmetomesetup.html">Me2Me Setup</a>
+						</li>
+						<li><a href="#viewzimbasetup.html">Zimba Setup</a>
+						</li>
+					</ul>
+				</div></td>
+			<td class="content">
+				<table width="100%">
+					<tr>
+						<td>
+							<h2>Welcome to the Applab Money AUI</h2>
+							<hr>
+						</td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
 </body>
 </html>

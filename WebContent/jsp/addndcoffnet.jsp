@@ -242,10 +242,11 @@ td.formlabels {
 					style="font-family: sans-serif; font-stretch: wider; font-size: x-large; color: #000000; text-indent: 6%;">
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
-					<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
-						> Administration</a>
-				</div>
-			</td>
+					<h2>
+						<a style="color: #000000;" href="/metomeui/auilanding.html"
+							title="Home">Go Back Home</a>
+					</h2>
+				</div></td>
 		</tr>
 	</table>
 	<div>
@@ -254,7 +255,8 @@ td.formlabels {
 				<tr>
 					<td><h2>Configure Allowed Mobile National Destination
 							Codes</h2>
-						<hr></td>
+						<hr>
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -277,15 +279,13 @@ td.formlabels {
 										<td class="formlabels"><form:label path="ndc">National Destination Code: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="ndc" />
-										</td>
+												path="ndc" /></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="networkOperator">Network Operator: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="networkOperator" />
-										</td>
+												path="networkOperator" /></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:checkbox
@@ -302,8 +302,7 @@ td.formlabels {
 										<td class="savebutton"><br> <input class="btn"
 											type="submit" value="Save" /> <input class="btn"
 											type="button" value="Cancel"
-											onClick="location.href='/metomeui/listmobilendc.html'" />
-										</td>
+											onClick="location.href='/metomeui/listmobilendc.html'" /></td>
 										<td></td>
 										<td></td>
 									</tr>
@@ -312,12 +311,12 @@ td.formlabels {
 						</fieldset>
 						<table>
 							<tr>
-								<td><br></td>
+								<td><br>
+								</td>
 							</tr>
 						</table>
 
-					</div>
-				</td>
+					</div></td>
 			</tr>
 		</table>
 		<!--    <table border=1px; width=100%;> -->

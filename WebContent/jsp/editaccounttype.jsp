@@ -268,6 +268,14 @@ td.formlabels {
 </head>
 <body>
 
+	<%
+		String[][] sysAccountTypeFlagsList = { { "0", "NONE" },
+				{ "1", "TEMP" }, { "2", "MCOM" }, { "3", "AGNT" },
+				{ "4", "DLER" }, { "5", "MERC" }, { "6", "CORP" } };
+		request.setAttribute("sysAccountTypeFlagsList",
+				sysAccountTypeFlagsList);
+	%>
+
 	<table style="width: 100%;">
 		<tr style="background-color: #008000;">
 			<td
@@ -277,8 +285,10 @@ td.formlabels {
 					style="font-family: sans-serif; font-stretch: wider; font-size: x-large; color: #000000; text-indent: 6%;">
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
-					<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
-						> Administration</a>
+					<h2>
+						<a style="color: #000000;" href="/metomeui/auilanding.html"
+							title="Home">Go Back Home</a>
+					</h2>
 				</div></td>
 		</tr>
 	</table>
@@ -286,7 +296,7 @@ td.formlabels {
 		<div>
 			<table style="width: 100%;">
 				<tr>
-					<td><h2>Manage Predefined Inputs</h2>
+					<td><h2>Manage Account Types</h2>
 						<hr>
 					</td>
 				</tr>
@@ -340,23 +350,63 @@ td.formlabels {
 										</td>
 										<td class="form"><form:input cssClass="formfields"
 												path="accountMaximumBookBalance"
-												value="${accountType.accountTypeId}" />
+												value="${accountType.accountMaximumBookBalance}" />
 										</td>
 									</tr>
 									<tr>
-                                        <td class="formlabels"><form:label path="accountTypeBitMap">Account Type BitMap: </form:label>
-                                        </td>
-                                        <td class="form"><form:input cssClass="formfields"
-                                                path="accountTypeBitMap"
-                                                value="${accountType.accountTypeBitMap}" disabled="true"/>
-                                        </td>
-                                    </tr>
+										<td class="formlabels"><form:label
+												path="accountTypeBitMap">Account Type BitMap: </form:label>
+										</td>
+										<td class="form"><form:select cssClass="dropdown"
+												path="accountTypeBitMap">
+												<form:option value="${accountType.accountTypeBitMap}"
+													label="${accountType.accountTypeBitMap}" />
+												<form:option value="1" label="1" />
+												<form:option value="2" label="2" />
+												<form:option value="4" label="4" />
+												<form:option value="8" label="8" />
+												<form:option value="16" label="16" />
+												<form:option value="32" label="32" />
+												<form:option value="64" label="64" />
+												<form:option value="128" label="128" />
+												<form:option value="256" label="256" />
+												<form:option value="512" label="512" />
+												<form:option value="1024" label="1024" />
+											</form:select>
+										</td>
+									</tr>
 									<tr>
-										<td colspan="2" class="savebutton"><input class="btn"
-											type="submit" value="Update" /><input class="btn"
-											type="button" value="Cancel"
+										<td class="formlabels"><form:label
+												path="sysAccountTypeFlag">Account Type Maps to: </form:label>
+										</td>
+										<td class="form"><form:select cssClass="dropdown"
+												path="sysAccountTypeFlag">
+												<c:forEach items="${sysAccountTypeFlagsList}"
+													var="sysacctypeflg">
+													<c:if
+														test="${sysacctypeflg[0] == accountType.sysAccountTypeFlag}">
+														<form:option value="${accountType.sysAccountTypeFlag}"
+															label="${sysacctypeflg[1]}" />
+													</c:if>
+												</c:forEach>
+												<c:forEach items="${sysAccountTypeFlagsList}"
+													var="sysacctypeflg">
+													<c:if
+														test="${sysacctypeflg[0] != accountType.sysAccountTypeFlag}">
+														<form:option value="${sysacctypeflg[0]}"
+															label="${sysacctypeflg[1]}" />
+													</c:if>
+												</c:forEach>
+											</form:select>
+										</td>
+									</tr>
+									<tr>
+										<td></td>
+										<td class="savebutton"><input type="submit"
+											value="Update" /><input type="button" value="Cancel"
 											onClick="location.href='/metomeui/listaccounttypes.html'" />
 										</td>
+										<td></td>
 									</tr>
 								</table>
 							</form:form>

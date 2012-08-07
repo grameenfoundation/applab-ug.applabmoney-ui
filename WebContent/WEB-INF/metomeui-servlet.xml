@@ -47,9 +47,6 @@
 		<property name="password" value="${database.password}" />
 	</bean>
 
-	<bean id="passwordSettingsValidator" class="metomeui.validator.PasswordSettingsValidator" />
-	<bean id="msisdnSettingsValidator" class="metomeui.validator.MsisdnSettingsValidator" />
-	<bean id="transactionSettingsValidator" class="metomeui.validator.TransactionSettingsValidator" />
 	<bean id="ussdMenuValidator" class="metomeui.validator.UssdMenuValidator" />
 
 	<bean id="sessionFactory"
@@ -68,5 +65,4 @@
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-
 </beans>

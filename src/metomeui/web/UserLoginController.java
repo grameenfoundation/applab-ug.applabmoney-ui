@@ -40,7 +40,7 @@ public class UserLoginController {
 		//if (authenticate(login)) {
 //			model.put("login", login);
 		if ((login.userName.equalsIgnoreCase("admin"))&& (login.password.equalsIgnoreCase("adminpass"))){
-			return "redirect:/listussdmenuitems.html";
+			return "redirect:/auilanding.html";
 		} else {
 			result.reject("notmatch.login", "invalid login!! Please try again");
 			login.clearFields();

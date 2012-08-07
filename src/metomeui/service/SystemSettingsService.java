@@ -3,6 +3,8 @@ package metomeui.service;
 import java.util.List;
 
 import metomeui.model.AccountType;
+import metomeui.model.AmlBarring;
+import metomeui.model.GlobalKeywordCharge;
 import metomeui.model.Language;
 import metomeui.model.MemoGroup;
 import metomeui.model.Message;
@@ -75,6 +77,9 @@ public interface SystemSettingsService {
 	public void editExistingLanguage(Language language);
 
 	public void setDefaultLanguage(Long languageId, Integer offSwitch);
+	
+	public boolean checkIfDuplicateLanguageName(String languageName,
+			Long languageId);
 
 	/**
 	 * MemoGroup Management functions
@@ -97,9 +102,14 @@ public interface SystemSettingsService {
 	 * System Config functions
 	 * 
 	 */
-	public List<SystemConfiguration> listSystemConfiguration();
+	public SystemConfiguration getSystemConfiguration();
 
 	public void addSystemConfiguration(SystemConfiguration sysConfiguration);
+	
+	public SystemConfiguration getExistingSystemConfiguration();
+
+	public void editExistingSystemConfiguration(
+			SystemConfiguration systemConfiguration);
 
 	public void deleteExistingSystemConfiguration(Long SystemConfigurationId);
 
@@ -133,5 +143,33 @@ public interface SystemSettingsService {
 	public void activateOrDeactivateExistingNdcListOffnet(Long ndcListId,
 			Integer onSwitch);
 	
+	/**
+	 * AML Settings functions
+	 * 
+	 */
+	public List<AmlBarring> listAmlBarringSettings();
 
+	public void addAmlBarringSetting(AmlBarring amlBarring);
+
+	public void editExistingAmlBarring(AmlBarring amlBarring);
+
+	public void deleteExistingAmlBarring(Long barringId);
+
+	public AmlBarring getExistingAmlBarring(Long barringId);
+
+	
+	/**
+	 * GlobalKeywordCharge Settings functions
+	 * 
+	 */
+	public void addGlobalKeywordCharge(
+			GlobalKeywordCharge globalKeywordCharge);
+
+	public List<GlobalKeywordCharge> listGlobalKeywordCharges();
+	
+	public void editExistingGlobalKeywordCharge(GlobalKeywordCharge globalKeywordCharge);
+
+	public void deleteExistingGlobalKeywordCharge(Long chargeId);
+
+	public GlobalKeywordCharge getExistingGlobalKeywordCharge(Long chargeId);
 }

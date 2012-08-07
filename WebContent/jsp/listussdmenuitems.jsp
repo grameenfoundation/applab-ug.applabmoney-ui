@@ -242,9 +242,12 @@ td.formlabels {
 					style="font-family: sans-serif; font-stretch: wider; font-size: x-large; color: #000000; text-indent: 6%;">
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
-					<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
-						> Administration</a>
-				</div></td>
+					<h2>
+						<a style="color: #000000;" href="/metomeui/auilanding.html"
+							title="Home">Go Back Home</a>
+					</h2>
+				</div>
+			</td>
 		</tr>
 	</table>
 	<div>
@@ -252,8 +255,7 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Menu Items Manager</h2>
-						<hr>
-					</td>
+						<hr></td>
 				</tr>
 			</table>
 		</div>
@@ -268,21 +270,14 @@ td.formlabels {
 							<li><a href="/metomeui/viewsystemconfiguration.html">System
 									Configuration</a>
 							</li>
-							<li><a href="/metomeui/listcharges.html">Charge
-									Configuration</a>
-							</li>
-							<li><a href="/metomeui/listaccounttypes.html">Account
-									Type Configuration</a></li>
 							<li><a href="/metomeui/listmemogroups.html">Memo Groups
 									Configuration</a></li>
 							<li><a href="/metomeui/listlanguages.html">Languages
 									Configuration</a></li>
-									<li><a href="/metomeui/listmessages.html">Messages
-                                    Configuration</a>
-                            </li>
-							<li><a href="listmobilendc.html">Mobile NDC
-									Configuration</a>
-							</li>
+							<li><a href="/metomeui/listmessages.html">Messages
+									Configuration</a></li>
+							<li><a href="/metomeui/listmobilendc.html">Mobile NDC
+									Configuration</a></li>
 						</ul>
 						<h3>
 							<a href="#ussdmenusetup">Ussd Menu Setup</a>
@@ -297,19 +292,24 @@ td.formlabels {
 									Inputs</a></li>
 						</ul>
 						<h3>
-							<a href="#amlsettings">AML Settings</a>
+							<a href="#transsettings">Transaction Settings</a>
 						</h3>
 						<ul>
-							<li><a href="/metomeui/viewamlsettings.html">AML
+							<li><a href="/metomeui/viewamlbarringsettings.html">AML
 									Settings</a>
 							</li>
+							<li><a href="/metomeui/listcharges.html">Charge
+									Configuration</a>
+							</li>
+							<li><a href="/metomeui/listaccounttypes.html">Account
+									Type Configuration</a></li>
 						</ul>
-
 						<h3>
 							<a href="#">Products Setup</a>
 						</h3>
 						<ul>
-							<li><a href="#viewmetomesetup">Me2Me Setup</a></li>
+							<li><a href="/metomeui/viewmetomesetup.html">Me2Me Setup</a>
+							</li>
 							<li><a href="#viewzimbasetup.html">Zimba Setup</a></li>
 						</ul>
 					</div>
@@ -325,14 +325,16 @@ td.formlabels {
 									<input class="btn" type="submit" name="submit"
 										value="Create New"
 										onClick="location.href='addussdmenuitem.html'">
-								</div></td>
+								</div>
+							</td>
 						</tr>
 					</table> <c:if test="${empty ussdMenuItemsList}">
 						<div>
 							<table>
 								<tr>
 									<td>There are no menu items configured on this system <br>
-										<br></td>
+										<br>
+									</td>
 								</tr>
 							</table>
 						</div>
@@ -347,35 +349,43 @@ td.formlabels {
 								<th>Action</th>
 							</tr>
 							<c:forEach items="${ussdMenuItemsList}" var="menuitem">
-								<tr class=data><c:if test="${menuitem.menuItemId != 0}">
-									<td class=data><a
-										href="/metomeui/editussdmenuitem/${menuitem.menuItemId}.html">${menuitem.menuItemName}</a>
-									</td>
-									<td class=data>${menuitem.menuItemOrder}</td>
-									<td class=data><c:forEach
-											items="${ussdTransactionKeywordsList}" var="transkeyword">
-											<c:if
-												test="${transkeyword.keywordId == menuitem.menuItemKeyword.keywordId}">
-												<c:if test="${transkeyword.keywordId != 0}">
-												<c:out value="${transkeyword.keywordName}" />
+								<tr class=data>
+									<c:if test="${menuitem.menuItemId != 0}">
+										<td class=data><a
+											href="/metomeui/editussdmenuitem/${menuitem.menuItemId}.html">${menuitem.menuItemName}</a>
+										</td>
+										<td class=data>${menuitem.menuItemOrder}</td>
+										<td class=data><c:forEach
+												items="${ussdTransactionKeywordsList}" var="transkeyword">
+												<c:if
+													test="${transkeyword.keywordId == menuitem.menuItemKeyword.keywordId}">
+													<c:if test="${transkeyword.keywordId != 0}">
+														<c:out value="${transkeyword.keywordName}" />
+													</c:if>
 												</c:if>
+											</c:forEach>
+										</td>
+										<td class=data><c:if
+												test="${menuitem.rootMenuItem.menuItemId != 0}">
+												<c:out value="${menuitem.rootMenuItem.menuItemName}" />
 											</c:if>
-										</c:forEach></td>
-									<td class=data><c:if test="${menuitem.rootMenuItem.menuItemId != 0}"><c:out value="${menuitem.rootMenuItem.menuItemName}"/></c:if></td>
-									<td class=data><c:if
-											test="${menuitem.menuItemEnabledFlag != 1}">
-											<a
-												href="/metomeui/activatemenuitem/${menuitem.menuItemId}.html">Activate</a>
-										</c:if> <c:if test="${menuitem.menuItemEnabledFlag == 1}">
-											<a
-												href="/metomeui/deactivatemenuitem/${menuitem.menuItemId}.html">Deactivate</a>
-										</c:if> <a
-										href="/metomeui/removemenuitem/${menuitem.menuItemId}.html">Delete</a>
-									</td></c:if>
+										</td>
+										<td class=data><c:if
+												test="${menuitem.menuItemEnabledFlag != 1}">
+												<a
+													href="/metomeui/activatemenuitem/${menuitem.menuItemId}.html">Activate</a>
+											</c:if> <c:if test="${menuitem.menuItemEnabledFlag == 1}">
+												<a
+													href="/metomeui/deactivatemenuitem/${menuitem.menuItemId}.html">Deactivate</a>
+											</c:if> <a
+											href="/metomeui/removemenuitem/${menuitem.menuItemId}.html">Delete</a>
+										</td>
+									</c:if>
 								</tr>
 							</c:forEach>
 						</table>
-					</c:if></td>
+					</c:if>
+				</td>
 			</tr>
 		</table>
 	</div>

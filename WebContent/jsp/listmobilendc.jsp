@@ -99,31 +99,31 @@ hover.btn {
 }
 
 hover.longbtn {
-    color: #0066CC;
+	color: #0066CC;
 }
 
-.longbtn{
-background-image:
-        url('resources/css/ui-lightness/images/CuteCapLa7.gif');
-    /*background-position: left top;*/
-    background-position:absolute;
-    background-repeat: repeat-x;
-    background-color: transparent;
-     -moz-box-align:stretch;
-    background-size: 100% 100%;
-    border-color: -moz-use-text-color #5C5D61 rgb(92, 93, 97)
-        -moz-use-text-color;
-    border-style: none none none none;
-    border-width: medium 2px 2px medium;
-    cursor: pointer;
-    display: inline;
-    colour: #008000;
-    font-family: 'Arial', 'Helvetica', sans-serif;
-    font-size: 100%;
-    font-weight: bold;
-    padding: 1px 3px;
-    height: 33px;
-    width: 140px;
+.longbtn {
+	background-image:
+		url('resources/css/ui-lightness/images/CuteCapLa7.gif');
+	/*background-position: left top;*/
+	background-position: absolute;
+	background-repeat: repeat-x;
+	background-color: transparent;
+	-moz-box-align: stretch;
+	background-size: 100% 100%;
+	border-color: -moz-use-text-color #5C5D61 rgb(92, 93, 97)
+		-moz-use-text-color;
+	border-style: none none none none;
+	border-width: medium 2px 2px medium;
+	cursor: pointer;
+	display: inline;
+	colour: #008000;
+	font-family: 'Arial', 'Helvetica', sans-serif;
+	font-size: 100%;
+	font-weight: bold;
+	padding: 1px 3px;
+	height: 33px;
+	width: 140px;
 }
 
 /*END BUTTONS*/
@@ -270,8 +270,10 @@ td.formlabels {
 					style="font-family: sans-serif; font-stretch: wider; font-size: x-large; color: #000000; text-indent: 6%;">
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
-					<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
-						> Administration</a>
+					<h2>
+						<a style="color: #000000;" href="/metomeui/auilanding.html"
+							title="Home">Go Back Home</a>
+					</h2>
 				</div></td>
 		</tr>
 	</table>
@@ -297,11 +299,6 @@ td.formlabels {
 						<ul>
 							<li><a href="/metomeui/viewsystemconfiguration.html">System
 									Configuration</a></li>
-							<li><a href="/metomeui/listcharges.html">Charge
-									Configuration</a></li>
-							<li><a href="/metomeui/listaccounttypes.html">Account
-									Type Configuration</a>
-							</li>
 							<li><a href="/metomeui/listmemogroups.html">Memo Groups
 									Configuration</a>
 							</li>
@@ -309,9 +306,9 @@ td.formlabels {
 									Configuration</a>
 							</li>
 							<li><a href="/metomeui/listmessages.html">Messages
-                                    Configuration</a>
-                            </li>
-							<li><a href="listmobilendc.html">Mobile NDC
+									Configuration</a>
+							</li>
+							<li><a href="/metomeui/listmobilendc.html">Mobile NDC
 									Configuration</a>
 							</li>
 						</ul>
@@ -329,18 +326,23 @@ td.formlabels {
 							</li>
 						</ul>
 						<h3>
-							<a href="#amlsettings">AML Settings</a>
+							<a href="#transsettings">Transaction Settings</a>
 						</h3>
 						<ul>
-							<li><a href="/metomeui/viewamlsettings.html">AML
+							<li><a href="/metomeui/viewamlbarringsettings.html">AML
 									Settings</a></li>
+							<li><a href="/metomeui/listcharges.html">Charge
+									Configuration</a></li>
+							<li><a href="/metomeui/listaccounttypes.html">Account
+									Type Configuration</a>
+							</li>
 						</ul>
 
 						<h3>
 							<a href="#">Products Setup</a>
 						</h3>
 						<ul>
-							<li><a href="#viewmetomesetup">Me2Me Setup</a>
+							<li><a href="/metomeui/viewmetomesetup.html">Me2Me Setup</a>
 							</li>
 							<li><a href="#viewzimbasetup.html">Zimba Setup</a>
 							</li>

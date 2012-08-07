@@ -222,17 +222,19 @@ td.savebutton {
 					style="font-family: sans-serif; font-stretch: wider; font-size: x-large; color: #000000; text-indent: 6%;">
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
-					<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
-						> Administration</a>
-				</div>
-			</td>
+					<a style="color: #000000;" href="/metomeui/auilanding.html"
+						title="Home"></a>
+					<h2>Home</h2>
+					<a> > Administration</a>
+				</div></td>
 		</tr>
 	</table>
 	<div>
 		<table style="width: 100%;">
 			<tr>
 				<td><h2>Transaction Keywords Manager</h2>
-					<hr></td>
+					<hr>
+				</td>
 			</tr>
 		</table>
 	</div>
@@ -247,19 +249,14 @@ td.savebutton {
 						<li><a href="/metomeui/viewsystemconfiguration.html">System
 								Configuration</a>
 						</li>
-						<li><a href="/metomeui/listcharges.html">Charge
-								Configuration</a>
-						</li>
-						<li><a href="/metomeui/listaccounttypes.html">Account
-								Type Configuration</a></li>
 						<li><a href="/metomeui/listmemogroups.html">Memo Groups
 								Configuration</a></li>
 						<li><a href="/metomeui/listlanguages.html">Languages
 								Configuration</a></li>
 						<li><a href="/metomeui/listmessages.html">Messages
 								Configuration</a></li>
-						<li><a href="listmobilendc.html">Mobile NDC Configuration</a>
-						</li>
+						<li><a href="/metomeui/listmobilendc.html">Mobile NDC
+								Configuration</a></li>
 					</ul>
 					<h3>
 						<a href="#ussdmenusetup">Ussd Menu Setup</a>
@@ -274,17 +271,25 @@ td.savebutton {
 								Inputs</a></li>
 					</ul>
 					<h3>
-						<a href="#amlsettings">AML Settings</a>
+						<a href="#transsettings">Transaction Settings</a>
 					</h3>
 					<ul>
-						<li><a href="/metomeui/viewamlsettings.html">AML Settings</a>
+						<li><a href="/metomeui/viewamlbarringsettings.html">AML
+								Settings</a>
 						</li>
+						<li><a href="/metomeui/listcharges.html">Charge
+								Configuration</a>
+						</li>
+						<li><a href="/metomeui/listaccounttypes.html">Account
+								Type Configuration</a></li>
 					</ul>
+
 					<h3>
-						<a href="#">Products Setup</a>
+						<a href="#product">Products Setup</a>
 					</h3>
 					<ul>
-						<li><a href="#viewmetomesetup">Me2Me Setup</a></li>
+						<li><a href="/metomeui/viewmetomesetup.html">Me2Me Setup</a>
+						</li>
 						<li><a href="#viewzimbasetup.html">Zimba Setup</a></li>
 					</ul>
 				</div>
@@ -300,15 +305,15 @@ td.savebutton {
 								<input class="btn" type="submit" name="submit"
 									value="Create New"
 									onClick="location.href='addussdtransactionkeyword.html'">
-							</div>
-						</td>
+							</div></td>
 					</tr>
 				</table> <c:if test="${empty ussdTransactionKeywordList}">
 					<div>
 						<table>
 							<tr>
 								<td>There are no Transaction Keywords configured on this
-									system <br> <br></td>
+									system <br> <br>
+								</td>
 							</tr>
 						</table>
 					</div>
@@ -326,33 +331,33 @@ td.savebutton {
 						<c:forEach items="${ussdTransactionKeywordList}"
 							var="transactionkeyword">
 							<tr class="data">
-							<c:if test="${transactionkeyword.keywordId != 0}">
-								<td class="data"><a
-									href="/metomeui/editussdtransactionkeyword/${transactionkeyword.keywordId}.html">${transactionkeyword.keywordName}</a>
-								</td>
+								<c:if test="${transactionkeyword.keywordId != 0}">
+									<td class="data"><a
+										href="/metomeui/editussdtransactionkeyword/${transactionkeyword.keywordId}.html">${transactionkeyword.keywordName}</a>
+									</td>
 
-								<td class="data">${transactionkeyword.keywordCode}</td>
-								<td class="data">${transactionkeyword.keywordStepsCount}</td>
-								<td class="data">${transactionkeyword.keywordDescription}</td>
+									<td class="data">${transactionkeyword.keywordCode}</td>
+									<td class="data">${transactionkeyword.keywordStepsCount}</td>
+									<td class="data">${transactionkeyword.keywordDescription}</td>
 
-								<td class=data><c:if
-										test="${transactionkeyword.keywordEnabledFlag != 1}">
-										<a
-											href="/metomeui/activatekeyword/${transactionkeyword.keywordId}.html">Activate
-										</a>
-									</c:if> <c:if test="${transactionkeyword.keywordEnabledFlag == 1}">
-										<a
-											href="/metomeui/deactivatekeyword/${transactionkeyword.keywordId}.html">Deactivate
-										</a>
-									</c:if> <a
-									href="/metomeui/removekeyword/${transactionkeyword.keywordId}.html">
-										Delete </a>
-								</td>
+									<td class=data><c:if
+											test="${transactionkeyword.keywordEnabledFlag != 1}">
+											<a
+												href="/metomeui/activatekeyword/${transactionkeyword.keywordId}.html">Activate
+											</a>
+										</c:if> <c:if test="${transactionkeyword.keywordEnabledFlag == 1}">
+											<a
+												href="/metomeui/deactivatekeyword/${transactionkeyword.keywordId}.html">Deactivate
+											</a>
+										</c:if> <a
+										href="/metomeui/removekeyword/${transactionkeyword.keywordId}.html">
+											Delete </a></td>
 								</c:if>
 							</tr>
 						</c:forEach>
 					</table>
-				</c:if></td>
+				</c:if>
+			</td>
 		</tr>
 	</table>
 </body>

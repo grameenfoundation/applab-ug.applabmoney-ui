@@ -269,8 +269,10 @@ td.formlabels {
 					style="font-family: sans-serif; font-stretch: wider; font-size: x-large; color: #000000; text-indent: 6%;">
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
-					<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
-						> Administration</a>
+					<h2>
+						<a style="color: #000000;" href="/metomeui/auilanding.html"
+							title="Home">Go Back Home</a>
+					</h2>
 				</div></td>
 		</tr>
 	</table>
@@ -363,9 +365,10 @@ td.formlabels {
 									</tr>
 									<tr>
 										<td colspan="2" class="savebutton"><br> <input
-											class="btn" type="submit" value="Update" /><input class="btn"
-											type="button" value="Cancel"
-											onClick="location.href='/metomeui/listussdmenuitems.html'" /></td>
+											type="submit" value="Update" /><input type="button"
+											value="Cancel"
+											onClick="location.href='/metomeui/listussdmenuitems.html'" />
+										</td>
 									</tr>
 								</table>
 							</form:form>

@@ -242,8 +242,10 @@ td.formlabels {
 					style="font-family: sans-serif; font-stretch: wider; font-size: x-large; color: #000000; text-indent: 6%;">
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
-					<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
-						> Administration</a>
+					<h2>
+						<a style="color: #000000;" href="/metomeui/auilanding.html"
+							title="Home">Go Back Home</a>
+					</h2>
 				</div>
 			</td>
 		</tr>
@@ -267,51 +269,55 @@ td.formlabels {
 						</h3>
 						<ul>
 							<li><a href="/metomeui/viewsystemconfiguration.html">System
-									Configuration</a>
-							</li>
-							<li><a href="/metomeui/listcharges.html">Charge
-									Configuration</a>
-							</li>
-							<li><a href="/metomeui/listaccounttypes.html">Account
-									Type Configuration</a></li>
+									Configuration</a></li>
 							<li><a href="/metomeui/listmemogroups.html">Memo Groups
-									Configuration</a></li>
+									Configuration</a>
+							</li>
 							<li><a href="/metomeui/listlanguages.html">Languages
-									Configuration</a></li>
+									Configuration</a>
+							</li>
 							<li><a href="/metomeui/listmessages.html">Messages
-									Configuration</a></li>
-							<li><a href="listmobilendc.html">Mobile NDC
-									Configuration</a></li>
+									Configuration</a>
+							</li>
+							<li><a href="/metomeui/listmobilendc.html">Mobile NDC
+									Configuration</a>
+							</li>
 						</ul>
 						<h3>
 							<a href="#ussdmenusetup">Ussd Menu Setup</a>
 						</h3>
 						<ul>
 							<li><a href="/metomeui/listussdmenuitems.html">Ussd Menu
-									Items</a>
-							</li>
+									Items</a></li>
 							<li><a href="/metomeui/listussdtransactionkeywords.html">Transaction
-									Keywords</a></li>
+									Keywords</a>
+							</li>
 							<li><a href="/metomeui/listussdpredefinputs.html">Predefined
-									Inputs</a></li>
+									Inputs</a>
+							</li>
 						</ul>
 						<h3>
-							<a href="#amlsettings">AML Settings</a>
+							<a href="#transsettings">Transaction Settings</a>
 						</h3>
 						<ul>
-							<li><a href="/metomeui/viewamlsettings.html">AML
-									Settings</a>
+							<li><a href="/metomeui/viewamlbarringsettings.html">AML
+									Settings</a></li>
+							<li><a href="/metomeui/listcharges.html">Charge
+									Configuration</a></li>
+							<li><a href="/metomeui/listaccounttypes.html">Account
+									Type Configuration</a>
 							</li>
 						</ul>
 						<h3>
 							<a href="#">Products Setup</a>
 						</h3>
 						<ul>
-							<li><a href="#viewmetomesetup">Me2Me Setup</a></li>
-							<li><a href="#viewzimbasetup.html">Zimba Setup</a></li>
+							<li><a href="/metomeui/viewmetomesetup.html">Me2Me Setup</a>
+							</li>
+							<li><a href="#viewzimbasetup.html">Zimba Setup</a>
+							</li>
 						</ul>
-					</div>
-				</td>
+					</div></td>
 				<td class="content">
 					<table>
 						<tr>

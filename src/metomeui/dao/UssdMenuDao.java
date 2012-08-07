@@ -10,10 +10,6 @@ import metomeui.model.UssdTransactionKeyword;
 
 public interface UssdMenuDao {
 
-	public boolean isSuccess();
-
-	public void setSuccess(boolean success);
-
 	public List<UssdTransactionKeyword> listTransactionKeywords();
 
 	public void addTransactionKeyword(UssdTransactionKeyword transactionKeyword);
@@ -105,4 +101,8 @@ public interface UssdMenuDao {
 
 	public List<UssdMenuItem> getChildMenuItemsForParentMenuItem(
 			UssdMenuItem rootMenuItem);
+
+	public void editPredefInputItem(UssdPredefInputItem predefInputItem);
+
+	public void addPredefInputItem(UssdPredefInputItem predefInputItem);
 }

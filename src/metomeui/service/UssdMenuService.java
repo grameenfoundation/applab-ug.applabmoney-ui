@@ -97,4 +97,11 @@ public interface UssdMenuService {
 
 	public List<UssdMenuItem> getChildMenuItemsForParentMenuItem(
 			UssdMenuItem rootMenuItem);
+
+	public void editPredefInputItem(UssdPredefInputItem predefInputItem);
+
+	public void addPredefInputItem(UssdPredefInputItem predefInputItem);
+
+	public boolean checkIfDuplicateStepMenuNumber(Integer stepMenuNumber,
+			Long keywordId);
 }

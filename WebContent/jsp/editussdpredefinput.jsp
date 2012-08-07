@@ -84,7 +84,7 @@ button,.btn {
 	border-width: medium 2px 2px medium;
 	cursor: pointer;
 	display: inline;
-	colour: #008000;
+	color: #000000;
 	font-family: 'Arial', 'Helvetica', sans-serif;
 	font-size: 100%;
 	font-weight: bold;
@@ -95,6 +95,34 @@ button,.btn {
 
 hover.btn {
 	color: #0066CC;
+}
+
+hover.longbtn {
+    color: #0066CC;
+}
+
+.longbtn{
+background-image:
+        url('resources/css/ui-lightness/images/ui-bg_gloss-wave_35_9ac482_500x100.png');
+    /*background-position: left top;*/
+    background-position:absolute;
+    background-repeat: repeat-x;
+    background-color: transparent;
+     -moz-box-align:stretch;
+    background-size: 100% 100%;
+    border-color: -moz-use-text-color #5C5D61 rgb(92, 93, 97)
+        -moz-use-text-color;
+    border-style: none none none none;
+    border-width: medium 2px 2px medium;
+    cursor: pointer;
+    display: inline;
+    color: #000000;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 100%;
+    font-weight: bold;
+    padding: 1px 3px;
+    height: 33px;
+    width: 140px;
 }
 
 /*END BUTTONS*/
@@ -264,10 +292,9 @@ td.formlabels {
 				<div class="header"
 					style="font-family: sans-serif; font-stretch: wider; font-size: x-large; color: #000000; text-indent: 6%;">
 					Administrator Console</div> <br>
-				<div class="header" style="color: #000000;">
-					<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
-						> Administration</a>
-				</div></td>
+				<div class="header" style="color: #000000;"><h2>
+                    <a style="color: #000000;" href="/metomeui/auilanding.html" title="Home">Go Back Home</a></h2>
+                </div></td>
 		</tr>
 	</table>
 	<div>
@@ -332,7 +359,7 @@ td.formlabels {
 									<tr>
 										<td></td>
 										<td><div>
-												<br> <input type="button"
+												<br> <input type="button" class ="longbtn"
 													value="Create New Predefined Input Item"
 													onClick="location.href='/metomeui/editaddnewussdpredefinputitem/${ussdPredefInput.predefInputId}.html'">
 											</div></td>
@@ -350,6 +377,7 @@ td.formlabels {
 											<th>Predefined Input Item Order</th>
 											<th>Action</th>
 										</tr>
+										<!--ussdPredefInput.predefInputItems-->
 										<c:forEach items="${ussdPredefInput.predefInputItems}"
 											var="predefinputitem" varStatus="status">
 											<tr class=data>
@@ -357,15 +385,18 @@ td.formlabels {
 													<td class=otherdata>${status.count}</td>
 													<td class=data><input type="hidden"
 														name="ussdPredefInput.predefInputItems[${status.index}].inputItemId"
-														value="${predefinputitem.inputItemId}" /><input
+														value="${predefinputitem.inputItemId}" /><a
+														href="/metomeui/editussdpredefinputitem/${predefinputitem.inputItemId}.html">
+															${predefinputitem.predefInputItemName}</a><input
+														type="hidden"
 														name="predefInputItems[${status.index}].predefInputItemName"
 														value="${predefinputitem.predefInputItemName}" /></td>
-													<td class=data><input
+													<td class=data><input type="hidden"
 														name="predefInputItems[${status.index}].predefInputItemCode"
-														value="${predefinputitem.predefInputItemCode}" /></td>
-													<td class=data><input
+														value="${predefinputitem.predefInputItemCode}" />${predefinputitem.predefInputItemCode}</td>
+													<td class=data><input type="hidden"
 														name="predefInputItems[${status.index}].predefInputItemOrder"
-														value="${predefinputitem.predefInputItemOrder}" /></td>
+														value="${predefinputitem.predefInputItemOrder}" />${predefinputitem.predefInputItemOrder}</td>
 													<td class=data><c:if
 															test="${predefinputitem.inputItemId != null}">
 															<c:if
@@ -393,12 +424,13 @@ td.formlabels {
 								<table>
 									<tr>
 										<td colspan="2" class="savebutton"><br> <input
-											class="btn" type="submit" value="Update" /><input class="btn"
+											 type="submit" value="Update" />&nbsp;&nbsp;&nbsp;&nbsp;<input
 											type="button" value="Cancel"
-											onClick="location.href='/metomeui/listpredefinputs.html'" />
+											onClick="location.href='/metomeui/listussdpredefinputs.html'" />
 										</td>
 									</tr>
 								</table>
+
 							</form:form>
 						</fieldset>
 					</div></td>

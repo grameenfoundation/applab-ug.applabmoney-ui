@@ -110,31 +110,31 @@ hover.btn {
 }
 
 .longbtn {
-    background-image:
-        url('resources/css/ui-lightness/images/CuteCapLa7.gif');
-    /*background-position: left top;*/
-    background-position: absolute;
-    background-repeat: repeat-x;
-    background-color: transparent;
-    -moz-box-align: stretch;
-    background-size: 100% 100%;
-    border-color: -moz-use-text-color #5C5D61 rgb(92, 93, 97)
-        -moz-use-text-color;
-    border-style: none none none none;
-    border-width: medium 2px 2px medium;
-    cursor: pointer;
-    display: inline;
-    colour: #008000;
-    font-family: 'Arial', 'Helvetica', sans-serif;
-    font-size: 100%;
-    font-weight: bold;
-    padding: 1px 3px;
-    height: 35px;
-    width: 210px;
+	background-image:
+		url('resources/css/ui-lightness/images/CuteCapLa7.gif');
+	/*background-position: left top;*/
+	background-position: absolute;
+	background-repeat: repeat-x;
+	background-color: transparent;
+	-moz-box-align: stretch;
+	background-size: 100% 100%;
+	border-color: -moz-use-text-color #5C5D61 rgb(92, 93, 97)
+		-moz-use-text-color;
+	border-style: none none none none;
+	border-width: medium 2px 2px medium;
+	cursor: pointer;
+	display: inline;
+	colour: #008000;
+	font-family: 'Arial', 'Helvetica', sans-serif;
+	font-size: 100%;
+	font-weight: bold;
+	padding: 1px 3px;
+	height: 35px;
+	width: 210px;
 }
 
 hover.longbtn {
-    color: #0066CC;
+	color: #0066CC;
 }
 
 /*END BUTTONS*/
@@ -305,10 +305,11 @@ td.formlabels {
 					style="font-family: sans-serif; font-stretch: wider; font-size: x-large; color: #000000; text-indent: 6%;">
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
-					<a style="color: #000000;" href="Me2meUiHome URL" title="Home">Home</a><a>
-						> Administration</a>
-				</div>
-			</td>
+					<h2>
+						<a style="color: #000000;" href="/metomeui/auilanding.html"
+							title="Home">Go Back Home</a>
+					</h2>
+				</div></td>
 		</tr>
 	</table>
 	<div>
@@ -316,7 +317,8 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Manage Predefined Inputs</h2>
-						<hr></td>
+						<hr>
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -336,18 +338,15 @@ td.formlabels {
 									<table>
 										<tr>
 											<td class="formlabels"><form:label
-													path="predefInputName">Predefined Input Name</form:label>
-											</td>
+													path="predefInputName">Predefined Input Name</form:label></td>
 											<td class="form"><form:input cssClass="formfields"
-													path="predefInputName" />
-											</td>
+													path="predefInputName" /></td>
 										<tr>
 											<td class="formlabels"><form:label
 													path="predefInputDescription">Predefined Input Description</form:label>
 											</td>
 											<td class="form"><form:input cssClass="formfields"
-													path="predefInputDescription" />
-											</td>
+													path="predefInputDescription" /></td>
 										</tr>
 									</table>
 								</fieldset>
@@ -358,7 +357,8 @@ td.formlabels {
 												<br> <input type="button" name="submit" class="longbtn"
 													value="Create New Predefined Input Item"
 													onClick="location.href='addnewussdpredefinputitem.html'">
-											</div></td>
+											</div>
+										</td>
 										<td></td>
 										<td></td>
 									</tr>
@@ -376,20 +376,17 @@ td.formlabels {
 										<c:forEach items="${ussdPredefInput.predefInputItems}"
 											var="predefInputItem" varStatus="status">
 											<tr class=data>
-												<c:if test="${predefInputItem.predefInputItemId != 0}">
+												<c:if test="${predefInputItem.inputItemId != 0}">
 													<td class=otherdata>${status.count}</td>
 													<td class=data><input
 														name="predefInputItems[${status.index}].predefInputItemName"
-														value="${predefInputItem.predefInputItemName}" />
-													</td>
+														value="${predefInputItem.predefInputItemName}" /></td>
 													<td class=data><input
 														name="predefInputItems[${status.index}].predefInputItemCode"
-														value="${predefInputItem.predefInputItemCode}" />
-													</td>
+														value="${predefInputItem.predefInputItemCode}" /></td>
 													<td class=data><input
 														name="predefInputItems[${status.index}].predefInputItemOrder"
-														value="${predefInputItem.predefInputItemOrder}" />
-													</td>
+														value="${predefInputItem.predefInputItemOrder}" /></td>
 												</c:if>
 											</tr>
 										</c:forEach>
@@ -408,8 +405,7 @@ td.formlabels {
 								</table>
 							</form:form>
 						</fieldset>
-					</div>
-				</td>
+					</div></td>
 			</tr>
 		</table>
 	</div>

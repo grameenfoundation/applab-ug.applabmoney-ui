@@ -3,24 +3,23 @@ package metomeui.web;
 import java.util.List;
 import java.util.Map;
 
-import javax.validation.Valid;
-
-import metomeui.dao.SystemSettingsDao;
-import metomeui.dao.SystemSettingsDaoImplementation;
+import metomeui.dao.UssdMenuDao;
+import metomeui.dao.UssdMenuDaoImplementation;
 import metomeui.model.AccountType;
+import metomeui.model.AmlBarring;
+import metomeui.model.GlobalKeywordCharge;
 import metomeui.model.Language;
 import metomeui.model.MemoGroup;
 import metomeui.model.Message;
-import metomeui.model.MsisdnSettings;
 import metomeui.model.NdcListOffnet;
 import metomeui.model.NdcListPToP;
+import metomeui.model.SystemConfiguration;
 import metomeui.model.User;
-import metomeui.model.UssdMenuItem;
-import metomeui.model.UssdPredefInput;
-import metomeui.model.UssdPredefInputItem;
 import metomeui.model.UssdTransactionKeyword;
 import metomeui.service.SystemSettingsService;
 import metomeui.service.SystemSettingsServiceImplementation;
+import metomeui.service.UssdMenuService;
+import metomeui.service.UssdMenuServiceImplementation;
 import metomeui.validator.SystemSettingsValidator;
 
 import org.apache.log4j.Logger;
@@ -43,13 +42,20 @@ public class SystemSettingsController {
 	private SystemSettingsValidator systemSettingsValidator;
 	@Autowired
 	SystemSettingsService systemSettingsService = new SystemSettingsServiceImplementation();
-	SystemSettingsDao systemSettingsDao = new SystemSettingsDaoImplementation();
+	@Autowired
+	UssdMenuService ussdMenuService = new UssdMenuServiceImplementation();
+	UssdMenuDao ussdMenuDao = new UssdMenuDaoImplementation();
 
-	@RequestMapping("/users")
+	@RequestMapping("/auilanding")
+	public String showAuiLanding(Map<String, Object> map) {
+		return "auilanding";
+	}
+	
+	@RequestMapping("/listusers")
 	public String listUser(Map<String, Object> map) {
 		map.put("user", new User());
 		map.put("userList", systemSettingsService.listUsers());
-		return "users";
+		return "listusers";
 	}
 
 	@RequestMapping(value = "/adduser", method = RequestMethod.GET)
@@ -62,7 +68,7 @@ public class SystemSettingsController {
 	public String addUser(@ModelAttribute("user") User user,
 			BindingResult result) {
 		systemSettingsService.addUser(user);
-		return "redirect:/users.html";
+		return "redirect:/listusers.html";
 	}
 
 	@RequestMapping(value = "/edituser/{userId}", method = RequestMethod.GET)
@@ -75,20 +81,20 @@ public class SystemSettingsController {
 	}
 
 	@RequestMapping(value = "/edituser/{userId}", method = RequestMethod.POST)
-	public String postChangesToMessage(@PathVariable Long userId,
+	public String postChangesToUser(@PathVariable Long userId,
 			@ModelAttribute("user") User user, BindingResult result) {
 
 		// Assign id
 		user.setUserId(userId);
 		systemSettingsService.editExistingUser(user);
-		return "redirect:/users.html";
+		return "redirect:/listusers.html";
 	}
 
-	@RequestMapping("/removeUser/{userId}")
+	@RequestMapping("/removeuser/{userId}")
 	public String deleteUser(@PathVariable("userId") Long userId) {
 		systemSettingsService.deleteExistingUser(userId);
 		logger.info("Returning hello view");
-		return "redirect:/users.html";
+		return "redirect:/listusers.html";
 	}
 
 	@RequestMapping("/listmessages")
@@ -149,7 +155,7 @@ public class SystemSettingsController {
 
 		systemSettingsValidator.validate(message, result);
 		if (result.hasErrors()) {
-			return "addmessage";
+			return "editmessage";
 		}
 
 		Language language = (Language) systemSettingsService
@@ -220,7 +226,7 @@ public class SystemSettingsController {
 
 		systemSettingsValidator.validate(memoGroup, result);
 		if (result.hasErrors()) {
-			return "addmemogroup";
+			return "addeditmemogroup";
 		}
 
 		// Assign id
@@ -307,9 +313,9 @@ public class SystemSettingsController {
 	public String postChangesToLanguage(@PathVariable Long languageId,
 			@ModelAttribute("language") Language language, BindingResult result) {
 
-		systemSettingsValidator.validate(language, result);
+		systemSettingsValidator.validate(language, result, languageId);
 		if (result.hasErrors()) {
-			return "addlanguage";
+			return "editlanguage";
 		}
 
 		// Assign id
@@ -617,10 +623,211 @@ public class SystemSettingsController {
 		return "redirect:/listmobilendc.html";
 	}
 
+	@RequestMapping("/viewamlbarringsettings")
+	public String listAmlBarringSettings(Map<String, Object> map) {
+		map.put("amlBarring", new AmlBarring());
+		map.put("amlBarringSettingsList",
+				systemSettingsService.listAmlBarringSettings());
+		return "viewamlbarringsettings";
+	}
+
+	@RequestMapping(value = "/addamlbarring", method = RequestMethod.GET)
+	public String addAmlBarringLink(Map<String, Object> map) {
+		map.put("amlBarring", new AmlBarring());
+		return "addamlbarring";
+	}
+
+	@RequestMapping(value = "/addamlbarring", method = RequestMethod.POST)
+	public String addAmlBarring(
+			@ModelAttribute("amlBarring") AmlBarring amlBarring,
+			BindingResult result) {
+		systemSettingsService.addAmlBarringSetting(amlBarring);
+		return "redirect:/viewamlbarringsettings.html";
+	}
+
+	@RequestMapping(value = "/editamlbarring/{barringId}", method = RequestMethod.GET)
+	public String editAmlBarringLink(@PathVariable Long barringId,
+			Map<String, Object> map) {
+		AmlBarring existingAmlBarring = systemSettingsService
+				.getExistingAmlBarring(barringId);
+
+		map.put("amlBarring", existingAmlBarring);
+		return "editamlbarring";
+	}
+
+	@RequestMapping(value = "/editamlbarring/{barringId}", method = RequestMethod.POST)
+	public String postChangesToAmlBarring(@PathVariable Long barringId,
+			@ModelAttribute("amlBarring") AmlBarring amlBarring,
+			BindingResult result) {
+
+		systemSettingsValidator.validate(amlBarring, result);
+		if (result.hasErrors()) {
+			return "editamlbarring";
+		}
+
+		// Assign id
+		amlBarring.setBarringId(barringId);
+		systemSettingsService.editExistingAmlBarring(amlBarring);
+		return "redirect:/viewamlbarringsettings.html";
+	}
+
+	@RequestMapping("/removeamlbarring/{barringId}")
+	public String deleteAmlBarring(@PathVariable("barringId") Long barringId) {
+		systemSettingsService.deleteExistingAmlBarring(barringId);
+		return "redirect:/viewamlbarringsettings.html";
+	}
+
+	@RequestMapping("/listglobalkeywordcharges")
+	public String listGlobalKeywordCharges(Map<String, Object> map) {
+		map.put("globalKeywordCharge", new GlobalKeywordCharge());
+		map.put("globalKeywordChargeList",
+				systemSettingsService.listGlobalKeywordCharges());
+		return "listglobalkeywordcharges";
+	}
+
+	@RequestMapping(value = "/addglobalkeywordcharge", method = RequestMethod.GET)
+	public String addGlobalKeywordChargeLink(Map<String, Object> map) {
+		map.put("globalKeywordCharge", new GlobalKeywordCharge());
+		return "addglobalkeywordcharge";
+	}
+
+	@RequestMapping(value = "/addglobalkeywordcharge", method = RequestMethod.POST)
+	public String addGlobalKeywordCharge(
+			@ModelAttribute("globalKeywordCharge") GlobalKeywordCharge globalKeywordCharge,
+			BindingResult result) {
+
+		systemSettingsValidator.validate(globalKeywordCharge, result);
+		if (result.hasErrors()) {
+			return "addglobalkeywordcharge";
+		}
+
+		UssdTransactionKeyword chargeKeyword = new UssdTransactionKeyword();
+		if ((globalKeywordCharge.getTransactionKeyword().getKeywordId() == null)
+				|| (globalKeywordCharge.getTransactionKeyword().getKeywordId() == 0)) {
+			chargeKeyword = ussdMenuService
+					.getExistingTransactionKeyword((long) 0);
+		} else {
+			chargeKeyword = ussdMenuService
+					.getExistingTransactionKeyword(globalKeywordCharge
+							.getTransactionKeyword().getKeywordId());
+		}
+		if (chargeKeyword != null) {
+			globalKeywordCharge.setTransactionKeyword(chargeKeyword);
+		}
+		systemSettingsService.addGlobalKeywordCharge(globalKeywordCharge);
+		return "redirect:/listglobalkeywordcharges.html";
+	}
+
+	@RequestMapping(value = "/editglobalkeywordcharge/{chargeId}", method = RequestMethod.GET)
+	public String editGlobalKeywordChargeLink(@PathVariable Long chargeId,
+			Map<String, Object> map) {
+		GlobalKeywordCharge existingGlobalKeywordCharge = systemSettingsService
+				.getExistingGlobalKeywordCharge(chargeId);
+
+		map.put("globalKeywordCharge", existingGlobalKeywordCharge);
+		return "editglobalkeywordcharge";
+	}
+
+	@RequestMapping(value = "/editglobalkeywordcharge/{chargeId}", method = RequestMethod.POST)
+	public String postChangesToGlobalKeywordCharge(
+			@PathVariable Long chargeId,
+			@ModelAttribute("globalKeywordCharge") GlobalKeywordCharge globalKeywordCharge,
+			BindingResult result) {
+
+		systemSettingsValidator.validate(globalKeywordCharge, result);
+		if (result.hasErrors()) {
+			return "editglobalkeywordcharge";
+		}
+
+		// Assign id
+		globalKeywordCharge.setChargeId(chargeId);
+		systemSettingsService
+				.editExistingGlobalKeywordCharge(globalKeywordCharge);
+		return "redirect:/listglobalkeywordcharges.html";
+	}
+
+	@RequestMapping("/removeglobalkeywordcharge/{chargeId}")
+	public String deleteGlobalKeywordCharge(
+			@PathVariable("chargeId") Long chargeId) {
+		systemSettingsService.deleteExistingGlobalKeywordCharge(chargeId);
+		return "redirect:/listglobalkeywordcharges.html";
+	}
+
+	@RequestMapping("/viewsystemconfiguration")
+	public String viewSystemConfiguration(Map<String, Object> map) {
+
+		SystemConfiguration existingSystemConfiguration = systemSettingsService
+				.getSystemConfiguration();
+		if (null != existingSystemConfiguration) {
+			map.put("systemConfiguration", existingSystemConfiguration);
+			return "viewsystemconfiguration";
+		} else {
+			map.put("systemConfiguration", new SystemConfiguration());
+			return "redirect:/addsystemconfiguration.html";
+		}
+	}
+
+	@RequestMapping(value = "/addsystemconfiguration", method = RequestMethod.GET)
+	public String addSystemConfigurationLink(Map<String, Object> map) {
+		map.put("systemConfiguration", new SystemConfiguration());
+		return "addsystemconfiguration";
+	}
+
+	@RequestMapping(value = "/addsystemconfiguration", method = RequestMethod.POST)
+	public String addSystemConfiguration(
+			@ModelAttribute("systemConfiguration") SystemConfiguration systemConfiguration,
+			BindingResult result) {
+
+		systemSettingsService.addSystemConfiguration(systemConfiguration);
+		return "redirect:/auilanding.html";
+	}
+
+	/*
+	 * @RequestMapping(value = "/viewsystemconfiguration", method =
+	 * RequestMethod.GET) public String
+	 * editSystemConfigurationLink(@PathVariable Long configId, Map<String,
+	 * Object> map) { SystemConfiguration existingSystemConfiguration =
+	 * systemSettingsService .getExistingSystemConfiguration();
+	 * 
+	 * map.put("systemConfiguration", existingSystemConfiguration); return
+	 * "viewsystemconfiguration"; }
+	 */
+
+	@RequestMapping(value = "/viewsystemconfiguration", method = RequestMethod.POST)
+	public String postChangesToSystemConfiguration(
+			// @PathVariable Long configId,
+			@ModelAttribute("systemConfiguration") SystemConfiguration systemConfiguration,
+			BindingResult result) {
+
+		systemSettingsValidator.validate(systemConfiguration, result);
+		if (result.hasErrors()) {
+			return "viewsystemconfiguration";
+		}
+		systemConfiguration.setConfigId((long) 1);
+		systemSettingsService
+				.editExistingSystemConfiguration(systemConfiguration);
+		return "redirect:/auilanding.html";
+	}
+
 	// Create model attributes for linking across models
+	@ModelAttribute("globalKeywordChargeList")
+	public List<GlobalKeywordCharge> populateGlobalKeywordChargeList() {
+		return systemSettingsService.listGlobalKeywordCharges();
+	}
+
 	@ModelAttribute("memoGroupsList")
 	public List<MemoGroup> populateMemoGroupList() {
 		return systemSettingsService.listMemoGroups();
+	}
+
+	@ModelAttribute("amlBarringSettingsList")
+	public List<AmlBarring> populateAmlBarringSettingsList() {
+		return systemSettingsService.listAmlBarringSettings();
+	}
+
+	@ModelAttribute("transactionKeywordsList")
+	public List<UssdTransactionKeyword> populateTransactionKeywordsList() {
+		return ussdMenuService.listTransactionKeywords();
 	}
 
 	@ModelAttribute("accountTypesList")

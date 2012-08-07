@@ -21,8 +21,6 @@ public class UssdMenuValidator implements Validator {
 
 	@Autowired
 	UssdMenuService ussdMenuService = new UssdMenuServiceImplementation();
-	@Autowired
-	UssdMenuDao ussdMenuDao = new UssdMenuDaoImplementation();
 
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -144,7 +142,7 @@ public class UssdMenuValidator implements Validator {
 							"stepMenuNumber", "stepMenuNumber.required");
 				} else if ((null != ussdKeywordStep.getStepMenuNumber())
 						|| (ussdKeywordStep.getStepMenuNumber().toString() != "")) {
-					if ((ussdMenuDao.checkIfDuplicateStepMenuNumber(
+					if ((ussdMenuService.checkIfDuplicateStepMenuNumber(
 							ussdKeywordStep.getStepMenuNumber(), keywordId)) == true) {
 						errors.rejectValue("stepMenuNumber",
 								"stepMenuNumber.duplicate");

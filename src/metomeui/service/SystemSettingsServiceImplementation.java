@@ -5,6 +5,8 @@ import java.util.List;
 import metomeui.dao.SystemSettingsDao;
 import metomeui.dao.SystemSettingsDaoImplementation;
 import metomeui.model.AccountType;
+import metomeui.model.AmlBarring;
+import metomeui.model.GlobalKeywordCharge;
 import metomeui.model.Language;
 import metomeui.model.MemoGroup;
 import metomeui.model.Message;
@@ -18,7 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service("chargeSetupService")
+@Service("systemSettingsService")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class SystemSettingsServiceImplementation implements
 		SystemSettingsService {
@@ -82,8 +84,8 @@ public class SystemSettingsServiceImplementation implements
 	}
 
 	@Transactional
-	public void deleteExistingUser(Long id) {
-		systemSettingsDao.removeUser(id);
+	public void deleteExistingUser(Long userId) {
+		systemSettingsDao.removeExistingUser(userId);
 	}
 
 	@Transactional
@@ -212,8 +214,8 @@ public class SystemSettingsServiceImplementation implements
 	}
 
 	@Transactional
-	public List<SystemConfiguration> listSystemConfiguration() {
-		return systemSettingsDao.listSystemConfiguration();
+	public SystemConfiguration getSystemConfiguration() {
+		return systemSettingsDao.getSystemConfiguration();
 	}
 
 	@Transactional
@@ -221,6 +223,19 @@ public class SystemSettingsServiceImplementation implements
 		systemSettingsDao.removeSystemConfiguration(systemConfigurationId);
 	}
 
+	@Transactional
+	public SystemConfiguration getExistingSystemConfiguration() {
+		return systemSettingsDao.getSystemConfiguration();
+	}
+	
+	@Transactional
+	public void editExistingSystemConfiguration(
+			SystemConfiguration systemConfiguration) {
+		systemSettingsDao.editSystemConfiguration(systemConfiguration);
+		
+	}
+
+	
 	/**
 	 * NDC List functions
 	 * 
@@ -291,4 +306,65 @@ public class SystemSettingsServiceImplementation implements
 				onSwitch);
 	}
 
+	@Transactional
+	public List<AmlBarring> listAmlBarringSettings() {
+		return systemSettingsDao.listAmlBarringSettings();
+	}
+
+	@Transactional
+	public void addAmlBarringSetting(AmlBarring amlBarring) {
+		systemSettingsDao.addAmlBarringSetting(amlBarring);
+	}
+
+	@Transactional
+	public void editExistingAmlBarring(AmlBarring amlBarring) {
+		systemSettingsDao.editExistingAmlBarring(amlBarring);
+	}
+
+	@Transactional
+	public void deleteExistingAmlBarring(Long barringId) {
+		systemSettingsDao.deleteExistingAmlBarring(barringId);
+	}
+
+	@Transactional
+	public AmlBarring getExistingAmlBarring(Long barringId) {
+		return systemSettingsDao.getExistingAmlBarring(barringId);
+	}
+
+	@Transactional
+	public List<GlobalKeywordCharge> listGlobalKeywordCharges() {
+		return systemSettingsDao.listGlobalKeywordCharges();
+	}
+
+	@Transactional
+	public void addGlobalKeywordCharge(GlobalKeywordCharge globalKeywordCharge) {
+		systemSettingsDao.addGlobalKeywordCharge(globalKeywordCharge);
+	}
+
+	@Transactional
+	public void editExistingGlobalKeywordCharge(GlobalKeywordCharge globalKeywordCharge) {
+		systemSettingsDao.editExistingGlobalKeywordCharge(globalKeywordCharge);
+	}
+
+	@Transactional
+	public void deleteExistingGlobalKeywordCharge(Long chargeId) {
+		systemSettingsDao.deleteExistingGlobalKeywordCharge(chargeId);
+	}
+
+	@Transactional
+	public GlobalKeywordCharge getExistingGlobalKeywordCharge(Long chargeId) {
+		return systemSettingsDao.getExistingGlobalKeywordCharge(chargeId);
+	}
+
+	@Override
+	public boolean checkIfDuplicateLanguageName(String languageName,
+			Long languageId) {
+		return systemSettingsDao.checkIfDuplicateLanguageName(languageId, languageName);
+	}
+
+	
+	
+	
+	
+	
 }

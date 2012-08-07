@@ -14,9 +14,6 @@
 	<a>USSD Processing Engine Setup Menu</a>
 	</br>
 	</br>
-<a href="listussdpredefinputs.html"> USSD Menu Items Management</a>
-	</br>
-
 	<a href="listussdmenuitems.html"> USSD Menu Items Management</a>
 	</br>
 	<a href="listussdtransactionkeywords.html"> Transaction Keyword
@@ -34,41 +31,30 @@
 	<a>Admin UI parked!! :-)</a>
 	<br>
 	<br>
-
 	<a href="uilogin.html"> Administrator Console Login</a>
 	</br>
-	<a href="auilanding.html">Password Settings</a>
+	<a href="viewsystemconfiguration.html">System Configuration</a>
 	</br>
-	<a href="auimsisdnsettings.html">MSISDN Settings</a>
+	<a href="listmobilendc.html">Mobile NDC Configuration</a>
 	</br>
-	<a href="auitransactionsettings.html">Transaction Settings</a>
+	<a href="listusers.html"> User Management</a>
 	</br>
-	<a href="auimessagesettings.html">Message Settings</a>
+	<a href="listaccounttypes.html"> Account Type Management</a>
 	</br>
-	<a href="auilanguagesettings.html">Language Settings</a>
+	<a href="listlanguages.html"> Language Configuration</a>
 	</br>
-	<a href="auiaccountsconfiguration.html">Accounts Configuration</a>
+	<a href="listmessages.html"> Message Management</a>
 	</br>
-	<a href="auimemogroupsconfiguration.html">Memo Groups Configuration</a>
+	<a href="listglobalkeywordcharges.html"> Global Keyword Charge Setup</a>
 	</br>
-	<a href="auimobilendcconfiguration.html">Mobile NDC Configuration</a>
+	<a href="listmemogroups.html"> Memo Groups</a>
 	</br>
-	<a href="users.html"> User Management</a>
+	<a href="viewamlbarringsettings.html"> AML Settings</a>
 	</br>
-	<a href="accounttypes.html"> Account Type Management</a>
-	</br>
-	<a href="languages.html"> Language Configuration</a>
-	</br>
-	<a href="messages.html"> Message Management</a>
-	</br>
-	<a href="charges.html"> Charge Setup</a>
-	</br>
-	<a href="memogroups.html"> Memo Groups</a>
-	</br>
-	<a href="amlsettings.html"> AML Settings</a>
-	</br>
-	<a href="ndc-lists.html"> AML Settings</a>
-	</br>
+	<a href="viewmetomesetup.html"> Me2Me</a>
+    </br>
+    <a href="viewzimbasetup.html">Zimba</a>
+    </br>
 	
 
 

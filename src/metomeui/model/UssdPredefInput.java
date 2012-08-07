@@ -37,13 +37,11 @@ public class UssdPredefInput {
 	private String predefInputDescription;
 
 	@OneToMany(targetEntity = UssdPredefInputItem.class, mappedBy = "predefInput", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
-	// @Cascade(value = org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
-	@JoinColumn(name = "PREDEF_INPUT_ID", insertable = false, updatable = false)
-	// @PrimaryKeyJoinColumn
+	@JoinColumn(name = "PREDEF_INPUT_ID", insertable = false, updatable = false, nullable = true)
 	private List<UssdPredefInputItem> predefInputItems;
 
 	@OneToMany(targetEntity = UssdKeywordStep.class, mappedBy = "predefInput", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
-	@JoinColumn(name = "KEYWORD_STEP_ID", insertable = false, updatable = false)
+	@JoinColumn(name = "PREDEF_INPUT_ID", insertable = false, updatable = false, nullable = true)
 	private List<UssdKeywordStep> keywordSteps;
 
 	public UssdPredefInput() {

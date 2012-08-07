@@ -1,5 +1,6 @@
 package metomeui.dao;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
@@ -17,8 +18,14 @@ public final class HibernateUtil {
 		}
 	}
 
-	public static SessionFactory getSessionFactory() {
+	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
-
+	
+	public static void discardSession(Session theSession){
+		if(null != theSession){
+			theSession.close();
+			theSession = null;
+		}
+	}
 }

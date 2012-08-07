@@ -11,48 +11,48 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "users")
+@Table(name = "USERS")
 public class User {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "user_id")
-	private long userId;
+	@Column(name = "USER_ID")
+	private Long userId;
 
 	@NotEmpty
-	@Column(name = "user_name", nullable = false, length = 20)
+	@Column(name = "USER_NAME", nullable = false, length = 20)
 	public String userName;
 
 	@NotEmpty
-	@Column(name = "password", nullable = false, length = 20)
+	@Column(name = "PASSWORD", nullable = false, length = 20)
 	public String password;
 
 	@NotEmpty
 	@Size(min = 2, max = 20)
-	@Column(name = "first_name", nullable = false, length = 20)
+	@Column(name = "FIRST_NAME", nullable = false, length = 20)
 	private String firstName;
 
 	@NotEmpty
 	@Size(min = 2, max = 20)
-	@Column(name = "last_name", nullable = false, length = 20)
+	@Column(name = "LAST_NAME", nullable = false, length = 20)
 	private String lastName;
 
 	@Size(min = 1, max = 20)
-	@Column(name = "middle_name", nullable = true, length = 20)
+	@Column(name = "MIDDLE_NAME", nullable = true, length = 20)
 	private String middleName;
 
 	@NotEmpty
 	@Size(min = 5, max = 20)
-	@Column(name = "role", nullable = false, length = 20)
+	@Column(name = "ROLE", nullable = false, length = 20)
 	private String role;
 
 	@NotEmpty
 	@Email
-	@Column(name = "email_address", nullable = false, length = 40)
+	@Column(name = "EMAIL_ADDRESS", nullable = false, length = 40)
 	private String email;
 
 	@NotEmpty
-	@Column(name = "telephone", nullable = false, length = 20)
+	@Column(name = "TELEPHONE", nullable = false, length = 20)
 	private String telephone;
 
 	public User() {
@@ -75,17 +75,11 @@ public class User {
 		return password;
 	}
 
-	public void clearFields() {
-		this.userName = "";
-		this.password = "";
-
-	}
-
-	public long getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(long userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
