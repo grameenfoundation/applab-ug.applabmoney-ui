@@ -13,7 +13,7 @@ public class SystemConfiguration {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "ID")
+	@Column(name = "CONFIG_ID")
 	private Long configId;
 
 	@Column(name = "MIN_PASSWORD", nullable = true, length = 11)
@@ -25,9 +25,6 @@ public class SystemConfiguration {
 	@Column(name = "INVALID_PASSWORD_LOCK", nullable = true, length = 11)
 	private Integer invalidPasswordLock;
 
-	@Transient
-	private Integer maxFailedLoginCount;
-
 	@Column(name = "FAILED_TRANSFER_LOCK", nullable = true, length = 11)
 	private Integer failedTransferLock;
 
@@ -35,19 +32,19 @@ public class SystemConfiguration {
 	private Integer autoCreateTempSub;
 
 	@Column(name = "TEMP_RESTRICTION", nullable = true, length = 11)
-	private String tempRestrictionSettings;
+	private Integer tempRestrictionSettings;
 
 	@Column(name = "OPERATION", nullable = true, length = 50)
-	private Integer allowedOperations;
+	private String operation;
 
 	@Column(name = "SMS_SENDER_NUMBER", nullable = true, length = 50)
 	private String smsSenderNumber;
 
 	@Column(name = "SMS_MSG_SUB_DISPLAY_FMT", nullable = true, length = 11)
-	private Integer smsMessageSubscriptionFormat;
+	private Integer smsMessageSubscriberFormat;
 
 	@Column(name = "SUB_DISPLAY_MAX_CHARS", nullable = true, length = 11)
-	private String subscriptionMaxDisplayCharacters;
+	private Integer subscriberMaxDisplayCharacters;
 
 	@Column(name = "CHARGE_COLLECT_IMMEDIATE", nullable = true, length = 11)
 	private Integer chargeCollectSetting;
@@ -56,7 +53,7 @@ public class SystemConfiguration {
 	private Integer notifyOnDelayTransaction;
 
 	@Column(name = "NOTIFY_DELAY_MSG_ID", nullable = true, length = 11)
-	private String notifyOnDelayMessageID;
+	private Integer notifyOnDelayMessageID;
 
 	@Column(name = "NOTIFY_DELAY_SECONDS", nullable = true, length = 11)
 	private Integer notifyOnDelaySeconds;
@@ -65,7 +62,7 @@ public class SystemConfiguration {
 	private Integer maintenanceModeFlag;
 
 	@Column(name = "MAINTENANCE_MODE_MSG_ID", nullable = true, length = 11)
-	private String maintenanceModeMessageID;
+	private Integer maintenanceModeMessageID;
 
 	@Column(name = "COUNTRY_CODE", nullable = true, length = 5)
 	private String countryCode;
@@ -77,7 +74,7 @@ public class SystemConfiguration {
 	private String currencyCode;
 
 	@Column(name = "CURRENCY_ISO_NUMBER", nullable = true, length = 11)
-	private String currencyISONumber;
+	private Integer currencyISONumber;
 
 	@Column(name = "MOBILE_LENGTH", nullable = true, length = 11)
 	private Integer msisdnLength;
@@ -113,14 +110,6 @@ public class SystemConfiguration {
 		this.invalidPasswordLock = invalidPasswordLock;
 	}
 
-	public Integer getMaxFailedLoginCount() {
-		return maxFailedLoginCount;
-	}
-
-	public void setMaxFailedLoginCount(Integer maxFailedLoginCount) {
-		this.maxFailedLoginCount = maxFailedLoginCount;
-	}
-
 	public Integer getFailedTransferLock() {
 		return failedTransferLock;
 	}
@@ -137,20 +126,20 @@ public class SystemConfiguration {
 		this.autoCreateTempSub = autoCreateTempSub;
 	}
 
-	public String getTempRestrictionSettings() {
+	public Integer getTempRestrictionSettings() {
 		return tempRestrictionSettings;
 	}
 
-	public void setTempRestrictionSettings(String tempRestrictionSettings) {
+	public void setTempRestrictionSettings(Integer tempRestrictionSettings) {
 		this.tempRestrictionSettings = tempRestrictionSettings;
 	}
 
-	public Integer getAllowedOperations() {
-		return allowedOperations;
+	public String getOperation() {
+		return operation;
 	}
 
-	public void setAllowedOperations(Integer allowedOperations) {
-		this.allowedOperations = allowedOperations;
+	public void setOperation(String operation) {
+		this.operation = operation;
 	}
 
 	public String getSmsSenderNumber() {
@@ -161,21 +150,21 @@ public class SystemConfiguration {
 		this.smsSenderNumber = smsSenderNumber;
 	}
 
-	public Integer getSmsMessageSubscriptionFormat() {
-		return smsMessageSubscriptionFormat;
+	public Integer getSmsMessageSubscriberFormat() {
+		return smsMessageSubscriberFormat;
 	}
 
-	public void setSmsMessageSubscriptionFormat(Integer smsMessageSubscriptionFormat) {
-		this.smsMessageSubscriptionFormat = smsMessageSubscriptionFormat;
+	public void setSmsMessageSubscriberFormat(Integer smsMessageSubscriberFormat) {
+		this.smsMessageSubscriberFormat = smsMessageSubscriberFormat;
 	}
 
-	public String getSubscriptionMaxDisplayCharacters() {
-		return subscriptionMaxDisplayCharacters;
+	public Integer getSubscriberMaxDisplayCharacters() {
+		return subscriberMaxDisplayCharacters;
 	}
 
-	public void setSubscriptionMaxDisplayCharacters(
-			String subscriptionMaxDisplayCharacters) {
-		this.subscriptionMaxDisplayCharacters = subscriptionMaxDisplayCharacters;
+	public void setSubscriberMaxDisplayCharacters(
+			Integer subscriberMaxDisplayCharacters) {
+		this.subscriberMaxDisplayCharacters = subscriberMaxDisplayCharacters;
 	}
 
 	public Integer getChargeCollectSetting() {
@@ -194,11 +183,11 @@ public class SystemConfiguration {
 		this.notifyOnDelayTransaction = notifyOnDelayTransaction;
 	}
 
-	public String getNotifyOnDelayMessageID() {
+	public Integer getNotifyOnDelayMessageID() {
 		return notifyOnDelayMessageID;
 	}
 
-	public void setNotifyOnDelayMessageID(String notifyOnDelayMessageID) {
+	public void setNotifyOnDelayMessageID(Integer notifyOnDelayMessageID) {
 		this.notifyOnDelayMessageID = notifyOnDelayMessageID;
 	}
 
@@ -218,11 +207,11 @@ public class SystemConfiguration {
 		this.maintenanceModeFlag = maintenanceModeFlag;
 	}
 
-	public String getMaintenanceModeMessageID() {
+	public Integer getMaintenanceModeMessageID() {
 		return maintenanceModeMessageID;
 	}
 
-	public void setMaintenanceModeMessageID(String maintenanceModeMessageID) {
+	public void setMaintenanceModeMessageID(Integer maintenanceModeMessageID) {
 		this.maintenanceModeMessageID = maintenanceModeMessageID;
 	}
 
@@ -250,11 +239,11 @@ public class SystemConfiguration {
 		this.currencyCode = currencyCode;
 	}
 
-	public String getCurrencyISONumber() {
+	public Integer getCurrencyISONumber() {
 		return currencyISONumber;
 	}
 
-	public void setCurrencyISONumber(String currencyISONumber) {
+	public void setCurrencyISONumber(Integer currencyISONumber) {
 		this.currencyISONumber = currencyISONumber;
 	}
 

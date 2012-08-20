@@ -247,7 +247,8 @@ td.formlabels {
 						<a style="color: #000000;" href="/metomeui/auilanding.html"
 							title="Home">Go Back Home</a>
 					</h2>
-				</div></td>
+				</div>
+			</td>
 		</tr>
 	</table>
 	<div>
@@ -255,8 +256,7 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Global AML Barring Manager</h2>
-						<hr>
-					</td>
+						<hr></td>
 				</tr>
 			</table>
 		</div>
@@ -277,6 +277,21 @@ td.formlabels {
 								<table>
 									<tr>
 										<td class="formlabels"><form:label
+												path="accountType.accountTypeId">Associated Account Type:</form:label>
+										</td>
+										<td class="form"><form:select cssClass="dropdown"
+												path="accountType.accountTypeId">
+												<form:option value="0" label="--None--" />
+												<c:forEach items="${accountTypesList}" var="acctype">
+													<c:if test="${acctype.accountTypeId != 0}">
+														<form:option value="${acctype.accountTypeId}"
+															label="${acctype.accountTypeName}" />
+													</c:if>
+												</c:forEach>
+											</form:select></td>
+									</tr>
+									<tr>
+										<td class="formlabels"><form:label
 												path="transactionKeyword.keywordId">Associated Keyword Name:</form:label>
 										</td>
 										<td class="form"><form:select cssClass="dropdown"
@@ -289,22 +304,6 @@ td.formlabels {
 															label="${transactionkeyword.keywordName}" />
 													</c:if>
 												</c:forEach>
-											</form:select></td>
-									</tr>
-									<tr>
-										<td class="formlabels"><form:label
-												path="accountType.accountTypeId">Associated Account Type:</form:label>
-										</td>
-										<td class="form"><form:select cssClass="dropdown"
-												path="accountType.accountTypeId">
-												<form:option value="0" label="--None--" />
-												<c:forEach items="${accountTypesList}" var="acctype">
-													<c:if test="${acctype.accountTypeId != 0}">
-														<form:option value="${acctype.accountTypeId}"
-															label="${acctype.accountTypeName}" />
-													</c:if>
-												</c:forEach>
-												<form:options items="${accountTypesList}" />
 											</form:select>
 										</td>
 									</tr>
@@ -315,8 +314,7 @@ td.formlabels {
 												path="allowSend">
 												<form:option value="0" label="No" />
 												<form:option value="1" label="Yes" />
-											</form:select>
-										</td>
+											</form:select></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="allowReceive">Allow Receive:</form:label>
@@ -325,8 +323,7 @@ td.formlabels {
 												path="allowReceive">
 												<form:option value="0" label="No" />
 												<form:option value="1" label="Yes" />
-											</form:select>
-										</td>
+											</form:select></td>
 									</tr>
 									<tr>
 										<td></td>
@@ -336,7 +333,8 @@ td.formlabels {
 										<td colspan="2" class="savebutton"><br> <input
 											class="btn" type="submit" value="Save" /> <input class="btn"
 											type="button" value="Cancel"
-											onClick="location.href='/metomeui/listamlbarring.html'" /></td>
+											onClick="location.href='/metomeui/listamlbarring.html'" />
+										</td>
 
 									</tr>
 								</table>
@@ -344,12 +342,12 @@ td.formlabels {
 						</fieldset>
 						<table>
 							<tr>
-								<td><br></td>
+								<td><br>
+								</td>
 							</tr>
 						</table>
 
-					</div>
-				</td>
+					</div></td>
 			</tr>
 		</table>
 		<!--    <table border=1px; width=100%;> -->

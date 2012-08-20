@@ -40,12 +40,10 @@ public class UssdMenuItem {
 	private UssdTransactionKeyword menuItemKeyword;
 
 	@NotEmpty
-	@Size(min = 1, max = 11)
 	@Column(name = "MENU_ITEM_ORDER", nullable = true, length = 11)
 	private Integer menuItemOrder;
 
 	@NotEmpty
-	@Size(min = 8, max = 20)
 	@Column(name = "MENU_ITEM_NAME", nullable = true, length = 100)
 	private String menuItemName;
 

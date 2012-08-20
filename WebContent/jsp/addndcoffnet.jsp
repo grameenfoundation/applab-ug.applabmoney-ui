@@ -298,13 +298,12 @@ td.formlabels {
 										<td></td>
 									</tr>
 									<tr>
-										<td></td>
-										<td class="savebutton"><br> <input class="btn"
+									<td></td>
+										<td colspan = "2" class="savebutton"><br> <input class="btn"
 											type="submit" value="Save" /> <input class="btn"
 											type="button" value="Cancel"
 											onClick="location.href='/metomeui/listmobilendc.html'" /></td>
-										<td></td>
-										<td></td>
+										
 									</tr>
 								</table>
 							</form:form>

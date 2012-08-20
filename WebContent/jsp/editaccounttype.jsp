@@ -319,7 +319,7 @@ td.formlabels {
 								<table>
 
 									<tr>
-										<td class="formlabels"><form:label path="accountTypeId">Menu Item Parent ID:</form:label>
+										<td class="formlabels"><form:label path="accountTypeId">Account Type ID:</form:label>
 										</td>
 
 										<td class="form"><form:input cssClass="formfields"

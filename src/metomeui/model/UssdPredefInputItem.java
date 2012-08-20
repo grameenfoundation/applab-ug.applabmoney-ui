@@ -26,17 +26,14 @@ public class UssdPredefInputItem {
 	private UssdPredefInput predefInput;
 
 	@NotEmpty
-	@Size(min = 6, max = 100)
 	@Column(name = "INPUT_ITEM_NAME", unique = true, nullable = false, length = 100)
 	private String predefInputItemName;
 
 	@NotEmpty
-	@Size(min = 6, max = 100)
 	@Column(name = "INPUT_ITEM_CODE", unique = true, nullable = false, length = 100)
 	private String predefInputItemCode;
 
 	@NotEmpty
-	@Size(min = 1, max = 11)
 	@Column(name = "INPUT_ITEM_ORDER", nullable = false, length = 11)
 	private Integer predefInputItemOrder;
 

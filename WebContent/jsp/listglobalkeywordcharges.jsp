@@ -296,23 +296,30 @@ td.formlabels {
 							<a href="#transsettings">Transaction Settings</a>
 						</h3>
 						<ul>
-							<li><a href="/metomeui/viewamlbarringsettings.html">AML
-									Settings</a>
-							</li>
-							<li><a href="/metomeui/listcharges.html">Charge
-									Configuration</a>
-							</li>
-							<li><a href="/metomeui/listaccounttypes.html">Account
-									Type Configuration</a></li>
-						</ul>
-
+                            <li><a href="/metomeui/viewamlbarringsettings.html">AML
+                                    Settings</a></li>
+                            <li><a href="/metomeui/listglobalkeywordcharges.html">Charge
+                                    Configuration</a>
+                            </li>
+                            <li><a href="/metomeui/listaccounttypes.html">Account
+                                    Type Configuration</a>
+                            </li>
+                            <li><a href="/metomeui/listglobalsendlimits.html">Transaction
+                                    Global Send Limits Settings</a>
+                            </li>
+                            <li><a href="/metomeui/listglobalreceivelimits.html">Transaction
+                                    Global Receive Limits Settings</a>
+                            </li>
+                        </ul>
 						<h3>
 							<a href="#">Products Setup</a>
 						</h3>
 						<ul>
 							<li><a href="/metomeui/viewmetomesetup.html">Me2Me Setup</a>
 							</li>
-							<li><a href="#viewzimbasetup.html">Zimba Setup</a></li>
+							<li><a href="/metomeui/viewzimbaconfiguration.html">Zimba
+									Setup</a>
+							</li>
 						</ul>
 					</div>
 				</td>
@@ -357,7 +364,16 @@ td.formlabels {
 									<td class="data"><a
 										href="/metomeui/editglobalkeywordcharge/${charge.chargeId}.html">${status.count}</a>
 									</td>
-									<td class=data>${charge.transactionKeyword}</td>
+									<td class=data><c:forEach
+											items="${transactionKeywordsList}" var="transkeyword">
+											<c:if
+												test="${transkeyword.keywordId == charge.transactionKeyword.keywordId}">
+												<c:if test="${transkeyword.keywordId != 0}">
+													<c:out value="${transkeyword.keywordName}" />
+												</c:if>
+											</c:if>
+										</c:forEach>
+									</td>
 									<td class=data>${charge.lowRange} - ${charge.highRange}</td>
 									<td class=data>${charge.chargeFixed}</td>
 									<td class=data>${charge.chargePercent}</td>

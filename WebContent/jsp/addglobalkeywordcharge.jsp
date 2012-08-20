@@ -5,7 +5,7 @@
 
 <html>
 <head>
-<title>Charges Manager</title>
+<title>Global Keyword Charges Manager</title>
 <link type="text/css"
 	href="resources/css/ui-lightness/jquery-ui-1.8.18.custom.css"
 	rel="stylesheet" />
@@ -246,16 +246,16 @@ td.formlabels {
 						<a style="color: #000000;" href="/metomeui/auilanding.html"
 							title="Home">Go Back Home</a>
 					</h2>
-				</div>
-			</td>
+				</div></td>
 		</tr>
 	</table>
 	<div>
 		<div>
 			<table style="width: 100%;">
 				<tr>
-					<td><h2>Manage Account Types</h2>
-						<hr></td>
+					<td><h2>Configure Charges</h2>
+						<hr>
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -285,13 +285,12 @@ td.formlabels {
 													<form:option value="${keyword.keywordId}"
 														label="${keyword.keywordName}" />
 												</c:forEach>
-												<form:options items="${transactionKeywordsList}" />
-											</form:select></td>
+											</form:select>
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><label name="chargeRange">Charge
-												Range: </label>
-										</td>
+												Range: </label></td>
 										<td class="form">From:&nbsp;&nbsp;&nbsp;&nbsp;<form:select
 												cssClass="dropdown" path="lowRange" style="width:60px;">
 												<form:option value="0 " label="0" />
@@ -302,12 +301,12 @@ td.formlabels {
 												<form:option value="0" label="0" />
 												<form:option value="1" label="500" />
 												<form:option value="2" label="2000" />
-											</form:select>
-										</td>
+											</form:select></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><label name="chargeModeType">Charge
-												Mode:</label></td>
+												Mode:</label>
+										</td>
 										<td class="form"><form:radiobutton path="chargeMode"
 												value="1" /> Charge Fixed</td>
 									</tr>
@@ -320,15 +319,13 @@ td.formlabels {
 										<td class="formlabels"><form:label path="chargeFixed">Fixed Charge Amount: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="chargeFixed" />
-										</td>
+												path="chargeFixed" /></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="chargePercent">Charge Percent: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="chargePercent" />
-										</td>
+												path="chargePercent" /></td>
 									</tr>
 									<tr>
 										<td></td>
@@ -344,12 +341,12 @@ td.formlabels {
 						</fieldset>
 						<table>
 							<tr>
-								<td><br>
-								</td>
+								<td><br></td>
 							</tr>
 						</table>
 
-					</div></td>
+					</div>
+				</td>
 			</tr>
 		</table>
 		<!--    <table border=1px; width=100%;> -->

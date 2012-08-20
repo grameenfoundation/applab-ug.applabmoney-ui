@@ -8,6 +8,8 @@ import metomeui.dao.UssdMenuDaoImplementation;
 import metomeui.model.AccountType;
 import metomeui.model.AmlBarring;
 import metomeui.model.GlobalKeywordCharge;
+import metomeui.model.GlobalReceiveLimit;
+import metomeui.model.GlobalSendLimit;
 import metomeui.model.Language;
 import metomeui.model.MemoGroup;
 import metomeui.model.Message;
@@ -50,13 +52,12 @@ public class SystemSettingsController {
 	public String showAuiLanding(Map<String, Object> map) {
 		return "auilanding";
 	}
-	
-	@RequestMapping("/listusers")
-	public String listUser(Map<String, Object> map) {
-		map.put("user", new User());
-		map.put("userList", systemSettingsService.listUsers());
-		return "listusers";
-	}
+
+	/*
+	 * @RequestMapping("/listusers") public String listUser(Map<String, Object>
+	 * map) { map.put("user", new User()); map.put("userList",
+	 * systemSettingsService.listUsers()); return "listusers"; }
+	 */
 
 	@RequestMapping(value = "/adduser", method = RequestMethod.GET)
 	public String addUserLink(Map<String, Object> map) {
@@ -641,6 +642,12 @@ public class SystemSettingsController {
 	public String addAmlBarring(
 			@ModelAttribute("amlBarring") AmlBarring amlBarring,
 			BindingResult result) {
+
+		systemSettingsValidator.validate(amlBarring, result);
+		if (result.hasErrors()) {
+			return "addamlbarring";
+		}
+
 		systemSettingsService.addAmlBarringSetting(amlBarring);
 		return "redirect:/viewamlbarringsettings.html";
 	}
@@ -782,20 +789,8 @@ public class SystemSettingsController {
 		return "redirect:/auilanding.html";
 	}
 
-	/*
-	 * @RequestMapping(value = "/viewsystemconfiguration", method =
-	 * RequestMethod.GET) public String
-	 * editSystemConfigurationLink(@PathVariable Long configId, Map<String,
-	 * Object> map) { SystemConfiguration existingSystemConfiguration =
-	 * systemSettingsService .getExistingSystemConfiguration();
-	 * 
-	 * map.put("systemConfiguration", existingSystemConfiguration); return
-	 * "viewsystemconfiguration"; }
-	 */
-
 	@RequestMapping(value = "/viewsystemconfiguration", method = RequestMethod.POST)
 	public String postChangesToSystemConfiguration(
-			// @PathVariable Long configId,
 			@ModelAttribute("systemConfiguration") SystemConfiguration systemConfiguration,
 			BindingResult result) {
 
@@ -803,16 +798,177 @@ public class SystemSettingsController {
 		if (result.hasErrors()) {
 			return "viewsystemconfiguration";
 		}
+
 		systemConfiguration.setConfigId((long) 1);
 		systemSettingsService
 				.editExistingSystemConfiguration(systemConfiguration);
 		return "redirect:/auilanding.html";
+	}
+	
+	@RequestMapping("/listglobalsendlimits")
+	public String listGlobalSendLimit(Map<String, Object> map) {
+		map.put("globalSendLimit", new GlobalSendLimit());
+		map.put("globalSendLimitsList",
+				systemSettingsService.listGlobalSendLimits());
+		return "listglobalsendlimits";
+	}
+
+	@RequestMapping(value = "/addglobalsendlimit", method = RequestMethod.GET)
+	public String addGlobalSendLimitLink(Map<String, Object> map) {
+		map.put("globalSendLimit", new GlobalSendLimit());
+		return "addglobalsendlimit";
+	}
+
+	@RequestMapping(value = "/addglobalsendlimit", method = RequestMethod.POST)
+	public String addGlobalSendLimit(
+			@ModelAttribute("globalSendLimit") GlobalSendLimit globalSendLimit,
+			BindingResult result) {
+
+		systemSettingsValidator.validate(globalSendLimit, result);
+		if (result.hasErrors()) {
+			return "addglobalsendlimit";
+		}
+
+		UssdTransactionKeyword sendLimitKeyword = new UssdTransactionKeyword();
+		if ((globalSendLimit.getTransactionKeyword().getKeywordId() == null)
+				|| (globalSendLimit.getTransactionKeyword().getKeywordId() == 0)) {
+			sendLimitKeyword = ussdMenuService
+					.getExistingTransactionKeyword((long) 0);
+		} else {
+			sendLimitKeyword = ussdMenuService
+					.getExistingTransactionKeyword(globalSendLimit.getTransactionKeyword().getKeywordId());
+		}
+		if (sendLimitKeyword != null) {
+			globalSendLimit.setTransactionKeyword(sendLimitKeyword);
+		}
+		systemSettingsService.addGlobalSendLimit(globalSendLimit);
+		return "redirect:/listglobalsendlimits.html";
+	}
+
+	@RequestMapping(value = "/editglobalsendlimit/{sendLimitId}", method = RequestMethod.GET)
+	public String editGlobalSendLimitLink(@PathVariable Long sendLimitId,
+			Map<String, Object> map) {
+		GlobalSendLimit existingGlobalSendLimit = systemSettingsService
+				.getExistingGlobalSendLimit(sendLimitId);
+
+		map.put("globalSendLimit", existingGlobalSendLimit);
+		return "editglobalsendlimit";
+	}
+
+	@RequestMapping(value = "/editglobalsendlimit/{sendLimitId}", method = RequestMethod.POST)
+	public String postChangesToGlobalSendLimit(
+			@PathVariable Long sendLimitId,
+			@ModelAttribute("globalSendLimit") GlobalSendLimit globalSendLimit,
+			BindingResult result) {
+
+		systemSettingsValidator.validate(globalSendLimit, result);
+		if (result.hasErrors()) {
+			return "editglobalsendlimit";
+		}
+
+		// Assign id
+		globalSendLimit.setSendLimitId(sendLimitId);
+		systemSettingsService
+				.editExistingGlobalSendLimit(globalSendLimit);
+		return "redirect:/listglobalsendlimits.html";
+	}
+
+	@RequestMapping("/removeglobalsendlimit/{sendLimitId}")
+	public String deleteGlobalSendLimit(
+			@PathVariable("sendLimitId") Long sendLimitId) {
+		systemSettingsService.deleteExistingGlobalSendLimit(sendLimitId);
+		return "redirect:/listglobalsendlimits.html";
+	}
+	
+	@RequestMapping("/listglobalreceivelimits")
+	public String listGlobalReceiveLimits(Map<String, Object> map) {
+		map.put("globalReceiveLimit", new GlobalReceiveLimit());
+		map.put("globalReceiveLimitsList",
+				systemSettingsService.listGlobalReceiveLimits());
+		return "listglobalreceivelimits";
+	}
+
+	@RequestMapping(value = "/addglobalreceivelimit", method = RequestMethod.GET)
+	public String addGlobalReceiveLimitLink(Map<String, Object> map) {
+		map.put("globalReceiveLimit", new GlobalReceiveLimit());
+		return "addglobalreceivelimit";
+	}
+
+	@RequestMapping(value = "/addglobalreceivelimit", method = RequestMethod.POST)
+	public String addGlobalReceiveLimit(
+			@ModelAttribute("globalReceiveLimit") GlobalReceiveLimit globalReceiveLimit,
+			BindingResult result) {
+
+		systemSettingsValidator.validate(globalReceiveLimit, result);
+		if (result.hasErrors()) {
+			return "addglobalreceivelimit";
+		}
+
+		UssdTransactionKeyword receiveLimitKeyword = new UssdTransactionKeyword();
+		if ((globalReceiveLimit.getTransactionKeyword().getKeywordId() == null)
+				|| (globalReceiveLimit.getTransactionKeyword().getKeywordId() == 0)) {
+			receiveLimitKeyword = ussdMenuService
+					.getExistingTransactionKeyword((long) 0);
+		} else {
+			receiveLimitKeyword = ussdMenuService
+					.getExistingTransactionKeyword(globalReceiveLimit.getTransactionKeyword().getKeywordId());
+		}
+		if (receiveLimitKeyword != null) {
+			globalReceiveLimit.setTransactionKeyword(receiveLimitKeyword);
+		}
+		systemSettingsService.addGlobalReceiveLimit(globalReceiveLimit);
+		return "redirect:/listglobalreceivelimits.html";
+	}
+
+	@RequestMapping(value = "/editglobalreceivelimit/{receiveLimitId}", method = RequestMethod.GET)
+	public String editGlobalReceiveLimitLink(@PathVariable Long receiveLimitId,
+			Map<String, Object> map) {
+		GlobalReceiveLimit existingGlobalReceiveLimit = systemSettingsService
+				.getExistingGlobalReceiveLimit(receiveLimitId);
+
+		map.put("globalReceiveLimit", existingGlobalReceiveLimit);
+		return "editglobalreceivelimit";
+	}
+
+	@RequestMapping(value = "/editglobalreceivelimit/{receiveLimitId}", method = RequestMethod.POST)
+	public String postChangesToGlobalReceiveLimit(
+			@PathVariable Long receiveLimitId,
+			@ModelAttribute("globalReceiveLimit") GlobalReceiveLimit globalReceiveLimit,
+			BindingResult result) {
+
+		systemSettingsValidator.validate(globalReceiveLimit, result);
+		if (result.hasErrors()) {
+			return "editglobalreceivelimit";
+		}
+
+		// Assign id
+		globalReceiveLimit.setReceiveLimitId(receiveLimitId);
+		systemSettingsService
+				.editExistingGlobalReceiveLimit(globalReceiveLimit);
+		return "redirect:/listglobalreceivelimits.html";
+	}
+
+	@RequestMapping("/removeglobalreceivelimit/{receiveLimitId}")
+	public String deleteGlobalReceiveLimit(
+			@PathVariable("receiveLimitId") Long receiveLimitId) {
+		systemSettingsService.deleteExistingGlobalReceiveLimit(receiveLimitId);
+		return "redirect:/listglobalreceivelimits.html";
 	}
 
 	// Create model attributes for linking across models
 	@ModelAttribute("globalKeywordChargeList")
 	public List<GlobalKeywordCharge> populateGlobalKeywordChargeList() {
 		return systemSettingsService.listGlobalKeywordCharges();
+	}
+
+	@ModelAttribute("globalSendLimitList")
+	public List<GlobalSendLimit> populateGlobalSendLimitsList() {
+		return systemSettingsService.listGlobalSendLimits();
+	}
+
+	@ModelAttribute("globalReceiveLimitList")
+	public List<GlobalReceiveLimit> populateGlobalReceiveLimitsList() {
+		return systemSettingsService.listGlobalReceiveLimits();
 	}
 
 	@ModelAttribute("memoGroupsList")
@@ -855,8 +1011,8 @@ public class SystemSettingsController {
 		return systemSettingsService.listNDCOffnet();
 	}
 
-	@ModelAttribute("usersList")
-	public List<User> populateUserList() {
-		return systemSettingsService.listUsers();
-	}
+	/*
+	 * @ModelAttribute("usersList") public List<User> populateUserList() {
+	 * return systemSettingsService.listUsers(); }
+	 */
 }

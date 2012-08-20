@@ -226,6 +226,11 @@ td.formlabels {
 </head>
 <body>
 
+	<%
+		String[][] yesNoList = { { "0", "No" }, { "1", "Yes" } };
+		request.setAttribute("yesNoList", yesNoList);
+	%>
+
 	<table style="width: 100%;">
 		<tr style="background-color: #008000;">
 			<td
@@ -239,8 +244,7 @@ td.formlabels {
 						<a style="color: #000000;" href="/metomeui/auilanding.html"
 							title="Home">Go Back Home</a>
 					</h2>
-				</div>
-			</td>
+				</div></td>
 		</tr>
 	</table>
 	<div>
@@ -248,7 +252,8 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>System Configuration</h2>
-						<hr></td>
+						<hr>
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -274,13 +279,15 @@ td.formlabels {
 										</td>
 										<td class="form"><form:select path="minPasswordLength"
 												tabindex="5">
+												<form:option
+													value="${systemConfiguration.minPasswordLength}"
+													label="${systemConfiguration.minPasswordLength}" />
 												<form:option value="7" label="7" />
 												<form:option value="8" label="8" />
 												<form:option value="9" label="9" />
 												<form:option value="10" label="10" />
 												<form:option value="11" label="11" />
-											</form:select>
-										</td>
+											</form:select></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
@@ -288,6 +295,9 @@ td.formlabels {
 										</td>
 										<td class="form"><form:select path="maxPasswordLength"
 												tabindex="5">
+												<form:option
+													value="${systemConfiguration.maxPasswordLength}"
+													label="${systemConfiguration.maxPasswordLength}" />
 												<form:option value="9" label="9" />
 												<form:option value="10" label="10" />
 												<form:option value="11" label="11" />
@@ -295,136 +305,171 @@ td.formlabels {
 												<form:option value="13" label="13" />
 												<form:option value="14" label="14" />
 												<form:option value="15" label="15" />
-											</form:select>
-										</td>
+											</form:select></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="countryCode">Set Country Code: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="countryCode" />
-										</td>
+												path="countryCode" /></td>
 									</tr>
 									<tr>
-										<td class="formlabels"><form:label path="countryDomain">Set Country Domain: </form:label>
+										<td class="formlabels"><form:label path="countryDomain">Set Country Domain </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="countryDomain" />
-										</td>
+												path="countryDomain" /></td>
 									</tr>
 									<tr>
-										<td class="formlabels"><form:label path="currencyCode">Set Currency: </form:label>
+										<td class="formlabels"><form:label path="currencyCode">Set Currency </form:label>
 										</td>
 										<td class="form"><form:select cssClass="formfields"
 												path="currencyCode">
-												<form:option value="None" label="--- Select ---" />
+												<form:option value="${systemConfiguration.currencyCode}"
+													label="${systemConfiguration.currencyCode}" />
 												<form:option value="UGX">UGX</form:option>
 												<form:option value="TSH">TSH</form:option>
 												<form:option value="KSH">KSH</form:option>
 												<form:option value="GBP">GBP</form:option>
 												<form:option value="USD">USD</form:option>
-											</form:select>
-										</td>
+											</form:select></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
 												path="currencyISONumber">Set Currency
-                        ISO Number: </form:label></td>
+                        ISO Number: </form:label>
+										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="currencyISONumber"></form:input></td>
+												path="currencyISONumber"></form:input>
+										</td>
 									</tr>
 									<tr>
-										<td class="formlabels"><form:label path="msisdnLength">Set MSISDN Length:</form:label>
+										<td class="formlabels"><form:label path="msisdnLength">Set MSISDN Length</form:label>
 										<td class="form"><form:select path="msisdnLength">
-												<form:option value="0" label="--- Select ---" />
-												<form:option value="12">12</form:option>
-												<form:option value="13">13</form:option>
-												<form:option value="14">14</form:option>
-											</form:select>
-										</td>
+												<form:option value="${systemConfiguration.msisdnLength}"
+													label="${systemConfiguration.msisdnLength}" />
+												<form:option value="12" label="12" />
+												<form:option value="13" label="13" />
+												<form:option value="14" label="14" />
+											</form:select></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:checkbox
-												path="msisdnLeadZeroRequired" tabindex="5" value="1"></form:checkbox>
+												path="msisdnLeadZeroRequired" value="1"></form:checkbox>
 										</td>
 										<td class="form"><form:label
-												path="msisdnLeadZeroRequired">Set MSISDN lead zero requirement:</form:label>
+												path="msisdnLeadZeroRequired">MSISDN requires leading zero(0)</form:label>
+										</td>
+
+									</tr>
+									<tr>
+										<td class="formlabels"><form:label path="operation">Operation </form:label>
+										</td>
+										<td class="form"><form:input cssClass="formfields"
+												path="operation"></form:input>
 										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
-												path="allowedOperations">Allowed Operations </form:label></td>
-										<td class="form"><form:select path="allowedOperations"
-												cssClass="formfields">
-												<form:option value="0" label="--- Select ---" />
-												<form:option value="1">Send Cash</form:option>
-												<form:option value="2">Recieve Cash</form:option>
-												<form:option value="3">Send and Recieve Cash</form:option>
-											</form:select></td>
-									</tr>
-									<tr>
-										<td class="formlabels"><form:label
-												path="autoCreateTempSub">Treat Non-Registered MSIDN as OFF-NET:</form:label>
+												path="autoCreateTempSub">Treat Non-Registered MSIDN as OFF-NET</form:label>
 										</td>
 										<td class="form"><form:select path="autoCreateTempSub">
-												<form:option value="0" label="No" />
-												<form:option value="1" label="Yes" />
-
-											</form:select></td>
+												<c:forEach items="${yesNoList}" var="yesno">
+													<c:if
+														test="${yesno[0] == systemConfiguration.autoCreateTempSub}">
+														<form:option
+															value="${systemConfiguration.autoCreateTempSub}"
+															label="${yesno[1]}" />
+													</c:if>
+												</c:forEach>
+												<c:forEach items="${yesNoList}" var="yesno">
+													<c:if
+														test="${yesno[0] != systemConfiguration.autoCreateTempSub}">
+														<form:option value="${yesno[0]}" label="${yesno[1]}" />
+													</c:if>
+												</c:forEach>
+											</form:select>
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
 												path="tempRestrictionSettings">Require approval for Transaction</form:label>
 										</td>
 										<td class="form"><form:select
-												path="tempRestrictionSettings" cssClass="formfields">
-												<form:option value="0" label="No" />
-												<form:option value="1" label="Yes" />
-											</form:select></td>
+												path="tempRestrictionSettings">
+												<c:forEach items="${yesNoList}" var="yesno">
+													<c:if
+														test="${yesno[0] == systemConfiguration.tempRestrictionSettings}">
+														<form:option
+															value="${systemConfiguration.tempRestrictionSettings}"
+															label="${yesno[1]}" />
+													</c:if>
+												</c:forEach>
+												<c:forEach items="${yesNoList}" var="yesno">
+													<c:if
+														test="${yesno[0] != systemConfiguration.tempRestrictionSettings}">
+														<form:option value="${yesno[0]}" label="${yesno[1]}" />
+													</c:if>
+												</c:forEach>
+											</form:select>
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="smsSenderNumber">SMS Sender Number/Name</form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="smsSenderNumber"></form:input></td>
+												path="smsSenderNumber"></form:input>
+										</td>
 									</tr>
 
 									<tr>
 										<td class="formlabels"><form:label
-												path="smsMessageSubscriptionFormat">SMS Message Subscription Display Format</form:label>
+												path="smsMessageSubscriberFormat">SMS Message Subscriber Display Format</form:label>
 										</td>
 										<td class="form"><form:select
-												path="smsMessageSubscriptionFormat" cssClass="formfields">
+												path="smsMessageSubscriberFormat" cssClass="formfields">
 												<form:option value="0" label="MSISDN" />
 												<form:option value="1" label="FULL_NAMES" />
 												<form:option value="2" label="MSISDN AND FULL_NAMES" />
-											</form:select></td>
-									</tr>
-
-
-									<tr>
-										<td class="formlabels"><form:checkbox
-												path="subscriptionMaxDisplayCharacters" value="1"></form:checkbox>
+											</form:select>
 										</td>
-										<td class="form"><form:label
-												path="subscriptionMaxDisplayCharacters">Subscription Maximum Display Characters</form:label>
+									</tr>
+									<tr>
+										<td class="formlabels"><form:label
+												path="subscriberMaxDisplayCharacters">Subscriber Maximum Display Characters</form:label>
+										</td>
+										<td class="form"><form:input cssClass="formfields"
+												path="subscriberMaxDisplayCharacters"></form:input>
 										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
 												path="chargeCollectSetting">Charge collect
-                                immediate setting</form:label></td>
-										<td class="form"><form:select path="chargeCollectSetting"
-												cssClass="formfields">
-												<form:option value="1" label="Yes" />
-												<form:option value="0" label="No" />
-											</form:select></td>
+                                immediate setting</form:label>
+										</td>
+										<td class="form"><form:select path="chargeCollectSetting">
+												<c:forEach items="${yesNoList}" var="yesno">
+													<c:if
+														test="${yesno[0] == systemConfiguration.chargeCollectSetting}">
+														<form:option
+															value="${systemConfiguration.chargeCollectSetting}"
+															label="${yesno[1]}" />
+													</c:if>
+												</c:forEach>
+												<c:forEach items="${yesNoList}" var="yesno">
+													<c:if
+														test="${yesno[0] != systemConfiguration.chargeCollectSetting}">
+														<form:option value="${yesno[0]}" label="${yesno[1]}" />
+													</c:if>
+												</c:forEach>
+											</form:select>
+										</td>
 									</tr>
 									<tr>
-										<td class="formlabels"><form:checkbox
-												path="notifyOnDelayTransaction" value="1"></form:checkbox></td>
-										<td class="form"><form:label
+										<td class="formlabels"><form:label
 												path="notifyOnDelayTransaction">Notify on delayed transaction</form:label>
+										</td>
+										<td class="form"><form:checkbox
+												path="notifyOnDelayTransaction" value="1"></form:checkbox>
 										</td>
 									</tr>
 									<tr>
@@ -433,20 +478,22 @@ td.formlabels {
 										</td>
 										<td class="form"><form:select path="notifyOnDelaySeconds"
 												cssClass="formfields">
+												<form:option value="30" label="30" />
 												<form:option value="60" label="60" />
-												<form:option value="100" label="100" />
+												<form:option value="90" label="90" />
+												<form:option value="120" label="120" />
 												<form:option value="150" label="150" />
-												<form:option value="200" label="200" />
-												<form:option value="250" label="250" />
-												<form:option value="300" label="300" />
-											</form:select></td>
+												<form:option value="180" label="180" />
+											</form:select>
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
 												path="notifyOnDelayMessageID">Notify on delay message ID </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="notifyOnDelayMessageID"></form:input></td>
+												path="notifyOnDelayMessageID"></form:input>
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
@@ -455,34 +502,36 @@ td.formlabels {
 										<td></td>
 										<td class="form"><form:label path="maintenanceModeFlag">&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;On</form:label>
 											<form:radiobutton path="maintenanceModeFlag"
-												class="formRadio" value="1"></form:radiobutton></td>
+												class="formRadio" value="1"></form:radiobutton>
+										</td>
 									</tr>
 									<tr>
 										<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 										<td class="form"><form:label path="maintenanceModeFlag">Off(Default)</form:label>
 											<form:radiobutton path="maintenanceModeFlag"
-												class="formRadio" value="0"></form:radiobutton></td>
+												class="formRadio" value="0"></form:radiobutton>
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
 												path="maintenanceModeMessageID"> Maintenance Mode
-                                Message ID</form:label></td>
-										<td class="form"><form:input cssClass="formfields"
-												path="maintenanceModeMessageID"></form:input>
+                                Message ID</form:label>
 										</td>
+										<td class="form"><form:input cssClass="formfields"
+												path="maintenanceModeMessageID"></form:input></td>
 									</tr>
 									<tr>
 										<td></td>
 										<td colspan="2" class="savebutton"><br> <input
 											type="submit" value="Save Changes" /> <input type="button"
 											value="  Cancel  "
-											onClick="location.href='/metomeui/auilanding.html'" />
-										</td>
+											onClick="location.href='/metomeui/auilanding.html'" /></td>
 									</tr>
 								</table>
 							</form:form>
 						</fieldset>
-					</div></td>
+					</div>
+				</td>
 			</tr>
 		</table>
 	</div>

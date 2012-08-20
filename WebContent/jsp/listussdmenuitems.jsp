@@ -246,8 +246,7 @@ td.formlabels {
 						<a style="color: #000000;" href="/metomeui/auilanding.html"
 							title="Home">Go Back Home</a>
 					</h2>
-				</div>
-			</td>
+				</div></td>
 		</tr>
 	</table>
 	<div>
@@ -255,7 +254,8 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Menu Items Manager</h2>
-						<hr></td>
+						<hr>
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -268,28 +268,32 @@ td.formlabels {
 						</h3>
 						<ul>
 							<li><a href="/metomeui/viewsystemconfiguration.html">System
+									Configuration</a></li>
+							<li><a href="/metomeui/listmemogroups.html">Memo Groups
 									Configuration</a>
 							</li>
-							<li><a href="/metomeui/listmemogroups.html">Memo Groups
-									Configuration</a></li>
 							<li><a href="/metomeui/listlanguages.html">Languages
-									Configuration</a></li>
+									Configuration</a>
+							</li>
 							<li><a href="/metomeui/listmessages.html">Messages
-									Configuration</a></li>
+									Configuration</a>
+							</li>
 							<li><a href="/metomeui/listmobilendc.html">Mobile NDC
-									Configuration</a></li>
+									Configuration</a>
+							</li>
 						</ul>
 						<h3>
 							<a href="#ussdmenusetup">Ussd Menu Setup</a>
 						</h3>
 						<ul>
 							<li><a href="/metomeui/listussdmenuitems.html">Ussd Menu
-									Items</a>
-							</li>
+									Items</a></li>
 							<li><a href="/metomeui/listussdtransactionkeywords.html">Transaction
-									Keywords</a></li>
+									Keywords</a>
+							</li>
 							<li><a href="/metomeui/listussdpredefinputs.html">Predefined
-									Inputs</a></li>
+									Inputs</a>
+							</li>
 						</ul>
 						<h3>
 							<a href="#transsettings">Transaction Settings</a>
@@ -298,11 +302,14 @@ td.formlabels {
 							<li><a href="/metomeui/viewamlbarringsettings.html">AML
 									Settings</a>
 							</li>
-							<li><a href="/metomeui/listcharges.html">Charge
-									Configuration</a>
-							</li>
+							<li><a href="/metomeui/listglobalkeywordcharges.html">Charge
+									Configuration</a></li>
 							<li><a href="/metomeui/listaccounttypes.html">Account
 									Type Configuration</a></li>
+							<li><a href="/metomeui/listglobalsendlimits.html">Transaction
+									Global Send Limits Settings</a></li>
+							<li><a href="/metomeui/listglobalreceivelimits.html">Transaction
+									Global Receive Limits Settings</a></li>
 						</ul>
 						<h3>
 							<a href="#">Products Setup</a>
@@ -310,10 +317,10 @@ td.formlabels {
 						<ul>
 							<li><a href="/metomeui/viewmetomesetup.html">Me2Me Setup</a>
 							</li>
-							<li><a href="#viewzimbasetup.html">Zimba Setup</a></li>
+							<li><a href="/metomeui/viewzimbaconfiguration.html">Zimba
+									Setup</a></li>
 						</ul>
-					</div>
-				</td>
+					</div></td>
 				<td class="content">
 					<table>
 						<tr>
@@ -325,16 +332,14 @@ td.formlabels {
 									<input class="btn" type="submit" name="submit"
 										value="Create New"
 										onClick="location.href='addussdmenuitem.html'">
-								</div>
-							</td>
+								</div></td>
 						</tr>
 					</table> <c:if test="${empty ussdMenuItemsList}">
 						<div>
 							<table>
 								<tr>
 									<td>There are no menu items configured on this system <br>
-										<br>
-									</td>
+										<br></td>
 								</tr>
 							</table>
 						</div>
@@ -363,13 +368,11 @@ td.formlabels {
 														<c:out value="${transkeyword.keywordName}" />
 													</c:if>
 												</c:if>
-											</c:forEach>
-										</td>
+											</c:forEach></td>
 										<td class=data><c:if
 												test="${menuitem.rootMenuItem.menuItemId != 0}">
 												<c:out value="${menuitem.rootMenuItem.menuItemName}" />
-											</c:if>
-										</td>
+											</c:if></td>
 										<td class=data><c:if
 												test="${menuitem.menuItemEnabledFlag != 1}">
 												<a
@@ -384,8 +387,7 @@ td.formlabels {
 								</tr>
 							</c:forEach>
 						</table>
-					</c:if>
-				</td>
+					</c:if></td>
 			</tr>
 		</table>
 	</div>

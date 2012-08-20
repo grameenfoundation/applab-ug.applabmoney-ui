@@ -364,7 +364,7 @@ td.formlabels {
 									</tr>
 									<tr>
 										<td></td>
-										<td><input type="submit" value="Add" /><input type="button" value="Cancel"
+										<td><input type="submit" value="Update"/><input type="button" value="Cancel"
 											onClick="location.href='editussdtransactionkeyword.html'" />
 										</td>
 									</tr>

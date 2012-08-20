@@ -2,19 +2,12 @@ package metomeui.web;
 
 import java.util.Map;
 
-import metomeui.dao.ProductsDao;
-import metomeui.dao.ProductsDaoImplementation;
-import metomeui.dao.SystemSettingsDao;
-import metomeui.dao.SystemSettingsDaoImplementation;
-import metomeui.model.Language;
 import metomeui.model.MeToMeGoalType;
 import metomeui.model.MeToMeRewardType;
-import metomeui.model.Message;
+import metomeui.model.ZimbaConfiguration;
 import metomeui.service.ProductsService;
 import metomeui.service.ProductsServiceImplementation;
-import metomeui.service.SystemSettingsService;
-import metomeui.service.SystemSettingsServiceImplementation;
-import metomeui.validator.SystemSettingsValidator;
+import metomeui.validator.ProductsValidator;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +22,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ProductsController {
 
-	private static Logger logger = Logger
-			.getLogger(SystemSettingsController.class);
+	private static Logger logger = Logger.getLogger(ProductsController.class);
 
-	// @Autowired
-	// private ProductsValidator productsValidator;
+	@Autowired
+	private ProductsValidator productsValidator;
 	@Autowired
 	ProductsService productsService = new ProductsServiceImplementation();
 
@@ -71,14 +63,6 @@ public class ProductsController {
 		 */
 
 		if (meToMeGoalType != null) {
-			/*
-			 * Language language = (Language) productsService
-			 * .getExistingLanguage
-			 * (meToMeGoalType.getMeToMeGoalType().getLanguageId());
-			 * language.getMessages().add(meToMeGoalType);
-			 * meToMeGoalType.setLanguage(language);
-			 */
-
 			productsService.addMeToMeGoalType(meToMeGoalType);
 		}
 
@@ -102,17 +86,10 @@ public class ProductsController {
 			@ModelAttribute("meToMeGoalType") MeToMeGoalType meToMeGoalType,
 			BindingResult result, Map<String, Object> map) {
 
-		/*
-		 * productsValidator.validate(meToMeGoalType, result); if
-		 * (result.hasErrors()) { return "editmetomegoaltype"; }
-		 */
-
-		/*
-		 * Language language = (Language) productsService
-		 * .getExistingLanguage(meToMeGoalType.getLanguage().getLanguageId());
-		 * language.getMeToMeGoalTypes().add(meToMeGoalType);
-		 * meToMeGoalType.setLanguage(language);
-		 */
+		productsValidator.validate(meToMeGoalType, result);
+		if (result.hasErrors()) {
+			return "editmetomegoaltype";
+		}
 
 		// Assign id
 		meToMeGoalType.setGoalTypeId(goalTypeId);
@@ -149,21 +126,13 @@ public class ProductsController {
 			@ModelAttribute("meToMeRewardType") MeToMeRewardType meToMeRewardType,
 			BindingResult result, Map<String, Object> map) {
 
-		/*
-		 * productsValidator.validate(meToMeRewardType, result); if
-		 * (result.hasErrors()) { return "addmetomegoaltype"; }
-		 */
+		productsValidator.validate(meToMeRewardType, result);
+		if (result.hasErrors()) {
+			return "addmetomerewardtype";
+		}
 
 		if (meToMeRewardType.getCashRewardFlag() == null) {
-			/*
-			 * Language language = (Language) productsService
-			 * .getExistingLanguage
-			 * (meToMeRewardType.getMeToMeRewardType().getLanguageId());
-			 * language.getMessages().add(meToMeRewardType);
-			 * meToMeGoalType.setLanguage(language);
-			 */
 			meToMeRewardType.setCashRewardFlag(0);
-
 		}
 
 		productsService.addMeToMeRewardType(meToMeRewardType);
@@ -190,29 +159,15 @@ public class ProductsController {
 			@ModelAttribute("meToMeRewardType") MeToMeRewardType meToMeRewardType,
 			BindingResult result) {
 
-		/*
-		 * productsValidator.validate(meToMeRewardType, result); if
-		 * (result.hasErrors()) { return "editmetomerewardtype"; }
-		 */
-
-		/*
-		 * Language language = (Language) productsService
-		 * .getExistingLanguage(meToMeRewardType.getLanguage().getLanguageId());
-		 * language.getMeToMeGoalTypes().add(meToMeGoalType);
-		 * meToMeGoalType.setLanguage(language);
-		 */
+		productsValidator.validate(meToMeRewardType, result);
+		if (result.hasErrors()) {
+			return "editmetomerewardtype";
+		}
 
 		// Assign id
 		meToMeRewardType.setRewardTypeId(rewardTypeId);
-		
+
 		if (meToMeRewardType.getCashRewardFlag() == null) {
-			/*
-			 * Language language = (Language) productsService
-			 * .getExistingLanguage
-			 * (meToMeRewardType.getMeToMeRewardType().getLanguageId());
-			 * language.getMessages().add(meToMeRewardType);
-			 * meToMeGoalType.setLanguage(language);
-			 */
 			meToMeRewardType.setCashRewardFlag(0);
 
 		}
@@ -225,8 +180,55 @@ public class ProductsController {
 	public String deleteMeToMeRewardType(
 			@PathVariable("rewardTypeId") Long rewardTypeId) {
 		productsService.deleteExistingMeToMeRewardType(rewardTypeId);
-
 		return "redirect:/viewmetomesetup.html";
+	}
+
+	@RequestMapping("/viewzimbaconfiguration")
+	public String viewZimbaConfiguration(Map<String, Object> map) {
+
+		ZimbaConfiguration existingZimbaConfiguration = productsService
+				.getZimbaConfiguration();
+		if (null != existingZimbaConfiguration) {
+			map.put("zimbaConfiguration", existingZimbaConfiguration);
+			return "viewzimbaconfiguration";
+		} else {
+			map.put("zimbaConfiguration", new ZimbaConfiguration());
+			return "redirect:/addzimbaconfiguration.html";
+		}
+	}
+
+	@RequestMapping(value = "/addzimbaconfiguration", method = RequestMethod.GET)
+	public String addZimbaConfigurationLink(Map<String, Object> map) {
+		map.put("zimbaConfiguration", new ZimbaConfiguration());
+		return "addzimbaconfiguration";
+	}
+
+	@RequestMapping(value = "/addzimbaconfiguration", method = RequestMethod.POST)
+	public String addZimbaConfiguration(
+			@ModelAttribute("zimbaConfiguration") ZimbaConfiguration zimbaConfiguration,
+			BindingResult result) {
+		productsValidator.validate(zimbaConfiguration, result);
+		if (result.hasErrors()) {
+			return "addzimbaconfiguration";
+		}
+
+		productsService.addZimbaConfiguration(zimbaConfiguration);
+		return "redirect:/auilanding.html";
+	}
+
+	@RequestMapping(value = "/viewzimbaconfiguration", method = RequestMethod.POST)
+	public String postChangesToZimbaConfiguration(
+			@ModelAttribute("zimbaConfiguration") ZimbaConfiguration zimbaConfiguration,
+			BindingResult result) {
+
+		productsValidator.validate(zimbaConfiguration, result);
+		if (result.hasErrors()) {
+			return "viewzimbaconfiguration";
+		}
+
+		zimbaConfiguration.setConfigId((long) 1);
+		productsService.editExistingZimbaConfiguration(zimbaConfiguration);
+		return "redirect:/auilanding.html";
 	}
 
 }

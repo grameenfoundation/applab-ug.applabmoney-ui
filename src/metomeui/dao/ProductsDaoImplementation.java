@@ -4,6 +4,7 @@ import java.util.List;
 
 import metomeui.model.MeToMeGoalType;
 import metomeui.model.MeToMeRewardType;
+import metomeui.model.ZimbaConfiguration;
 
 import org.apache.log4j.Logger;
 import org.hibernate.classic.Session;
@@ -104,14 +105,12 @@ public class ProductsDaoImplementation implements ProductsDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public boolean checkIfDuplicateMeToMeGoalTypeName(
-			String meToMeGoalTypeName, Long meToMeGoalTypeId) {
+	public boolean checkIfDuplicateMeToMeGoalTypeName(String meToMeGoalTypeName) {
 		currentSession().beginTransaction();
 		List<MeToMeGoalType> meToMeGoalType = (List<MeToMeGoalType>) currentSession()
 				.createQuery(
 						"from MeToMeGoalType meToMeGoalType "
-								+ "where meToMeGoalType.meToMeGoalTypeId = :meToMeGoalTypeId and meToMeGoalType.meToMeGoalTypeName = :meToMeGoalTypeName")
-				.setParameter("meToMeGoalTypeId", meToMeGoalTypeId)
+								+ "where meToMeGoalType.meToMeGoalTypeName = :meToMeGoalTypeName")
 				.setParameter("meToMeGoalTypeName", meToMeGoalTypeName).list();
 		if (meToMeGoalType.isEmpty()) {
 			return false;
@@ -122,14 +121,12 @@ public class ProductsDaoImplementation implements ProductsDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public boolean checkIfDuplicateMeToMeGoalTypeCode(
-			String meToMeGoalTypeCode, Long meToMeGoalTypeId) {
+	public boolean checkIfDuplicateMeToMeGoalTypeCode(String meToMeGoalTypeCode) {
 		currentSession().beginTransaction();
 		List<MeToMeGoalType> meToMeGoalType = (List<MeToMeGoalType>) currentSession()
 				.createQuery(
 						"from MeToMeGoalType meToMeGoalType "
-								+ "where meToMeGoalType.goalTypeId = :meToMeGoalTypeId and meToMeGoalType.goalTypeCode = :meToMeGoalTypeCode")
-				.setParameter("meToMeGoalTypeId", meToMeGoalTypeId)
+								+ "where meToMeGoalType.goalTypeCode = :meToMeGoalTypeCode")
 				.setParameter("meToMeGoalTypeCode", meToMeGoalTypeCode).list();
 		if (meToMeGoalType.isEmpty()) {
 			return false;
@@ -186,7 +183,7 @@ public class ProductsDaoImplementation implements ProductsDao {
 
 		if (null != existingMeToMeRewardType) {
 
-			// Assign updated values to this existing Transaction Keyword
+			// Assign updated values to this existing MeToMeRewardType
 			existingMeToMeRewardType.setRewardTypeName(meToMeRewardType
 					.getRewardTypeName());
 			existingMeToMeRewardType.setRewardTypeDescription(meToMeRewardType
@@ -218,13 +215,12 @@ public class ProductsDaoImplementation implements ProductsDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean checkIfDuplicateMeToMeRewardTypeCode(
-			String meToMeRewardTypeCode, Long meToMeRewardTypeId) {
+			String meToMeRewardTypeCode) {
 		currentSession().beginTransaction();
 		List<MeToMeRewardType> meToMeRewardType = (List<MeToMeRewardType>) currentSession()
 				.createQuery(
 						"from MeToMeRewardType meToMeRewardType "
-								+ "where meToMeRewardType.rewardTypeId = :meToMeRewardTypeId and meToMeRewardType.rewardTypeCode = :meToMeGoalTypeCode")
-				.setParameter("meToMeRewardTypeId", meToMeRewardTypeId)
+								+ "where meToMeRewardType.rewardTypeCode = :meToMeGoalTypeCode")
 				.setParameter("meToMeRewardTypeCode", meToMeRewardTypeCode)
 				.list();
 		if (meToMeRewardType.isEmpty()) {
@@ -237,13 +233,12 @@ public class ProductsDaoImplementation implements ProductsDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean checkIfDuplicateMeToMeRewardTypeName(
-			String meToMeRewardTypeName, Long meToMeRewardTypeId) {
+			String meToMeRewardTypeName) {
 		currentSession().beginTransaction();
 		List<MeToMeRewardType> meToMeRewardType = (List<MeToMeRewardType>) currentSession()
 				.createQuery(
 						"from MeToMeRewardType meToMeRewardType "
-								+ "where meToMeRewardType.rewardTypeId = :meToMeRewardTypeId and meToMeRewardType.rewardTypeName = :meToMeRewardTypeName")
-				.setParameter("meToMeRewardTypeId", meToMeRewardTypeId)
+								+ "where meToMeRewardType.rewardTypeName = :meToMeRewardTypeName")
 				.setParameter("meToMeRewardTypeName", meToMeRewardTypeName)
 				.list();
 		if (meToMeRewardType.isEmpty()) {
@@ -251,5 +246,60 @@ public class ProductsDaoImplementation implements ProductsDao {
 		} else {
 			return true;
 		}
+	}
+
+	@Override
+	public void addZimbaConfiguration(ZimbaConfiguration zimbaConfiguration) {
+		try {
+			currentSession().beginTransaction();
+			currentSession().saveOrUpdate(zimbaConfiguration);
+			currentSession().getTransaction().commit();
+		} catch (Exception e) {
+			currentSession().getTransaction().rollback();
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void editZimbaConfiguration(ZimbaConfiguration zimbaConfiguration) {
+		currentSession().beginTransaction();
+		ZimbaConfiguration existingZimbaConfiguration = (ZimbaConfiguration) currentSession()
+				.createCriteria(ZimbaConfiguration.class).setMaxResults(1)
+				.uniqueResult();
+		if (null != existingZimbaConfiguration) {
+
+			existingZimbaConfiguration.setNetworkSize(zimbaConfiguration
+					.getNetworkSize());
+			existingZimbaConfiguration.setMinInterestRate(zimbaConfiguration
+					.getMinInterestRate());
+			existingZimbaConfiguration.setMaxInterestRate(zimbaConfiguration
+					.getMaxInterestRate());
+			existingZimbaConfiguration.setMinLoanAmount(zimbaConfiguration
+					.getMinLoanAmount());
+			existingZimbaConfiguration.setMaxLoanAmount(zimbaConfiguration
+					.getMaxLoanAmount());
+			existingZimbaConfiguration.setMaxRepayPeriod(zimbaConfiguration
+					.getMaxRepayPeriod());
+			existingZimbaConfiguration.setPeriodToDefaulting(zimbaConfiguration
+					.getPeriodToDefaulting());
+			existingZimbaConfiguration.setActiveBorrowPeriod(zimbaConfiguration
+					.getActiveBorrowPeriod());
+		}
+
+		try {
+			currentSession().merge(zimbaConfiguration);
+			currentSession().getTransaction().commit();
+		} catch (Exception e) {
+			currentSession().getTransaction().rollback();
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public ZimbaConfiguration getZimbaConfiguration() {
+		currentSession().beginTransaction();
+		return (ZimbaConfiguration) currentSession()
+				.createCriteria(ZimbaConfiguration.class).setMaxResults(1)
+				.uniqueResult();
 	}
 }

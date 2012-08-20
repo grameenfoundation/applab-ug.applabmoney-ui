@@ -116,7 +116,7 @@ public class UssdMenuValidator implements Validator {
 			if (ussdTransactionKeyword.getKeywordEnabledFlag() == null) {
 				ussdTransactionKeyword.setKeywordEnabledFlag(0);
 			}
-			if (ussdTransactionKeyword.getKeywordCode().length() > 10) {
+			if (ussdTransactionKeyword.getKeywordCode().length() > 20) {
 				errors.rejectValue("keywordName", "keywordCode.lengthLimit");
 			}
 		} else if (target instanceof UssdKeywordStep) {

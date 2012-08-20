@@ -293,20 +293,19 @@ td.formlabels {
 															label="${language.languageName}" />
 													</c:if>
 												</c:forEach>
-												<form:options items="${languagesList}" />
 											</form:select></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="messageText">Message Text: </form:label>
 										</td>
-										<td class="form"><form:textarea cssClass="formfields"
+										<td class="form"><form:textarea rows="5" cols="32"
 												path="messageText" />
 										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="messageDesc">Message Description: </form:label>
 										</td>
-										<td class="form"><form:textarea cssClass="formfields"
+										<td class="form"><form:textarea rows="5" cols="32"
 												path="messageDesc" />
 										</td>
 									</tr>
@@ -315,12 +314,12 @@ td.formlabels {
 									</tr>
 									<tr>
 										<td></td>
-										<td class="savebutton"><br> <input class="btn"
-											type="submit" value="Save" /> <input class="btn"
+										<td colspan="2" class="savebutton"><br> <input
+											class="btn" type="submit" value="Save" /> <input class="btn"
 											type="button" value="Cancel"
 											onClick="location.href='/metomeui/listmessages.html'" />
 										</td>
-										<td></td>
+						
 									</tr>
 								</table>
 							</form:form>

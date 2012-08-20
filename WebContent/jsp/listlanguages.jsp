@@ -246,8 +246,7 @@ td.formlabels {
 						<a style="color: #000000;" href="/metomeui/auilanding.html"
 							title="Home">Go Back Home</a>
 					</h2>
-				</div>
-			</td>
+				</div></td>
 		</tr>
 	</table>
 	<div>
@@ -255,8 +254,7 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Configure System Languages</h2>
-						<hr>
-					</td>
+						<hr></td>
 				</tr>
 			</table>
 		</div>
@@ -270,28 +268,32 @@ td.formlabels {
 						</h3>
 						<ul>
 							<li><a href="/metomeui/viewsystemconfiguration.html">System
+									Configuration</a></li>
+							<li><a href="/metomeui/listmemogroups.html">Memo Groups
 									Configuration</a>
 							</li>
-							<li><a href="/metomeui/listmemogroups.html">Memo Groups
-									Configuration</a></li>
 							<li><a href="/metomeui/listlanguages.html">Languages
-									Configuration</a></li>
+									Configuration</a>
+							</li>
 							<li><a href="/metomeui/listmessages.html">Messages
-									Configuration</a></li>
+									Configuration</a>
+							</li>
 							<li><a href="listmobilendc.html">Mobile NDC
-									Configuration</a></li>
+									Configuration</a>
+							</li>
 						</ul>
 						<h3>
 							<a href="#ussdmenusetup">Ussd Menu Setup</a>
 						</h3>
 						<ul>
 							<li><a href="/metomeui/listussdmenuitems.html">Ussd Menu
-									Items</a>
-							</li>
+									Items</a></li>
 							<li><a href="/metomeui/listussdtransactionkeywords.html">Transaction
-									Keywords</a></li>
+									Keywords</a>
+							</li>
 							<li><a href="/metomeui/listussdpredefinputs.html">Predefined
-									Inputs</a></li>
+									Inputs</a>
+							</li>
 						</ul>
 						<h3>
 							<a href="#transsettings">Transaction Settings</a>
@@ -300,23 +302,25 @@ td.formlabels {
 							<li><a href="/metomeui/viewamlbarringsettings.html">AML
 									Settings</a>
 							</li>
-							<li><a href="/metomeui/listcharges.html">Charge
-									Configuration</a>
-							</li>
+							<li><a href="/metomeui/listglobalkeywordcharges.html">Charge
+									Configuration</a></li>
 							<li><a href="/metomeui/listaccounttypes.html">Account
 									Type Configuration</a></li>
+							<li><a href="/metomeui/listglobalsendlimits.html">Transaction
+									Global Send Limits Settings</a></li>
+							<li><a href="/metomeui/listglobalreceivelimits.html">Transaction
+									Global Receive Limits Settings</a></li>
 						</ul>
-
 						<h3>
 							<a href="#">Products Setup</a>
 						</h3>
 						<ul>
 							<li><a href="/metomeui/viewmetomesetup.html">Me2Me Setup</a>
 							</li>
-							<li><a href="#viewzimbasetup.html">Zimba Setup</a></li>
+							<li><a href="/metomeui/viewzimbaconfiguration.html">Zimba
+									Setup</a></li>
 						</ul>
-					</div>
-				</td>
+					</div></td>
 				<td class="content">
 					<table>
 						<tr>
@@ -327,14 +331,16 @@ td.formlabels {
 							<td><div>
 									<input class="btn" type="submit" name="submit"
 										value="Create New" onClick="location.href='addlanguage.html'">
-								</div></td>
+								</div>
+							</td>
 						</tr>
 					</table> <c:if test="${empty languagesList}">
 						<div>
 							<table>
 								<tr>
 									<td>There are no languages configured on this system <br>
-										<br></td>
+										<br>
+									</td>
 								</tr>
 							</table>
 						</div>
@@ -350,15 +356,13 @@ td.formlabels {
 									<c:if test="${language.languageId != 0}">
 										<td class=data><a
 											href="/metomeui/editlanguage/${language.languageId}.html">${language.languageName}</a>
+											<c:if test="${language.isDefault == 1}">
+												<c:out value="(is Default)" />
+											</c:if>
 										</td>
 										<td class=data><c:if test="${language.isDefault == 0}">
 												<a
 													href="/metomeui/defaultlanguage/${language.languageId}.html">Make
-													Default</a>
-												<a> | </a>
-											</c:if> <c:if test="${language.isDefault == 1}">
-												<a
-													href="/metomeui/undefaultlanguage/${language.languageId}.html">Remove
 													Default</a>
 												<a> | </a>
 											</c:if> <a
@@ -368,7 +372,8 @@ td.formlabels {
 								</tr>
 							</c:forEach>
 						</table>
-					</c:if></td>
+					</c:if>
+				</td>
 			</tr>
 		</table>
 		<!-- 	<table border=1px; width=100%;> -->

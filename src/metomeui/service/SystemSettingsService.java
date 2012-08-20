@@ -5,6 +5,8 @@ import java.util.List;
 import metomeui.model.AccountType;
 import metomeui.model.AmlBarring;
 import metomeui.model.GlobalKeywordCharge;
+import metomeui.model.GlobalReceiveLimit;
+import metomeui.model.GlobalSendLimit;
 import metomeui.model.Language;
 import metomeui.model.MemoGroup;
 import metomeui.model.Message;
@@ -12,6 +14,7 @@ import metomeui.model.NdcListOffnet;
 import metomeui.model.NdcListPToP;
 import metomeui.model.SystemConfiguration;
 import metomeui.model.User;
+import metomeui.model.UssdTransactionKeyword;
 
 public interface SystemSettingsService {
 
@@ -32,6 +35,8 @@ public interface SystemSettingsService {
 	public void activateOrDeactivateExistingAccountType(Long accountTypeId,
 			Integer offSwitch);
 
+	public boolean checkIfDuplicateBitMap(Integer accountTypeBitMap);
+
 	/**
 	 * User Management functions
 	 * 
@@ -43,9 +48,9 @@ public interface SystemSettingsService {
 	public void deleteExistingUser(Long userId);
 
 	public User getUserByLogin(String username, String password);
-	
+
 	public User getExistingUser(Long userId);
-	
+
 	public void editExistingUser(User user);
 
 	/**
@@ -62,6 +67,9 @@ public interface SystemSettingsService {
 
 	public Message getExistingMessage(Long messageId);
 
+	public boolean checkIfLanguageMessageCodeComboExists(Language language,
+			Integer messageCode);
+
 	/**
 	 * Language Management functions
 	 * 
@@ -77,7 +85,7 @@ public interface SystemSettingsService {
 	public void editExistingLanguage(Language language);
 
 	public void setDefaultLanguage(Long languageId, Integer offSwitch);
-	
+
 	public boolean checkIfDuplicateLanguageName(String languageName,
 			Long languageId);
 
@@ -105,7 +113,7 @@ public interface SystemSettingsService {
 	public SystemConfiguration getSystemConfiguration();
 
 	public void addSystemConfiguration(SystemConfiguration sysConfiguration);
-	
+
 	public SystemConfiguration getExistingSystemConfiguration();
 
 	public void editExistingSystemConfiguration(
@@ -114,7 +122,7 @@ public interface SystemSettingsService {
 	public void deleteExistingSystemConfiguration(Long SystemConfigurationId);
 
 	/**
-	 * NDC  functions
+	 * NDC functions
 	 * 
 	 */
 	public List<NdcListPToP> listNDCPToP();
@@ -142,7 +150,9 @@ public interface SystemSettingsService {
 
 	public void activateOrDeactivateExistingNdcListOffnet(Long ndcListId,
 			Integer onSwitch);
-	
+
+	public boolean checkIfDuplicateNdc(Integer ndc);
+
 	/**
 	 * AML Settings functions
 	 * 
@@ -157,19 +167,51 @@ public interface SystemSettingsService {
 
 	public AmlBarring getExistingAmlBarring(Long barringId);
 
-	
+	public boolean checkIfAccTypeKeywordCodeComboExist(AccountType accountType,
+			UssdTransactionKeyword transactionKeyword);
+
 	/**
 	 * GlobalKeywordCharge Settings functions
 	 * 
 	 */
-	public void addGlobalKeywordCharge(
-			GlobalKeywordCharge globalKeywordCharge);
+	public void addGlobalKeywordCharge(GlobalKeywordCharge globalKeywordCharge);
 
 	public List<GlobalKeywordCharge> listGlobalKeywordCharges();
-	
-	public void editExistingGlobalKeywordCharge(GlobalKeywordCharge globalKeywordCharge);
+
+	public void editExistingGlobalKeywordCharge(
+			GlobalKeywordCharge globalKeywordCharge);
 
 	public void deleteExistingGlobalKeywordCharge(Long chargeId);
 
 	public GlobalKeywordCharge getExistingGlobalKeywordCharge(Long chargeId);
+
+	/**
+	 * GlobalSendLimit Settings functions
+	 * 
+	 */
+	public List<GlobalSendLimit> listGlobalSendLimits();
+
+	public void deleteExistingGlobalSendLimit(Long sendLimitId);
+
+	public void editExistingGlobalSendLimit(GlobalSendLimit globalSendLimit);
+
+	public GlobalSendLimit getExistingGlobalSendLimit(Long sendLimitId);
+
+	public void addGlobalSendLimit(GlobalSendLimit globalSendLimit);
+
+	/**
+	 * GlobalReceiveLimit Settings functions
+	 * 
+	 */
+	public List<GlobalReceiveLimit> listGlobalReceiveLimits();
+
+	public void deleteExistingGlobalReceiveLimit(Long receiveLimitId);
+
+	public void editExistingGlobalReceiveLimit(
+			GlobalReceiveLimit globalReceiveLimit);
+
+	public GlobalReceiveLimit getExistingGlobalReceiveLimit(Long receiveLimitId);
+
+	public void addGlobalReceiveLimit(GlobalReceiveLimit globalReceiveLimit);
+
 }

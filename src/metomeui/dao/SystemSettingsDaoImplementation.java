@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import metomeui.model.AccountType;
 import metomeui.model.AmlBarring;
 import metomeui.model.GlobalKeywordCharge;
+import metomeui.model.GlobalReceiveLimit;
+import metomeui.model.GlobalSendLimit;
 import metomeui.model.Language;
 import metomeui.model.MemoGroup;
 import metomeui.model.Message;
@@ -14,6 +16,7 @@ import metomeui.model.NdcListOffnet;
 import metomeui.model.NdcListPToP;
 import metomeui.model.SystemConfiguration;
 import metomeui.model.User;
+import metomeui.model.UssdTransactionKeyword;
 
 import org.apache.log4j.Logger;
 import org.hibernate.classic.Session;
@@ -401,22 +404,37 @@ public class SystemSettingsDaoImplementation implements SystemSettingsDao {
 		return existingLanguage;
 	}
 
+	public void unDefaultAllLanguages() {
+		currentSession().beginTransaction();
+		Integer defaultSwitchOff = 0;
+		for (Language tempLang : listLanguages()) {
+			tempLang.setIsDefault(defaultSwitchOff);
+			currentSession().update(tempLang);
+		}
+		try {
+			currentSession().getTransaction().commit();
+		} catch (Exception e) {
+			currentSession().getTransaction().rollback();
+			e.printStackTrace();
+		}
+
+	}
+
 	@Override
 	public void setDefaultLanguage(Long languageId, Integer defaultSwitch) {
-		if ((defaultSwitch == 1) && (null == checkForExistingDefaultLanguage())
-				|| (defaultSwitch == 0)) {
-			currentSession().beginTransaction();
-			Language existingLanguage = (Language) currentSession().load(
-					Language.class, languageId);
-			existingLanguage.setIsDefault(defaultSwitch);
-			try {
-				currentSession().update(existingLanguage);
-				currentSession().getTransaction().commit();
-			} catch (Exception e) {
-				currentSession().getTransaction().rollback();
-				e.printStackTrace();
-			}
+		unDefaultAllLanguages();
+		currentSession().beginTransaction();
+		Language existingLanguage = (Language) currentSession().load(
+				Language.class, languageId);
+		existingLanguage.setIsDefault(defaultSwitch);
+		try {
+			currentSession().update(existingLanguage);
+			currentSession().getTransaction().commit();
+		} catch (Exception e) {
+			currentSession().getTransaction().rollback();
+			e.printStackTrace();
 		}
+
 	}
 
 	public Language checkForExistingDefaultLanguage() {
@@ -481,11 +499,16 @@ public class SystemSettingsDaoImplementation implements SystemSettingsDao {
 			existingSystemConfiguration
 					.setAutoCreateTempSub(systemConfiguration
 							.getAutoCreateTempSub());
-			existingSystemConfiguration
-					.setAllowedOperations(systemConfiguration
-							.getAllowedOperations());
+			existingSystemConfiguration.setOperation(systemConfiguration
+					.getOperation());
 			existingSystemConfiguration.setCountryDomain(systemConfiguration
 					.getCountryDomain());
+			existingSystemConfiguration
+					.setSmsMessageSubscriberFormat(systemConfiguration
+							.getSmsMessageSubscriberFormat());
+			existingSystemConfiguration
+					.setSubscriberMaxDisplayCharacters(systemConfiguration
+							.getSubscriberMaxDisplayCharacters());
 			existingSystemConfiguration
 					.setChargeCollectSetting(systemConfiguration
 							.getChargeCollectSetting());
@@ -510,9 +533,6 @@ public class SystemSettingsDaoImplementation implements SystemSettingsDao {
 			existingSystemConfiguration
 					.setMaintenanceModeFlag(systemConfiguration
 							.getMaintenanceModeFlag());
-			existingSystemConfiguration
-					.setMaxFailedLoginCount(systemConfiguration
-							.getMaxFailedLoginCount());
 			existingSystemConfiguration
 					.setMaxPasswordLength(systemConfiguration
 							.getMaxPasswordLength());
@@ -842,6 +862,170 @@ public class SystemSettingsDaoImplementation implements SystemSettingsDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
+	public List<GlobalSendLimit> listGlobalSendLimits() {
+		currentSession().beginTransaction();
+		return (List<GlobalSendLimit>) currentSession().createCriteria(
+				GlobalSendLimit.class).list();
+	}
+
+	@Override
+	public void deleteExistingGlobalSendLimit(Long sendLimitId) {
+		currentSession().beginTransaction();
+		GlobalSendLimit globalSendLimit = (GlobalSendLimit) currentSession()
+				.load(GlobalSendLimit.class, sendLimitId);
+
+		if (null != globalSendLimit) {
+			try {
+				currentSession().delete(globalSendLimit);
+				currentSession().getTransaction().commit();
+			} catch (Exception e) {
+				currentSession().getTransaction().rollback();
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	@Override
+	public void addGlobalSendLimit(GlobalSendLimit globalSendLimit) {
+		try {
+			currentSession().beginTransaction();
+			currentSession().save(globalSendLimit);
+			currentSession().getTransaction().commit();
+		} catch (Exception e) {
+			currentSession().getTransaction().rollback();
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
+	public GlobalSendLimit getExistingGlobalSendLimit(Long sendLimitId) {
+		currentSession().beginTransaction();
+		GlobalSendLimit globalSendLimit = (GlobalSendLimit) currentSession()
+				.load(GlobalSendLimit.class, sendLimitId);
+		return globalSendLimit;
+	}
+
+	@Override
+	public void editExistingGlobalSendLimit(GlobalSendLimit globalSendLimit) {
+
+		currentSession().beginTransaction();
+		GlobalSendLimit existingGlobalSendLimit = (GlobalSendLimit) currentSession()
+				.load(GlobalSendLimit.class, globalSendLimit.getSendLimitId());
+		if (null != existingGlobalSendLimit) {
+			existingGlobalSendLimit.setTransactionKeyword(globalSendLimit
+					.getTransactionKeyword());
+			existingGlobalSendLimit.setAccountType(globalSendLimit
+					.getAccountType());
+			existingGlobalSendLimit.setMaxAmountDay(globalSendLimit
+					.getMaxAmountDay());
+			existingGlobalSendLimit.setMaxAmountMonth(globalSendLimit
+					.getMaxAmountMonth());
+			existingGlobalSendLimit.setMaxTransDay(globalSendLimit
+					.getMaxTransDay());
+			existingGlobalSendLimit.setMaxTransMonth(globalSendLimit
+					.getMaxTransMonth());
+			existingGlobalSendLimit.setMinTransactionAmount(globalSendLimit
+					.getMinTransactionAmount());
+			existingGlobalSendLimit.setMaxTransactionAmount(globalSendLimit
+					.getMaxTransactionAmount());
+		}
+		try {
+			currentSession().update(existingGlobalSendLimit);
+			currentSession().getTransaction().commit();
+		} catch (Exception e) {
+			currentSession().getTransaction().rollback();
+			e.printStackTrace();
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<GlobalReceiveLimit> listGlobalReceiveLimits() {
+		currentSession().beginTransaction();
+		return (List<GlobalReceiveLimit>) currentSession().createCriteria(
+				GlobalReceiveLimit.class).list();
+	}
+
+	@Override
+	public void deleteExistingGlobalReceiveLimit(Long receiveLimitId) {
+		currentSession().beginTransaction();
+		GlobalReceiveLimit globalReceiveLimit = (GlobalReceiveLimit) currentSession()
+				.load(GlobalReceiveLimit.class, receiveLimitId);
+
+		if (null != globalReceiveLimit) {
+			try {
+				currentSession().delete(globalReceiveLimit);
+				currentSession().getTransaction().commit();
+			} catch (Exception e) {
+				currentSession().getTransaction().rollback();
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	@Override
+	public void addGlobalReceiveLimit(GlobalReceiveLimit globalReceiveLimit) {
+		try {
+			currentSession().beginTransaction();
+			currentSession().save(globalReceiveLimit);
+			currentSession().getTransaction().commit();
+		} catch (Exception e) {
+			currentSession().getTransaction().rollback();
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
+	public GlobalReceiveLimit getExistingGlobalReceiveLimit(Long receiveLimitId) {
+		currentSession().beginTransaction();
+		GlobalReceiveLimit globalReceiveLimit = (GlobalReceiveLimit) currentSession()
+				.load(GlobalReceiveLimit.class, receiveLimitId);
+		return globalReceiveLimit;
+	}
+
+	@Override
+	public void editExistingGlobalReceiveLimit(
+			GlobalReceiveLimit globalReceiveLimit) {
+
+		currentSession().beginTransaction();
+		GlobalReceiveLimit existingGlobalReceiveLimit = (GlobalReceiveLimit) currentSession()
+				.load(GlobalReceiveLimit.class,
+						globalReceiveLimit.getReceiveLimitId());
+		if (null != existingGlobalReceiveLimit) {
+			existingGlobalReceiveLimit.setTransactionKeyword(globalReceiveLimit
+					.getTransactionKeyword());
+			existingGlobalReceiveLimit.setAccountType(globalReceiveLimit
+					.getAccountType());
+			existingGlobalReceiveLimit.setMaxAmountDay(globalReceiveLimit
+					.getMaxAmountDay());
+			existingGlobalReceiveLimit.setMaxAmountMonth(globalReceiveLimit
+					.getMaxAmountMonth());
+			existingGlobalReceiveLimit.setMaxTransDay(globalReceiveLimit
+					.getMaxTransDay());
+			existingGlobalReceiveLimit.setMaxTransMonth(globalReceiveLimit
+					.getMaxTransMonth());
+			existingGlobalReceiveLimit
+					.setMinTransactionAmount(globalReceiveLimit
+							.getMinTransactionAmount());
+			existingGlobalReceiveLimit
+					.setMaxTransactionAmount(globalReceiveLimit
+							.getMaxTransactionAmount());
+		}
+		try {
+			currentSession().update(existingGlobalReceiveLimit);
+			currentSession().getTransaction().commit();
+		} catch (Exception e) {
+			currentSession().getTransaction().rollback();
+			e.printStackTrace();
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
 	public boolean checkIfDuplicateMemoGroupName(Long memoGroupId,
 			String memoGroupName) {
 		currentSession().beginTransaction();
@@ -912,4 +1096,77 @@ public class SystemSettingsDaoImplementation implements SystemSettingsDao {
 		}
 	}
 
+	@Override
+	public boolean checkIfLanguageMessageCodeComboExists(Language language,
+			Integer messageCode) {
+		currentSession().beginTransaction();
+		Message message = (Message) currentSession()
+				.createQuery(
+						"from Message message "
+								+ "where message.messageCode = :messagecode and message.language = :language")
+				.setParameter("messagecode", messageCode)
+				.setParameter("language", language).setMaxResults(1)
+				.uniqueResult();
+
+		if (message != null) {
+			return true;
+		} else
+			return false;
+	}
+
+	@Override
+	public boolean checkIfDuplicateNdc(Integer ndc) {
+		currentSession().beginTransaction();
+		NdcListOffnet ndcListOffnet = (NdcListOffnet) currentSession()
+				.createQuery(
+						"from NdcListOffnet ndcListOffnet "
+								+ "where ndcListOffnet.ndc = :ndc")
+				.setParameter("ndc", ndc).setMaxResults(1).uniqueResult();
+
+		NdcListPToP ndcListPToP = (NdcListPToP) currentSession()
+				.createQuery(
+						"from NdcListPToP ndcListPToP "
+								+ "where ndcListPToP.ndc = :ndc")
+				.setParameter("ndc", ndc).setMaxResults(1).uniqueResult();
+
+		if ((ndcListOffnet != null) || (ndcListPToP != null)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean checkIfAccTypeKeywordCodeComboExist(AccountType accountType,
+			UssdTransactionKeyword transactionKeyword) {
+		currentSession().beginTransaction();
+		AmlBarring amlBarring = (AmlBarring) currentSession()
+				.createQuery(
+						"from AmlBarring amlBarring "
+								+ "where amlBarring.accountType = :acctype and amlBarring.transactionKeyword = :keyword")
+				.setParameter("acctype", accountType)
+				.setParameter("keyword", transactionKeyword).setMaxResults(1)
+				.uniqueResult();
+
+		if (amlBarring != null) {
+			return true;
+		} else
+			return false;
+	}
+
+	@Override
+	public boolean checkIfDuplicateBitMap(Integer accountTypeBitMap) {
+		currentSession().beginTransaction();
+		AccountType accountType = (AccountType) currentSession()
+				.createQuery(
+						"from AccountType accountType "
+								+ "where accountType.accountTypeBitMap = :accountTypeBitMap")
+				.setParameter("accountTypeBitMap", accountTypeBitMap)
+				.setMaxResults(1).uniqueResult();
+
+		if (accountType != null) {
+			return true;
+		} else
+			return false;
+	}
 }

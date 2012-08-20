@@ -282,8 +282,7 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Manage Me2Me Setup</h2>
-						<hr>
-					</td>
+						<hr></td>
 				</tr>
 			</table>
 		</div>
@@ -297,32 +296,28 @@ td.formlabels {
 						</h3>
 						<ul>
 							<li><a href="/metomeui/viewsystemconfiguration.html">System
-									Configuration</a></li>
+									Configuration</a>
+							</li>
 							<li><a href="/metomeui/listmemogroups.html">Memo Groups
-									Configuration</a>
-							</li>
+									Configuration</a></li>
 							<li><a href="/metomeui/listlanguages.html">Languages
-									Configuration</a>
-							</li>
+									Configuration</a></li>
 							<li><a href="/metomeui/listmessages.html">Messages
-									Configuration</a>
-							</li>
+									Configuration</a></li>
 							<li><a href="/metomeui/listmobilendc.html">Mobile NDC
-									Configuration</a>
-							</li>
+									Configuration</a></li>
 						</ul>
 						<h3>
 							<a href="#ussdmenusetup">Ussd Menu Setup</a>
 						</h3>
 						<ul>
 							<li><a href="/metomeui/listussdmenuitems.html">Ussd Menu
-									Items</a></li>
+									Items</a>
+							</li>
 							<li><a href="/metomeui/listussdtransactionkeywords.html">Transaction
-									Keywords</a>
-							</li>
+									Keywords</a></li>
 							<li><a href="/metomeui/listussdpredefinputs.html">Predefined
-									Inputs</a>
-							</li>
+									Inputs</a></li>
 						</ul>
 						<h3>
 							<a href="#transsettings">Transaction Settings</a>
@@ -330,10 +325,17 @@ td.formlabels {
 						<ul>
 							<li><a href="/metomeui/viewamlbarringsettings.html">AML
 									Settings</a></li>
-							<li><a href="/metomeui/listcharges.html">Charge
-									Configuration</a></li>
+							<li><a href="/metomeui/listglobalkeywordcharges.html">Charge
+									Configuration</a>
+							</li>
 							<li><a href="/metomeui/listaccounttypes.html">Account
 									Type Configuration</a>
+							</li>
+							<li><a href="/metomeui/listglobalsendlimits.html">Transaction
+									Global Send Limits Settings</a>
+							</li>
+							<li><a href="/metomeui/listglobalreceivelimits.html">Transaction
+									Global Receive Limits Settings</a>
 							</li>
 						</ul>
 						<h3>
@@ -342,10 +344,12 @@ td.formlabels {
 						<ul>
 							<li><a href="/metomeui/viewmetomesetup.html">Me2Me Setup</a>
 							</li>
-							<li><a href="#viewzimbasetup.html">Zimba Setup</a>
+							<li><a href="/metomeui/viewzimbaconfiguration.html">Zimba
+									Setup</a>
 							</li>
 						</ul>
-					</div></td>
+					</div>
+				</td>
 				<td class="content">
 					<table>
 						<tr>
@@ -357,16 +361,14 @@ td.formlabels {
 									<input class="longbtn" type="submit" name="submit"
 										value="Create New Goal Type"
 										onClick="location.href='addmetomegoaltype.html'">
-								</div>
-							</td>
+								</div></td>
 						</tr>
 					</table> <c:if test="${empty meToMeGoalTypesList}">
 						<div>
 							<table>
 								<tr>
 									<td>There are no Me2Me Goal types configured for this
-										system <br> <br>
-									</td>
+										system <br> <br></td>
 								</tr>
 							</table>
 						</div>
@@ -405,16 +407,14 @@ td.formlabels {
 									<input class="longbtn" type="submit" name="submit"
 										value="Create New Reward Type"
 										onClick="location.href='addmetomerewardtype.html'">
-								</div>
-							</td>
+								</div></td>
 						</tr>
 					</table> <c:if test="${empty meToMeRewardTypesList}">
 						<div>
 							<table>
 								<tr>
 									<td>There are no Me2Me Reward types configured for this
-										system <br> <br>
-									</td>
+										system <br> <br></td>
 								</tr>
 							</table>
 						</div>
@@ -441,7 +441,8 @@ td.formlabels {
 								</tr>
 							</c:forEach>
 						</table>
-					</c:if></td>
+					</c:if>
+				</td>
 
 			</tr>
 		</table>

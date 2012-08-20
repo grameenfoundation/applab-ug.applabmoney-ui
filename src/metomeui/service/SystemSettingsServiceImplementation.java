@@ -7,6 +7,8 @@ import metomeui.dao.SystemSettingsDaoImplementation;
 import metomeui.model.AccountType;
 import metomeui.model.AmlBarring;
 import metomeui.model.GlobalKeywordCharge;
+import metomeui.model.GlobalReceiveLimit;
+import metomeui.model.GlobalSendLimit;
 import metomeui.model.Language;
 import metomeui.model.MemoGroup;
 import metomeui.model.Message;
@@ -14,6 +16,7 @@ import metomeui.model.NdcListOffnet;
 import metomeui.model.NdcListPToP;
 import metomeui.model.SystemConfiguration;
 import metomeui.model.User;
+import metomeui.model.UssdTransactionKeyword;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,7 +69,11 @@ public class SystemSettingsServiceImplementation implements
 			Integer offSwitch) {
 		systemSettingsDao.activateOrDeactivateExistingAccountType(
 				accountTypeId, offSwitch);
-
+	}
+	
+	@Transactional
+	public boolean checkIfDuplicateBitMap(Integer accountTypeBitMap) {
+		return systemSettingsDao.checkIfDuplicateBitMap(accountTypeBitMap);
 	}
 
 	/**
@@ -132,10 +139,16 @@ public class SystemSettingsServiceImplementation implements
 		systemSettingsDao.editExistingLanguage(language);
 	}
 
-	@Override
+	@Transactional
 	public void setDefaultLanguage(Long languageId, Integer offSwitch) {
 		systemSettingsDao.setDefaultLanguage(languageId, offSwitch);
+	}
 
+	@Transactional
+	public boolean checkIfLanguageMessageCodeComboExists(Language language,
+			Integer messageCode) {
+		return systemSettingsDao.checkIfLanguageMessageCodeComboExists(
+				language, messageCode);
 	}
 
 	/**
@@ -165,6 +178,13 @@ public class SystemSettingsServiceImplementation implements
 	@Transactional
 	public void editExistingMessage(Message message) {
 		systemSettingsDao.editExistingMessage(message);
+	}
+
+	@Transactional
+	public boolean checkIfDuplicateLanguageName(String languageName,
+			Long languageId) {
+		return systemSettingsDao.checkIfDuplicateLanguageName(languageId,
+				languageName);
 	}
 
 	/**
@@ -227,15 +247,14 @@ public class SystemSettingsServiceImplementation implements
 	public SystemConfiguration getExistingSystemConfiguration() {
 		return systemSettingsDao.getSystemConfiguration();
 	}
-	
+
 	@Transactional
 	public void editExistingSystemConfiguration(
 			SystemConfiguration systemConfiguration) {
 		systemSettingsDao.editSystemConfiguration(systemConfiguration);
-		
+
 	}
 
-	
 	/**
 	 * NDC List functions
 	 * 
@@ -307,6 +326,15 @@ public class SystemSettingsServiceImplementation implements
 	}
 
 	@Transactional
+	public boolean checkIfDuplicateNdc(Integer ndc) {
+		return systemSettingsDao.checkIfDuplicateNdc(ndc);
+	}
+
+	/**
+	 * AML Barring functions
+	 * 
+	 */
+	@Transactional
 	public List<AmlBarring> listAmlBarringSettings() {
 		return systemSettingsDao.listAmlBarringSettings();
 	}
@@ -332,6 +360,17 @@ public class SystemSettingsServiceImplementation implements
 	}
 
 	@Transactional
+	public boolean checkIfAccTypeKeywordCodeComboExist(AccountType accountType,
+			UssdTransactionKeyword transactionKeyword) {
+		return systemSettingsDao.checkIfAccTypeKeywordCodeComboExist(
+				accountType, transactionKeyword);
+	}
+
+	/**
+	 * GlobalKeywordCharge functions
+	 * 
+	 */
+	@Transactional
 	public List<GlobalKeywordCharge> listGlobalKeywordCharges() {
 		return systemSettingsDao.listGlobalKeywordCharges();
 	}
@@ -342,7 +381,8 @@ public class SystemSettingsServiceImplementation implements
 	}
 
 	@Transactional
-	public void editExistingGlobalKeywordCharge(GlobalKeywordCharge globalKeywordCharge) {
+	public void editExistingGlobalKeywordCharge(
+			GlobalKeywordCharge globalKeywordCharge) {
 		systemSettingsDao.editExistingGlobalKeywordCharge(globalKeywordCharge);
 	}
 
@@ -356,15 +396,62 @@ public class SystemSettingsServiceImplementation implements
 		return systemSettingsDao.getExistingGlobalKeywordCharge(chargeId);
 	}
 
-	@Override
-	public boolean checkIfDuplicateLanguageName(String languageName,
-			Long languageId) {
-		return systemSettingsDao.checkIfDuplicateLanguageName(languageId, languageName);
+	/**
+	 * GlobalSendLimit functions
+	 * 
+	 */
+	@Transactional
+	public List<GlobalSendLimit> listGlobalSendLimits() {
+		return systemSettingsDao.listGlobalSendLimits();
 	}
 
+	@Transactional
+	public void deleteExistingGlobalSendLimit(Long sendLimitId) {
+		systemSettingsDao.deleteExistingGlobalSendLimit(sendLimitId);
+	}
+
+	@Transactional
+	public void editExistingGlobalSendLimit(GlobalSendLimit globalSendLimit) {
+		systemSettingsDao.editExistingGlobalSendLimit(globalSendLimit);		
+	}
+
+	@Transactional
+	public GlobalSendLimit getExistingGlobalSendLimit(Long sendLimitId) {
+		return systemSettingsDao.getExistingGlobalSendLimit(sendLimitId);
+	}
+
+	@Transactional
+	public void addGlobalSendLimit(GlobalSendLimit globalSendLimit) {
+		systemSettingsDao.addGlobalSendLimit(globalSendLimit);
+	}
 	
-	
-	
-	
-	
+	/**
+	 * GlobalReceiveLimit functions
+	 * 
+	 */
+	@Transactional
+	public List<GlobalReceiveLimit> listGlobalReceiveLimits() {
+		return systemSettingsDao.listGlobalReceiveLimits();
+	}
+
+	@Transactional
+	public void deleteExistingGlobalReceiveLimit(Long receiveLimitId) {
+		systemSettingsDao.deleteExistingGlobalReceiveLimit(receiveLimitId);
+	}
+
+	@Transactional
+	public void editExistingGlobalReceiveLimit(
+			GlobalReceiveLimit globalReceiveLimit) {
+		systemSettingsDao.editExistingGlobalReceiveLimit(globalReceiveLimit);
+	}
+
+	@Transactional
+	public GlobalReceiveLimit getExistingGlobalReceiveLimit(Long receiveLimitId) {
+		return systemSettingsDao.getExistingGlobalReceiveLimit(receiveLimitId);
+	}
+
+	@Transactional
+	public void addGlobalReceiveLimit(GlobalReceiveLimit globalReceiveLimit) {
+		systemSettingsDao.addGlobalReceiveLimit(globalReceiveLimit);
+	}
 }

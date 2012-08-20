@@ -4,6 +4,7 @@ import java.util.List;
 
 import metomeui.model.MeToMeGoalType;
 import metomeui.model.MeToMeRewardType;
+import metomeui.model.ZimbaConfiguration;
 
 public interface ProductsDao {
 
@@ -17,19 +18,17 @@ public interface ProductsDao {
 
 	public MeToMeGoalType getExistingMeToMeGoalType(Long meToMeGoalTypeId);
 
-	boolean checkIfDuplicateMeToMeGoalTypeName(String meToMeGoalTypeName,
-			Long meToMeGoalTypeId);
+	boolean checkIfDuplicateMeToMeGoalTypeName(String meToMeGoalTypeName);
 
-	boolean checkIfDuplicateMeToMeGoalTypeCode(String meToMeGoalTypeCode,
-			Long meToMeGoalTypeId);
+	boolean checkIfDuplicateMeToMeGoalTypeCode(String meToMeGoalTypeCode);
 
 	public void addMeToMeRewardType(MeToMeRewardType meToMeRewardType);
 
 	public boolean checkIfDuplicateMeToMeRewardTypeCode(
-			String meToMeRewardTypeCode, Long meToMeRewardTypeId);
+			String meToMeRewardTypeCode);
 
 	public boolean checkIfDuplicateMeToMeRewardTypeName(
-			String meToMeRewardTypeName, Long meToMeRewardTypeId);
+			String meToMeRewardTypeName);
 
 	public MeToMeRewardType getExistingMeToMeRewardType(Long meToMeRewardTypeId);
 
@@ -38,4 +37,10 @@ public interface ProductsDao {
 	public void editMeToMeRewardType(MeToMeRewardType meToMeRewardType);
 
 	public void deleteMeToMeRewardType(Long meToMeRewardTypeId);
+
+	public void addZimbaConfiguration(ZimbaConfiguration zimbaConfiguration);
+
+	public void editZimbaConfiguration(ZimbaConfiguration zimbaConfiguration);
+
+	public ZimbaConfiguration getZimbaConfiguration();
 }

@@ -109,4 +109,12 @@ public class AccountType {
 	public void setSysAccountTypeFlag(Integer sysAccountTypeFlag) {
 		this.sysAccountTypeFlag = sysAccountTypeFlag;
 	}
+
+	public List<AmlBarring> getAccountTypeAmlBarring() {
+		return accountTypeAmlBarring;
+	}
+
+	public void setAccountTypeAmlBarring(List<AmlBarring> accountTypeAmlBarring) {
+		this.accountTypeAmlBarring = accountTypeAmlBarring;
+	}
 }

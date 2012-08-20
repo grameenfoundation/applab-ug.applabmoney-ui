@@ -25,12 +25,10 @@ public class UssdKeywordStep {
 	private UssdTransactionKeyword transactionKeyword;
 
 	@NotEmpty
-	@Size(min = 6, max = 100)
 	@Column(name = "STEP_MENU_NAME", nullable = false, length = 100)
 	private String stepMenuName;
 
 	@NotEmpty
-	@Size(min = 1, max = 11)
 	@Column(name = "STEP_NUMBER", nullable = false, length = 20)
 	private Integer stepMenuNumber;
 
@@ -40,11 +38,9 @@ public class UssdKeywordStep {
 	@Column(name = "IS_LAST_STEP", nullable = true, length = 1)
 	private Integer isLastStepFlag;
 
-	@Size(min = 1, max = 11)
 	@Column(name = "USE_FIXED_VALUE", nullable = true, length = 11)
 	private Integer useFixedValueFlag;
 
-	@Size(min = 1, max = 50)
 	@Column(name = "FIXED_VALUE", nullable = true, length = 50)
 	private String fixedValue;
 

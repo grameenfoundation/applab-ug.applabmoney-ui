@@ -1,5 +1,5 @@
-<%@ page language="java"
-	contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <%@ include file="include.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -335,7 +335,7 @@ td.formlabels {
 										</td>
 									</tr>
 									<tr>
-										<td class="formlabels"><form:label path="msisdnLength">Set MSISDN Length:</form:label>
+										<td class="formlabels"><form:label path="msisdnLength">Set MSISDN Length</form:label>
 										<td class="form"><form:select path="msisdnLength">
 												<form:option value="0" label="--- Select ---" />
 												<form:option value="12">12</form:option>
@@ -344,25 +344,18 @@ td.formlabels {
 											</form:select></td>
 									</tr>
 									<tr>
-										<td class="formlabels"><form:checkbox
-												path="msisdnLeadZeroRequired" tabindex="5" value="1"></form:checkbox>
+										<td class="formlabels"><form:label
+												path="msisdnLeadZeroRequired">MSISDN requires leading zero(0)</form:label>
 										</td>
-										<td class="form"><form:label
-												path="msisdnLeadZeroRequired">Set MSISDN lead zero requirement:</form:label>
+										<td class="form"><form:checkbox
+												path="msisdnLeadZeroRequired" value="1"></form:checkbox>
 										</td>
 									</tr>
 									<tr>
-										<td class="formlabels"><form:label
-												path="allowedOperations">Allowed Operations </form:label>
+										<td class="formlabels"><form:label path="operation">Operation </form:label>
 										</td>
-										<td class="form"><form:select path="allowedOperations">
-												<form:option value="0" label="--- Select ---" />
-												<form:option value="1">This</form:option>
-												<form:option value="2">That</form:option>
-												<form:option value="3">Other</form:option>
-												<form:option value="4">Then</form:option>
-												<form:option value="5">What</form:option>
-											</form:select>
+										<td class="form"><form:input cssClass="formfields"
+												path="operation"></form:input>
 										</td>
 									</tr>
 									<tr>
@@ -407,26 +400,12 @@ td.formlabels {
 											</form:select>
 										</td>
 									</tr>
-									<%-- <tr>
-										<td class="formlabels"><form:label
-												path="smsMessageSubscriptionFormat">SMS Message Subscription
-                                Display Format</form:label>
-										</td>
-										<td class="form"><form:select cssClass="formfields"
-												path="smsMessageSubscriptionFormat">
-												<form:option value="0" label="MSISDN" />
-												<form:option value="1" label="FULL_NAMES" />
-												<form:option value="2" label="MSISDN AND FULL_NAMES" />
-											</form:select>
-										</td>
-									</tr> --%>
-
 									<tr>
-										<td class="formlabels"><form:checkbox
-												path="subscriptionMaxDisplayCharacters" value="1"></form:checkbox>
-										</td>
-										<td class="form"><form:label
+										<td class="formlabels"><form:label
 												path="subscriptionMaxDisplayCharacters">Subscription Maximum Display Characters</form:label>
+										</td>
+										<td class="form"><form:checkbox
+												path="subscriptionMaxDisplayCharacters" value="1"></form:checkbox>
 										</td>
 									</tr>
 									<tr>
@@ -442,11 +421,11 @@ td.formlabels {
 										</td>
 									</tr>
 									<tr>
-										<td class="formlabels"><form:checkbox
-												path="notifyOnDelayTransaction" value="1"></form:checkbox>
-										</td>
-										<td class="form"><form:label
+										<td class="formlabels"><form:label
 												path="notifyOnDelayTransaction">Notify on delayed transaction</form:label>
+										</td>
+										<td class="form"><form:checkbox
+												path="notifyOnDelayTransaction" value="1"></form:checkbox>
 										</td>
 									</tr>
 									<tr>

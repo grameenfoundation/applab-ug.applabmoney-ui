@@ -5,6 +5,8 @@ import java.util.List;
 import metomeui.model.AccountType;
 import metomeui.model.AmlBarring;
 import metomeui.model.GlobalKeywordCharge;
+import metomeui.model.GlobalReceiveLimit;
+import metomeui.model.GlobalSendLimit;
 import metomeui.model.MemoGroup;
 import metomeui.model.Message;
 import metomeui.model.NdcListOffnet;
@@ -12,6 +14,7 @@ import metomeui.model.NdcListPToP;
 import metomeui.model.SystemConfiguration;
 import metomeui.model.User;
 import metomeui.model.Language;
+import metomeui.model.UssdTransactionKeyword;
 
 public interface SystemSettingsDao {
 
@@ -164,10 +167,50 @@ public interface SystemSettingsDao {
 
 	public void deleteExistingGlobalKeywordCharge(Long chargeId);
 
+	/**
+	 * Global Send Limit functions
+	 */
+	public List<GlobalSendLimit> listGlobalSendLimits();
+
+	public void deleteExistingGlobalSendLimit(Long sendLimitId);
+
+	public void addGlobalSendLimit(GlobalSendLimit globalSendLimit);
+
+	public GlobalSendLimit getExistingGlobalSendLimit(Long sendLimitId);
+
+	public void editExistingGlobalSendLimit(GlobalSendLimit globalSendLimit);
+
+	/**
+	 * Global Receive Limit functions
+	 * 
+	 */
+	public List<GlobalReceiveLimit> listGlobalReceiveLimits();
+
+	public void deleteExistingGlobalReceiveLimit(Long receiveLimitId);
+
+	public void editExistingGlobalReceiveLimit(
+			GlobalReceiveLimit globalReceiveLimit);
+
+	public GlobalReceiveLimit getExistingGlobalReceiveLimit(Long receiveLimitId);
+
+	public void addGlobalReceiveLimit(GlobalReceiveLimit globalReceiveLimit);
+	
+	
+
 	public boolean checkIfDuplicateMemoGroupCode(Long memoGroupId,
 			String memoGroupCode);
 
 	public boolean checkIfDuplicateMemoGroupName(Long memoGroupId,
 			String memoGroupName);
+
+	public boolean checkIfLanguageMessageCodeComboExists(Language language,
+			Integer messageCode);
+
+	public boolean checkIfDuplicateNdc(Integer ndc);
+
+	public boolean checkIfAccTypeKeywordCodeComboExist(AccountType accountType,
+			UssdTransactionKeyword transactionKeyword);
+
+	public boolean checkIfDuplicateBitMap(Integer accountTypeBitMap);
 
 }

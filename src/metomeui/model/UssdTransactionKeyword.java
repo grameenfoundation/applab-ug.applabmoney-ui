@@ -28,20 +28,16 @@ public class UssdTransactionKeyword {
 	private Long keywordId;
 
 	@NotEmpty
-	@Size(min = 6, max = 100)
 	@Column(name = "KEYWORD_NAME", nullable = false, length = 100)
 	private String keywordName;
 
 	@NotEmpty
-	@Size(min = 3, max = 10)
-	@Column(name = "KEYWORD_CODE", nullable = false, length = 10)
+	@Column(name = "KEYWORD_CODE", nullable = false, length = 20)
 	private String keywordCode;
 
-	@Size(min = 2, max = 100)
 	@Column(name = "KEYWORD_DESC", nullable = true, length = 100)
 	private String keywordDescription;
 
-	@Size(min = 1, max = 11)
 	@Column(name = "STEPS_COUNT", nullable = true, length = 11)
 	private Integer keywordStepsCount;
 

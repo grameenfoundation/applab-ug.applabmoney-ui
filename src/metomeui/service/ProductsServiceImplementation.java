@@ -9,10 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import metomeui.dao.ProductsDao;
 import metomeui.dao.ProductsDaoImplementation;
-import metomeui.dao.SystemSettingsDao;
-import metomeui.dao.SystemSettingsDaoImplementation;
 import metomeui.model.MeToMeGoalType;
 import metomeui.model.MeToMeRewardType;
+import metomeui.model.ZimbaConfiguration;
 
 @Service("productsService")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -25,86 +24,105 @@ public class ProductsServiceImplementation implements ProductsService {
 
 	}
 
+	@Transactional
 	public List<MeToMeGoalType> listMeToMeGoalTypes() {
 		return productsDao.listMeToMeGoalTypes();
 	}
 
+	@Transactional
 	public void addMeToMeGoalType(MeToMeGoalType meToMeGoalType) {
 		productsDao.addMeToMeGoalType(meToMeGoalType);
 	}
 
+	@Transactional
 	public void editMeToMeGoalType(MeToMeGoalType meToMeGoalType) {
 		productsDao.editMeToMeGoalType(meToMeGoalType);
 	}
 
+	@Transactional
 	public MeToMeGoalType getExistingMeToMeGoalType(Long meToMeGoalTypeId) {
 		return productsDao.getExistingMeToMeGoalType(meToMeGoalTypeId);
 	}
 
-	public boolean checkIfDuplicateMeToMeGoalTypeName(
-			String meToMeGoalTypeName, Long meToMeGoalTypeId) {
-		return productsDao.checkIfDuplicateMeToMeGoalTypeName(
-				meToMeGoalTypeName, meToMeGoalTypeId);
-
+	@Transactional
+	public boolean checkIfDuplicateMeToMeGoalTypeName(String meToMeGoalTypeName) {
+		return productsDao
+				.checkIfDuplicateMeToMeGoalTypeName(meToMeGoalTypeName);
 	}
 
-	public boolean checkIfDuplicateMeToMeGoalTypeCode(
-			String meToMeGoalTypeCode, Long meToMeGoalTypeId) {
-		return productsDao.checkIfDuplicateMeToMeGoalTypeCode(
-				meToMeGoalTypeCode, meToMeGoalTypeId);
+	@Transactional
+	public boolean checkIfDuplicateMeToMeGoalTypeCode(String meToMeGoalTypeCode) {
+		return productsDao
+				.checkIfDuplicateMeToMeGoalTypeCode(meToMeGoalTypeCode);
 	}
 
-	@Override
+	@Transactional
 	public void deleteExistingMeToMeGoalType(Long meToMeGoalTypeId) {
 		productsDao.deleteMeToMeGoalType(meToMeGoalTypeId);
 
 	}
 
-	@Override
+	@Transactional
 	public void editExistingMeToMeGoalType(MeToMeGoalType meToMeGoalType) {
 		productsDao.editMeToMeGoalType(meToMeGoalType);
 
 	}
 
-	@Override
+	@Transactional
 	public List<MeToMeRewardType> listMeToMeRewardTypes() {
 		return productsDao.listMeToMeRewardTypes();
 	}
 
-	@Override
+	@Transactional
 	public void addMeToMeRewardType(MeToMeRewardType meToMeRewardType) {
 		productsDao.addMeToMeRewardType(meToMeRewardType);
 
 	}
 
-	@Override
+	@Transactional
 	public MeToMeRewardType getExistingMeToMeRewardType(Long meToMeRewardTypeId) {
 		return productsDao.getExistingMeToMeRewardType(meToMeRewardTypeId);
 	}
 
-	@Override
+	@Transactional
 	public boolean checkIfDuplicateMeToMeRewardTypeName(
-			String meToMeRewardTypeName, Long meToMeRewardTypeId) {
-		return productsDao.checkIfDuplicateMeToMeRewardTypeName(
-				meToMeRewardTypeName, meToMeRewardTypeId);
+			String meToMeRewardTypeName) {
+		return productsDao
+				.checkIfDuplicateMeToMeRewardTypeName(meToMeRewardTypeName);
 	}
 
-	@Override
+	@Transactional
 	public boolean checkIfDuplicateMeToMeRewardTypeCode(
-			String meToMeRewardTypeCode, Long meToMeRewardTypeId) {
-		return productsDao.checkIfDuplicateMeToMeRewardTypeCode(
-				meToMeRewardTypeCode, meToMeRewardTypeId);
+			String meToMeRewardTypeCode) {
+		return productsDao
+				.checkIfDuplicateMeToMeRewardTypeCode(meToMeRewardTypeCode);
 	}
 
-	@Override
+	@Transactional
 	public void deleteExistingMeToMeRewardType(Long meToMeRewardTypeId) {
 		productsDao.deleteMeToMeRewardType(meToMeRewardTypeId);
 
 	}
 
-	@Override
+	@Transactional
 	public void editExistingMeToMeRewardType(MeToMeRewardType meToMeRewardType) {
 		productsDao.editMeToMeRewardType(meToMeRewardType);
 
+	}
+
+	@Transactional
+	public void addZimbaConfiguration(ZimbaConfiguration zimbaConfiguration) {
+		productsDao.addZimbaConfiguration(zimbaConfiguration);
+	}
+
+	@Transactional
+	public void editExistingZimbaConfiguration(
+			ZimbaConfiguration zimbaConfiguration) {
+		productsDao.editZimbaConfiguration(zimbaConfiguration);
+	}
+
+	@Transactional
+	public ZimbaConfiguration getZimbaConfiguration() {
+		return productsDao.getZimbaConfiguration();
 	}
 }

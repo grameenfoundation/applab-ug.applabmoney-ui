@@ -5,7 +5,7 @@
 
 <html>
 <head>
-<title>Charges Manager</title>
+<title>Global Keyword Charges Manager</title>
 <link type="text/css"
 	href="resources/css/ui-lightness/jquery-ui-1.8.18.custom.css"
 	rel="stylesheet" />
@@ -253,7 +253,7 @@ td.formlabels {
 		<div>
 			<table style="width: 100%;">
 				<tr>
-					<td><h2>Manage Account Types</h2>
+					<td><h2>Configure Charges</h2>
 						<hr>
 					</td>
 				</tr>
@@ -295,7 +295,6 @@ td.formlabels {
 													<form:option value="${keyword.keywordId}"
 														label="${keyword.keywordName}" />
 												</c:forEach>
-												<form:options items="${transactionKeywordsList}" />
 											</form:select>
 										</td>
 									</tr>

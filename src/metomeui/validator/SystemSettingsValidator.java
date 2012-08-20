@@ -12,12 +12,9 @@ import metomeui.model.SystemConfiguration;
 import metomeui.model.User;
 import metomeui.service.SystemSettingsService;
 import metomeui.service.SystemSettingsServiceImplementation;
-import metomeui.service.UssdMenuService;
-import metomeui.service.UssdMenuServiceImplementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 import org.springframework.validation.Errors;
@@ -49,6 +46,19 @@ public class SystemSettingsValidator implements Validator {
 					"messageCode.required");
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "messageText",
 					"messageText.required");
+
+			if (message.getLanguage() != null) {
+				if (message.getMessageCode() != null) {
+					if (systemSettingsService
+							.checkIfLanguageMessageCodeComboExists(
+									message.getLanguage(),
+									message.getMessageCode())) {
+						errors.rejectValue("messageCode",
+								"messageCode.languageMessageComboDuplicate");
+					}
+				}
+
+			}
 		} else if (target instanceof Language) {
 			Language language = (Language) target;
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "languageName",
@@ -73,10 +83,28 @@ public class SystemSettingsValidator implements Validator {
 					"ndc.required");
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors,
 					"networkOperator", "networkOperator.required");
+			if (systemSettingsService.checkIfDuplicateNdc(ndcListOffnet
+					.getNdc())) {
+				errors.rejectValue("ndc", "ndc.duplicate");
+			}
 		} else if (target instanceof NdcListPToP) {
 			NdcListPToP ndcListPToP = (NdcListPToP) target;
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "ndc",
 					"ndc.required");
+			if (systemSettingsService.checkIfDuplicateNdc(ndcListPToP.getNdc())) {
+				errors.rejectValue("ndc", "ndc.duplicate");
+			}
+		} else if (target instanceof AmlBarring) {
+			AmlBarring amlBarring = (AmlBarring) target;
+			if ((amlBarring.getAccountType() != null)
+					&& (amlBarring.getTransactionKeyword() != null)) {
+				if (systemSettingsService.checkIfAccTypeKeywordCodeComboExist(
+						amlBarring.getAccountType(),
+						amlBarring.getTransactionKeyword())) {
+					errors.rejectValue("accountType",
+							"accountType.AccTypeKeywordComboDuplicate");
+				}
+			}
 		} else if (target instanceof AccountType) {
 			AccountType accountType = (AccountType) target;
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors,
@@ -88,6 +116,15 @@ public class SystemSettingsValidator implements Validator {
 					"accountMaximumBookBalance.required");
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors,
 					"accountTypeBitMap", "accountTypeBitMap.required");
+			if ((accountType.getAccountTypeBitMap() != null)
+					|| (accountType.getAccountTypeBitMap().toString().trim() != "")) {
+				if (systemSettingsService.checkIfDuplicateBitMap(accountType
+						.getAccountTypeBitMap())) {
+					errors.rejectValue("accountTypeBitMap",
+							"accountTypeBitMap.duplicate");
+				}
+			}
+
 		} else if (target instanceof GlobalKeywordCharge) {
 			GlobalKeywordCharge globalKeywordCharge = (GlobalKeywordCharge) target;
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "chargePercent",
@@ -104,12 +141,59 @@ public class SystemSettingsValidator implements Validator {
 			}
 			if (globalKeywordCharge.getHighRange() <= globalKeywordCharge
 					.getLowRange()) {
+
 				errors.rejectValue("highRange", "highRange.invalid");
 			}
 		} else if (target instanceof SystemConfiguration) {
 			SystemConfiguration systemConfiguration = (SystemConfiguration) target;
-			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "ndc",
-					"ndc.required");
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "operation",
+					"operation.required");
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors,
+					"smsSenderNumber", "smsSenderNumber.required");
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors,
+					"currencyISONumber", "currencyISONumber.required");
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "countryDomain",
+					"countryDomain.required");
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "countryCode",
+					"countryCode.required");
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors,
+					"subscriberMaxDisplayCharacters",
+					"subscriberMaxDisplayCharacters.required");
+			ValidationUtils
+					.rejectIfEmptyOrWhitespace(errors,
+							"notifyOnDelayMessageID",
+							"notifyOnDelayMessageID.required");
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors,
+					"maintenanceModeMessageID",
+					"maintenanceModeMessageID.required");
+
+			if ((systemConfiguration.getSubscriberMaxDisplayCharacters() != null)
+					|| (systemConfiguration.getSubscriberMaxDisplayCharacters()
+							.toString().trim() != "")) {
+				if (systemConfiguration.getSubscriberMaxDisplayCharacters() > 30) {
+					errors.rejectValue("subscriberMaxDisplayCharacters",
+							"subscriberMaxDisplayCharacters.overMax");
+				}
+				if (systemConfiguration.getSubscriberMaxDisplayCharacters() < 15) {
+					errors.rejectValue("subscriberMaxDisplayCharacters",
+							"subscriberMaxDisplayCharacters.underMin");
+				}
+			}
+			if (systemConfiguration.getNotifyOnDelayTransaction() == null) {
+				if ((systemConfiguration.getNotifyOnDelayMessageID() != null)
+						|| (systemConfiguration.getNotifyOnDelayMessageID()
+								.toString().trim() != "")) {
+					errors.rejectValue("notifyOnDelayMessageID",
+							"notifyOnDelayMessageID.required");
+				}
+				if ((systemConfiguration.getNotifyOnDelayTransaction() == null)
+						|| (systemConfiguration.getNotifyOnDelaySeconds()
+								.toString().trim() != "")) {
+					errors.rejectValue("notifyOnDelaySeconds",
+							"notifyOnDelaySeconds.required");
+				}
+
+			}
 		}
 	}
 

@@ -12,6 +12,8 @@
 <script type="text/javascript" src="resources/js/jquery-1.7.1.min.js"></script>
 <script type="text/javascript"
 	src="resources/js/jquery-ui-1.8.18.custom.min.js"></script>
+<script type="text/javascript"
+	src="resources/js/jconfirmaction.jquery.js"></script>
 <script type="text/javascript">
 	$(function() {
 		// Accordion
@@ -21,6 +23,22 @@
 		// Tabs
 		$('#tabs').tabs();
 		$('#button').button();
+	});
+
+	$(document).ready(function() {
+		$('.ask-plain').click(function(e) {
+			e.preventDefault();
+			thisHref = $(this).attr('href');
+			if (confirm('Are you sure')) {
+				window.location = thisHref;
+			}
+		});
+		$('.ask-custom').jConfirmAction({
+			question : "Anda Yakin?",
+			yesAnswer : "Ya",
+			cancelAnswer : "Tidak"
+		});
+		$('.ask').jConfirmAction();
 	});
 </script>
 <style>
@@ -57,6 +75,34 @@ h4 {
 label {
 	font-weight: bold;
 	text-align: right;
+}
+
+.question {
+	position: absolute;
+	display: inline;
+	text-align: center;
+	width: 174px;
+	height: 78px;
+	font-size: 13px;
+	line-height: 1.5em;
+	background: url('images/bubble.png') left top no-repeat;
+	padding: 10px 0 0 0;
+	text-shadow: 0px 1px 0px #fff;
+	margin-left: -7em;
+	margin-top: -6em;
+	opacity: 0;
+}
+
+.yes,.cancel {
+	margin-top: .5em;
+	margin-right: .5em;
+	cursor: pointer;
+	display: inline-block;
+	width: 63px;
+	height: 21px;
+	color: #fff;
+	text-shadow: 0px 1px 0px #000;
+	background: url('images/button.png') left top no-repeat;
 }
 
 /*END GENERAL*/
@@ -274,7 +320,8 @@ td.formlabels {
 						<a style="color: #000000;" href="/metomeui/auilanding.html"
 							title="Home">Go Back Home</a>
 					</h2>
-				</div></td>
+				</div>
+			</td>
 		</tr>
 	</table>
 	<div>
@@ -283,8 +330,7 @@ td.formlabels {
 				<tr>
 					<td><h2>Configure Allowed Mobile National Destination
 							Code</h2>
-						<hr>
-					</td>
+						<hr></td>
 				</tr>
 			</table>
 		</div>
@@ -298,56 +344,56 @@ td.formlabels {
 						</h3>
 						<ul>
 							<li><a href="/metomeui/viewsystemconfiguration.html">System
-									Configuration</a></li>
+									Configuration</a>
+							</li>
 							<li><a href="/metomeui/listmemogroups.html">Memo Groups
-									Configuration</a>
-							</li>
+									Configuration</a></li>
 							<li><a href="/metomeui/listlanguages.html">Languages
-									Configuration</a>
-							</li>
+									Configuration</a></li>
 							<li><a href="/metomeui/listmessages.html">Messages
-									Configuration</a>
-							</li>
+									Configuration</a></li>
 							<li><a href="/metomeui/listmobilendc.html">Mobile NDC
-									Configuration</a>
-							</li>
+									Configuration</a></li>
 						</ul>
 						<h3>
 							<a href="#ussdmenusetup">Ussd Menu Setup</a>
 						</h3>
 						<ul>
 							<li><a href="/metomeui/listussdmenuitems.html">Ussd Menu
-									Items</a></li>
+									Items</a>
+							</li>
 							<li><a href="/metomeui/listussdtransactionkeywords.html">Transaction
-									Keywords</a>
-							</li>
+									Keywords</a></li>
 							<li><a href="/metomeui/listussdpredefinputs.html">Predefined
-									Inputs</a>
-							</li>
+									Inputs</a></li>
 						</ul>
 						<h3>
 							<a href="#transsettings">Transaction Settings</a>
 						</h3>
 						<ul>
 							<li><a href="/metomeui/viewamlbarringsettings.html">AML
-									Settings</a></li>
-							<li><a href="/metomeui/listcharges.html">Charge
+									Settings</a>
+							</li>
+							<li><a href="/metomeui/listglobalkeywordcharges.html">Charge
 									Configuration</a></li>
 							<li><a href="/metomeui/listaccounttypes.html">Account
-									Type Configuration</a>
-							</li>
+									Type Configuration</a></li>
+							<li><a href="/metomeui/listglobalsendlimits.html">Transaction
+									Global Send Limits Settings</a></li>
+							<li><a href="/metomeui/listglobalreceivelimits.html">Transaction
+									Global Receive Limits Settings</a></li>
 						</ul>
-
 						<h3>
 							<a href="#">Products Setup</a>
 						</h3>
 						<ul>
 							<li><a href="/metomeui/viewmetomesetup.html">Me2Me Setup</a>
 							</li>
-							<li><a href="#viewzimbasetup.html">Zimba Setup</a>
-							</li>
+							<li><a href="/metomeui/viewzimbaconfiguration.html">Zimba
+									Setup</a></li>
 						</ul>
-					</div></td>
+					</div>
+				</td>
 				<td class="content">
 					<table>
 						<tr>
@@ -358,13 +404,13 @@ td.formlabels {
 									<input class="longbtn" type="submit" name="submit"
 										value="Create New NDCP2P"
 										onClick="location.href='addndcptop.html'">
-								</div>
-							</td>
+								</div></td>
 							<td><div>
 									<input class="longbtn" type="submit" name="submit"
 										value="Create New NDCOffnet"
 										onClick="location.href='addndcoffnet.html'">
-								</div></td>
+								</div>
+							</td>
 						</tr>
 					</table> <c:if test="${empty NDCPToPList}">
 						<c:if test="${empty NDCOffnetList}">
@@ -372,13 +418,14 @@ td.formlabels {
 								<table>
 									<tr>
 										<td>There are no allowed National Destination Codes
-											configured on this system <br> <br></td>
+											configured on this system <br> <br>
+										</td>
 									</tr>
 								</table>
 							</div>
 						</c:if>
 					</c:if> <c:if test="${!empty NDCPToPList}">
-						<h2>Configured NDCP2P Listing</h2>
+						<h2>Configured NDC P2P Listing</h2>
 						<table class="data">
 							<tr>
 								<th>NDC</th>
@@ -404,7 +451,7 @@ td.formlabels {
 							<tr></tr>
 							<tr></tr>
 						</table>
-						<h2>Configured NDCOffNet Listing</h2>
+						<h2>Configured NDC OFFNET Listing</h2>
 						<table class="data">
 							<tr>
 								<th>NDC</th>
@@ -421,18 +468,18 @@ td.formlabels {
 											<a
 												href="/metomeui/activatendcoffnet/${ndcoffnet.ndcListId}.html">Activate</a>
 											<a> | </a>
-										</c:if> <c:if test="${ndcoffnetp.enabledFlag == 1}">
+										</c:if> <c:if test="${ndcoffnet.enabledFlag == 1}">
 											<a
 												href="/metomeui/deactivatendcoffnet/${ndcoffnet.ndcListId}.html">Deactivate</a>
 											<a> | </a>
 										</c:if> <a
-										href="/metomeui/removendcoffnet/${ndcoffnet.ndcListId}.html">Delete</a>
+										href="/metomeui/removendcoffnet/${ndcoffnet.ndcListId}.html"
+										class="ask">Delete</a>
 									</td>
 								</tr>
 							</c:forEach>
 						</table>
-					</c:if>
-				</td>
+					</c:if></td>
 			</tr>
 		</table>
 		<!-- 	<table border=1px; width=100%;> -->
