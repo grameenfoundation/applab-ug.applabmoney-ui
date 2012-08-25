@@ -9,7 +9,6 @@ import metomeui.model.User;
 import metomeui.service.SystemSettingsService;
 import metomeui.service.SystemSettingsServiceImplementation;
 
-import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -37,9 +36,10 @@ public class UserLoginController {
 		}
 		login = (Login) model.get("login");
 
-		//if (authenticate(login)) {
-//			model.put("login", login);
-		if ((login.userName.equalsIgnoreCase("admin"))&& (login.password.equalsIgnoreCase("adminpass"))){
+		// if (authenticate(login)) {
+		// model.put("login", login);
+		if ((login.userName.equalsIgnoreCase("admin"))
+				&& (login.password.equalsIgnoreCase("adminpass"))) {
 			return "redirect:/auilanding.html";
 		} else {
 			result.reject("notmatch.login", "invalid login!! Please try again");
@@ -63,5 +63,12 @@ public class UserLoginController {
 			e.printStackTrace();
 		}
 		return exist;
+	}
+
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(Map<String, Login> model) {
+		Login userLoginForm = new Login();
+		model.put("login", userLoginForm);
+		return "uilogin";
 	}
 }
