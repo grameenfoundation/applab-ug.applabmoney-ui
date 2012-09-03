@@ -243,10 +243,11 @@ td.formlabels {
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
 					<h2>
-						<a style="color: #000000;" href="/metomeui/auilanding.html"
+						<a style="color: #000000;" href="/applabmoneyaui/auilanding.html"
 							title="Home">Go Back Home</a>
 					</h2>
-				</div></td>
+				</div>
+			</td>
 		</tr>
 	</table>
 	<div>
@@ -254,8 +255,7 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Configure Transaction Recieve Limits</h2>
-						<hr>
-					</td>
+						<hr></td>
 				</tr>
 			</table>
 		</div>
@@ -287,7 +287,8 @@ td.formlabels {
 															label="${acctype.accountTypeName}" />
 													</c:if>
 												</c:forEach>
-											</form:select></td>
+											</form:select>
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
@@ -303,8 +304,7 @@ td.formlabels {
 															label="${transactionkeyword.keywordName}" />
 													</c:if>
 												</c:forEach>
-											</form:select>
-										</td>
+											</form:select></td>
 									</tr>
 
 									<tr>
@@ -312,38 +312,44 @@ td.formlabels {
 												path="minTransactionAmount">Minimum Transaction Amount:</form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="minTransactionAmount" /></td>
+												path="minTransactionAmount" />
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
 												path="maxTransactionAmount">Maximum Transaction Amount:</form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="maxTransactionAmount" /></td>
+												path="maxTransactionAmount" />
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="maxAmountDay">Maximum Transaction Amount per Day:</form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="maxAmountDay" /></td>
+												path="maxAmountDay" />
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="maxAmountMonth">Maximum Transaction Amount per Month:</form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="maxAmountMonth" /></td>
+												path="maxAmountMonth" />
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="maxTransDay">Maximum Number of Transactions per Day:</form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="maxTransDay" /></td>
+												path="maxTransDay" />
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="maxTransMonth">Maximum Number of Transactions per Month:</form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="maxTransMonth" /></td>
+												path="maxTransMonth" />
+										</td>
 									</tr>
 									<tr>
 										<td></td>
@@ -351,7 +357,7 @@ td.formlabels {
 										<td class="savebutton"><input class="btn" type="submit"
 											value="Add" /><input class="btn" type="button"
 											value="Cancel"
-											onClick="location.href='/metomeui/listglobalreceivelimits.html'" />
+											onClick="location.href='/applabmoneyaui/listglobalreceivelimits.html'" />
 										</td>
 									</tr>
 								</table>
@@ -359,12 +365,12 @@ td.formlabels {
 						</fieldset>
 						<table>
 							<tr>
-								<td><br></td>
+								<td><br>
+								</td>
 							</tr>
 						</table>
 
-					</div>
-				</td>
+					</div></td>
 			</tr>
 		</table>
 		<!--    <table border=1px; width=100%;> -->

@@ -1,6 +1,6 @@
 package metomeui.model;
 
-import metomeui.model.UssdPredefInput;
+import applabmoneyaui.model.UssdPredefInput;
 import junit.framework.TestCase;
 
 public class UssdMenuModelTest extends TestCase {

@@ -243,11 +243,10 @@ td.formlabels {
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
 					<h2>
-						<a style="color: #000000;" href="/metomeui/auilanding.html"
+						<a style="color: #000000;" href="/applabmoneyaui/auilanding.html"
 							title="Home">Go Back Home</a>
 					</h2>
-				</div>
-			</td>
+				</div></td>
 		</tr>
 	</table>
 	<div>
@@ -255,7 +254,8 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Manage Memo Groups</h2>
-						<hr></td>
+						<hr>
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -270,7 +270,7 @@ td.formlabels {
 							</legend>
 
 							<form:form method="post"
-								action="/metomeui/editmemogroup/${memoGroup.memoGroupId}.html"
+								action="/applabmoneyaui/editmemogroup/${memoGroup.memoGroupId}.html"
 								commandName="memoGroup">
 
 								<form:errors path="*" cssClass="errorblock" element="div" />
@@ -282,8 +282,7 @@ td.formlabels {
 										<td class="form"><form:input cssClass="formfields"
 												path="memoGroupId" value="${memoGroup.memoGroupId}"
 												disabled="true" /> <input type="hidden" name="memoGroupId"
-											value="${memoGroup.memoGroupId}" />
-										</td>
+											value="${memoGroup.memoGroupId}" /></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="memoGroupCode">Memo Group Code: </form:label>
@@ -306,17 +305,20 @@ td.formlabels {
 										</td>
 										<td class="form"><form:input cssClass="formfields"
 												path="memoGroupDescription"
-												value="${memoGroup.memoGroupDescription}" /></td>
+												value="${memoGroup.memoGroupDescription}" />
+										</td>
 									</tr>
 									<tr>
 										<td colspan="2" class="savebutton"><input type="submit"
 											value="Update" /><input type="button" value="Cancel"
-											onClick="location.href='/metomeui/listmemogroups.html'" /></td>
+											onClick="location.href='/applabmoneyaui/listmemogroups.html'" />
+										</td>
 									</tr>
 								</table>
 							</form:form>
 						</fieldset>
-					</div></td>
+					</div>
+				</td>
 			</tr>
 		</table>
 		<!--    <table border=1px; width=100%;> -->

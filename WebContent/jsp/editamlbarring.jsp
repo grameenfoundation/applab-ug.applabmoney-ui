@@ -244,10 +244,11 @@ td.formlabels {
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
 					<h2>
-						<a style="color: #000000;" href="/metomeui/auilanding.html"
+						<a style="color: #000000;" href="/applabmoneyaui/auilanding.html"
 							title="Home">Go Back Home</a>
 					</h2>
-				</div></td>
+				</div>
+			</td>
 		</tr>
 	</table>
 	<div>
@@ -255,8 +256,7 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Global AML Barring Manager</h2>
-						<hr>
-					</td>
+						<hr></td>
 				</tr>
 			</table>
 		</div>
@@ -271,7 +271,7 @@ td.formlabels {
 							</legend>
 
 							<form:form method="post"
-								action="/metomeui/editamlbarring/${amlBarring.barringId}.html"
+								action="/applabmoneyaui/editamlbarring/${amlBarring.barringId}.html"
 								commandName="amlBarring">
 								<form:errors path="*" cssClass="errorblock" element="div" />
 
@@ -282,7 +282,8 @@ td.formlabels {
 										<td class="form"><form:input cssClass="formfields"
 												path="barringId" value="${amlBarring.barringId}"
 												disabled="true" /> <input type="hidden" name="barringId"
-											value="${amlBarring.barringId}" /></td>
+											value="${amlBarring.barringId}" />
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
@@ -298,8 +299,7 @@ td.formlabels {
 													</c:if>
 												</c:forEach>
 												<form:options items="${accountTypesList}" />
-											</form:select>
-										</td>
+											</form:select></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
@@ -314,8 +314,7 @@ td.formlabels {
 															label="${keyword.keywordName}" />
 													</c:if>
 												</c:forEach>
-											</form:select>
-										</td>
+											</form:select></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="allowSend">Allow Send:</form:label>
@@ -324,8 +323,7 @@ td.formlabels {
 												path="allowSend">
 												<form:option value="0" label="No" />
 												<form:option value="1" label="Yes" />
-											</form:select>
-										</td>
+											</form:select></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="allowReceive">Allow Receive:</form:label>
@@ -334,8 +332,7 @@ td.formlabels {
 												path="allowReceive">
 												<form:option value="0" label="No" />
 												<form:option value="1" label="Yes" />
-											</form:select>
-										</td>
+											</form:select></td>
 									</tr>
 									<tr>
 									<tr>
@@ -345,7 +342,7 @@ td.formlabels {
 										<td></td>
 										<td class="savebutton"><br> <input type="submit"
 											value="Save" /> <input type="button" value="Cancel"
-											onClick="location.href='/metomeui/viewamlbarringsettings.html'" />
+											onClick="location.href='/applabmoneyaui/viewamlbarringsettings.html'" />
 										</td>
 										<td></td>
 									</tr>
@@ -354,12 +351,12 @@ td.formlabels {
 						</fieldset>
 						<table>
 							<tr>
-								<td><br></td>
+								<td><br>
+								</td>
 							</tr>
 						</table>
 
-					</div>
-				</td>
+					</div></td>
 			</tr>
 		</table>
 		<!--    <table border=1px; width=100%;> -->

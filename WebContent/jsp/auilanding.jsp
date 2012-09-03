@@ -223,18 +223,18 @@ td.savebutton {
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
 					<h2>
-						<a style="color: #000000;" href="/metomeui/auilanding.html"
+						<a style="color: #000000;" href="/applabmoneyaui/auilanding.html"
 							title="Home">Go Back Home</a>
 					</h2>
-				</div></td>
+				</div>
+			</td>
 		</tr>
 	</table>
 	<div>
 		<table style="width: 100%;">
 			<tr>
 				<td><h2></h2>
-					<hr>
-				</td>
+					<hr></td>
 			</tr>
 		</table>
 	</div>
@@ -246,15 +246,17 @@ td.savebutton {
 						<a href="#systemsettings">System Settings</a>
 					</h3>
 					<ul>
-						<li><a href="/metomeui/viewsystemconfiguration.html">System
+						<li><a href="/applabmoneyaui/viewsystemconfiguration.html">System
+								Configuration</a></li>
+						<li><a href="/applabmoneyaui/listmemogroups.html">Memo Groups
 								Configuration</a>
 						</li>
-						<li><a href="/metomeui/listmemogroups.html">Memo Groups
-								Configuration</a></li>
-						<li><a href="/metomeui/listlanguages.html">Languages
-								Configuration</a></li>
-						<li><a href="/metomeui/listmessages.html">Messages
-								Configuration</a></li>
+						<li><a href="/applabmoneyaui/listlanguages.html">Languages
+								Configuration</a>
+						</li>
+						<li><a href="/applabmoneyaui/listmessages.html">Messages
+								Configuration</a>
+						</li>
 						<li><a href="listmobilendc.html">Mobile NDC Configuration</a>
 						</li>
 					</ul>
@@ -262,55 +264,57 @@ td.savebutton {
 						<a href="#ussdmenusetup">Ussd Menu Setup</a>
 					</h3>
 					<ul>
-						<li><a href="/metomeui/listussdmenuitems.html">Ussd Menu
-								Items</a>
+						<li><a href="/applabmoneyaui/listussdmenuitems.html">Ussd Menu
+								Items</a></li>
+						<li><a href="/applabmoneyaui/listussdtransactionkeywords.html">Transaction
+								Keywords</a>
 						</li>
-						<li><a href="/metomeui/listussdtransactionkeywords.html">Transaction
-								Keywords</a></li>
-						<li><a href="/metomeui/listussdpredefinputs.html">Predefined
-								Inputs</a></li>
+						<li><a href="/applabmoneyaui/listussdpredefinputs.html">Predefined
+								Inputs</a>
+						</li>
 					</ul>
 					<h3>
 						<a href="#transsettings">Transaction Settings</a>
 					</h3>
 					<ul>
-						<li><a href="/metomeui/viewamlbarringsettings.html">AML
-								Settings</a>
+						<li><a href="/applabmoneyaui/viewamlbarringsettings.html">AML
+								Settings</a></li>
+						<li><a href="/applabmoneyaui/listglobalkeywordcharges.html">Charge
+								Configuration</a></li>
+						<li><a href="/applabmoneyaui/listaccounttypes.html">Account
+								Type Configuration</a>
 						</li>
-						<li><a href="/metomeui/listglobalkeywordcharges.html">Charge
-								Configuration</a>
+						<li><a href="/applabmoneyaui/listglobalsendlimits.html">Transaction
+								Global Send Limits Settings</a>
 						</li>
-						<li><a href="/metomeui/listaccounttypes.html">Account
-								Type Configuration</a></li>
-						<li><a href="/metomeui/listglobalsendlimits.html">Transaction
-								Global Send Limits Settings</a></li>
-						<li><a href="/metomeui/listglobalreceivelimits.html">Transaction
-								Global Receive Limits Settings</a></li>
+						<li><a href="/applabmoneyaui/listglobalreceivelimits.html">Transaction
+								Global Receive Limits Settings</a>
+						</li>
 					</ul>
 
 					<h3>
 						<a href="#">Products Setup</a>
 					</h3>
 					<ul>
-						<li><a href="/metomeui/viewmetomesetup.html">Me2Me Setup</a>
+						<li><a href="/applabmoneyaui/viewmetomesetup.html">Me2Me Setup</a>
 						</li>
-						<li><a href="/metomeui/viewzimbaconfiguration.html">Zimba
-								Setup</a>
-						</li>
+						<li><a href="/applabmoneyaui/viewzimbaconfiguration.html">Zimba
+								Setup</a></li>
 					</ul>
-				</div>
-			</td>
+				</div></td>
 			<td class="content">
 				<table width="100%">
 					<tr>
 						<td>
 							<h2>Welcome to the Applab Money AUI</h2>
-							<hr></td>
+							<hr>
+						</td>
 						<td></td>
 						<td></td>
 						<td></td>
 					</tr>
-				</table></td>
+				</table>
+			</td>
 		</tr>
 	</table>
 </body>

@@ -98,31 +98,31 @@ hover.btn {
 }
 
 hover.longbtn {
-    color: #0066CC;
+	color: #0066CC;
 }
 
-.longbtn{
-background-image:
-        url('resources/css/ui-lightness/images/ui-bg_gloss-wave_35_9ac482_500x100.png');
-    /*background-position: left top;*/
-    background-position:absolute;
-    background-repeat: repeat-x;
-    background-color: transparent;
-     -moz-box-align:stretch;
-    background-size: 100% 100%;
-    border-color: -moz-use-text-color #5C5D61 rgb(92, 93, 97)
-        -moz-use-text-color;
-    border-style: none none none none;
-    border-width: medium 2px 2px medium;
-    cursor: pointer;
-    display: inline;
-    color: #000000;
-    font-family: 'Arial', 'Helvetica', sans-serif;
-    font-size: 100%;
-    font-weight: bold;
-    padding: 1px 3px;
-    height: 33px;
-    width: 140px;
+.longbtn {
+	background-image:
+		url('resources/css/ui-lightness/images/ui-bg_gloss-wave_35_9ac482_500x100.png');
+	/*background-position: left top;*/
+	background-position: absolute;
+	background-repeat: repeat-x;
+	background-color: transparent;
+	-moz-box-align: stretch;
+	background-size: 100% 100%;
+	border-color: -moz-use-text-color #5C5D61 rgb(92, 93, 97)
+		-moz-use-text-color;
+	border-style: none none none none;
+	border-width: medium 2px 2px medium;
+	cursor: pointer;
+	display: inline;
+	color: #000000;
+	font-family: 'Arial', 'Helvetica', sans-serif;
+	font-size: 100%;
+	font-weight: bold;
+	padding: 1px 3px;
+	height: 33px;
+	width: 140px;
 }
 
 /*END BUTTONS*/
@@ -292,9 +292,13 @@ td.formlabels {
 				<div class="header"
 					style="font-family: sans-serif; font-stretch: wider; font-size: x-large; color: #000000; text-indent: 6%;">
 					Administrator Console</div> <br>
-				<div class="header" style="color: #000000;"><h2>
-                    <a style="color: #000000;" href="/metomeui/auilanding.html" title="Home">Go Back Home</a></h2>
-                </div></td>
+				<div class="header" style="color: #000000;">
+					<h2>
+						<a style="color: #000000;" href="/applabmoneyaui/auilanding.html"
+							title="Home">Go Back Home</a>
+					</h2>
+				</div>
+			</td>
 		</tr>
 	</table>
 	<div>
@@ -302,8 +306,7 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Manage Predefined Inputs</h2>
-						<hr>
-					</td>
+						<hr></td>
 				</tr>
 			</table>
 		</div>
@@ -316,9 +319,9 @@ td.formlabels {
 							<legend>
 								<h2>Edit Predefined Inputs</h2>
 							</legend>
-							<%--               action="/metomeui/editcontacts.html"                 --%>
+							<%--               action="/applabmoneyaui/editcontacts.html"                 --%>
 							<form:form method="post"
-								action="/metomeui/editussdpredefinput/${ussdPredefInput.predefInputId}.html"
+								action="/applabmoneyaui/editussdpredefinput/${ussdPredefInput.predefInputId}.html"
 								commandName="ussdPredefInput">
 								<form:errors path="*" cssClass="errorblock" element="div" />
 								<fieldset>
@@ -331,16 +334,17 @@ td.formlabels {
 													path="predefInputId"
 													value="${ussdPredefInput.predefInputId}" disabled="true" />
 												<input type="hidden" name="predefInputId"
-												value="${ussdPredefInput.predefInputId}" />
-											</td>
+												value="${ussdPredefInput.predefInputId}" /></td>
 											<td>
 										</tr>
 										<tr>
 											<td class="formlabels"><form:label
-													path="predefInputName">Predefined Input Name</form:label></td>
+													path="predefInputName">Predefined Input Name</form:label>
+											</td>
 											<td class="form"><form:input cssClass="formfields"
 													path="predefInputName"
-													value="${ussdPredefInput.predefInputName}" /></td>
+													value="${ussdPredefInput.predefInputName}" />
+											</td>
 										</tr>
 										<tr>
 											<td class="formlabels"><form:label
@@ -348,7 +352,8 @@ td.formlabels {
 											</td>
 											<td class="form"><form:input cssClass="formfields"
 													path="predefInputDescription"
-													value="${ussdPredefInput.predefInputDescription}" /></td>
+													value="${ussdPredefInput.predefInputDescription}" />
+											</td>
 										</tr>
 
 
@@ -359,10 +364,11 @@ td.formlabels {
 									<tr>
 										<td></td>
 										<td><div>
-												<br> <input type="button" class ="longbtn"
+												<br> <input type="button" class="longbtn"
 													value="Create New Predefined Input Item"
-													onClick="location.href='/metomeui/editaddnewussdpredefinputitem/${ussdPredefInput.predefInputId}.html'">
-											</div></td>
+													onClick="location.href='/applabmoneyaui/editaddnewussdpredefinputitem/${ussdPredefInput.predefInputId}.html'">
+											</div>
+										</td>
 										<td></td>
 										<td></td>
 									</tr>
@@ -386,11 +392,12 @@ td.formlabels {
 													<td class=data><input type="hidden"
 														name="ussdPredefInput.predefInputItems[${status.index}].inputItemId"
 														value="${predefinputitem.inputItemId}" /><a
-														href="/metomeui/editussdpredefinputitem/${predefinputitem.inputItemId}.html">
+														href="/applabmoneyaui/editussdpredefinputitem/${predefinputitem.inputItemId}.html">
 															${predefinputitem.predefInputItemName}</a><input
 														type="hidden"
 														name="predefInputItems[${status.index}].predefInputItemName"
-														value="${predefinputitem.predefInputItemName}" /></td>
+														value="${predefinputitem.predefInputItemName}" />
+													</td>
 													<td class=data><input type="hidden"
 														name="predefInputItems[${status.index}].predefInputItemCode"
 														value="${predefinputitem.predefInputItemCode}" />${predefinputitem.predefInputItemCode}</td>
@@ -402,19 +409,18 @@ td.formlabels {
 															<c:if
 																test="${predefinputitem.predefInputItemEnabledFlag != 1}">
 																<a
-																	href="/metomeui/activatepredefinputitem/${predefinputitem.inputItemId}.html">Activate
+																	href="/applabmoneyaui/activatepredefinputitem/${predefinputitem.inputItemId}.html">Activate
 																</a>
 															</c:if>
 															<c:if
 																test="${predefinputitem.predefInputItemEnabledFlag == 1}">
 																<a
-																	href="/metomeui/deactivatepredefinputitem/${predefinputitem.inputItemId}.html">Deactivate
+																	href="/applabmoneyaui/deactivatepredefinputitem/${predefinputitem.inputItemId}.html">Deactivate
 																</a>
 															</c:if>
 															<a
-																href="/metomeui/removepredefinputitem/${predefinputitem.inputItemId}.html">Delete</a>
-														</c:if>
-													</td>
+																href="/applabmoneyaui/removepredefinputitem/${predefinputitem.inputItemId}.html">Delete</a>
+														</c:if></td>
 												</c:if>
 											</tr>
 										</c:forEach>
@@ -424,16 +430,17 @@ td.formlabels {
 								<table>
 									<tr>
 										<td colspan="2" class="savebutton"><br> <input
-											 type="submit" value="Update" />&nbsp;&nbsp;&nbsp;&nbsp;<input
+											type="submit" value="Update" />&nbsp;&nbsp;&nbsp;&nbsp;<input
 											type="button" value="Cancel"
-											onClick="location.href='/metomeui/listussdpredefinputs.html'" />
+											onClick="location.href='/applabmoneyaui/listussdpredefinputs.html'" />
 										</td>
 									</tr>
 								</table>
 
 							</form:form>
 						</fieldset>
-					</div></td>
+					</div>
+				</td>
 			</tr>
 		</table>
 	</div>

@@ -286,10 +286,11 @@ td.formlabels {
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
 					<h2>
-						<a style="color: #000000;" href="/metomeui/auilanding.html"
+						<a style="color: #000000;" href="/applabmoneyaui/auilanding.html"
 							title="Home">Go Back Home</a>
 					</h2>
-				</div></td>
+				</div>
+			</td>
 		</tr>
 	</table>
 	<div>
@@ -297,8 +298,7 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Manage Account Types</h2>
-						<hr>
-					</td>
+						<hr></td>
 				</tr>
 			</table>
 		</div>
@@ -312,7 +312,7 @@ td.formlabels {
 								<h2>Edit Account Types</h2>
 							</legend>
 							<form:form method="post"
-								action="/metomeui/editaccounttype/${accountType.accountTypeId}.html"
+								action="/applabmoneyaui/editaccounttype/${accountType.accountTypeId}.html"
 								commandName="accountType">
 
 								<form:errors path="*" cssClass="errorblock" element="div" />
@@ -325,24 +325,21 @@ td.formlabels {
 										<td class="form"><form:input cssClass="formfields"
 												path="accountTypeId" value="${accountType.accountTypeId}"
 												disabled="true" /><input type="hidden" name="accountTypeId"
-											value="${accountType.accountTypeId}" />
-										</td>
+											value="${accountType.accountTypeId}" /></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="accountTypeCode">Account Code: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
 												path="accountTypeCode"
-												value="${accountType.accountTypeCode}" />
-										</td>
+												value="${accountType.accountTypeCode}" /></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="accountTypeName">Account Name: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
 												path="accountTypeName"
-												value="${accountType.accountTypeName}" />
-										</td>
+												value="${accountType.accountTypeName}" /></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
@@ -350,8 +347,7 @@ td.formlabels {
 										</td>
 										<td class="form"><form:input cssClass="formfields"
 												path="accountMaximumBookBalance"
-												value="${accountType.accountMaximumBookBalance}" />
-										</td>
+												value="${accountType.accountMaximumBookBalance}" /></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
@@ -372,8 +368,7 @@ td.formlabels {
 												<form:option value="256" label="256" />
 												<form:option value="512" label="512" />
 												<form:option value="1024" label="1024" />
-											</form:select>
-										</td>
+											</form:select></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
@@ -397,22 +392,20 @@ td.formlabels {
 															label="${sysacctypeflg[1]}" />
 													</c:if>
 												</c:forEach>
-											</form:select>
-										</td>
+											</form:select></td>
 									</tr>
 									<tr>
 										<td></td>
 										<td class="savebutton"><input type="submit"
 											value="Update" /><input type="button" value="Cancel"
-											onClick="location.href='/metomeui/listaccounttypes.html'" />
+											onClick="location.href='/applabmoneyaui/listaccounttypes.html'" />
 										</td>
 										<td></td>
 									</tr>
 								</table>
 							</form:form>
 						</fieldset>
-					</div>
-				</td>
+					</div></td>
 			</tr>
 		</table>
 	</div>

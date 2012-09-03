@@ -306,10 +306,11 @@ td.formlabels {
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
 					<h2>
-						<a style="color: #000000;" href="/metomeui/auilanding.html"
+						<a style="color: #000000;" href="/applabmoneyaui/auilanding.html"
 							title="Home">Go Back Home</a>
 					</h2>
-				</div></td>
+				</div>
+			</td>
 		</tr>
 	</table>
 	<div>
@@ -317,8 +318,7 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Manage Predefined Inputs</h2>
-						<hr>
-					</td>
+						<hr></td>
 				</tr>
 			</table>
 		</div>
@@ -338,15 +338,18 @@ td.formlabels {
 									<table>
 										<tr>
 											<td class="formlabels"><form:label
-													path="predefInputName">Predefined Input Name</form:label></td>
+													path="predefInputName">Predefined Input Name</form:label>
+											</td>
 											<td class="form"><form:input cssClass="formfields"
-													path="predefInputName" /></td>
+													path="predefInputName" />
+											</td>
 										<tr>
 											<td class="formlabels"><form:label
 													path="predefInputDescription">Predefined Input Description</form:label>
 											</td>
 											<td class="form"><form:input cssClass="formfields"
-													path="predefInputDescription" /></td>
+													path="predefInputDescription" />
+											</td>
 										</tr>
 									</table>
 								</fieldset>
@@ -357,8 +360,7 @@ td.formlabels {
 												<br> <input type="button" name="submit" class="longbtn"
 													value="Create New Predefined Input Item"
 													onClick="location.href='addnewussdpredefinputitem.html'">
-											</div>
-										</td>
+											</div></td>
 										<td></td>
 										<td></td>
 									</tr>
@@ -380,13 +382,16 @@ td.formlabels {
 													<td class=otherdata>${status.count}</td>
 													<td class=data><input
 														name="predefInputItems[${status.index}].predefInputItemName"
-														value="${predefInputItem.predefInputItemName}" /></td>
+														value="${predefInputItem.predefInputItemName}" />
+													</td>
 													<td class=data><input
 														name="predefInputItems[${status.index}].predefInputItemCode"
-														value="${predefInputItem.predefInputItemCode}" /></td>
+														value="${predefInputItem.predefInputItemCode}" />
+													</td>
 													<td class=data><input
 														name="predefInputItems[${status.index}].predefInputItemOrder"
-														value="${predefInputItem.predefInputItemOrder}" /></td>
+														value="${predefInputItem.predefInputItemOrder}" />
+													</td>
 												</c:if>
 											</tr>
 										</c:forEach>
@@ -399,13 +404,14 @@ td.formlabels {
 										<td></td>
 										<td><input type="submit" value="Save" class="btn" /> <input
 											class="btn" type="button" value="Cancel"
-											onClick="location.href='/metomeui/listussdpredefinputs.html'" />
+											onClick="location.href='/applabmoneyaui/listussdpredefinputs.html'" />
 										<td></td>
 									</tr>
 								</table>
 							</form:form>
 						</fieldset>
-					</div></td>
+					</div>
+				</td>
 			</tr>
 		</table>
 	</div>

@@ -22,34 +22,35 @@
 		<property name="connection.url">jdbc:mysql://localhost:3306/applabmoney</property>
 		<property name="connection.username">root</property>
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-		<!-- <property name="connection.password">g5*vTys-D2</property> -->
-		<property name="connection.password">root123</property>
+		<property name="connection.password">g5*vTys-D2</property> 
+		<!--<property name="connection.password">root123</property> -->
 
 		<!-- JDBC connection pool (use the built-in) -->
 		<property name="connection.pool_size">1</property>
 
 		<!-- Disable the second-level cache <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property> -->
 
-
-		<mapping class="metomeui.model.AccountType" />
-		<mapping class="metomeui.model.Message" />
-		<mapping class="metomeui.model.Language" />
-		<mapping class="metomeui.model.User" />
-		<mapping class="metomeui.model.Login" />
-		<mapping class="metomeui.model.NdcListOffnet" />
-		<mapping class="metomeui.model.NdcListPToP" />
-		<mapping class="metomeui.model.SystemConfiguration" />
-		<mapping class="metomeui.model.GlobalKeywordCharge" />
-		<mapping class="metomeui.model.AmlBarring" />
-		<mapping class="metomeui.model.MeToMeGoalType" />
-		<mapping class="metomeui.model.MeToMeRewardType" />
-		<mapping class="metomeui.model.MemoGroup" />
-		<mapping class="metomeui.model.UssdPredefInputItem" />
-		<mapping class="metomeui.model.UssdPredefInput" />
-		<mapping class="metomeui.model.UssdKeywordStep" />
-		<mapping class="metomeui.model.UssdMenuItem" />
-		<mapping class="metomeui.model.UssdTransactionKeyword" />
-		<mapping class="metomeui.model.UssdRequest" />
+		<mapping class="applabmoneyaui.model.AccountType" />
+		<mapping class="applabmoneyaui.model.Message" />
+		<mapping class="applabmoneyaui.model.Language" />
+		<mapping class="applabmoneyaui.model.User" />
+		<mapping class="applabmoneyaui.model.Login" />
+		<mapping class="applabmoneyaui.model.NdcListOffnet" />
+		<mapping class="applabmoneyaui.model.NdcListPToP" />
+		<mapping class="applabmoneyaui.model.SystemConfiguration" />
+		<mapping class="applabmoneyaui.model.ZimbaConfiguration" />
+		<mapping class="applabmoneyaui.model.GlobalKeywordCharge" />
+		<mapping class="applabmoneyaui.model.GlobalSendLimit" />
+		<mapping class="applabmoneyaui.model.GlobalReceiveLimit" />
+		<mapping class="applabmoneyaui.model.AmlBarring" />
+		<mapping class="applabmoneyaui.model.MeToMeGoalType" />
+		<mapping class="applabmoneyaui.model.MeToMeRewardType" />
+		<mapping class="applabmoneyaui.model.MemoGroup" />
+		<mapping class="applabmoneyaui.model.UssdPredefInputItem" />
+		<mapping class="applabmoneyaui.model.UssdPredefInput" />
+		<mapping class="applabmoneyaui.model.UssdKeywordStep" />
+		<mapping class="applabmoneyaui.model.UssdMenuItem" />
+		<mapping class="applabmoneyaui.model.UssdTransactionKeyword" />
 	</session-factory>
 
 </hibernate-configuration>

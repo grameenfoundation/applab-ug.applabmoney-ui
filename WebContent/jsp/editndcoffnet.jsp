@@ -243,11 +243,10 @@ td.formlabels {
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
 					<h2>
-						<a style="color: #000000;" href="/metomeui/auilanding.html"
+						<a style="color: #000000;" href="/applabmoneyaui/auilanding.html"
 							title="Home">Go Back Home</a>
 					</h2>
-				</div>
-			</td>
+				</div></td>
 		</tr>
 	</table>
 	<div>
@@ -256,7 +255,8 @@ td.formlabels {
 				<tr>
 					<td><h2>Configure Allowed Mobile National Destination
 							Codes</h2>
-						<hr></td>
+						<hr>
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -271,7 +271,7 @@ td.formlabels {
 							</legend>
 
 							<form:form method="post"
-								action="/metomeui/editndcoffnet/${ndcListOffnet.ndcListId}.html"
+								action="/applabmoneyaui/editndcoffnet/${ndcListOffnet.ndcListId}.html"
 								commandName="ndcListOffnet">
 								<form:errors path="*" cssClass="errorblock" element="div" />
 
@@ -282,39 +282,39 @@ td.formlabels {
 										<td class="form"><form:input cssClass="formfields"
 												path="ndcListId" value="${ndcListOffnet.ndcListId}"
 												disabled="true" /> <input type="hidden" name="ndcListId"
-											value="${ndcListOffnet.ndcListId}" /></td>
+											value="${ndcListOffnet.ndcListId}" />
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="ndc">National Destination Code: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="ndc" value="${ndcListOffnet.ndc}" />
-										</td>
+												path="ndc" value="${ndcListOffnet.ndc}" /></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="networkOperator">Network Operator: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
 												path="networkOperator"
-												value="${ndcListOffnet.networkOperator}" />
-										</td>
+												value="${ndcListOffnet.networkOperator}" /></td>
 									</tr>
 									<tr>
 										<td colspan="2" class="savebutton"><input type="submit"
 											value="Update" /> <input type="button" value="Cancel"
-											onClick="location.href='/metomeui/listmobilendc.html'" /></td>
+											onClick="location.href='/applabmoneyaui/listmobilendc.html'" />
+										</td>
 									</tr>
 								</table>
 							</form:form>
 						</fieldset>
 						<table>
 							<tr>
-								<td><br></td>
+								<td><br>
+								</td>
 							</tr>
 						</table>
 
-					</div>
-				</td>
+					</div></td>
 			</tr>
 		</table>
 		<!--    <table border=1px; width=100%;> -->

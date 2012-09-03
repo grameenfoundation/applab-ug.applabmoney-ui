@@ -249,11 +249,10 @@ td.formlabels {
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
 					<h2>
-						<a style="color: #000000;" href="/metomeui/auilanding.html"
+						<a style="color: #000000;" href="/applabmoneyaui/auilanding.html"
 							title="Home">Go Back Home</a>
 					</h2>
-				</div>
-			</td>
+				</div></td>
 		</tr>
 	</table>
 	<div>
@@ -261,7 +260,8 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Manage Users</h2>
-						<hr></td>
+						<hr>
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -277,7 +277,7 @@ td.formlabels {
 
 
 							<form:form method="post"
-								action="/metomeui/edituser/${user.userId}.html"
+								action="/applabmoneyaui/edituser/${user.userId}.html"
 								commandName="user">
 								<table>
 									<tr>
@@ -285,46 +285,47 @@ td.formlabels {
 										<td class="formlabels"><form:label path="userId"> User Id:</form:label>
 										</td>
 										<td class="form"><input disabled="true"
-											name="user.userId" value="${user.userId}" />
-										</td>
+											name="user.userId" value="${user.userId}" /></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="userName">UserName</form:label>
 										</td>
 										<td class="form"><form:input path="userName"
-												value="${user.userName}" />
-										</td>
+												value="${user.userName}" /></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="firstName">FirstName</form:label>
 										</td>
 										<td class="form"><form:input path="firstName"
-												value="${user.firstName}" /></td>
+												value="${user.firstName}" />
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="lastName">LastName</form:label>
 										</td>
 										<td class="form"><form:input path="lastName"
-												value="${user.lastName}" />
-										</td>
+												value="${user.lastName}" /></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="middleName">MiddleName</form:label>
 										</td>
 										<td class="form"><form:input path="middleName"
-												value="${user.middleName}" /></td>
+												value="${user.middleName}" />
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="email">Email Address</form:label>
 										</td>
 										<td class="form"><form:input path="email"
-												value="${user.email}" /></td>
+												value="${user.email}" />
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="telephone">Phone Contact</form:label>
 										</td>
 										<td class="form"><form:input path="telephone"
-												value="${user.telephone}" /></td>
+												value="${user.telephone}" />
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="role">Role</form:label>
@@ -337,18 +338,21 @@ td.formlabels {
 														<form:option value="${role[0]}" label="${role[0]}" />
 													</c:if>
 												</c:forEach>
-											</form:select></td>
+											</form:select>
+										</td>
 									</tr>
 									<tr>
 										<td colspan="2" class="savebutton"><br> <input
 											type="submit" value="Update" /> <input type="button"
 											value="Cancel"
-											onClick="location.href='/metomeui/listusers.html'" /></td>
+											onClick="location.href='/applabmoneyaui/listusers.html'" />
+										</td>
 									</tr>
 								</table>
 							</form:form>
 						</fieldset>
-					</div></td>
+					</div>
+				</td>
 			</tr>
 		</table>
 	</div>

@@ -241,10 +241,11 @@ td.formlabels {
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
 					<h2>
-						<a style="color: #000000;" href="/metomeui/auilanding.html"
+						<a style="color: #000000;" href="/applabmoneyaui/auilanding.html"
 							title="Home">Go Back Home</a>
 					</h2>
-				</div></td>
+				</div>
+			</td>
 		</tr>
 	</table>
 	<div>
@@ -252,8 +253,7 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Zimba Setup</h2>
-						<hr>
-					</td>
+						<hr></td>
 				</tr>
 			</table>
 		</div>
@@ -325,13 +325,13 @@ td.formlabels {
 										<td colspan="2" class="savebutton"><br> <input
 											type="submit" value="Add" /> <input type="button"
 											value="  Cancel  "
-											onClick="location.href='/metomeui/viewzimbaconfiguration.html'" /></td>
+											onClick="location.href='/applabmoneyaui/viewzimbaconfiguration.html'" />
+										</td>
 									</tr>
 								</table>
 							</form:form>
 						</fieldset>
-					</div>
-				</td>
+					</div></td>
 			</tr>
 		</table>
 	</div>

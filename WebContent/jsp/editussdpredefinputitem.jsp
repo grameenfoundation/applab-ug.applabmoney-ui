@@ -263,10 +263,11 @@ td.formlabels {
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
 					<h2>
-						<a style="color: #000000;" href="/metomeui/auilanding.html"
+						<a style="color: #000000;" href="/applabmoneyaui/auilanding.html"
 							title="Home">Go Back Home</a>
 					</h2>
-				</div></td>
+				</div>
+			</td>
 		</tr>
 	</table>
 	<table style="width: 100%;">
@@ -279,21 +280,21 @@ td.formlabels {
 						</legend>
 
 						<form:form method="post"
-							action="/metomeui/editussdpredefinputitem/${ussdPredefInputItem.inputItemId}.html"
+							action="/applabmoneyaui/editussdpredefinputitem/${ussdPredefInputItem.inputItemId}.html"
 							modelAttribute="ussdPredefInputItem">
 							<form:errors path="*" cssClass="errorblock" element="div" />
 							<table>
 								<tr>
 									<td><input type="hidden" name="predefInput.predefInputId"
-										value="${ussdPredefInputItem.predefInput.predefInputId}" /></td>
+										value="${ussdPredefInputItem.predefInput.predefInputId}" />
+									</td>
 								</tr>
 								<tr>
 									<td class="formlabels"><form:label path="inputItemId">Predefined Input Item Id</form:label>
 									</td>
 									<td class="form"><form:input cssClass="formfields"
 											path="inputItemId" disabled="true"
-											value="${ussdPredefInputItem.inputItemId}" />
-									</td>
+											value="${ussdPredefInputItem.inputItemId}" /></td>
 								</tr>
 								<tr>
 									<td class="formlabels"><form:label
@@ -301,8 +302,7 @@ td.formlabels {
 									</td>
 									<td class="form"><form:input cssClass="formfields"
 											path="predefInputItemName"
-											value="${ussdPredefInputItem.predefInputItemName}" />
-									</td>
+											value="${ussdPredefInputItem.predefInputItemName}" /></td>
 								</tr>
 								<tr>
 									<td class="formlabels"><form:label
@@ -310,8 +310,7 @@ td.formlabels {
 									</td>
 									<td class="form"><form:input cssClass="formfields"
 											path="predefInputItemCode"
-											value="${ussdPredefInputItem.predefInputItemCode}" />
-									</td>
+											value="${ussdPredefInputItem.predefInputItemCode}" /></td>
 								</tr>
 								<tr>
 									<td class="formlabels"><form:label
@@ -319,8 +318,7 @@ td.formlabels {
 									</td>
 									<td class="form"><form:input cssClass="formfields"
 											path="predefInputItemOrder"
-											value="${ussdPredefInputItem.predefInputItemOrder}" />
-									</td>
+											value="${ussdPredefInputItem.predefInputItemOrder}" /></td>
 								</tr>
 								<tr>
 									<td class="formlabels"><c:if
@@ -331,25 +329,24 @@ td.formlabels {
 											test="${ussdPredefInputItem.predefInputItemEnabledFlag == 0}">
 											<form:checkbox cssClass="otherformfields"
 												path="predefInputItemEnabledFlag" value="1" />
-										</c:if></td>
+										</c:if>
+									</td>
 									<td class="form"><form:label
 											path="predefInputItemEnabledFlag">Enable Predefined Input Item</form:label>
 									</td>
 								</tr>
 								<tr>
 									<td></td>
-									<td><input type="submit" name="Update"
-										id="Add" value="Update" /><input type="button"
-										value="Cancel"
-										onClick="location.href='/metomeui/editussdpredefinput/${ussdPredefInputItem.predefInput.predefInputId}.html'" />
+									<td><input type="submit" name="Update" id="Add"
+										value="Update" /><input type="button" value="Cancel"
+										onClick="location.href='/applabmoneyaui/editussdpredefinput/${ussdPredefInputItem.predefInput.predefInputId}.html'" />
 									</td>
 									<td></td>
 								</tr>
 							</table>
 						</form:form>
 					</fieldset>
-				</div>
-			</td>
+				</div></td>
 		</tr>
 	</table>
 </body>

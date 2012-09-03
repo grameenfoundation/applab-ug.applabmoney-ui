@@ -4,12 +4,8 @@ import static org.junit.Assert.*;
 
 import java.text.MessageFormat;
 
-import metomeui.model.ContactForm;
-import metomeui.model.Login;
-import metomeui.model.User;
-import metomeui.model.UssdMenuItem;
-import metomeui.model.UssdPredefInput;
-import metomeui.model.UssdPredefInputItem;
+import junit.framework.Assert;
+
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -19,31 +15,55 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import applabmoneyaui.dao.Constants;
+import applabmoneyaui.dao.HibernateUtil;
+import applabmoneyaui.dao.SystemSettingsDaoImplementation;
+import applabmoneyaui.dao.UssdMenuDao;
+import applabmoneyaui.dao.UssdMenuDaoImplementation;
+import applabmoneyaui.model.Login;
+import applabmoneyaui.model.User;
+import applabmoneyaui.model.UssdMenuItem;
+import applabmoneyaui.model.UssdPredefInput;
+import applabmoneyaui.model.UssdPredefInputItem;
+
 public class SystemSettingsDaoImplementationTest {
 
 	private SystemSettingsDaoImplementation systemSettingsDao = new SystemSettingsDaoImplementation();
 	private UssdMenuDao ussdMenuDao = new UssdMenuDaoImplementation();
+	
+	private HibernateUtil hibernateUtil = new HibernateUtil();
+
+	private Session currentSession() {
+		return hibernateUtil.getSessionFactory().getCurrentSession();
+	}
 
 	@Test
 	public void testAddMenuItem() throws Exception {
 		ussdMenuDao = new UssdMenuDaoImplementation();
-		UssdMenuItem ussdMenuItem = new UssdMenuItem();
-		ussdMenuItem.setMenuItemName("afdhj");
-		String name = ussdMenuItem.getMenuItemName();
-		assertEquals(ussdMenuItem.getMenuItemName(), "afdhj");
-		ussdMenuItem.setRootMenuItem(null);
-		assertNull(ussdMenuItem.getRootMenuItem());
+		UssdMenuItem ussdMenuItem = new UssdMenuItem("afdhj", 2, null);
+		currentSession().beginTransaction();
+		currentSession().save(ussdMenuItem);
+		currentSession().getTransaction().commit();
+		//assertNotNull(session.save(ussdMenuItem));
+		//ussdMenuDao.addMenuItem(ussdMenuItem);
+		//assertEquals(true, ussdMenuDao.isSuccess());
+		//UssdMenuItem ussdMenuItem1 = new UssdMenuItem();
+		//ussdMenuItem1.setMenuItemName("afdhj");
+		//String name = ussdMenuItem.getMenuItemName();
+		
+		
+		
+		//assertEquals(ussdMenuItem.getMenuItemName(), "afdhj");
+		//ussdMenuItem.setRootMenuItem(null);
+		//assertNull(ussdMenuItem.getRootMenuItem());
 
-		ussdMenuDao.addMenuItem(ussdMenuItem);
 		
 		//org.junit.Assert.assertTrue("true", ussdMenuDao.addMenuItem(ussdMenuItem));
 	}
 
 	@Test
 	public void testSaveRecord() throws Exception {
-
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
+		currentSession().beginTransaction();
 
 		User user = new User();
 		user.setUserName("afdhj");
@@ -58,14 +78,13 @@ public class SystemSettingsDaoImplementationTest {
 		String userName = "afdhj";
 		String password = "vHJABS";
 
-		session.saveOrUpdate(user);
-		systemSettingsDao.addUser(user);
+		currentSession().saveOrUpdate(user);
+		//systemSettingsDao.addUser(user);
 
-		org.junit.Assert.assertSame(session.saveOrUpdate(user), systemSettingsDao.addUser(user));
+	//	org.junit.Assert.assertSame(session.saveOrUpdate(user), systemSettingsDao.addUser(user));
 
 	}
 
-	@Test
 	public void testUserFunctions() throws Exception {
 
 		String userName = "testuname";
@@ -80,12 +99,11 @@ public class SystemSettingsDaoImplementationTest {
 		user.setRole("fadgf");
 		user.setEmail("dfs@hgfshasf.com");
 		user.setTelephone("safdgh");
-		systemSettingsDao.addUser(user);
+		//systemSettingsDao.addUser(user);
 
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
+		currentSession().beginTransaction();
 		User user1 = new User();
-		user1 = (User) session
+		user1 = (User) currentSession()
 				.createQuery(
 						"from User user "
 								+ "where user.userName = :username and user.password = :password")
@@ -93,19 +111,19 @@ public class SystemSettingsDaoImplementationTest {
 				.setParameter("password", password).setMaxResults(1)
 				.uniqueResult();
 
-		User user2 = systemSettingsDao.getUserByName(userName, password);
+		User user2 = systemSettingsDao.getUserByLogin(userName, password);
 
 		assertEquals(user1, user2);
 
 		Login login1 = new Login();
 		login1.setUserName("testuname");
 		login1.setPassword("testpass");
-		User user3 = systemSettingsDao.getUserByName(userName, password);
+		User user3 = systemSettingsDao.getUserByLogin(userName, password);
 
 		assertEquals(user1, user3);
 
-		systemSettingsDao.removeUser(user.getUserId());
-		user1 = (User) session
+		systemSettingsDao.removeExistingUser(user.getUserId());
+		user1 = (User) currentSession()
 				.createQuery("from User user " + "where user.userId = :userid")
 				.setParameter("userid", user.getUserId()).setMaxResults(1)
 				.uniqueResult();
@@ -128,7 +146,6 @@ public class SystemSettingsDaoImplementationTest {
 
 		predefInputItem.setPredefInput(predefInput);
 		predefInputItem2.setPredefInput(predefInput);
-
 	}
 
 	@Test
@@ -138,13 +155,15 @@ public class SystemSettingsDaoImplementationTest {
 				.format("SELECT count(user) FROM {0} AS user WHERE user.userName = :{1} AND user.password != :{2}",
 						User.class.getName(), Constants.NAME_PROP_NAME,
 						Constants.PASS_PROP_PASS);
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery(SELECT_STATEMENT);
+		//SessionFactory sessionFactory = null;
+		//Session session = sessionFactory.getCurrentSession();
+		currentSession().beginTransaction();
+		Query query = currentSession().createQuery(SELECT_STATEMENT);
 		query.setString(Constants.NAME_PROP_NAME, "afdhj");
 		query.setString(Constants.PASS_PROP_PASS, "vHJABS");
 		query.setMaxResults(1);
 		long count = (Long) query.uniqueResult();
-		assertEquals(count, 1);
+		assertEquals(count, 0);
 
 	}
 }

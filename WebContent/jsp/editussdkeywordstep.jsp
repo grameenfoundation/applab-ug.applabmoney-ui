@@ -243,7 +243,7 @@ td.formlabels {
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
 					<h2>
-						<a style="color: #000000;" href="/metomeui/auilanding.html"
+						<a style="color: #000000;" href="/applabmoneyaui/auilanding.html"
 							title="Home">Go Back Home</a>
 					</h2>
 				</div>
@@ -270,7 +270,7 @@ td.formlabels {
 							</legend>
 
 							<form:form method="post"
-								action="/metomeui/editussdkeywordstep/${ussdKeywordStep.keywordStepId}.html"
+								action="/applabmoneyaui/editussdkeywordstep/${ussdKeywordStep.keywordStepId}.html"
 								commandName="ussdKeywordStep">
 								<form:errors path="*" cssClass="errorblock" element="div" />
 								<table>
@@ -364,8 +364,9 @@ td.formlabels {
 									</tr>
 									<tr>
 										<td></td>
-										<td><input type="submit" value="Update"/><input type="button" value="Cancel"
-											onClick="location.href='editussdtransactionkeyword.html'" />
+										<td><input type="submit" value="Update" /><input
+											type="button" value="Cancel"
+											onClick="location.href='/applabmoneyaui/editussdtransactionkeyword/${ussdKeywordStep.transactionKeyword.keywordId}.html'" />
 										</td>
 									</tr>
 								</table>
@@ -374,7 +375,6 @@ td.formlabels {
 						<table>
 							<tr>
 								<td><br>
-								</td>
 							</tr>
 						</table>
 

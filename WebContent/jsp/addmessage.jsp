@@ -244,11 +244,10 @@ td.formlabels {
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
 					<h2>
-						<a style="color: #000000;" href="/metomeui/auilanding.html"
+						<a style="color: #000000;" href="/applabmoneyaui/auilanding.html"
 							title="Home">Go Back Home</a>
 					</h2>
-				</div>
-			</td>
+				</div></td>
 		</tr>
 	</table>
 	<div>
@@ -256,7 +255,8 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Manage Messages</h2>
-						<hr></td>
+						<hr>
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -279,12 +279,12 @@ td.formlabels {
 										<td class="formlabels"><form:label path="messageCode">Message Code: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="messageCode" />
-										</td>
+												path="messageCode" /></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
-												path="language.languageId">Message Language:</form:label></td>
+												path="language.languageId">Message Language:</form:label>
+										</td>
 										<td class="form"><form:select cssClass="dropdown"
 												path="language.languageId">
 												<c:forEach items="${languagesList}" var="language">
@@ -293,21 +293,20 @@ td.formlabels {
 															label="${language.languageName}" />
 													</c:if>
 												</c:forEach>
-											</form:select></td>
+											</form:select>
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="messageText">Message Text: </form:label>
 										</td>
 										<td class="form"><form:textarea rows="5" cols="32"
-												path="messageText" />
-										</td>
+												path="messageText" /></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="messageDesc">Message Description: </form:label>
 										</td>
 										<td class="form"><form:textarea rows="5" cols="32"
-												path="messageDesc" />
-										</td>
+												path="messageDesc" /></td>
 									</tr>
 									<tr>
 										<td></td>
@@ -317,21 +316,20 @@ td.formlabels {
 										<td colspan="2" class="savebutton"><br> <input
 											class="btn" type="submit" value="Save" /> <input class="btn"
 											type="button" value="Cancel"
-											onClick="location.href='/metomeui/listmessages.html'" />
-										</td>
-						
+											onClick="location.href='/applabmoneyaui/listmessages.html'" /></td>
+
 									</tr>
 								</table>
 							</form:form>
 						</fieldset>
 						<table>
 							<tr>
-								<td><br>
-								</td>
+								<td><br></td>
 							</tr>
 						</table>
 
-					</div></td>
+					</div>
+				</td>
 			</tr>
 		</table>
 		<!--    <table border=1px; width=100%;> -->

@@ -4,9 +4,6 @@ import static org.junit.Assert.*;
 
 import java.util.Map;
 
-import metomeui.model.UssdPredefInput;
-import metomeui.service.UssdMenuService;
-import metomeui.web.UssdMenuController;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -14,6 +11,10 @@ import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
+
+import applabmoneyaui.model.UssdPredefInput;
+import applabmoneyaui.service.UssdMenuService;
+import applabmoneyaui.web.UssdMenuController;
 
 public class UssdMenuControllerTest {
 	private UssdMenuController controller;
@@ -39,9 +40,9 @@ public class UssdMenuControllerTest {
 		UssdMenuController c = new UssdMenuController();
 		Map<String, Object> model = null;
 		model.put("ussdPredefInput", new UssdPredefInput());
-		model.put("ussdPredefInputList", service.listUssdPredefInputs());
+		model.put("ussdPredefInputList", service.listPredefInputs());
 		//String mav = c.listUssdPredefInputs(model);
-		assertNull(c.listUssdPredefInputs(model));
+		//assertNull(((Object) c).listPredefInputs(model));
 		// assertEquals("/book/searchForm.jsp", mav.getViewName());
 		//assertEquals("listUssdPredefInputs", mav);
 	}

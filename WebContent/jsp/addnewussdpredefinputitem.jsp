@@ -263,11 +263,10 @@ td.formlabels {
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
 					<h2>
-						<a style="color: #000000;" href="/metomeui/auilanding.html"
+						<a style="color: #000000;" href="/applabmoneyaui/auilanding.html"
 							title="Home">Go Back Home</a>
 					</h2>
-				</div>
-			</td>
+				</div></td>
 		</tr>
 	</table>
 	<table style="width: 100%;">
@@ -288,26 +287,30 @@ td.formlabels {
 											path="predefInputItemName">Predefined Input Item Name</form:label>
 									</td>
 									<td class="form"><form:input cssClass="formfields"
-											path="predefInputItemName" /></td>
+											path="predefInputItemName" />
+									</td>
 								</tr>
 								<tr>
 									<td class="formlabels"><form:label
 											path="predefInputItemCode">Predefined Input Item Code</form:label>
 									</td>
 									<td class="form"><form:input cssClass="formfields"
-											path="predefInputItemCode" /></td>
+											path="predefInputItemCode" />
+									</td>
 								</tr>
 								<tr>
 									<td class="formlabels"><form:label
 											path="predefInputItemOrder">Predefined Input Item Order</form:label>
 									</td>
 									<td class="form"><form:input cssClass="formfields"
-											path="predefInputItemOrder" /></td>
+											path="predefInputItemOrder" />
+									</td>
 								</tr>
 								<tr>
 									<td class="formlabels"><form:checkbox id="enable"
 											cssClass="otherformfields" path="predefInputItemEnabledFlag"
-											value="1" /></td>
+											value="1" />
+									</td>
 									<td class="form"><form:label
 											path="predefInputItemEnabledFlag">Enable Predefined Input Item</form:label>
 									</td>
@@ -316,13 +319,15 @@ td.formlabels {
 									<td></td>
 									<td><input class="btn" type="submit" name="Add" id="Add"
 										value="Add" /><input class="btn" type="button" value="Cancel"
-										onClick="location.href='addussdpredefinput.html'" /></td>
+										onClick="location.href='addussdpredefinput.html'" />
+									</td>
 									<td></td>
 								</tr>
 							</table>
 						</form:form>
 					</fieldset>
-				</div></td>
+				</div>
+			</td>
 		</tr>
 	</table>
 </body>

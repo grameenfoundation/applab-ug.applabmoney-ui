@@ -253,11 +253,10 @@ td.formlabels {
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
 					<h2>
-						<a style="color: #000000;" href="/metomeui/auilanding.html"
+						<a style="color: #000000;" href="/applabmoneyaui/auilanding.html"
 							title="Home">Go Back Home</a>
 					</h2>
-				</div>
-			</td>
+				</div></td>
 		</tr>
 	</table>
 	<div>
@@ -265,7 +264,8 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Manage Me2Me Product</h2>
-						<hr></td>
+						<hr>
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -288,23 +288,20 @@ td.formlabels {
 										<td class="formlabels"><form:label path="goalTypeCode">Me2Me Goal Type Code: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="goalTypeCode" />
-										</td>
+												path="goalTypeCode" /></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="goalTypeName">Me2Me Goal Type Name: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="goalTypeName" />
-										</td>
+												path="goalTypeName" /></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
 												path="goalTypeDescription">Me2Me Goal Type Description: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="goalTypeDescription" />
-										</td>
+												path="goalTypeDescription" /></td>
 									</tr>
 									<tr>
 										<td></td>
@@ -314,7 +311,7 @@ td.formlabels {
 										<td class="savebutton"><input class="btn" type="submit"
 											value="Add" /><input class="btn" type="button"
 											value="Cancel"
-											onClick="location.href='/metomeui/viewmetomesetup.html'" />
+											onClick="location.href='/applabmoneyaui/viewmetomesetup.html'" />
 										</td>
 										<td></td>
 									</tr>
@@ -323,12 +320,12 @@ td.formlabels {
 						</fieldset>
 						<table>
 							<tr>
-								<td><br>
-								</td>
+								<td><br></td>
 							</tr>
 						</table>
 
-					</div></td>
+					</div>
+				</td>
 			</tr>
 		</table>
 		<!--    <table border=1px; width=100%;> -->

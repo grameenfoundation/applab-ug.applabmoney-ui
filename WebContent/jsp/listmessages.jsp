@@ -243,7 +243,7 @@ td.formlabels {
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
 					<h2>
-						<a style="color: #000000;" href="/metomeui/auilanding.html"
+						<a style="color: #000000;" href="/applabmoneyaui/auilanding.html"
 							title="Home">Go Back Home</a>
 					</h2>
 				</div></td>
@@ -268,53 +268,53 @@ td.formlabels {
 							<a href="#systemsettings">System Settings</a>
 						</h3>
 						<ul>
-							<li><a href="/metomeui/viewsystemconfiguration.html">System
+							<li><a href="/applabmoneyaui/viewsystemconfiguration.html">System
 									Configuration</a>
 							</li>
-							<li><a href="/metomeui/listmemogroups.html">Memo Groups
+							<li><a href="/applabmoneyaui/listmemogroups.html">Memo Groups
 									Configuration</a></li>
-							<li><a href="/metomeui/listlanguages.html">Languages
+							<li><a href="/applabmoneyaui/listlanguages.html">Languages
 									Configuration</a></li>
-							<li><a href="/metomeui/listmessages.html">Messages
+							<li><a href="/applabmoneyaui/listmessages.html">Messages
 									Configuration</a></li>
-							<li><a href="/metomeui/listmobilendc.html">Mobile NDC
+							<li><a href="/applabmoneyaui/listmobilendc.html">Mobile NDC
 									Configuration</a></li>
 						</ul>
 						<h3>
 							<a href="#ussdmenusetup">Ussd Menu Setup</a>
 						</h3>
 						<ul>
-							<li><a href="/metomeui/listussdmenuitems.html">Ussd Menu
+							<li><a href="/applabmoneyaui/listussdmenuitems.html">Ussd Menu
 									Items</a>
 							</li>
-							<li><a href="/metomeui/listussdtransactionkeywords.html">Transaction
+							<li><a href="/applabmoneyaui/listussdtransactionkeywords.html">Transaction
 									Keywords</a></li>
-							<li><a href="/metomeui/listussdpredefinputs.html">Predefined
+							<li><a href="/applabmoneyaui/listussdpredefinputs.html">Predefined
 									Inputs</a></li>
 						</ul>
 						<h3>
 							<a href="#transsettings">Transaction Settings</a>
 						</h3>
 						<ul>
-							<li><a href="/metomeui/viewamlbarringsettings.html">AML
+							<li><a href="/applabmoneyaui/viewamlbarringsettings.html">AML
 									Settings</a>
 							</li>
-							<li><a href="/metomeui/listglobalkeywordcharges.html">Charge
+							<li><a href="/applabmoneyaui/listglobalkeywordcharges.html">Charge
 									Configuration</a></li>
-							<li><a href="/metomeui/listaccounttypes.html">Account
+							<li><a href="/applabmoneyaui/listaccounttypes.html">Account
 									Type Configuration</a></li>
-							<li><a href="/metomeui/listglobalsendlimits.html">Transaction
+							<li><a href="/applabmoneyaui/listglobalsendlimits.html">Transaction
 									Global Send Limits Settings</a></li>
-							<li><a href="/metomeui/listglobalreceivelimits.html">Transaction
+							<li><a href="/applabmoneyaui/listglobalreceivelimits.html">Transaction
 									Global Receive Limits Settings</a></li>
 						</ul>
 						<h3>
 							<a href="#">Products Setup</a>
 						</h3>
 						<ul>
-							<li><a href="/metomeui/viewmetomesetup.html">Me2Me Setup</a>
+							<li><a href="/applabmoneyaui/viewmetomesetup.html">Me2Me Setup</a>
 							</li>
-							<li><a href="/metomeui/viewzimbaconfiguration.html">Zimba
+							<li><a href="/applabmoneyaui/viewzimbaconfiguration.html">Zimba
 									Setup</a></li>
 						</ul>
 					</div>
@@ -352,7 +352,7 @@ td.formlabels {
 							<c:forEach items="${messagesList}" var="message">
 								<tr class=data>
 									<td class=data><a
-										href="/metomeui/editmessage/${message.messageId}.html">${message.messageCode}</a>
+										href="/applabmoneyaui/editmessage/${message.messageId}.html">${message.messageCode}</a>
 									</td>
 									<td class=data>${message.messageDesc}</td>
 									<td class=data><c:forEach items="${languagesList}"
@@ -365,7 +365,7 @@ td.formlabels {
 											</c:if>
 										</c:forEach></td>
 									<td class=data><a
-										href="/metomeui/removemessage/${message.messageId}.html">Delete</a>
+										href="/applabmoneyaui/removemessage/${message.messageId}.html">Delete</a>
 									</td>
 								</tr>
 							</c:forEach>

@@ -317,9 +317,9 @@ td.formlabels {
 							<legend>
 								<h2>Edit Predefined Inputs</h2>
 							</legend>
-							<%--               action="/metomeui/editcontacts.html"                 --%>
+							<%--               action="/applabmoneyaui/editcontacts.html"                 --%>
 							<form:form method="post"
-								action="/metomeui/editussdpredefinput/${ussdPredefInput.predefInputId}.html"
+								action="/applabmoneyaui/editussdpredefinput/${ussdPredefInput.predefInputId}.html"
 								commandName="ussdPredefInput">
 								<form:errors path="*" cssClass="errorblock" element="div" />
 								<fieldset>
@@ -362,7 +362,7 @@ td.formlabels {
 										<td><div>
 												<br> <input type="button" class ="longbtn"
 													value="Create New Predefined Input Item"
-													onClick="location.href='/metomeui/editaddnewussdpredefinputitem/${ussdPredefInput.predefInputId}.html'">
+													onClick="location.href='/applabmoneyaui/editaddnewussdpredefinputitem/${ussdPredefInput.predefInputId}.html'">
 											</div></td>
 										<td></td>
 										<td></td>
@@ -387,7 +387,7 @@ td.formlabels {
 													<td class=data><input type="hidden"
 														name="ussdPredefInput.predefInputItems[${status.index}].inputItemId"
 														value="${predefinputitem.inputItemId}" /><a
-														href="/metomeui/editussdpredefinputitem/${predefinputitem.inputItemId}.html">
+														href="/applabmoneyaui/editussdpredefinputitem/${predefinputitem.inputItemId}.html">
 															${predefinputitem.predefInputItemName}</a><input
 														type="hidden"
 														name="predefInputItems[${status.index}].predefInputItemName"
@@ -403,17 +403,17 @@ td.formlabels {
 															<c:if
 																test="${predefinputitem.predefInputItemEnabledFlag != 1}">
 																<a
-																	href="/metomeui/activatepredefinputitem/${predefinputitem.inputItemId}.html">Activate
+																	href="/applabmoneyaui/activatepredefinputitem/${predefinputitem.inputItemId}.html">Activate
 																</a>
 															</c:if>
 															<c:if
 																test="${predefinputitem.predefInputItemEnabledFlag == 1}">
 																<a
-																	href="/metomeui/deactivatepredefinputitem/${predefinputitem.inputItemId}.html">Deactivate
+																	href="/applabmoneyaui/deactivatepredefinputitem/${predefinputitem.inputItemId}.html">Deactivate
 																</a>
 															</c:if>
 															<a
-																href="/metomeui/removepredefinputitem/${predefinputitem.inputItemId}.html">Delete</a>
+																href="/applabmoneyaui/removepredefinputitem/${predefinputitem.inputItemId}.html">Delete</a>
 														</c:if>
 													</td>
 												</c:if>
@@ -427,7 +427,7 @@ td.formlabels {
 										<td colspan="2" class="savebutton"><br> <input
 											 type="submit" value="Update" />&nbsp;&nbsp;&nbsp;&nbsp;<input
 											type="button" value="Cancel"
-											onClick="location.href='/metomeui/listussdpredefinputs.html'" />
+											onClick="location.href='/applabmoneyaui/listussdpredefinputs.html'" />
 										</td>
 									</tr>
 								</table>

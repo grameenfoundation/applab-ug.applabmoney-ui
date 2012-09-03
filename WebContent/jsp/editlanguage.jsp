@@ -243,11 +243,10 @@ td.formlabels {
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
 					<h2>
-						<a style="color: #000000;" href="/metomeui/auilanding.html"
+						<a style="color: #000000;" href="/applabmoneyaui/auilanding.html"
 							title="Home">Go Back Home</a>
 					</h2>
-				</div>
-			</td>
+				</div></td>
 		</tr>
 	</table>
 	<div>
@@ -255,7 +254,8 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Manage Languages</h2>
-						<hr></td>
+						<hr>
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -270,7 +270,7 @@ td.formlabels {
 							</legend>
 
 							<form:form method="post"
-								action="/metomeui/editlanguage/${language.languageId}.html"
+								action="/applabmoneyaui/editlanguage/${language.languageId}.html"
 								commandName="language">
 
 								<form:errors path="*" cssClass="errorblock" element="div" />
@@ -282,25 +282,27 @@ td.formlabels {
 										<td class="form"><form:input cssClass="formfields"
 												path="languageId" value="${language.languageId}"
 												disabled="true" /> <input type="hidden" name="languageId"
-											value="${language.languageId}" />
-										</td>
+											value="${language.languageId}" /></td>
 									</tr>
 
 									<tr>
 										<td class="formlabels"><form:label path="LanguageName">Memo Group Name: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="languageName" value="${language.languageName}" /></td>
+												path="languageName" value="${language.languageName}" />
+										</td>
 									</tr>
 									<tr>
 										<td colspan="2" class="savebutton"><input type="submit"
 											value="Update" /><input type="button" value="Cancel"
-											onClick="location.href='/metomeui/listlanguages.html'" /></td>
+											onClick="location.href='/applabmoneyaui/listlanguages.html'" />
+										</td>
 									</tr>
 								</table>
 							</form:form>
 						</fieldset>
-					</div></td>
+					</div>
+				</td>
 			</tr>
 		</table>
 		<!--    <table border=1px; width=100%;> -->

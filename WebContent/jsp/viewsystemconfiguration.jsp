@@ -241,7 +241,7 @@ td.formlabels {
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
 					<h2>
-						<a style="color: #000000;" href="/metomeui/auilanding.html"
+						<a style="color: #000000;" href="/applabmoneyaui/auilanding.html"
 							title="Home">Go Back Home</a>
 					</h2>
 				</div></td>
@@ -525,7 +525,7 @@ td.formlabels {
 										<td colspan="2" class="savebutton"><br> <input
 											type="submit" value="Save Changes" /> <input type="button"
 											value="  Cancel  "
-											onClick="location.href='/metomeui/auilanding.html'" /></td>
+											onClick="location.href='/applabmoneyaui/auilanding.html'" /></td>
 									</tr>
 								</table>
 							</form:form>

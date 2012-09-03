@@ -253,10 +253,11 @@ td.formlabels {
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
 					<h2>
-						<a style="color: #000000;" href="/metomeui/auilanding.html"
+						<a style="color: #000000;" href="/applabmoneyauipplabmoneyaui/auilanding.html"
 							title="Home">Go Back Home</a>
 					</h2>
-				</div></td>
+				</div>
+			</td>
 		</tr>
 	</table>
 	<div>
@@ -264,8 +265,7 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Manage Account Types</h2>
-						<hr>
-					</td>
+						<hr></td>
 				</tr>
 			</table>
 		</div>
@@ -288,18 +288,19 @@ td.formlabels {
 										<td class="formlabels"><form:label path="accountTypeCode">Account Code: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="accountTypeCode" /></td>
+												path="accountTypeCode" />
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="accountTypeName">Account Name: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="accountTypeName" /></td>
+												path="accountTypeName" />
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
-												path="accountTypeBitMap">Account Bitmap:</form:label>
-										</td>
+												path="accountTypeBitMap">Account Bitmap:</form:label></td>
 										<td class="form"><form:select cssClass="dropdown"
 												path="accountTypeBitMap">
 												<form:option value="1" label="1" />
@@ -313,7 +314,8 @@ td.formlabels {
 												<form:option value="256" label="256" />
 												<form:option value="512" label="512" />
 												<form:option value="1024" label="1024" />
-											</form:select></td>
+											</form:select>
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
@@ -328,7 +330,8 @@ td.formlabels {
 												<form:option value="4" label="DLER" />
 												<form:option value="5" label="MERC" />
 												<form:option value="6" label="CORP" />
-											</form:select></td>
+											</form:select>
+										</td>
 									</tr>
 
 									<tr>
@@ -336,7 +339,8 @@ td.formlabels {
 												path="accountMaximumBookBalance">Maximum Book Balance:</form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="accountMaximumBookBalance" /></td>
+												path="accountMaximumBookBalance" />
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:checkbox
@@ -350,17 +354,10 @@ td.formlabels {
 									</tr>
 									<tr>
 										<td></td>
-
-										<!-- <td class="savebutton"><input class="btn" type="submit"
-											value="Save" />&nbsp;&nbsp;&nbsp;<input class="btn" type="button"
-                                            value="Cancel"
-                                            onClick="location.href='/metomeui/listaccounttypes.html'" />
-										</td> -->
-
 										<td colspan="2" class="savebutton"><input class="btn"
 											type="submit" value="Save" /><input class="btn"
 											type="button" value="Cancel"
-											onClick="location.href='/metomeui/listaccounttypes.html'" />
+											onClick="location.href='/applabmoneyaui/listaccounttypes.html'" />
 										</td>
 
 										<td></td>
@@ -371,12 +368,12 @@ td.formlabels {
 						</fieldset>
 						<table>
 							<tr>
-								<td><br></td>
+								<td><br>
+								</td>
 							</tr>
 						</table>
 
-					</div>
-				</td>
+					</div></td>
 			</tr>
 		</table>
 		<!--    <table border=1px; width=100%;> -->

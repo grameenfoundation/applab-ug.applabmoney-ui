@@ -10,21 +10,24 @@
 	</context-param>
 	<listener>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
-	</listener> 
+	</listener>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/metomeui-servlet.xml</param-value>
+		<param-value>/WEB-INF/applabmoneyaui-servlet.xml</param-value>
 	</context-param>
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	<!-- <filter> <filter-name>springSecurityFilterChain</filter-name> <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class> 
+		</filter> <filter-mapping> <filter-name>springSecurityFilterChain</filter-name> 
+		<url-pattern>/*</url-pattern> </filter-mapping> -->
 	<servlet>
-		<servlet-name>metomeui</servlet-name>
+		<servlet-name>applabmoneyaui</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>metomeui</servlet-name>
+		<servlet-name>applabmoneyaui</servlet-name>
 		<url-pattern>*.html</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
@@ -32,4 +35,7 @@
       jsp/index.jsp
     </welcome-file>
 	</welcome-file-list>
+	<session-config>
+		<session-timeout>10</session-timeout>
+	</session-config>
 </web-app>

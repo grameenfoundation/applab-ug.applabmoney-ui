@@ -243,11 +243,10 @@ td.formlabels {
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
 					<h2>
-						<a style="color: #000000;" href="/metomeui/auilanding.html"
+						<a style="color: #000000;" href="/applabmoneyaui/auilanding.html"
 							title="Home">Go Back Home</a>
 					</h2>
-				</div>
-			</td>
+				</div></td>
 		</tr>
 	</table>
 	<div>
@@ -255,7 +254,8 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>System Configuration</h2>
-						<hr></td>
+						<hr>
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -283,7 +283,8 @@ td.formlabels {
 												<form:option value="9" label="9" />
 												<form:option value="10" label="10" />
 												<form:option value="11" label="11" />
-											</form:select></td>
+											</form:select>
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
@@ -298,19 +299,22 @@ td.formlabels {
 												<form:option value="13" label="13" />
 												<form:option value="14" label="14" />
 												<form:option value="15" label="15" />
-											</form:select></td>
+											</form:select>
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="countryCode">Set Country Code: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="countryCode" /></td>
+												path="countryCode" />
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="countryDomain">Set Country Domain: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="countryDomain" /></td>
+												path="countryDomain" />
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="currencyCode">Set Currency: </form:label>
@@ -323,16 +327,15 @@ td.formlabels {
 												<form:option value="KSH">KSH</form:option>
 												<form:option value="GBP">GBP</form:option>
 												<form:option value="USD">USD</form:option>
-											</form:select></td>
+											</form:select>
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
 												path="currencyISONumber">Set Currency
-                        ISO Number: </form:label>
-										</td>
+                        ISO Number: </form:label></td>
 										<td class="form"><form:input cssClass="formfields"
-												path="currencyISONumber"></form:input>
-										</td>
+												path="currencyISONumber"></form:input></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="msisdnLength">Set MSISDN Length</form:label>
@@ -341,22 +344,21 @@ td.formlabels {
 												<form:option value="12">12</form:option>
 												<form:option value="13">13</form:option>
 												<form:option value="14">14</form:option>
-											</form:select></td>
+											</form:select>
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
 												path="msisdnLeadZeroRequired">MSISDN requires leading zero(0)</form:label>
 										</td>
 										<td class="form"><form:checkbox
-												path="msisdnLeadZeroRequired" value="1"></form:checkbox>
-										</td>
+												path="msisdnLeadZeroRequired" value="1"></form:checkbox></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="operation">Operation </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="operation"></form:input>
-										</td>
+												path="operation"></form:input></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
@@ -366,8 +368,7 @@ td.formlabels {
 												<form:option value="0" label="No" />
 												<form:option value="1" label="Yes" />
 
-											</form:select>
-										</td>
+											</form:select></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
@@ -377,15 +378,13 @@ td.formlabels {
 												path="tempRestrictionSettings" cssClass="formfields">
 												<form:option value="0" label="No" />
 												<form:option value="1" label="Yes" />
-											</form:select>
-										</td>
+											</form:select></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="smsSenderNumber">SMS Sender Number/Name</form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="smsSenderNumber"></form:input>
-										</td>
+												path="smsSenderNumber"></form:input></td>
 									</tr>
 
 									<tr>
@@ -397,8 +396,7 @@ td.formlabels {
 												<form:option value="0" label="MSISDN" />
 												<form:option value="1" label="FULL_NAMES" />
 												<form:option value="2" label="MSISDN AND FULL_NAMES" />
-											</form:select>
-										</td>
+											</form:select></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
@@ -411,22 +409,19 @@ td.formlabels {
 									<tr>
 										<td class="formlabels"><form:label
 												path="chargeCollectSetting">Charge collect
-                                immediate setting</form:label>
-										</td>
+                                immediate setting</form:label></td>
 										<td class="form"><form:select path="chargeCollectSetting"
 												cssClass="formfields">
 												<form:option value="1" label="Yes" />
 												<form:option value="0" label="No" />
-											</form:select>
-										</td>
+											</form:select></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
 												path="notifyOnDelayTransaction">Notify on delayed transaction</form:label>
 										</td>
 										<td class="form"><form:checkbox
-												path="notifyOnDelayTransaction" value="1"></form:checkbox>
-										</td>
+												path="notifyOnDelayTransaction" value="1"></form:checkbox></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
@@ -440,16 +435,14 @@ td.formlabels {
 												<form:option value="200" label="200" />
 												<form:option value="250" label="250" />
 												<form:option value="300" label="300" />
-											</form:select>
-										</td>
+											</form:select></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
 												path="notifyOnDelayMessageID">Notify on delay message ID </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="notifyOnDelayMessageID"></form:input>
-										</td>
+												path="notifyOnDelayMessageID"></form:input></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
@@ -458,35 +451,34 @@ td.formlabels {
 										<td></td>
 										<td class="form"><form:label path="maintenanceModeFlag">On</form:label>
 											<form:radiobutton path="maintenanceModeFlag"
-												class="formRadio" value="1"></form:radiobutton>
-										</td>
+												class="formRadio" value="1"></form:radiobutton></td>
 									</tr>
 									<tr>
 										<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 										<td class="form"><form:label path="maintenanceModeFlag">Off(Default)</form:label>
 											<form:radiobutton path="maintenanceModeFlag"
-												class="formRadio" value="0"></form:radiobutton>
-										</td>
+												class="formRadio" value="0"></form:radiobutton></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
 												path="maintenanceModeMessageID"> Maintenance Mode
-                                Message ID</form:label>
-										</td>
+                                Message ID</form:label></td>
 										<td class="form"><form:input cssClass="formfields"
-												path="maintenanceModeMessageID"></form:input></td>
+												path="maintenanceModeMessageID"></form:input>
+										</td>
 									</tr>
 									<tr>
 										<td colspan="2" class="savebutton"><br> <input
 											class="btn" type="submit" value="Save" /> <input class="btn"
 											type="button" value="Cancel"
-											onClick="location.href='/metomeui/viewsystemconfig.html'" />
+											onClick="location.href='/applabmoneyaui/viewsystemconfig.html'" />
 										</td>
 									</tr>
 								</table>
 							</form:form>
 						</fieldset>
-					</div></td>
+					</div>
+				</td>
 			</tr>
 		</table>
 	</div>

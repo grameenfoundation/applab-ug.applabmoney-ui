@@ -299,10 +299,11 @@ td.formlabels {
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
 					<h2>
-						<a style="color: #000000;" href="/metomeui/auilanding.html"
+						<a style="color: #000000;" href="/applabmoneyaui/auilanding.html"
 							title="Home">Go Back Home</a>
 					</h2>
-				</div></td>
+				</div>
+			</td>
 		</tr>
 	</table>
 	<div>
@@ -310,8 +311,7 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Manage Transaction Keywords</h2>
-						<hr>
-					</td>
+						<hr></td>
 				</tr>
 			</table>
 		</div>
@@ -325,7 +325,7 @@ td.formlabels {
 								<h2>Edit Transaction Keyword</h2>
 							</legend>
 							<form:form method="post"
-								action="/metomeui/editussdtransactionkeyword/${ussdTransactionKeyword.keywordId}.html"
+								action="/applabmoneyaui/editussdtransactionkeyword/${ussdTransactionKeyword.keywordId}.html"
 								commandName="ussdTransactionKeyword">
 								<form:errors path="*" cssClass="errorblock" element="div" />
 								<fieldset>
@@ -337,22 +337,23 @@ td.formlabels {
 													path="keywordId"
 													value="${ussdTransactionKeyword.keywordId}" disabled="true" /><input
 												type="hidden" name="keywordId"
-												value="${ussdTransactionKeyword.keywordId}" /></td>
+												value="${ussdTransactionKeyword.keywordId}" />
+											</td>
 										</tr>
 										<tr>
 											<td class="formlabels"><form:label path="keywordCode">Transaction Keyword Code:</form:label>
 											</td>
 											<td class="form"><form:input cssClass="formfields"
 													path="keywordCode" maxlength="10"
-													value="${ussdTransactionKeyword.keywordCode}" /></td>
+													value="${ussdTransactionKeyword.keywordCode}" />
+											</td>
 										</tr>
 										<tr>
 											<td class="formlabels"><form:label path="keywordName">Transaction Keyword Name</form:label>
 											</td>
 											<td class="form"><form:input cssClass="formfields"
 													path="keywordName"
-													value="${ussdTransactionKeyword.keywordName}" />
-											</td>
+													value="${ussdTransactionKeyword.keywordName}" /></td>
 										</tr>
 										<tr>
 											<td class="formlabels"><form:label
@@ -360,8 +361,7 @@ td.formlabels {
 											</td>
 											<td class="form"><form:input cssClass="formfields"
 													path="keywordDescription"
-													value="${ussdTransactionKeyword.keywordDescription}" />
-											</td>
+													value="${ussdTransactionKeyword.keywordDescription}" /></td>
 										</tr>
 										<tr>
 											<td class="formlabels"><form:label
@@ -369,8 +369,7 @@ td.formlabels {
 											</td>
 											<td class="form"><form:input cssClass="formfields"
 													path="keywordStepsCount"
-													value="${ussdTransactionKeyword.keywordStepsCount}" />
-											</td>
+													value="${ussdTransactionKeyword.keywordStepsCount}" /></td>
 										</tr>
 									</table>
 								</fieldset>
@@ -380,9 +379,8 @@ td.formlabels {
 										<td><div>
 												<br> <input type="button"
 													value="Create New Keyword Step"
-													onClick="location.href='/metomeui/editaddnewussdkeywordstep/${ussdTransactionKeyword.keywordId}.html'">
-											</div>
-										</td>
+													onClick="location.href='/applabmoneyaui/editaddnewussdkeywordstep/${ussdTransactionKeyword.keywordId}.html'">
+											</div></td>
 										<td></td>
 										<td></td>
 									</tr>
@@ -409,11 +407,12 @@ td.formlabels {
 													<td class="otherdata">${status.count} <input size="2"
 														type="hidden"
 														name="keywordSteps[${status.index}].keywordStepId"
-														value="${keywordstep.keywordStepId}" /></td>
+														value="${keywordstep.keywordStepId}" />
+													</td>
 													<td class="data"><input type="hidden"
 														name="keywordSteps[${status.index}].stepMenuName"
 														value="${keywordstep.stepMenuName}" /> <a
-														href="/metomeui/editussdkeywordstep/${keywordstep.keywordStepId}.html">${keywordstep.stepMenuName}</a>
+														href="/applabmoneyaui/editussdkeywordstep/${keywordstep.keywordStepId}.html">${keywordstep.stepMenuName}</a>
 													</td>
 													<td class="otherdata"><input type="hidden"
 														name="keywordSteps[${status.index}].stepMenuNumber"
@@ -428,8 +427,7 @@ td.formlabels {
 														<input size="3" type="hidden"
 																name="keywordSteps[${status.index}].isFirstStepFlag"
 																value="1" />
-														</c:if>
-													</td>
+														</c:if></td>
 													<td class="otherdata"><c:if
 															test="${keywordstep.isLastStepFlag == 0}"> No
 														<input size="3" type="hidden"
@@ -439,8 +437,7 @@ td.formlabels {
 														<input size="3" type="hidden"
 																name="keywordSteps[${status.index}].isLastStepFlag"
 																value="1" />
-														</c:if>
-													</td>
+														</c:if></td>
 													<td class="otherdata"><c:if
 															test="${keywordstep.hasPredefInputFlag == 0}"> No
 														<input size="3" type="hidden"
@@ -450,8 +447,7 @@ td.formlabels {
 														<input size="3" type="hidden"
 																name="keywordSteps[${status.index}].hasPredefInputFlag"
 																value="1" />
-														</c:if>
-													</td>
+														</c:if></td>
 													<td class="data"><c:forEach items="${predefInputList}"
 															var="predefinput">
 															<c:if
@@ -460,8 +456,7 @@ td.formlabels {
 															</c:if>
 														</c:forEach><input type="hidden"
 														name="keywordSteps[${status.index}].predefInputId"
-														value="${keywordstep.predefInput.predefInputId}" />
-													</td>
+														value="${keywordstep.predefInput.predefInputId}" /></td>
 													<td class="otherdata"><c:if
 															test="${keywordstep.useFixedValueFlag == 0}"> No
 														<input size="3" type="hidden"
@@ -471,7 +466,8 @@ td.formlabels {
 														<input size="3" type="hidden"
 																name="keywordSteps[${status.index}].useFixedValueFlag"
 																value="1" />
-														</c:if></td>
+														</c:if>
+													</td>
 													<td class="data"><input type="hidden"
 														name="keywordSteps[${status.index}].fixedValue"
 														value="${keywordstep.fixedValue}" />
@@ -479,9 +475,8 @@ td.formlabels {
 													<td class=data><c:if
 															test="${keywordstep.keywordStepId != null}">
 															<a
-																href="/metomeui/removekeywordstep/${keywordstep.keywordStepId}.html">Delete</a>
-														</c:if>
-													</td>
+																href="/applabmoneyaui/removekeywordstep/${keywordstep.keywordStepId}.html">Delete</a>
+														</c:if></td>
 												</c:if>
 											</tr>
 										</c:forEach>
@@ -495,14 +490,15 @@ td.formlabels {
 										<td></td>
 										<td><input type="submit" value="Update" />
 											&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="Cancel"
-											onClick="location.href='/metomeui/listussdtransactionkeywords.html'" />
+											onClick="location.href='/applabmoneyaui/listussdtransactionkeywords.html'" />
 										</td>
 									</tr>
 								</table>
 
 							</form:form>
 						</fieldset>
-					</div></td>
+					</div>
+				</td>
 			</tr>
 		</table>
 	</div>

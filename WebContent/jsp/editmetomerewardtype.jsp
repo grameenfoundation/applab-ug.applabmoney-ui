@@ -253,10 +253,11 @@ td.formlabels {
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
 					<h2>
-						<a style="color: #000000;" href="/metomeui/auilanding.html"
+						<a style="color: #000000;" href="/applabmoneyaui/auilanding.html"
 							title="Home">Go Back Home</a>
 					</h2>
-				</div></td>
+				</div>
+			</td>
 		</tr>
 	</table>
 	<div>
@@ -264,8 +265,7 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Manage Me2Me Product</h2>
-						<hr>
-					</td>
+						<hr></td>
 				</tr>
 			</table>
 		</div>
@@ -280,7 +280,7 @@ td.formlabels {
 							</legend>
 
 							<form:form method="post"
-								action="/metomeui/editmetomerewardtype/${meToMeRewardType.rewardTypeId}.html"
+								action="/applabmoneyaui/editmetomerewardtype/${meToMeRewardType.rewardTypeId}.html"
 								commandName="meToMeRewardType">
 								<form:errors path="*" cssClass="errorblock" element="div" />
 
@@ -291,22 +291,23 @@ td.formlabels {
 										<td class="form"><form:input cssClass="formfields"
 												path="rewardTypeId" value="${meToMeRewardType.rewardTypeId}"
 												disabled="true" /> <input type="hidden" name="rewardTypeId"
-											value="${meToMeRewardType.rewardTypeId}" />
-										</td>
+											value="${meToMeRewardType.rewardTypeId}" /></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="rewardTypeCode">Me2Me Reward Type Code: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
 												path="rewardTypeCode"
-												value="${meToMeRewardType.rewardTypeCode}" /></td>
+												value="${meToMeRewardType.rewardTypeCode}" />
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="rewardTypeName">Me2Me Reward Type Name: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
 												path="rewardTypeName"
-												value="${meToMeRewardType.rewardTypeName}" /></td>
+												value="${meToMeRewardType.rewardTypeName}" />
+										</td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
@@ -314,7 +315,8 @@ td.formlabels {
 										</td>
 										<td class="form"><form:input cssClass="formfields"
 												path="rewardTypeDescription"
-												value="${meToMeRewardType.rewardTypeDescription}" /></td>
+												value="${meToMeRewardType.rewardTypeDescription}" />
+										</td>
 									</tr>
 
 									<tr>
@@ -325,7 +327,8 @@ td.formlabels {
 											</c:if> <c:if test="${meToMeRewardType.cashRewardFlag == 0}">
 												<form:checkbox cssClass="otherformfields"
 													path="cashRewardFlag" value="1" />
-											</c:if></td>
+											</c:if>
+										</td>
 										<td class="form"><form:label path="cashRewardFlag">Is Cash Reward</form:label>
 										</td>
 									</tr>
@@ -336,7 +339,7 @@ td.formlabels {
 										<td></td>
 										<td class="savebutton"><input type="submit"
 											value="Update" /><input type="button" value="Cancel"
-											onClick="location.href='/metomeui/viewmetomesetup.html'" />
+											onClick="location.href='/applabmoneyaui/viewmetomesetup.html'" />
 										</td>
 										<td></td>
 									</tr>
@@ -345,12 +348,12 @@ td.formlabels {
 						</fieldset>
 						<table>
 							<tr>
-								<td><br></td>
+								<td><br>
+								</td>
 							</tr>
 						</table>
 
-					</div>
-				</td>
+					</div></td>
 			</tr>
 		</table>
 		<!--    <table border=1px; width=100%;> -->

@@ -253,11 +253,10 @@ td.formlabels {
 					Administrator Console</div> <br>
 				<div class="header" style="color: #000000;">
 					<h2>
-						<a style="color: #000000;" href="/metomeui/auilanding.html"
+						<a style="color: #000000;" href="/applabmoneyaui/auilanding.html"
 							title="Home">Go Back Home</a>
 					</h2>
-				</div>
-			</td>
+				</div></td>
 		</tr>
 	</table>
 	<div>
@@ -265,7 +264,8 @@ td.formlabels {
 			<table style="width: 100%;">
 				<tr>
 					<td><h2>Manage Memo Group</h2>
-						<hr></td>
+						<hr>
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -288,23 +288,20 @@ td.formlabels {
 										<td class="formlabels"><form:label path="memoGroupCode">Memo Group Code: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="memoGroupCode" />
-										</td>
+												path="memoGroupCode" /></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label path="memoGroupName">Memo Group Name: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="memoGroupName" />
-										</td>
+												path="memoGroupName" /></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:label
 												path="memoGroupDescription">Memo Group Description: </form:label>
 										</td>
 										<td class="form"><form:input cssClass="formfields"
-												path="memoGroupDescription" />
-										</td>
+												path="memoGroupDescription" /></td>
 									</tr>
 									<tr>
 										<td class="formlabels"><form:checkbox
@@ -321,7 +318,8 @@ td.formlabels {
 										<td class="savebutton"><input class="btn" type="submit"
 											value="Add" /><input class="btn" type="button"
 											value="Cancel"
-											onClick="location.href='/metomeui/listmemogroups.html'" /></td>
+											onClick="location.href='/applabmoneyaui/listmemogroups.html'" />
+										</td>
 										<td></td>
 									</tr>
 								</table>
@@ -329,12 +327,12 @@ td.formlabels {
 						</fieldset>
 						<table>
 							<tr>
-								<td><br>
-								</td>
+								<td><br></td>
 							</tr>
 						</table>
 
-					</div></td>
+					</div>
+				</td>
 			</tr>
 		</table>
 		<!--    <table border=1px; width=100%;> -->
